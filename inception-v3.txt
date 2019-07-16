@@ -1,0 +1,1397 @@
+{
+  name: fc9d2ee0
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [input, 0e0e874d, e43566db, ]
+  outputs: [608eb81c, ]
+  output shapes: [(1,32,149,149,) ]
+}
+{
+  name: f5596247
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [608eb81c, c43418dd, c3a80a53, ]
+  outputs: [0adcafa6, ]
+  output shapes: [(1,32,147,147,) ]
+}
+{
+  name: db8899a9
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0adcafa6, 6acb5835, 87ebf3cb, ]
+  outputs: [04173a04, ]
+  output shapes: [(1,64,147,147,) ]
+}
+{
+  name: ea49472c
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [04173a04, ]
+  outputs: [040e521f, ]
+  output shapes: [(1,64,73,73,) ]
+}
+{
+  name: e1ede951
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [040e521f, a5e0527c, 85ad2399, ]
+  outputs: [df0f0102, ]
+  output shapes: [(1,80,73,73,) ]
+}
+{
+  name: 32375b12
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [df0f0102, 54efe1c9, 1c46a8d4, ]
+  outputs: [86eab04c, ]
+  output shapes: [(1,192,71,71,) ]
+}
+{
+  name: 1809b83a
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [86eab04c, ]
+  outputs: [19cebc62, ]
+  output shapes: [(1,192,35,35,) ]
+}
+{
+  name: 2abda1eb
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [19cebc62, 351e9bee, c793af27, ]
+  outputs: [6a6e444d, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 7b5c0112
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [19cebc62, 9b3bb190, 985857c6, ]
+  outputs: [2178f771, ]
+  output shapes: [(1,48,35,35,) ]
+}
+{
+  name: 0b28dbba
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [2178f771, 82159153, a430600b, ]
+  outputs: [f58f0702, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 76a48d05
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [19cebc62, 4dbbfefc, 307412cf, ]
+  outputs: [0a19a0e1, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 5a907139
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0a19a0e1, 8a3f9616, c63b5da9, ]
+  outputs: [5bc14890, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: 3aa3fe44
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5bc14890, ce8e57f5, fa025269, ]
+  outputs: [de7cb688, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: abb23bf2
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [19cebc62, ]
+  outputs: [995c1bd5, ]
+  output shapes: [(1,192,35,35,) ]
+}
+{
+  name: 073e5c0f
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [995c1bd5, bedc7a2f, 61d445b6, ]
+  outputs: [41789bf3, ]
+  output shapes: [(1,32,35,35,) ]
+}
+{
+  name: 8e24ec09
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [6a6e444d, f58f0702, de7cb688, 41789bf3, ]
+  outputs: [42edb166, ]
+  output shapes: [(1,256,35,35,) ]
+}
+{
+  name: e68b600c
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [42edb166, 54f1cffb, 6f8d1682, ]
+  outputs: [68ede31c, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 341e5658
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [42edb166, 3e99c11a, 61c9f7ad, ]
+  outputs: [d66fa0ed, ]
+  output shapes: [(1,48,35,35,) ]
+}
+{
+  name: dcfd6c9a
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d66fa0ed, 35fc56d2, 953086fc, ]
+  outputs: [a838a991, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 6bac7635
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [42edb166, 1fb20c82, daa3e42f, ]
+  outputs: [097a3427, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: a2c9a62f
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [097a3427, a33fea89, 0724f174, ]
+  outputs: [d675dfba, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: a54ef2b3
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d675dfba, 51a0f672, ac8546b3, ]
+  outputs: [cdfd6a46, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: 26cb98f4
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [42edb166, ]
+  outputs: [e6a187c3, ]
+  output shapes: [(1,256,35,35,) ]
+}
+{
+  name: 0f27dcb5
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [e6a187c3, 3cc0d813, f60d6f68, ]
+  outputs: [feea0a1a, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: de6a1842
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [68ede31c, a838a991, cdfd6a46, feea0a1a, ]
+  outputs: [ad9e4411, ]
+  output shapes: [(1,288,35,35,) ]
+}
+{
+  name: da51067a
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ad9e4411, aa36231a, 98071fa5, ]
+  outputs: [1106569d, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 27ba654a
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ad9e4411, e1c6d75c, 3037d719, ]
+  outputs: [eeea443e, ]
+  output shapes: [(1,48,35,35,) ]
+}
+{
+  name: a2ed8df8
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [eeea443e, 1e624649, 14dcf6b0, ]
+  outputs: [d83db999, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: d46e2d87
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ad9e4411, 9eb9e859, 5557c971, ]
+  outputs: [e03862f7, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 6a557b80
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [e03862f7, 0622e23c, e1d5690c, ]
+  outputs: [2a9a142a, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: d7354545
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [2a9a142a, 5f436857, 79aa1e38, ]
+  outputs: [9cf2f098, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: 7b8e362e
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ad9e4411, ]
+  outputs: [ff2c24a3, ]
+  output shapes: [(1,288,35,35,) ]
+}
+{
+  name: 5f8e4506
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ff2c24a3, 9131d1c4, 2eb6dc39, ]
+  outputs: [46da9436, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 3732f058
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [1106569d, d83db999, 9cf2f098, 46da9436, ]
+  outputs: [386b7c04, ]
+  output shapes: [(1,288,35,35,) ]
+}
+{
+  name: 21676af8
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [386b7c04, 4cd6fec4, 807410ce, ]
+  outputs: [4af1c196, ]
+  output shapes: [(1,384,17,17,) ]
+}
+{
+  name: cf604581
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [386b7c04, f55c624c, 0842665c, ]
+  outputs: [d9e92a92, ]
+  output shapes: [(1,64,35,35,) ]
+}
+{
+  name: 951c57b8
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d9e92a92, b9ddc5e4, 4d0d146c, ]
+  outputs: [b3e34ce2, ]
+  output shapes: [(1,96,35,35,) ]
+}
+{
+  name: d5cd5788
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [b3e34ce2, dd9bb9a3, 59c4cbc0, ]
+  outputs: [923db9ee, ]
+  output shapes: [(1,96,17,17,) ]
+}
+{
+  name: 1acdfead
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [386b7c04, ]
+  outputs: [687eaecd, ]
+  output shapes: [(1,288,17,17,) ]
+}
+{
+  name: edab0e3a
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [4af1c196, 923db9ee, 687eaecd, ]
+  outputs: [87b3ff13, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: bafe8771
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [87b3ff13, 79f7b178, 062279da, ]
+  outputs: [a07bea1d, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 39c46761
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [87b3ff13, cad0ab71, df1c94f9, ]
+  outputs: [9b0c9a54, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: bf7a39de
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [9b0c9a54, c83abbe6, e4eba946, ]
+  outputs: [559fc85b, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: 4c4f3289
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [559fc85b, 55b3ef8f, a8ed3b6b, ]
+  outputs: [ba4ed4e1, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 395d3cba
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [87b3ff13, 7e9d5672, 4fbd594c, ]
+  outputs: [fddd6ec4, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: 76309cb0
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [fddd6ec4, 41189a2a, 62301bd2, ]
+  outputs: [5b59d6ee, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: 52e87846
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5b59d6ee, 2eebc078, dd16b079, ]
+  outputs: [dff2ce01, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: bccaa591
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [dff2ce01, a3e4d3d9, 5911a223, ]
+  outputs: [abafbcef, ]
+  output shapes: [(1,128,17,17,) ]
+}
+{
+  name: bdd68022
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [abafbcef, 818ddfde, 0ae9e96c, ]
+  outputs: [eb2f37f2, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 5f45db2f
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [87b3ff13, ]
+  outputs: [f3504f83, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: 3a509e4b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [f3504f83, 38cbf493, 6bcafd47, ]
+  outputs: [279ce54a, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: d7961be6
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [a07bea1d, ba4ed4e1, eb2f37f2, 279ce54a, ]
+  outputs: [8ac483e1, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: 2c5f0c57
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [8ac483e1, 02c4e380, 7ce47a60, ]
+  outputs: [38ae683b, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 36712ef2
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [8ac483e1, 9a91b1a3, c10a7bf1, ]
+  outputs: [c20b3555, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: bd596808
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [c20b3555, 18953df8, bbec16b1, ]
+  outputs: [8b971cf9, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 9fab0e2b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [8b971cf9, fbac4bdc, 142892fc, ]
+  outputs: [ef3cd9d4, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: ee0fd9f9
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [8ac483e1, e9cc67e7, 17f5a9d3, ]
+  outputs: [cc7f59fe, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: ee4bd657
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [cc7f59fe, d9958673, 4562f267, ]
+  outputs: [0e26e0dd, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 69d56f09
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0e26e0dd, b32f1887, 81b304b1, ]
+  outputs: [badc24ab, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 074c22c2
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [badc24ab, 83b5e6e4, 0a248c24, ]
+  outputs: [66f6e30c, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: a03a0bc1
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [66f6e30c, 6e922fca, 6430a74d, ]
+  outputs: [ceadaf6b, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 187c49e3
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [8ac483e1, ]
+  outputs: [402487cb, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: ed8bb7f2
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [402487cb, 46aee160, 98d01bd9, ]
+  outputs: [13592e6a, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 1002bc0b
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [38ae683b, ef3cd9d4, ceadaf6b, 13592e6a, ]
+  outputs: [db76d14b, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: 7659fca2
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [db76d14b, cb8c8058, ffb098fc, ]
+  outputs: [4bb0284b, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 38c6eeae
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [db76d14b, 6aa5980c, 5571e594, ]
+  outputs: [59c01560, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: b7f27ef1
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [59c01560, eec0db64, 5d42265c, ]
+  outputs: [e6c62bea, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 5f2dc4d6
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [e6c62bea, 3636db64, 5ddf823f, ]
+  outputs: [0b940a8e, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 56c14fa4
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [db76d14b, 9e5e8ff2, ffbc0257, ]
+  outputs: [d6e8250d, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: eb0353ae
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d6e8250d, 460b18a4, ec176707, ]
+  outputs: [331a0277, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 4e9d3118
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [331a0277, 04799482, 33c08224, ]
+  outputs: [a442d15e, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 29178964
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [a442d15e, 62bb923f, 20f0a75c, ]
+  outputs: [e149bcf0, ]
+  output shapes: [(1,160,17,17,) ]
+}
+{
+  name: 56c8af72
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [e149bcf0, 7329954a, c79cedb8, ]
+  outputs: [a6f234b2, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: e31c5f90
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [db76d14b, ]
+  outputs: [16aba781, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: 3c9daa1f
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [16aba781, dc0a2d3a, 9ed24020, ]
+  outputs: [22d41f96, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: f089d9f5
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [4bb0284b, 0b940a8e, a6f234b2, 22d41f96, ]
+  outputs: [ac85908a, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: b40ffeca
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ac85908a, 61d8a088, 556b8b22, ]
+  outputs: [dcd4c524, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: b4170a0e
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ac85908a, f9441f05, 28760a8a, ]
+  outputs: [9ae7e3eb, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 2d66c804
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [9ae7e3eb, 38703b30, 0b210133, ]
+  outputs: [87b14c9c, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 92a2b256
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [87b14c9c, 6288f62a, 828f4293, ]
+  outputs: [229ffc1a, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: f8520570
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ac85908a, c61202c9, 9c585fa6, ]
+  outputs: [f44dcc6b, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: b546643b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [f44dcc6b, 2d509306, 701542df, ]
+  outputs: [5bdf6563, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 0e06522c
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5bdf6563, f4317bcb, dddaf821, ]
+  outputs: [a600d2a9, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 13059362
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [a600d2a9, 965defce, d6d3b1bc, ]
+  outputs: [3cabeb65, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: b8266ff2
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [3cabeb65, 4babf331, a70d3f75, ]
+  outputs: [6eb27643, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: bb69ee1e
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [ac85908a, ]
+  outputs: [1bddd3ae, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: f155b0bd
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [1bddd3ae, 16ca9887, 5feba775, ]
+  outputs: [4c8aab36, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: e090caf1
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [dcd4c524, 229ffc1a, 6eb27643, 4c8aab36, ]
+  outputs: [0f658c4c, ]
+  output shapes: [(1,768,17,17,) ]
+}
+{
+  name: 4b5dc529
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0f658c4c, 184ab94f, 67296113, ]
+  outputs: [dee9c957, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: d644cc07
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [dee9c957, 1450673e, 4d7fbcc8, ]
+  outputs: [6474912b, ]
+  output shapes: [(1,320,8,8,) ]
+}
+{
+  name: 5edfc99d
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0f658c4c, ca5b3970, bfbe6860, ]
+  outputs: [1644e5a0, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: 486ec237
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [1644e5a0, 3114c015, 6bbf9013, ]
+  outputs: [7a75f34b, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: eacc3c50
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [7a75f34b, 7fbefa61, 02577ff1, ]
+  outputs: [68a6a834, ]
+  output shapes: [(1,192,17,17,) ]
+}
+{
+  name: d94e89d5
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [68a6a834, 5e16dbf2, 5bfd1668, ]
+  outputs: [49240f8c, ]
+  output shapes: [(1,192,8,8,) ]
+}
+{
+  name: c4987b6e
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0f658c4c, ]
+  outputs: [d0be1f28, ]
+  output shapes: [(1,768,8,8,) ]
+}
+{
+  name: a6be3725
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [6474912b, 49240f8c, d0be1f28, ]
+  outputs: [5158b4b8, ]
+  output shapes: [(1,1280,8,8,) ]
+}
+{
+  name: 86850187
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5158b4b8, f81c8b26, 3d627f3a, ]
+  outputs: [376721af, ]
+  output shapes: [(1,320,8,8,) ]
+}
+{
+  name: 31610967
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5158b4b8, 3a234d53, d3bab065, ]
+  outputs: [1c41db24, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 33e38e52
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [1c41db24, 56e81398, 7df294ec, ]
+  outputs: [9769ab81, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: d110fc5b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [1c41db24, f41ff032, 8beede7c, ]
+  outputs: [07dbbeae, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: d23ab30d
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [9769ab81, 07dbbeae, ]
+  outputs: [dab6afd8, ]
+  output shapes: [(1,768,8,8,) ]
+}
+{
+  name: add6f42c
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5158b4b8, ef292360, 7eeeaf63, ]
+  outputs: [96a1fb0b, ]
+  output shapes: [(1,448,8,8,) ]
+}
+{
+  name: b5945541
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [96a1fb0b, 6711b1e4, 0d50ef4c, ]
+  outputs: [2696ab0a, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 299defc5
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [2696ab0a, 497726df, 6d6d46f2, ]
+  outputs: [e3382d88, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: be7118a4
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [2696ab0a, b46ff3ab, 7d5fdf92, ]
+  outputs: [5e267707, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 2005cf87
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [e3382d88, 5e267707, ]
+  outputs: [eeed21c9, ]
+  output shapes: [(1,768,8,8,) ]
+}
+{
+  name: 3f64abaa
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [5158b4b8, ]
+  outputs: [d83339bb, ]
+  output shapes: [(1,1280,8,8,) ]
+}
+{
+  name: 4525e614
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d83339bb, 3577d6f4, 96a0dc69, ]
+  outputs: [d7e33bee, ]
+  output shapes: [(1,192,8,8,) ]
+}
+{
+  name: 0a290589
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [376721af, dab6afd8, eeed21c9, d7e33bee, ]
+  outputs: [88300e85, ]
+  output shapes: [(1,2048,8,8,) ]
+}
+{
+  name: 51dda3d7
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [88300e85, 4d2982b9, 7a2ee8a6, ]
+  outputs: [afe6590b, ]
+  output shapes: [(1,320,8,8,) ]
+}
+{
+  name: 5b3aed1b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [88300e85, 69c0eb03, 6a74f879, ]
+  outputs: [0edfaebd, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 8387be6c
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0edfaebd, 5ca30ff2, d908a133, ]
+  outputs: [dbe76451, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 0f6cc30b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [0edfaebd, c30f2d10, d2a093e8, ]
+  outputs: [b0b543e3, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: cde9d4eb
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [dbe76451, b0b543e3, ]
+  outputs: [a3af653a, ]
+  output shapes: [(1,768,8,8,) ]
+}
+{
+  name: 236b7e0b
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [88300e85, 1a48a984, 6ea8fd61, ]
+  outputs: [f515f7de, ]
+  output shapes: [(1,448,8,8,) ]
+}
+{
+  name: 6e8820c0
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [f515f7de, 66e3e23c, f8fe0169, ]
+  outputs: [632347a2, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: b5583b68
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [632347a2, 411a4c2c, 8580695d, ]
+  outputs: [17861476, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: b786a898
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [632347a2, 8c62e0ab, 667f0c64, ]
+  outputs: [4228c65a, ]
+  output shapes: [(1,384,8,8,) ]
+}
+{
+  name: 5bddc2eb
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [17861476, 4228c65a, ]
+  outputs: [635a08f6, ]
+  output shapes: [(1,768,8,8,) ]
+}
+{
+  name: 33013ffa
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [88300e85, ]
+  outputs: [7968b302, ]
+  output shapes: [(1,2048,8,8,) ]
+}
+{
+  name: 5186a3f0
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [7968b302, 91143d6a, 64a43c16, ]
+  outputs: [aa91f693, ]
+  output shapes: [(1,192,8,8,) ]
+}
+{
+  name: cd64e9fe
+  type: Concat
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [afe6590b, a3af653a, 635a08f6, aa91f693, ]
+  outputs: [c31578fb, ]
+  output shapes: [(1,2048,8,8,) ]
+}
+{
+  name: b22146f8
+  type: Pooling
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [c31578fb, ]
+  outputs: [d276d075, ]
+  output shapes: [(1,2048,1,1,) ]
+}
+{
+  name: 57a8cf75
+  type: Conv2D
+  device: CPU
+  data type: DT_FLOAT
+  data format: NCHW
+  memory type: CPU_BUFFER
+  inputs: [d276d075, 3ddf43ec, bbac3064, ]
+  outputs: [a08e32e0, ]
+  output shapes: [(1,1001,1,1,) ]
+}
+{
+  name: mace_node_a08e32e0_data_format_1
+  type: Transpose
+  device: CPU
+  data type: DT_FLOAT
+  data format: NHWC
+  memory type: CPU_BUFFER
+  inputs: [a08e32e0, ]
+  outputs: [a08e32e0_data_format_1, ]
+  output shapes: [(1,1,1,1001,) ]
+}
+{
+  name: 8063ed2a
+  type: Squeeze
+  device: CPU
+  data type: DT_FLOAT
+  data format: NHWC
+  memory type: CPU_BUFFER
+  inputs: [a08e32e0_data_format_1, ]
+  outputs: [ef49e6c7, ]
+  output shapes: [(1,1001,) ]
+}
+{
+  name: 86332ce2
+  type: Softmax
+  device: CPU
+  data type: DT_FLOAT
+  data format: NHWC
+  memory type: CPU_BUFFER
+  inputs: [ef49e6c7, ]
+  outputs: [InceptionV3/Predictions/Reshape_1, ]
+  output shapes: [(1,1001,) ]
+}

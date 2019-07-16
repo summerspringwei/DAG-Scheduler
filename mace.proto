@@ -68,8 +68,8 @@ message QuantizeActivationInfo {
 message OpratorLatency {
   optional float CPU_latency = 1;
   optional float GPU_latency = 2;
-  optional float Transpose_latency_NCHW_to_NHWC = 3;
-  optional float Transpose_latency_NHWC_to_NCHW = 4;
+  optional float Transpose_latency_NCHW_to_NHWC = 3; // CPU to GPU
+  optional float Transpose_latency_NHWC_to_NCHW = 4; // GPU to CPU
 }
 
 message OperatorDef {

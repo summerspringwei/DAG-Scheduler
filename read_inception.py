@@ -14,7 +14,7 @@ def read_netdef(protobuf_file_path):
   except IOError:
     print(protobuf_file_path + ": Could not open file.  Creating a new one.")
   print("--------------------------###############------------------")
-  # print(netdef)
+  print(netdef.op)
   op_def = netdef.op[0]
   print(op_def)
   return netdef
@@ -68,6 +68,5 @@ if __name__ == "__main__":
   op_latency_dict = read_op_latency("ops_latency")
   netdef = read_netdef("inception_v3.pb")
   # print(op_latency_dict)
-  netdef = assign_latency_to_netdef(op_latency_dict, netdef)
-  write_bench_netdef("inception_v3_latency.pb", netdef)
-  
+  #netdef = assign_latency_to_netdef(op_latency_dict, netdef)
+  #write_bench_netdef("inception_v3_latency.pb", netdef)

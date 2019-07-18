@@ -1,5 +1,5 @@
 #! /usr/bin/python
-
+import logging
 import mace_pb2
 import read_inception
 
@@ -28,29 +28,30 @@ class Operator:
     return self.name + " " + self.op_def.type + " " + str(self.parents) + " " + str(self.children)
 
 
-def build_relationship_for_op():
-  netdef = read_inception.read_netdef("inception_v3_latency.pb")
+def build_relationship_for_op(file_name):
+  netdef = read_inception.read_netdef(file_name)
   ops_relation_dict = dict()
   # For each op, find its parents and childs
   for i in range(len(netdef.op)):
     opdef1 = netdef.op[i]
     op = Operator(opdef1.name)
     op.op_def = opdef1
+    # Skip itself
     for j in range(len(netdef.op)):
       if i == j:
         continue
       opdef2 = netdef.op[j]
-      # find parents
+      # Find parents
       for input in opdef1.input:
         for output in opdef2.output:
           if input == output:
             op.parents.add(opdef2.name)
-      # find childs
+      # Find children
       for output in opdef1.output:
         for input in opdef2.input:
           if output == input:
             op.children.add(opdef2.name)
-      ops_relation_dict[opdef1.name] = op
+    ops_relation_dict[opdef1.name] = op
   for key in ops_relation_dict.keys():
     print(ops_relation_dict[key])
   print(len(ops_relation_dict))
@@ -59,17 +60,21 @@ def build_relationship_for_op():
 
 def update_children_start_point(op, ops_relation_dict, device_start_point, latency):
   for child_name in op.children:
-    op_child = ops_relation_dict[child_name]
-    op_child.earlist_start_point = max(op_child.earlist_start_point, device_start_point + latency)
+    if child_name in ops_relation_dict:
+      op_child = ops_relation_dict[child_name]
+      op_child.earlist_start_point = max(op_child.earlist_start_point, device_start_point + latency)
+    else:
+      print("Can not find op %s in dict" % child_name)
 
 
-def sort_operator(operator):
+def key_sort_operator(operator):
   return operator.earlist_start_point
 
 
+# Place the op on CPU or GPU, return the updated device end point
 def assign_op_to_device(op, opsops_relation_dict, device_type, device_end_point, latency):
   op.executed = True
-  op.netdef.device_type = device_type
+  op.op_def.device_type = device_type
   update_children_start_point(op, ops_relation_dict, device_end_point, latency)
   return device_end_point + latency
 
@@ -77,9 +82,12 @@ def assign_op_to_device(op, opsops_relation_dict, device_type, device_end_point,
 def is_parents_executed(op, ops_relation_dict):
   ready = True # When all his father has been executed, then the op can start executing
   for op_parent_name in op.parents:
+    if not op_parent_name in ops_relation_dict.keys():
+      raise KeyError()
     op_parent = ops_relation_dict[op_parent_name]
     if op_parent.executed == False:
       ready = False
+
   return ready
 
 
@@ -87,39 +95,41 @@ def is_parents_executed(op, ops_relation_dict):
 # Follow the mace
 def greedy_device_placement(netdef, ops_relation_dict):
   input_node_name = "fc9d2ee0"
+  # input_node_name = "op1"
   CPU_end_point = 0.0
   GPU_end_point = 0.0
   # Execute the first op
   op = ops_relation_dict[input_node_name]
-  if op.netdef.operatorLatency.CPU_latency < \
-    op.netdef.operatorLatency.GPU_latency + op.netdef.operatorLatency.Transpose_latency_NHWC_to_NCHW:
-    CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.netdef.operatorLatency.CPU_latency)
+  GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
+  if op.op_def.operatorLatency.CPU_latency < GPU_latency:
+    CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
   else:
-    GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, op.netdef.operatorLatency.GPU_latency)
+    GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
 
   ops_queue = list()
-  
-
-  while(1):
-    # Add child to ops_queue
+  # Start greedy assign
+  while(True):
+    # Add child to ops_queue if all his parents has been executed
     for child_name in op.children:
-      if is_parents_executed(ops_relation_dict[child_name], ops_relation_dict):
+      if is_parents_executed(ops_relation_dict[child_name], ops_relation_dict) and\
+        ops_relation_dict[child_name] not in ops_queue:
         ops_queue.append(ops_relation_dict[child_name])
-    # All ops are assigned to devices
+    # All ops are assigned to devices, stop
     if(len(ops_queue) <= 0):
       break
     # Sort queue according to start point
-    ops_queue.sort(key=sort_operator)
+    ops_queue.sort(key=key_sort_operator)
     # Fetch an op from queue
     for op_in_queue in ops_queue:
       # When all his father has been executed, then the op can start executing
       if is_parents_executed(op_in_queue, ops_relation_dict):
         op = op_in_queue
         ops_queue.remove(op_in_queue)
+        logging.debug("Fetch op %s " % op.name)
         break
     # For ops that are not supported by GPU, set their device type as CPU(Fall back to CPU)
-    if op.netdef.type == "Concat":
-      op.netdef.device_type = DeviceType.CPU
+    if op.op_def.type == "Concat":
+      CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
       continue
     # Assign the op to CPU or GPU
     # Find its father, get transpose latency
@@ -132,19 +142,21 @@ def greedy_device_placement(netdef, ops_relation_dict):
       elif op_parent.op_def.device_type == DeviceType.GPU:
         to_CPU_transpose_latency += op_parent.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
     # Get computation latency on devices
-    CPU_latency = op.netdef.operatorLatency.CPU_latency + to_CPU_transpose_latency
-    GPU_latency = op.netdef.operatorLatency.GPU_latency + to_GPU_transpose_latency
+    CPU_latency = op.op_def.operatorLatency.CPU_latency + to_CPU_transpose_latency
+    GPU_latency = op.op_def.operatorLatency.GPU_latency + to_GPU_transpose_latency
+    logging.debug("op %s CPU and GPU endpoint: %f %f " % ( op.name, CPU_end_point, GPU_end_point))
+    logging.debug("op %s CPU and GPU latency: %f %f " % ( op.name, CPU_latency, GPU_latency))
     # TODO(xcw)add to_GPU_transpose_latency to CPU_end_point
     # op can be executed at the very first time, but CPU and GPU are busy
     if CPU_end_point >= op.earlist_start_point and GPU_end_point >= op.earlist_start_point:
-      if CPU_end_point + CPU_latency < GPU_end_point + GPU_latency: # CPU is better
+      if CPU_end_point + CPU_latency < GPU_end_point + GPU_latency: # CPU can finish this op earlier(Greedy here)
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
       else: # GPU is better
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
     
     # One device is ready but the other one is busy(or just finish work)
     elif (op.earlist_start_point >= CPU_end_point and op.earlist_start_point <= GPU_end_point):
-      if op.earlist_start_point + CPU_latency < GPU_end_point + GPU_latency:
+      if op.earlist_start_point + CPU_latency < GPU_end_point + GPU_latency:# Note, CPU_end_point changed
         CPU_end_point = op.earlist_start_point
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
       else:
@@ -162,34 +174,17 @@ def greedy_device_placement(netdef, ops_relation_dict):
       else:
         GPU_end_point = op.earlist_start_point
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
-    
-        
-    
-      
+  # End of while
+  for op in netdef.op:
+    # print("%s %s %s" % op.name, op.type, str(op.device_type))
+    #print(op.name + " " + op.type + " " + str(op.device_type))
+    print(op.name + " " + str(op.device_type))
+  print("CPU end point: %s ms." % CPU_end_point)
+  print("GPU end point: %s ms." % GPU_end_point)
+
+
 
 if __name__ == "__main__":
-  netdef = read_inception.read_netdef("inception_v3_latency.pb")
-  ops_relation_dict = dict()
-  # For each op, find its parents and childs
-  for i in range(len(netdef.op)):
-    opdef1 = netdef.op[i]
-    op = Operator(opdef1.name)
-    op.op_def = opdef1
-    for j in range(len(netdef.op)):
-      if i == j:
-        continue
-      opdef2 = netdef.op[j]
-      # find parents
-      for input in opdef1.input:
-        for output in opdef2.output:
-          if input == output:
-            op.parents.add(opdef2.name)
-      # find childs
-      for output in opdef1.output:
-        for input in opdef2.input:
-          if output == input:
-            op.children.add(opdef2.name)
-      ops_relation_dict[opdef1.name] = op
-  for key in ops_relation_dict.keys():
-    print(ops_relation_dict[key])
-  print(len(ops_relation_dict))
+  logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
+  netdef, ops_relation_dict = build_relationship_for_op("inception_v3_latency.pb")
+  greedy_device_placement(netdef, ops_relation_dict)

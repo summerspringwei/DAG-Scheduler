@@ -7,7 +7,7 @@ import sys
 def read_netdef(protobuf_file_path):
   netdef = mace_pb2.NetDef()
   try:
-    f = open(protobuf_file_path, "r")
+    f = open(protobuf_file_path, "rb")
     net_str = f.read()
     netdef.ParseFromString(net_str)
     f.close()

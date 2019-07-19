@@ -58,11 +58,13 @@ def build_relationship_for_op(file_name):
   return netdef, ops_relation_dict
 
 
-def update_children_start_point(op, ops_relation_dict, device_start_point, latency):
+def update_children_start_point(op, ops_relation_dict, \
+  device_start_point, latency):
   for child_name in op.children:
     if child_name in ops_relation_dict:
       op_child = ops_relation_dict[child_name]
-      op_child.earlist_start_point = max(op_child.earlist_start_point, device_start_point + latency)
+      op_child.earlist_start_point = \
+        max(op_child.earlist_start_point, device_start_point + latency)
     else:
       print("Can not find op %s in dict" % child_name)
 
@@ -91,6 +93,14 @@ def is_parents_executed(op, ops_relation_dict):
   return ready
 
 
+def write_execute_order(filename, op_execute_order):
+  f = open(filename, 'w')
+  for idx in op_execute_order:
+    f.write(str(idx) + " ")
+  f.flush()
+  f.close()
+
+
 # enum DeviceType { CPU = 0, GPU = 2, HEXAGON = 3, HTA = 4, APU = 5 };
 # Follow the mace
 def greedy_device_placement(netdef, ops_relation_dict):
@@ -98,6 +108,14 @@ def greedy_device_placement(netdef, ops_relation_dict):
   # input_node_name = "op1"
   CPU_end_point = 0.0
   GPU_end_point = 0.0
+  # Need to record the execute order
+  op_execute_order = list()
+  idx = 0
+  op_to_idx_dict = dict()
+  for op in netdef.op:
+    op_to_idx_dict[op.name] = idx
+    idx += 1
+  
   # Execute the first op
   op = ops_relation_dict[input_node_name]
   GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
@@ -105,7 +123,7 @@ def greedy_device_placement(netdef, ops_relation_dict):
     CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
   else:
     GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
-
+  op_execute_order.append(op_to_idx_dict[input_node_name])
   ops_queue = list()
   # Start greedy assign
   while(True):
@@ -127,6 +145,8 @@ def greedy_device_placement(netdef, ops_relation_dict):
         ops_queue.remove(op_in_queue)
         logging.debug("Fetch op %s " % op.name)
         break
+    # Record the execute index
+    op_execute_order.append(op_to_idx_dict[op.name])
     # For ops that are not supported by GPU, set their device type as CPU(Fall back to CPU)
     if op.op_def.type == "Concat":
       CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
@@ -179,9 +199,30 @@ def greedy_device_placement(netdef, ops_relation_dict):
     # print("%s %s %s" % op.name, op.type, str(op.device_type))
     #print(op.name + " " + op.type + " " + str(op.device_type))
     print(op.name + " " + str(op.device_type))
+  write_execute_order("op_execute_order.txt", op_execute_order)
   print("CPU end point: %s ms." % CPU_end_point)
   print("GPU end point: %s ms." % GPU_end_point)
-
+  print(op_execute_order)
+  scheduled_net_def = mace_pb2.NetDef()
+  for arg in netdef.arg:
+    new_arg = scheduled_net_def.arg.add()
+    new_arg.CopyFrom(arg)
+  for tensor in netdef.tensors:
+    new_tensor = scheduled_net_def.tensors.add()
+    new_tensor.CopyFrom(tensor)
+  for input_info in netdef.input_info:
+    new_input_info = scheduled_net_def.input_info.add()
+    new_input_info.CopyFrom(input_info)
+  for output_info in netdef.output_info:
+    new_output_info = scheduled_net_def.output_info.add()
+    new_output_info.CopyFrom(output_info)
+  for i in range(len(netdef.op)):
+    idx = op_execute_order[i]
+    new_op = scheduled_net_def.op.add()
+    new_op.CopyFrom(netdef.op[idx])
+  
+  read_inception.write_bench_netdef("s_inception_v3.pb", scheduled_net_def)
+  return scheduled_net_def
 
 
 if __name__ == "__main__":

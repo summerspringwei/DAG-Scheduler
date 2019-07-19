@@ -14,9 +14,12 @@ def read_netdef(protobuf_file_path):
   except IOError:
     print(protobuf_file_path + ": Could not open file.  Creating a new one.")
   print("--------------------------###############------------------")
-  print(netdef.op)
+  #print(netdef.op)
+  for op in netdef.op:
+    if(op.type == "Conv2D") and op.device_type == 2:
+      print(op.name+" "+str(op.device_type))
   op_def = netdef.op[0]
-  print(op_def)
+  #print(op_def)
   return netdef
 
 
@@ -65,8 +68,8 @@ def write_bench_netdef(file_path, netdef):
 
 
 if __name__ == "__main__":
-  op_latency_dict = read_op_latency("ops_latency")
-  netdef = read_netdef("inception_v3.pb")
+  # op_latency_dict = read_op_latency("ops_latency")
+  netdef = read_netdef("s_inception_v3.pb")
   # print(op_latency_dict)
   #netdef = assign_latency_to_netdef(op_latency_dict, netdef)
   #write_bench_netdef("inception_v3_latency.pb", netdef)

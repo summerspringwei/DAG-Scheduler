@@ -221,11 +221,12 @@ def greedy_device_placement(netdef, ops_relation_dict):
     new_op = scheduled_net_def.op.add()
     new_op.CopyFrom(netdef.op[idx])
   
-  read_inception.write_bench_netdef("s_inception_v3.pb", scheduled_net_def)
+  read_inception.write_bench_netdef("s_my_inception_v3.pb", scheduled_net_def)
   return scheduled_net_def
 
 
 if __name__ == "__main__":
   logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
+  #netdef, ops_relation_dict = build_relationship_for_op("my_dag.pb")
   netdef, ops_relation_dict = build_relationship_for_op("inception_v3_latency.pb")
   greedy_device_placement(netdef, ops_relation_dict)

@@ -13,7 +13,7 @@ class OperatorLatency:
         self.Transpose_latency_NCHW_to_NHWC = 0 # Transformation latency CPU to GPU
     
     def __str__(self):
-        return "Operator latency: %f %f %f %f\n" % (self.GPU_latency, self.GPU_latency, \
+        return "Operator latency: %f %f %f %f" % (self.CPU_latency, self.GPU_latency, \
             self.Transpose_latency_NHWC_to_NCHW, self.Transpose_latency_NCHW_to_NHWC)
 
 

@@ -30,7 +30,7 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict, devi
     for parent in op.parents:
         if parent in one_module_names_idx_dict.keys():
             convert_format_to_cpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
+            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
             parent_idx = one_module_names_idx_dict[parent]
     idx = one_module_names_idx_dict[op_name]
     for device in device_list:
@@ -100,25 +100,42 @@ def have_parent_relation(op_name_a, op_name_b, op_dict):
     else:
         return False
 
-
-# t_1_3 - t_1_2 + M u_1_2_3 - c_1_1_2 s_1_2 + c_1_1_2 s_1_1 > T_1_2
-# t_1_2 - t_1_3 - M u_1_2_3 > T_1_3 - M
-# t_2_3 - t_2_2 + M u_2_2_3 - c_2_1_2 s_2_2 + c_2_1_2 s_2_1 > T_2_2
-# t_2_2 - t_2_3 - M u_2_2_3 > T_2_3 - M
-# TODO(xcw) Consider the format convert
+# Generate constraints for parent and child operations.
+# Parent and child constraints can both cover the DAG constrains and the device execute one device at a time constrains
+# We have considered the format convert
 def generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_child, op_name_parent, op_dict):
     idx_parent = one_module_names_idx_dict[op_name_parent]
     idx_child = one_module_names_idx_dict[op_name_child]
+    print("parent: %d child: %d" % (idx_parent, idx_child))
+    idx_parent_parent = get_parent_idx(one_module_names_idx_dict, op_name_parent, op_dict)
+    idx_parent_parent = 0
     constraints = []
     for device1 in device_list:
         for device2 in device_list:
             c = ""
+            op_parent_latency = op_dict[op_name_parent].op_def.operatorLatency
             if device2 == CPU:
-                c = "t_%d_%d - t_%d_%d > %f\n" \
-                    % (device1, idx_child, device2, idx_parent, op_dict[op_name_parent].op_def.operatorLatency.CPU_latency)
+                # If parent does not have parent, then there is no transformat constrains
+                if idx_parent_parent == 0:
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
+                        % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
+                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
+                    print(c)
+                else:
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
+                        % (device1, idx_child, device2, idx_parent, \
+                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW),\
+                            device2, idx_parent, op_parent_latency.Transpose_latency_NHWC_to_NCHW, device2, idx_parent_parent)
             elif device2 == GPU:
-                c = "t_%d_%d - t_%d_%d > %f\n" \
-                    % (device1, idx_child, device2, idx_parent, op_dict[op_name_parent].op_def.operatorLatency.GPU_latency)
+                if idx_parent_parent == 0:
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
+                        % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
+                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC - M))
+                else:
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
+                        % (device1, idx_child, device2, idx_parent, \
+                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC),\
+                            device2, idx_parent, op_parent_latency.Transpose_latency_NCHW_to_NHWC, device2, idx_parent_parent)
             constraints.append(c)
     return constraints
 
@@ -182,9 +199,11 @@ def generate_device_execute_once_at_a_time(one_module_names_idx_dict, device_lis
             if op_name_a == op_name_b:
                 continue
             if have_parent_relation(op_name_a, op_name_b, op_dict):
-                generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_a, op_name_b, op_dict)
+                constraints.extend( \
+                    generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_a, op_name_b, op_dict))
             elif have_parent_relation(op_name_b, op_name_a, op_dict):
-                generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_b, op_name_a, op_dict)
+                constraints.extend( \
+                    generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_b, op_name_a, op_dict))
             if not have_relative_relation(one_module_names_idx_dict, op_name_a, op_name_b, op_dict) and \
                 not have_relative_relation(one_module_names_idx_dict, op_name_b, op_name_a, op_dict):
                 constraints_one_device, u_variable_one_device =  generate_one_node_at_a_device( \
@@ -202,14 +221,33 @@ def generate_binary(one_module_names_idx_dict, device_list):
             binary_content.append(c)
     return binary_content
 
+
+def print_op_profile(one_module_names_idx_dict, op_dict):
+    op_profile_list = []
+    for op_name, idx in one_module_names_idx_dict.items():
+        op = op_dict[op_name]
+        op_profile_list.append((op_name, idx, op.op_def.operatorLatency))
+    op_profile_list = sorted(op_profile_list, key=lambda op_profile:op_profile[1])
+    
+    for op_profile in op_profile_list:
+        (op_name, idx, op.op_def.operatorLatency) = op_profile
+        print("%s %d %s" % (op_name, idx, op.op_def.operatorLatency))
+
+
 def generateLP():
     one_module_names_idx_dict = read_inception_one_module("inception-v3-one-module.txt")
     op_name_list, op_dict, net_def = read_inception_info("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt")
-    M = 1000
-    
+    print_op_profile(one_module_names_idx_dict, op_dict)
+
+    # Set s_cpu_%d of 'concat' to 1
+    concat_constraint = ""
+    for op_name, idx in one_module_names_idx_dict.items():
+        if op_name.strip().split("/")[-1] == "concat":
+            concat_constraint = ("s_%d_%d = 1\n" % (CPU, idx))
     LP_contents = []
     LP_objective = "Minimize\n\tvalue: tt\n\n"
     LP_constraints = ["Subject to\n"]
+    LP_constraints.append(concat_constraint)
     # Generate for all op one all devices
     # 1 for CPU, 2 for GPU
     device_list = [CPU, GPU]
@@ -240,4 +278,4 @@ def write_LP_contents(LP_contents, file_name):
 
 if __name__ == "__main__":
     LP_contents = generateLP()
-    write_LP_contents(LP_contents, "inception-one-module.lp")
+    write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")

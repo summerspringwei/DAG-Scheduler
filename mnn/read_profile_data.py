@@ -23,7 +23,7 @@ def read_data_trans(file_path):
     return data_trans_dict
 
 
-# Read Operator latency, for now we read 4 thread
+# Read Operator latency, for now we read 4 thread for CPU
 def read_latency(file_path):
     f = open(file_path, 'r')
     operator_latency_dict = {}

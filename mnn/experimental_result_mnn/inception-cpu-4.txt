@@ -1,0 +1,945 @@
+MNN benchmark
+Forward type: **CPU** thread=4** precision=2** isParallel=0
+--------> Benchmarking... loop = 2
+In generateScheduleGraph, use default linear schedule
+InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D 1,3,299,299; 1,32,149,149;  1;
+InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D 1,32,149,149; 1,32,147,147; 0; 2;
+InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D 1,32,147,147; 1,64,147,147; 1; 3;
+InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool 1,64,147,147; 1,64,73,73; 2; 4;
+InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D 1,64,73,73; 1,80,73,73; 3; 5;
+InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D 1,80,73,73; 1,192,71,71; 4; 6;
+InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool 1,192,71,71; 1,192,35,35; 5; 7;8;9;10;
+InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool 1,192,35,35; 1,192,35,35; 6; 11;
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D 1,192,35,35; 1,64,35,35; 6; 12;
+InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D 1,192,35,35; 1,48,35,35; 6; 13;
+InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D 1,192,35,35; 1,64,35,35; 6; 15;
+InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D 1,192,35,35; 1,32,35,35; 7; 15;
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D 1,64,35,35; 1,96,35,35; 8; 14;
+InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D 1,48,35,35; 1,64,35,35; 9; 15;
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D 1,96,35,35; 1,96,35,35; 12; 15;
+InceptionV3/InceptionV3/Mixed_5b/concat 1,64,35,35;1,64,35,35;1,96,35,35;1,32,35,35; 1,256,35,35; 10;11;13;14; 16;17;18;19;
+InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool 1,256,35,35; 1,256,35,35; 15; 20;
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D 1,256,35,35; 1,64,35,35; 15; 21;
+InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D 1,256,35,35; 1,48,35,35; 15; 22;
+InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D 1,256,35,35; 1,64,35,35; 15; 24;
+InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D 1,256,35,35; 1,64,35,35; 16; 24;
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D 1,64,35,35; 1,96,35,35; 17; 23;
+InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D 1,48,35,35; 1,64,35,35; 18; 24;
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D 1,96,35,35; 1,96,35,35; 21; 24;
+InceptionV3/InceptionV3/Mixed_5c/concat 1,64,35,35;1,64,35,35;1,96,35,35;1,64,35,35; 1,288,35,35; 19;20;22;23; 25;26;27;28;
+InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool 1,288,35,35; 1,288,35,35; 24; 29;
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D 1,288,35,35; 1,64,35,35; 24; 30;
+InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D 1,288,35,35; 1,48,35,35; 24; 31;
+InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D 1,288,35,35; 1,64,35,35; 24; 33;
+InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D 1,288,35,35; 1,64,35,35; 25; 33;
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D 1,64,35,35; 1,96,35,35; 26; 32;
+InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D 1,48,35,35; 1,64,35,35; 27; 33;
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D 1,96,35,35; 1,96,35,35; 30; 33;
+InceptionV3/InceptionV3/Mixed_5d/concat 1,64,35,35;1,64,35,35;1,96,35,35;1,64,35,35; 1,288,35,35; 28;29;31;32; 34;35;36;
+InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool 1,288,35,35; 1,288,17,17; 33; 39;
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D 1,288,35,35; 1,64,35,35; 33; 37;
+InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D 1,288,35,35; 1,384,17,17; 33; 39;
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D 1,64,35,35; 1,96,35,35; 35; 38;
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D 1,96,35,35; 1,96,17,17; 37; 39;
+InceptionV3/InceptionV3/Mixed_6a/concat 1,384,17,17;1,96,17,17;1,288,17,17; 1,768,17,17; 34;36;38; 40;41;42;43;
+InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool 1,768,17,17; 1,768,17,17; 39; 44;
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,128,17,17; 39; 45;
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,128,17,17; 39; 46;
+InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 39; 51;
+InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D 1,768,17,17; 1,192,17,17; 40; 51;
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D 1,128,17,17; 1,128,17,17; 41; 47;
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D 1,128,17,17; 1,128,17,17; 42; 48;
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D 1,128,17,17; 1,128,17,17; 45; 49;
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D 1,128,17,17; 1,192,17,17; 46; 51;
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D 1,128,17,17; 1,128,17,17; 47; 50;
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D 1,128,17,17; 1,192,17,17; 49; 51;
+InceptionV3/InceptionV3/Mixed_6b/concat 1,192,17,17;1,192,17,17;1,192,17,17;1,192,17,17; 1,768,17,17; 43;44;48;50; 52;53;54;55;
+InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool 1,768,17,17; 1,768,17,17; 51; 56;
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,160,17,17; 51; 57;
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,160,17,17; 51; 58;
+InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 51; 63;
+InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D 1,768,17,17; 1,192,17,17; 52; 63;
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D 1,160,17,17; 1,160,17,17; 53; 59;
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D 1,160,17,17; 1,160,17,17; 54; 60;
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D 1,160,17,17; 1,160,17,17; 57; 61;
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D 1,160,17,17; 1,192,17,17; 58; 63;
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D 1,160,17,17; 1,160,17,17; 59; 62;
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D 1,160,17,17; 1,192,17,17; 61; 63;
+InceptionV3/InceptionV3/Mixed_6c/concat 1,192,17,17;1,192,17,17;1,192,17,17;1,192,17,17; 1,768,17,17; 55;56;60;62; 64;65;66;67;
+InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool 1,768,17,17; 1,768,17,17; 63; 68;
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,160,17,17; 63; 69;
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,160,17,17; 63; 70;
+InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 63; 75;
+InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D 1,768,17,17; 1,192,17,17; 64; 75;
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D 1,160,17,17; 1,160,17,17; 65; 71;
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D 1,160,17,17; 1,160,17,17; 66; 72;
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D 1,160,17,17; 1,160,17,17; 69; 73;
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D 1,160,17,17; 1,192,17,17; 70; 75;
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D 1,160,17,17; 1,160,17,17; 71; 74;
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D 1,160,17,17; 1,192,17,17; 73; 75;
+InceptionV3/InceptionV3/Mixed_6d/concat 1,192,17,17;1,192,17,17;1,192,17,17;1,192,17,17; 1,768,17,17; 67;68;72;74; 76;77;78;79;
+InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool 1,768,17,17; 1,768,17,17; 75; 80;
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 75; 81;
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 75; 82;
+InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 75; 87;
+InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D 1,768,17,17; 1,192,17,17; 76; 87;
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D 1,192,17,17; 1,192,17,17; 77; 83;
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D 1,192,17,17; 1,192,17,17; 78; 84;
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D 1,192,17,17; 1,192,17,17; 81; 85;
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D 1,192,17,17; 1,192,17,17; 82; 87;
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D 1,192,17,17; 1,192,17,17; 83; 86;
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D 1,192,17,17; 1,192,17,17; 85; 87;
+InceptionV3/InceptionV3/Mixed_6e/concat 1,192,17,17;1,192,17,17;1,192,17,17;1,192,17,17; 1,768,17,17; 79;80;84;86; 88;89;90;
+InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool 1,768,17,17; 1,768,8,8; 87; 95;
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 87; 91;
+InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D 1,768,17,17; 1,192,17,17; 87; 92;
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D 1,192,17,17; 1,192,17,17; 89; 93;
+InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D 1,192,17,17; 1,320,8,8; 90; 95;
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D 1,192,17,17; 1,192,17,17; 91; 94;
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D 1,192,17,17; 1,192,8,8; 93; 95;
+InceptionV3/InceptionV3/Mixed_7a/concat 1,320,8,8;1,192,8,8;1,768,8,8; 1,1280,8,8; 88;92;94; 96;97;98;99;
+InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool 1,1280,8,8; 1,1280,8,8; 95; 100;
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D 1,1280,8,8; 1,448,8,8; 95; 101;
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D 1,1280,8,8; 1,384,8,8; 95; 102;103;
+InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D 1,1280,8,8; 1,320,8,8; 95; 108;
+InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D 1,1280,8,8; 1,192,8,8; 96; 108;
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D 1,448,8,8; 1,384,8,8; 97; 104;105;
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D 1,384,8,8; 1,384,8,8; 98; 106;
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D 1,384,8,8; 1,384,8,8; 98; 106;
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D 1,384,8,8; 1,384,8,8; 101; 107;
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D 1,384,8,8; 1,384,8,8; 101; 107;
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat 1,384,8,8;1,384,8,8; 1,768,8,8; 102;103; 108;
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat 1,384,8,8;1,384,8,8; 1,768,8,8; 104;105; 108;
+InceptionV3/InceptionV3/Mixed_7b/concat 1,320,8,8;1,768,8,8;1,768,8,8;1,192,8,8; 1,2048,8,8; 99;100;106;107; 109;110;111;112;
+InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool 1,2048,8,8; 1,2048,8,8; 108; 113;
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D 1,2048,8,8; 1,448,8,8; 108; 114;
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D 1,2048,8,8; 1,384,8,8; 108; 115;116;
+InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D 1,2048,8,8; 1,320,8,8; 108; 121;
+InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D 1,2048,8,8; 1,192,8,8; 109; 121;
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D 1,448,8,8; 1,384,8,8; 110; 117;118;
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D 1,384,8,8; 1,384,8,8; 111; 119;
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D 1,384,8,8; 1,384,8,8; 111; 119;
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D 1,384,8,8; 1,384,8,8; 114; 120;
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D 1,384,8,8; 1,384,8,8; 114; 120;
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat 1,384,8,8;1,384,8,8; 1,768,8,8; 115;116; 121;
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat 1,384,8,8;1,384,8,8; 1,768,8,8; 117;118; 121;
+InceptionV3/InceptionV3/Mixed_7c/concat 1,320,8,8;1,768,8,8;1,768,8,8;1,192,8,8; 1,2048,8,8; 112;113;119;120; 122;
+InceptionV3/Logits/AvgPool_1a_8x8/AvgPool 1,2048,8,8; 1,2048,1,1; 121; 123;
+InceptionV3/Logits/Conv2d_1c_1x1/Conv2D 1,2048,1,1; 1,1001,1,1; 122; 124;
+InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze 1,1001,1,1; 1,1001,1,1; 123; 125;
+InceptionV3/Logits/SpatialSqueeze 1,1001,1,1; 1,0,1001,0; 124; 126;127;
+InceptionV3/Predictions/Shape 1,0,1001,0; 2,0,0,0; 125; 129;
+InceptionV3/Predictions/Reshape 1,0,1001,0; 1,0,1001,0; 125; 128;
+InceptionV3/Predictions/Softmax 1,0,1001,0; 1,0,1001,0; 127; 129;
+InceptionV3/Predictions/Reshape_1 1,0,1001,0;2,0,0,0; 1,0,1001,0; 126;128; 
+Start run pipeline in serial.
+In Pipline::execute mUnits size: 130
+Time in CPUConcat onExecute:598
+Time in Pipeline Unit execute:614
+Time in CPUConcat onExecute:634
+Time in Pipeline Unit execute:649
+Time in CPUConcat onExecute:624
+Time in Pipeline Unit execute:637
+Time in CPUConcat onExecute:364
+Time in Pipeline Unit execute:378
+Time in CPUConcat onExecute:471
+Time in Pipeline Unit execute:487
+Time in CPUConcat onExecute:469
+Time in Pipeline Unit execute:483
+Time in CPUConcat onExecute:484
+Time in Pipeline Unit execute:499
+Time in CPUConcat onExecute:473
+Time in Pipeline Unit execute:488
+Time in CPUConcat onExecute:149
+Time in Pipeline Unit execute:164
+Time in CPUConcat onExecute:90
+Time in Pipeline Unit execute:103
+Time in CPUConcat onExecute:67
+Time in Pipeline Unit execute:71
+Time in CPUConcat onExecute:183
+Time in Pipeline Unit execute:186
+Time in CPUConcat onExecute:97
+Time in Pipeline Unit execute:111
+Time in CPUConcat onExecute:76
+Time in Pipeline Unit execute:80
+Time in CPUConcat onExecute:228
+Time in Pipeline Unit execute:233
+Iter 0: InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D	Convolution	CPU	4647	1	4648	1,32,149,149,	
+Iter 1: InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D	Convolution	CPU	11328	4664	15992	1,32,147,147,	
+Iter 2: InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D	Convolution	CPU	22375	16009	38384	1,64,147,147,	
+Iter 3: InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool	Pooling	CPU	1445	38401	39846	1,64,73,73,	
+Iter 4: InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D	Convolution	CPU	2502	39857	42359	1,80,73,73,	
+Iter 5: InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D	Convolution	CPU	27472	42377	69849	1,192,71,71,	
+Iter 6: InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool	Pooling	CPU	1117	69864	70981	1,192,35,35,	
+Iter 7: InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	877	70992	71869	1,192,35,35,	
+Iter 8: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1207	71878	73085	1,64,35,35,	
+Iter 9: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	933	73101	74034	1,48,35,35,	
+Iter 10: InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1294	74045	75339	1,64,35,35,	
+Iter 11: InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	731	75351	76082	1,32,35,35,	
+Iter 12: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3212	76093	79305	1,96,35,35,	
+Iter 13: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3597	79320	82917	1,64,35,35,	
+Iter 14: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5065	82930	87995	1,96,35,35,	
+Iter 15: InceptionV3/InceptionV3/Mixed_5b/concat	Concat	CPU	617	88007	88624	1,256,35,35,	
+Iter 16: InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1206	88631	89837	1,256,35,35,	
+Iter 17: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1667	89859	91526	1,64,35,35,	
+Iter 18: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1299	91540	92839	1,48,35,35,	
+Iter 19: InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1740	92883	94623	1,64,35,35,	
+Iter 20: InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1704	94635	96339	1,64,35,35,	
+Iter 21: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3161	96352	99513	1,96,35,35,	
+Iter 22: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D	Convolution	CPU	3581	99526	103107	1,64,35,35,	
+Iter 23: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	7273	103120	110393	1,96,35,35,	
+Iter 24: InceptionV3/InceptionV3/Mixed_5c/concat	Concat	CPU	653	110405	111058	1,288,35,35,	
+Iter 25: InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1307	111069	112376	1,288,35,35,	
+Iter 26: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1847	112391	114238	1,64,35,35,	
+Iter 27: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1506	114248	115754	1,48,35,35,	
+Iter 28: InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1870	115766	117636	1,64,35,35,	
+Iter 29: InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1903	117651	119554	1,64,35,35,	
+Iter 30: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3131	119567	122698	1,96,35,35,	
+Iter 31: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3654	122709	126363	1,64,35,35,	
+Iter 32: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4886	126376	131262	1,96,35,35,	
+Iter 33: InceptionV3/InceptionV3/Mixed_5d/concat	Concat	CPU	642	131283	131925	1,288,35,35,	
+Iter 34: InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	373	131936	132309	1,288,17,17,	
+Iter 35: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1848	132318	134166	1,64,35,35,	
+Iter 36: InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D	Convolution	CPU	31705	134175	165880	1,384,17,17,	
+Iter 37: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3247	165896	169143	1,96,35,35,	
+Iter 38: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D	Convolution	CPU	2298	169157	171455	1,96,17,17,	
+Iter 39: InceptionV3/InceptionV3/Mixed_6a/concat	Concat	CPU	383	171467	171850	1,768,17,17,	
+Iter 40: InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	796	171857	172653	1,768,17,17,	
+Iter 41: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2895	172668	175563	1,128,17,17,	
+Iter 42: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2786	175578	178364	1,128,17,17,	
+Iter 43: InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3853	178375	182228	1,192,17,17,	
+Iter 44: InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4038	182239	186277	1,192,17,17,	
+Iter 45: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	4816	186293	191109	1,128,17,17,	
+Iter 46: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	4320	191119	195439	1,128,17,17,	
+Iter 47: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	4186	195451	199637	1,128,17,17,	
+Iter 48: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	7189	199647	206836	1,192,17,17,	
+Iter 49: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	4789	206853	211642	1,128,17,17,	
+Iter 50: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	6081	211654	217735	1,192,17,17,	
+Iter 51: InceptionV3/InceptionV3/Mixed_6b/concat	Concat	CPU	491	217748	218239	1,768,17,17,	
+Iter 52: InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	875	218247	219122	1,768,17,17,	
+Iter 53: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3398	219139	222537	1,160,17,17,	
+Iter 54: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3517	222552	226069	1,160,17,17,	
+Iter 55: InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3897	226087	229984	1,192,17,17,	
+Iter 56: InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3927	229997	233924	1,192,17,17,	
+Iter 57: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8040	233941	241981	1,160,17,17,	
+Iter 58: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6875	241997	248872	1,160,17,17,	
+Iter 59: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6896	248887	255783	1,160,17,17,	
+Iter 60: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9606	255797	265403	1,192,17,17,	
+Iter 61: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	7993	265420	273413	1,160,17,17,	
+Iter 62: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7905	273427	281332	1,192,17,17,	
+Iter 63: InceptionV3/InceptionV3/Mixed_6c/concat	Concat	CPU	488	281348	281836	1,768,17,17,	
+Iter 64: InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	881	281843	282724	1,768,17,17,	
+Iter 65: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3920	282796	286716	1,160,17,17,	
+Iter 66: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3385	286733	290118	1,160,17,17,	
+Iter 67: InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3930	290130	294060	1,192,17,17,	
+Iter 68: InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4099	294071	298170	1,192,17,17,	
+Iter 69: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8070	298188	306258	1,160,17,17,	
+Iter 70: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6806	306274	313080	1,160,17,17,	
+Iter 71: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6769	313091	319860	1,160,17,17,	
+Iter 72: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9595	319873	329468	1,192,17,17,	
+Iter 73: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8137	329486	337623	1,160,17,17,	
+Iter 74: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7940	337639	345579	1,192,17,17,	
+Iter 75: InceptionV3/InceptionV3/Mixed_6d/concat	Concat	CPU	502	345594	346096	1,768,17,17,	
+Iter 76: InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	873	346105	346978	1,768,17,17,	
+Iter 77: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3957	346993	350950	1,192,17,17,	
+Iter 78: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3942	350967	354909	1,192,17,17,	
+Iter 79: InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3921	354926	358847	1,192,17,17,	
+Iter 80: InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3923	358860	362783	1,192,17,17,	
+Iter 81: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	12331	362800	375131	1,192,17,17,	
+Iter 82: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10222	375147	385369	1,192,17,17,	
+Iter 83: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	10142	385387	395529	1,192,17,17,	
+Iter 84: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12252	395543	407795	1,192,17,17,	
+Iter 85: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	12322	407815	420137	1,192,17,17,	
+Iter 86: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	9934	420183	430117	1,192,17,17,	
+Iter 87: InceptionV3/InceptionV3/Mixed_6e/concat	Concat	CPU	493	430134	430627	1,768,17,17,	
+Iter 88: InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	287	430634	430921	1,768,8,8,	
+Iter 89: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4351	430967	435318	1,192,17,17,	
+Iter 90: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3945	435333	439278	1,192,17,17,	
+Iter 91: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10039	439289	449328	1,192,17,17,	
+Iter 92: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3341	449341	452682	1,320,8,8,	
+Iter 93: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12172	452697	464869	1,192,17,17,	
+Iter 94: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D	Convolution	CPU	2019	464885	466904	1,192,8,8,	
+Iter 95: InceptionV3/InceptionV3/Mixed_7a/concat	Concat	CPU	167	466914	467081	1,1280,8,8,	
+Iter 96: InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	358	467087	467445	1,1280,8,8,	
+Iter 97: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4165	467454	471619	1,448,8,8,	
+Iter 98: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3778	471633	475411	1,384,8,8,	
+Iter 99: InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3164	475464	478628	1,320,8,8,	
+Iter 100: InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	2073	478639	480712	1,192,8,8,	
+Iter 101: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	14256	480726	494982	1,384,8,8,	
+Iter 102: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D	Convolution	CPU	4323	494998	499321	1,384,8,8,	
+Iter 103: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4713	499336	504049	1,384,8,8,	
+Iter 104: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4335	504060	508395	1,384,8,8,	
+Iter 105: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4743	508410	513153	1,384,8,8,	
+Iter 106: InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat	Concat	CPU	108	513167	513275	1,768,8,8,	
+Iter 107: InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat	Concat	CPU	73	513280	513353	1,768,8,8,	
+Iter 108: InceptionV3/InceptionV3/Mixed_7b/concat	Concat	CPU	189	513356	513545	1,2048,8,8,	
+Iter 109: InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	550	513551	514101	1,2048,8,8,	
+Iter 110: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6732	514112	520844	1,448,8,8,	
+Iter 111: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6043	520857	526900	1,384,8,8,	
+Iter 112: InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5165	526913	532078	1,320,8,8,	
+Iter 113: InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3688	532094	535782	1,192,8,8,	
+Iter 114: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	13597	535797	549394	1,384,8,8,	
+Iter 115: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D	Convolution	CPU	4300	549406	553706	1,384,8,8,	
+Iter 116: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4775	553717	558492	1,384,8,8,	
+Iter 117: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4282	558509	562791	1,384,8,8,	
+Iter 118: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4793	562806	567599	1,384,8,8,	
+Iter 119: InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat	Concat	CPU	115	567611	567726	1,768,8,8,	
+Iter 120: InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat	Concat	CPU	82	567730	567812	1,768,8,8,	
+Iter 121: InceptionV3/InceptionV3/Mixed_7c/concat	Concat	CPU	235	567818	568053	1,2048,8,8,	
+Iter 122: InceptionV3/Logits/AvgPool_1a_8x8/AvgPool	Pooling	CPU	140	568058	568198	1,2048,1,1,	
+Iter 123: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D	Convolution	CPU	1321	568202	569523	1,1001,1,1,	
+Iter 124: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze	ConvertTensor	CPU	24	569532	569556	1,1,1,1001,	
+Iter 125: InceptionV3/Logits/SpatialSqueeze	Squeeze	CPU	2	569564	569566	1,1001,	
+Iter 126: InceptionV3/Predictions/Shape	Shape	CPU	0	569569	569569	2,	
+Iter 127: InceptionV3/Predictions/Reshape	Reshape	CPU	3	569572	569575	1,1001,	
+Iter 128: InceptionV3/Predictions/Softmax	Softmax	CPU	43	569577	569620	1,1001,	
+Iter 129: InceptionV3/Predictions/Reshape_1	Reshape	CPU	3	569677	569680	1,1001,	
+Start run pipeline in serial.
+In Pipline::execute mUnits size: 130
+Time in CPUConcat onExecute:601
+Time in Pipeline Unit execute:615
+Time in CPUConcat onExecute:636
+Time in Pipeline Unit execute:651
+Time in CPUConcat onExecute:626
+Time in Pipeline Unit execute:766
+Time in CPUConcat onExecute:364
+Time in Pipeline Unit execute:378
+Time in CPUConcat onExecute:452
+Time in Pipeline Unit execute:468
+Time in CPUConcat onExecute:468
+Time in Pipeline Unit execute:484
+Time in CPUConcat onExecute:474
+Time in Pipeline Unit execute:491
+Time in CPUConcat onExecute:582
+Time in Pipeline Unit execute:599
+Time in CPUConcat onExecute:148
+Time in Pipeline Unit execute:162
+Time in CPUConcat onExecute:89
+Time in Pipeline Unit execute:103
+Time in CPUConcat onExecute:67
+Time in Pipeline Unit execute:71
+Time in CPUConcat onExecute:185
+Time in Pipeline Unit execute:188
+Time in CPUConcat onExecute:97
+Time in Pipeline Unit execute:111
+Time in CPUConcat onExecute:75
+Time in Pipeline Unit execute:78
+Time in CPUConcat onExecute:226
+Time in Pipeline Unit execute:230
+Iter 0: InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3787	1	3788	1,32,149,149,	
+Iter 1: InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D	Convolution	CPU	10040	3804	13844	1,32,147,147,	
+Iter 2: InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D	Convolution	CPU	19465	13858	33323	1,64,147,147,	
+Iter 3: InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool	Pooling	CPU	1512	33338	34850	1,64,73,73,	
+Iter 4: InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D	Convolution	CPU	2507	34862	37369	1,80,73,73,	
+Iter 5: InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D	Convolution	CPU	27987	37390	65377	1,192,71,71,	
+Iter 6: InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool	Pooling	CPU	1183	65395	66578	1,192,35,35,	
+Iter 7: InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	881	66589	67470	1,192,35,35,	
+Iter 8: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1202	67481	68683	1,64,35,35,	
+Iter 9: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	932	68699	69631	1,48,35,35,	
+Iter 10: InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1186	69642	70828	1,64,35,35,	
+Iter 11: InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	727	70838	71565	1,32,35,35,	
+Iter 12: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3243	71574	74817	1,96,35,35,	
+Iter 13: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3605	74836	78441	1,64,35,35,	
+Iter 14: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5076	78454	83530	1,96,35,35,	
+Iter 15: InceptionV3/InceptionV3/Mixed_5b/concat	Concat	CPU	619	83543	84162	1,256,35,35,	
+Iter 16: InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1201	84168	85369	1,256,35,35,	
+Iter 17: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1678	85389	87067	1,64,35,35,	
+Iter 18: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1299	87081	88380	1,48,35,35,	
+Iter 19: InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1640	88425	90065	1,64,35,35,	
+Iter 20: InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1691	90076	91767	1,64,35,35,	
+Iter 21: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3237	91781	95018	1,96,35,35,	
+Iter 22: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D	Convolution	CPU	3573	95032	98605	1,64,35,35,	
+Iter 23: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5010	98620	103630	1,96,35,35,	
+Iter 24: InceptionV3/InceptionV3/Mixed_5c/concat	Concat	CPU	654	103643	104297	1,288,35,35,	
+Iter 25: InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1302	104308	105610	1,288,35,35,	
+Iter 26: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1841	105626	107467	1,64,35,35,	
+Iter 27: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1442	107476	108918	1,48,35,35,	
+Iter 28: InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1861	108928	110789	1,64,35,35,	
+Iter 29: InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1910	110802	112712	1,64,35,35,	
+Iter 30: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3198	112725	115923	1,96,35,35,	
+Iter 31: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3593	115935	119528	1,64,35,35,	
+Iter 32: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5006	119540	124546	1,96,35,35,	
+Iter 33: InceptionV3/InceptionV3/Mixed_5d/concat	Concat	CPU	770	124567	125337	1,288,35,35,	
+Iter 34: InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	389	125350	125739	1,288,17,17,	
+Iter 35: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1853	125749	127602	1,64,35,35,	
+Iter 36: InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D	Convolution	CPU	31612	127613	159225	1,384,17,17,	
+Iter 37: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3252	159241	162493	1,96,35,35,	
+Iter 38: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D	Convolution	CPU	2416	162507	164923	1,96,17,17,	
+Iter 39: InceptionV3/InceptionV3/Mixed_6a/concat	Concat	CPU	382	164938	165320	1,768,17,17,	
+Iter 40: InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	805	165326	166131	1,768,17,17,	
+Iter 41: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2849	166144	168993	1,128,17,17,	
+Iter 42: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2772	169007	171779	1,128,17,17,	
+Iter 43: InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3915	171789	175704	1,192,17,17,	
+Iter 44: InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3972	175716	179688	1,192,17,17,	
+Iter 45: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	4861	179703	184564	1,128,17,17,	
+Iter 46: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	4214	184576	188790	1,128,17,17,	
+Iter 47: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	4106	188799	192905	1,128,17,17,	
+Iter 48: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	7127	192913	200040	1,192,17,17,	
+Iter 49: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	4938	200056	204994	1,128,17,17,	
+Iter 50: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	6007	205009	211016	1,192,17,17,	
+Iter 51: InceptionV3/InceptionV3/Mixed_6b/concat	Concat	CPU	472	211028	211500	1,768,17,17,	
+Iter 52: InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	876	211507	212383	1,768,17,17,	
+Iter 53: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3432	212397	215829	1,160,17,17,	
+Iter 54: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3464	215845	219309	1,160,17,17,	
+Iter 55: InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3888	219324	223212	1,192,17,17,	
+Iter 56: InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4025	223223	227248	1,192,17,17,	
+Iter 57: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8060	227267	235327	1,160,17,17,	
+Iter 58: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6777	235343	242120	1,160,17,17,	
+Iter 59: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6857	242133	248990	1,160,17,17,	
+Iter 60: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9637	249004	258641	1,192,17,17,	
+Iter 61: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8058	258658	266716	1,160,17,17,	
+Iter 62: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7899	266732	274631	1,192,17,17,	
+Iter 63: InceptionV3/InceptionV3/Mixed_6c/concat	Concat	CPU	488	274647	275135	1,768,17,17,	
+Iter 64: InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	882	275141	276023	1,768,17,17,	
+Iter 65: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3692	276045	279737	1,160,17,17,	
+Iter 66: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3355	279752	283107	1,160,17,17,	
+Iter 67: InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4036	283118	287154	1,192,17,17,	
+Iter 68: InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4069	287167	291236	1,192,17,17,	
+Iter 69: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8074	291252	299326	1,160,17,17,	
+Iter 70: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6838	299342	306180	1,160,17,17,	
+Iter 71: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6702	306192	312894	1,160,17,17,	
+Iter 72: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9596	312905	322501	1,192,17,17,	
+Iter 73: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8100	322518	330618	1,160,17,17,	
+Iter 74: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7881	330635	338516	1,192,17,17,	
+Iter 75: InceptionV3/InceptionV3/Mixed_6d/concat	Concat	CPU	495	338529	339024	1,768,17,17,	
+Iter 76: InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	908	339034	339942	1,768,17,17,	
+Iter 77: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4088	339956	344044	1,192,17,17,	
+Iter 78: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3897	344061	347958	1,192,17,17,	
+Iter 79: InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3897	347973	351870	1,192,17,17,	
+Iter 80: InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4005	351883	355888	1,192,17,17,	
+Iter 81: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	12267	355908	368175	1,192,17,17,	
+Iter 82: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10157	368192	378349	1,192,17,17,	
+Iter 83: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	10133	378365	388498	1,192,17,17,	
+Iter 84: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12237	388512	400749	1,192,17,17,	
+Iter 85: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	12359	400766	413125	1,192,17,17,	
+Iter 86: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	9922	413142	423064	1,192,17,17,	
+Iter 87: InceptionV3/InceptionV3/Mixed_6e/concat	Concat	CPU	602	423081	423683	1,768,17,17,	
+Iter 88: InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	298	423694	423992	1,768,8,8,	
+Iter 89: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4382	424040	428422	1,192,17,17,	
+Iter 90: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3945	428436	432381	1,192,17,17,	
+Iter 91: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10035	432391	442426	1,192,17,17,	
+Iter 92: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3431	442438	445869	1,320,8,8,	
+Iter 93: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12103	445887	457990	1,192,17,17,	
+Iter 94: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D	Convolution	CPU	2024	458005	460029	1,192,8,8,	
+Iter 95: InceptionV3/InceptionV3/Mixed_7a/concat	Concat	CPU	165	460039	460204	1,1280,8,8,	
+Iter 96: InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	354	460210	460564	1,1280,8,8,	
+Iter 97: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4240	460573	464813	1,448,8,8,	
+Iter 98: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3699	464828	468527	1,384,8,8,	
+Iter 99: InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3167	468574	471741	1,320,8,8,	
+Iter 100: InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	2173	471752	473925	1,192,8,8,	
+Iter 101: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	14060	473941	488001	1,384,8,8,	
+Iter 102: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D	Convolution	CPU	4312	488017	492329	1,384,8,8,	
+Iter 103: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4769	492342	497111	1,384,8,8,	
+Iter 104: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4300	497124	501424	1,384,8,8,	
+Iter 105: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4791	501438	506229	1,384,8,8,	
+Iter 106: InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat	Concat	CPU	107	506244	506351	1,768,8,8,	
+Iter 107: InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat	Concat	CPU	74	506356	506430	1,768,8,8,	
+Iter 108: InceptionV3/InceptionV3/Mixed_7b/concat	Concat	CPU	190	506433	506623	1,2048,8,8,	
+Iter 109: InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	553	506627	507180	1,2048,8,8,	
+Iter 110: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6740	507191	513931	1,448,8,8,	
+Iter 111: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5891	513944	519835	1,384,8,8,	
+Iter 112: InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5218	519848	525066	1,320,8,8,	
+Iter 113: InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3584	525083	528667	1,192,8,8,	
+Iter 114: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	13497	528681	542178	1,384,8,8,	
+Iter 115: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D	Convolution	CPU	4352	542191	546543	1,384,8,8,	
+Iter 116: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4744	546556	551300	1,384,8,8,	
+Iter 117: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4361	551316	555677	1,384,8,8,	
+Iter 118: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4720	555692	560412	1,384,8,8,	
+Iter 119: InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat	Concat	CPU	116	560422	560538	1,768,8,8,	
+Iter 120: InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat	Concat	CPU	81	560543	560624	1,768,8,8,	
+Iter 121: InceptionV3/InceptionV3/Mixed_7c/concat	Concat	CPU	232	560631	560863	1,2048,8,8,	
+Iter 122: InceptionV3/Logits/AvgPool_1a_8x8/AvgPool	Pooling	CPU	137	560868	561005	1,2048,1,1,	
+Iter 123: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D	Convolution	CPU	1295	561010	562305	1,1001,1,1,	
+Iter 124: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze	ConvertTensor	CPU	4	562315	562319	1,1,1,1001,	
+Iter 125: InceptionV3/Logits/SpatialSqueeze	Squeeze	CPU	2	562325	562327	1,1001,	
+Iter 126: InceptionV3/Predictions/Shape	Shape	CPU	0	562330	562330	2,	
+Iter 127: InceptionV3/Predictions/Reshape	Reshape	CPU	3	562333	562336	1,1001,	
+Iter 128: InceptionV3/Predictions/Softmax	Softmax	CPU	27	562338	562365	1,1001,	
+Iter 129: InceptionV3/Predictions/Reshape_1	Reshape	CPU	2	562382	562384	1,1001,	
+Start run pipeline in serial.
+In Pipline::execute mUnits size: 130
+Time in CPUConcat onExecute:603
+Time in Pipeline Unit execute:618
+Time in CPUConcat onExecute:626
+Time in Pipeline Unit execute:641
+Time in CPUConcat onExecute:628
+Time in Pipeline Unit execute:643
+Time in CPUConcat onExecute:367
+Time in Pipeline Unit execute:380
+Time in CPUConcat onExecute:386
+Time in Pipeline Unit execute:399
+Time in CPUConcat onExecute:478
+Time in Pipeline Unit execute:493
+Time in CPUConcat onExecute:479
+Time in Pipeline Unit execute:496
+Time in CPUConcat onExecute:471
+Time in Pipeline Unit execute:487
+Time in CPUConcat onExecute:175
+Time in Pipeline Unit execute:191
+Time in CPUConcat onExecute:91
+Time in Pipeline Unit execute:105
+Time in CPUConcat onExecute:67
+Time in Pipeline Unit execute:194
+Time in CPUConcat onExecute:183
+Time in Pipeline Unit execute:186
+Time in CPUConcat onExecute:100
+Time in Pipeline Unit execute:114
+Time in CPUConcat onExecute:76
+Time in Pipeline Unit execute:79
+Time in CPUConcat onExecute:242
+Time in Pipeline Unit execute:245
+Iter 0: InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3607	0	3607	1,32,149,149,	
+Iter 1: InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D	Convolution	CPU	10007	3622	13629	1,32,147,147,	
+Iter 2: InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D	Convolution	CPU	19562	13644	33206	1,64,147,147,	
+Iter 3: InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool	Pooling	CPU	1437	33220	34657	1,64,73,73,	
+Iter 4: InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D	Convolution	CPU	2486	34668	37154	1,80,73,73,	
+Iter 5: InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D	Convolution	CPU	26366	37176	63542	1,192,71,71,	
+Iter 6: InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool	Pooling	CPU	1149	63560	64709	1,192,35,35,	
+Iter 7: InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	881	64721	65602	1,192,35,35,	
+Iter 8: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1206	65612	66818	1,64,35,35,	
+Iter 9: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	929	66834	67763	1,48,35,35,	
+Iter 10: InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1193	67774	68967	1,64,35,35,	
+Iter 11: InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	782	68977	69759	1,32,35,35,	
+Iter 12: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3139	69771	72910	1,96,35,35,	
+Iter 13: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3607	72927	76534	1,64,35,35,	
+Iter 14: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5168	76549	81717	1,96,35,35,	
+Iter 15: InceptionV3/InceptionV3/Mixed_5b/concat	Concat	CPU	621	81730	82351	1,256,35,35,	
+Iter 16: InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1208	82358	83566	1,256,35,35,	
+Iter 17: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1671	83585	85256	1,64,35,35,	
+Iter 18: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1301	85269	86570	1,48,35,35,	
+Iter 19: InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1637	86616	88253	1,64,35,35,	
+Iter 20: InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1739	88264	90003	1,64,35,35,	
+Iter 21: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3173	90018	93191	1,96,35,35,	
+Iter 22: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D	Convolution	CPU	3580	93205	96785	1,64,35,35,	
+Iter 23: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4961	96799	101760	1,96,35,35,	
+Iter 24: InceptionV3/InceptionV3/Mixed_5c/concat	Concat	CPU	646	101772	102418	1,288,35,35,	
+Iter 25: InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1328	102428	103756	1,288,35,35,	
+Iter 26: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1835	103770	105605	1,64,35,35,	
+Iter 27: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1449	105620	107069	1,48,35,35,	
+Iter 28: InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1857	107080	108937	1,64,35,35,	
+Iter 29: InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1975	108950	110925	1,64,35,35,	
+Iter 30: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3150	110940	114090	1,96,35,35,	
+Iter 31: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3584	114101	117685	1,64,35,35,	
+Iter 32: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4981	117697	122678	1,96,35,35,	
+Iter 33: InceptionV3/InceptionV3/Mixed_5d/concat	Concat	CPU	646	122700	123346	1,288,35,35,	
+Iter 34: InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	376	123357	123733	1,288,17,17,	
+Iter 35: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1852	123742	125594	1,64,35,35,	
+Iter 36: InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D	Convolution	CPU	31618	125604	157222	1,384,17,17,	
+Iter 37: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3370	157238	160608	1,96,35,35,	
+Iter 38: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D	Convolution	CPU	2298	160624	162922	1,96,17,17,	
+Iter 39: InceptionV3/InceptionV3/Mixed_6a/concat	Concat	CPU	384	162934	163318	1,768,17,17,	
+Iter 40: InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	796	163324	164120	1,768,17,17,	
+Iter 41: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2834	164135	166969	1,128,17,17,	
+Iter 42: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2867	166982	169849	1,128,17,17,	
+Iter 43: InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3868	169863	173731	1,192,17,17,	
+Iter 44: InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3975	173743	177718	1,192,17,17,	
+Iter 45: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	4855	177734	182589	1,128,17,17,	
+Iter 46: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	4227	182601	186828	1,128,17,17,	
+Iter 47: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	4159	186837	190996	1,128,17,17,	
+Iter 48: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	7073	191007	198080	1,192,17,17,	
+Iter 49: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	4810	198094	202904	1,128,17,17,	
+Iter 50: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	5978	202918	208896	1,192,17,17,	
+Iter 51: InceptionV3/InceptionV3/Mixed_6b/concat	Concat	CPU	403	208907	209310	1,768,17,17,	
+Iter 52: InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	931	209317	210248	1,768,17,17,	
+Iter 53: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3662	210265	213927	1,160,17,17,	
+Iter 54: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3453	213944	217397	1,160,17,17,	
+Iter 55: InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3943	217411	221354	1,192,17,17,	
+Iter 56: InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3985	221368	225353	1,192,17,17,	
+Iter 57: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8081	225370	233451	1,160,17,17,	
+Iter 58: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6855	233467	240322	1,160,17,17,	
+Iter 59: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6762	240338	247100	1,160,17,17,	
+Iter 60: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9578	247111	256689	1,192,17,17,	
+Iter 61: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8110	256706	264816	1,160,17,17,	
+Iter 62: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7897	264832	272729	1,192,17,17,	
+Iter 63: InceptionV3/InceptionV3/Mixed_6c/concat	Concat	CPU	496	272745	273241	1,768,17,17,	
+Iter 64: InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	885	273249	274134	1,768,17,17,	
+Iter 65: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3438	274159	277597	1,160,17,17,	
+Iter 66: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3444	277613	281057	1,160,17,17,	
+Iter 67: InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3950	281076	285026	1,192,17,17,	
+Iter 68: InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4018	285039	289057	1,192,17,17,	
+Iter 69: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8059	289074	297133	1,160,17,17,	
+Iter 70: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6836	297150	303986	1,160,17,17,	
+Iter 71: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6862	303999	310861	1,160,17,17,	
+Iter 72: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9672	310875	320547	1,192,17,17,	
+Iter 73: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	7993	320566	328559	1,160,17,17,	
+Iter 74: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7868	328574	336442	1,192,17,17,	
+Iter 75: InceptionV3/InceptionV3/Mixed_6d/concat	Concat	CPU	500	336456	336956	1,768,17,17,	
+Iter 76: InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	881	336966	337847	1,768,17,17,	
+Iter 77: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4344	337863	342207	1,192,17,17,	
+Iter 78: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3910	342223	346133	1,192,17,17,	
+Iter 79: InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3892	346148	350040	1,192,17,17,	
+Iter 80: InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3885	350053	353938	1,192,17,17,	
+Iter 81: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	12183	353955	366138	1,192,17,17,	
+Iter 82: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10056	366155	376211	1,192,17,17,	
+Iter 83: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	10031	376226	386257	1,192,17,17,	
+Iter 84: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12274	386269	398543	1,192,17,17,	
+Iter 85: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	12347	398558	410905	1,192,17,17,	
+Iter 86: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	9961	410922	420883	1,192,17,17,	
+Iter 87: InceptionV3/InceptionV3/Mixed_6e/concat	Concat	CPU	491	420900	421391	1,768,17,17,	
+Iter 88: InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	296	421399	421695	1,768,8,8,	
+Iter 89: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3949	421740	425689	1,192,17,17,	
+Iter 90: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4219	425705	429924	1,192,17,17,	
+Iter 91: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10197	429938	440135	1,192,17,17,	
+Iter 92: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3380	440150	443530	1,320,8,8,	
+Iter 93: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12154	443548	455702	1,192,17,17,	
+Iter 94: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D	Convolution	CPU	2063	455720	457783	1,192,8,8,	
+Iter 95: InceptionV3/InceptionV3/Mixed_7a/concat	Concat	CPU	195	457795	457990	1,1280,8,8,	
+Iter 96: InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	368	457997	458365	1,1280,8,8,	
+Iter 97: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4409	458374	462783	1,448,8,8,	
+Iter 98: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3688	462799	466487	1,384,8,8,	
+Iter 99: InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3288	466537	469825	1,320,8,8,	
+Iter 100: InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	2088	469838	471926	1,192,8,8,	
+Iter 101: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	14016	471942	485958	1,384,8,8,	
+Iter 102: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D	Convolution	CPU	4374	485974	490348	1,384,8,8,	
+Iter 103: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4738	490364	495102	1,384,8,8,	
+Iter 104: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4307	495112	499419	1,384,8,8,	
+Iter 105: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4793	499434	504227	1,384,8,8,	
+Iter 106: InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat	Concat	CPU	108	504242	504350	1,768,8,8,	
+Iter 107: InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat	Concat	CPU	197	504355	504552	1,768,8,8,	
+Iter 108: InceptionV3/InceptionV3/Mixed_7b/concat	Concat	CPU	189	504557	504746	1,2048,8,8,	
+Iter 109: InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	559	504751	505310	1,2048,8,8,	
+Iter 110: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6756	505319	512075	1,448,8,8,	
+Iter 111: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5957	512088	518045	1,384,8,8,	
+Iter 112: InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5240	518057	523297	1,320,8,8,	
+Iter 113: InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3621	523313	526934	1,192,8,8,	
+Iter 114: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	13686	526947	540633	1,384,8,8,	
+Iter 115: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D	Convolution	CPU	4301	540645	544946	1,384,8,8,	
+Iter 116: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4791	544957	549748	1,384,8,8,	
+Iter 117: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4293	549765	554058	1,384,8,8,	
+Iter 118: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4750	554073	558823	1,384,8,8,	
+Iter 119: InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat	Concat	CPU	117	558832	558949	1,768,8,8,	
+Iter 120: InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat	Concat	CPU	81	558954	559035	1,768,8,8,	
+Iter 121: InceptionV3/InceptionV3/Mixed_7c/concat	Concat	CPU	248	559041	559289	1,2048,8,8,	
+Iter 122: InceptionV3/Logits/AvgPool_1a_8x8/AvgPool	Pooling	CPU	138	559296	559434	1,2048,1,1,	
+Iter 123: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D	Convolution	CPU	1477	559439	560916	1,1001,1,1,	
+Iter 124: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze	ConvertTensor	CPU	4	560928	560932	1,1,1,1001,	
+Iter 125: InceptionV3/Logits/SpatialSqueeze	Squeeze	CPU	2	560938	560940	1,1001,	
+Iter 126: InceptionV3/Predictions/Shape	Shape	CPU	1	560942	560943	2,	
+Iter 127: InceptionV3/Predictions/Reshape	Reshape	CPU	2	560946	560948	1,1001,	
+Iter 128: InceptionV3/Predictions/Softmax	Softmax	CPU	31	560951	560982	1,1001,	
+Iter 129: InceptionV3/Predictions/Reshape_1	Reshape	CPU	2	561001	561003	1,1001,	
+Start run pipeline in serial.
+In Pipline::execute mUnits size: 130
+Time in CPUConcat onExecute:606
+Time in Pipeline Unit execute:620
+Time in CPUConcat onExecute:625
+Time in Pipeline Unit execute:639
+Time in CPUConcat onExecute:648
+Time in Pipeline Unit execute:662
+Time in CPUConcat onExecute:368
+Time in Pipeline Unit execute:382
+Time in CPUConcat onExecute:462
+Time in Pipeline Unit execute:478
+Time in CPUConcat onExecute:470
+Time in Pipeline Unit execute:485
+Time in CPUConcat onExecute:526
+Time in Pipeline Unit execute:542
+Time in CPUConcat onExecute:472
+Time in Pipeline Unit execute:487
+Time in CPUConcat onExecute:181
+Time in Pipeline Unit execute:196
+Time in CPUConcat onExecute:89
+Time in Pipeline Unit execute:102
+Time in CPUConcat onExecute:67
+Time in Pipeline Unit execute:70
+Time in CPUConcat onExecute:177
+Time in Pipeline Unit execute:181
+Time in CPUConcat onExecute:94
+Time in Pipeline Unit execute:108
+Time in CPUConcat onExecute:77
+Time in Pipeline Unit execute:80
+Time in CPUConcat onExecute:229
+Time in Pipeline Unit execute:232
+Iter 0: InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3622	0	3622	1,32,149,149,	
+Iter 1: InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D	Convolution	CPU	9991	3638	13629	1,32,147,147,	
+Iter 2: InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D	Convolution	CPU	19533	13645	33178	1,64,147,147,	
+Iter 3: InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool	Pooling	CPU	1429	33192	34621	1,64,73,73,	
+Iter 4: InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D	Convolution	CPU	2591	34632	37223	1,80,73,73,	
+Iter 5: InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D	Convolution	CPU	26396	37244	63640	1,192,71,71,	
+Iter 6: InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool	Pooling	CPU	1131	63658	64789	1,192,35,35,	
+Iter 7: InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	872	64801	65673	1,192,35,35,	
+Iter 8: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1196	65683	66879	1,64,35,35,	
+Iter 9: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	986	66895	67881	1,48,35,35,	
+Iter 10: InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1188	67894	69082	1,64,35,35,	
+Iter 11: InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	721	69091	69812	1,32,35,35,	
+Iter 12: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3136	69821	72957	1,96,35,35,	
+Iter 13: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3609	72974	76583	1,64,35,35,	
+Iter 14: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5056	76596	81652	1,96,35,35,	
+Iter 15: InceptionV3/InceptionV3/Mixed_5b/concat	Concat	CPU	624	81665	82289	1,256,35,35,	
+Iter 16: InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1209	82296	83505	1,256,35,35,	
+Iter 17: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1676	83524	85200	1,64,35,35,	
+Iter 18: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1299	85213	86512	1,48,35,35,	
+Iter 19: InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1713	86558	88271	1,64,35,35,	
+Iter 20: InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1691	88282	89973	1,64,35,35,	
+Iter 21: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3186	89986	93172	1,96,35,35,	
+Iter 22: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D	Convolution	CPU	3592	93186	96778	1,64,35,35,	
+Iter 23: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4941	96791	101732	1,96,35,35,	
+Iter 24: InceptionV3/InceptionV3/Mixed_5c/concat	Concat	CPU	643	101745	102388	1,288,35,35,	
+Iter 25: InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1334	102399	103733	1,288,35,35,	
+Iter 26: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1841	103746	105587	1,64,35,35,	
+Iter 27: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1447	105598	107045	1,48,35,35,	
+Iter 28: InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1868	107110	108978	1,64,35,35,	
+Iter 29: InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1908	108993	110901	1,64,35,35,	
+Iter 30: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3134	110914	114048	1,96,35,35,	
+Iter 31: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3761	114058	117819	1,64,35,35,	
+Iter 32: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4900	117830	122730	1,96,35,35,	
+Iter 33: InceptionV3/InceptionV3/Mixed_5d/concat	Concat	CPU	666	122751	123417	1,288,35,35,	
+Iter 34: InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	386	123428	123814	1,288,17,17,	
+Iter 35: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1844	123823	125667	1,64,35,35,	
+Iter 36: InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D	Convolution	CPU	31697	125678	157375	1,384,17,17,	
+Iter 37: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3245	157391	160636	1,96,35,35,	
+Iter 38: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D	Convolution	CPU	2294	160650	162944	1,96,17,17,	
+Iter 39: InceptionV3/InceptionV3/Mixed_6a/concat	Concat	CPU	387	162955	163342	1,768,17,17,	
+Iter 40: InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	815	163349	164164	1,768,17,17,	
+Iter 41: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2819	164177	166996	1,128,17,17,	
+Iter 42: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2841	167011	169852	1,128,17,17,	
+Iter 43: InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3827	169864	173691	1,192,17,17,	
+Iter 44: InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4076	173702	177778	1,192,17,17,	
+Iter 45: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	4803	177794	182597	1,128,17,17,	
+Iter 46: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	4211	182608	186819	1,128,17,17,	
+Iter 47: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	4149	186828	190977	1,128,17,17,	
+Iter 48: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	7212	190988	198200	1,192,17,17,	
+Iter 49: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	4818	198218	203036	1,128,17,17,	
+Iter 50: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	6079	203049	209128	1,192,17,17,	
+Iter 51: InceptionV3/InceptionV3/Mixed_6b/concat	Concat	CPU	482	209141	209623	1,768,17,17,	
+Iter 52: InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	881	209631	210512	1,768,17,17,	
+Iter 53: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3382	210527	213909	1,160,17,17,	
+Iter 54: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3556	213926	217482	1,160,17,17,	
+Iter 55: InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3891	217500	221391	1,192,17,17,	
+Iter 56: InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3961	221404	225365	1,192,17,17,	
+Iter 57: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8052	225381	233433	1,160,17,17,	
+Iter 58: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6865	233449	240314	1,160,17,17,	
+Iter 59: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6854	240331	247185	1,160,17,17,	
+Iter 60: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9553	247198	256751	1,192,17,17,	
+Iter 61: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8042	256766	264808	1,160,17,17,	
+Iter 62: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7907	264824	272731	1,192,17,17,	
+Iter 63: InceptionV3/InceptionV3/Mixed_6c/concat	Concat	CPU	490	272747	273237	1,768,17,17,	
+Iter 64: InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	888	273244	274132	1,768,17,17,	
+Iter 65: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3651	274157	277808	1,160,17,17,	
+Iter 66: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3415	277825	281240	1,160,17,17,	
+Iter 67: InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3958	281253	285211	1,192,17,17,	
+Iter 68: InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4136	285223	289359	1,192,17,17,	
+Iter 69: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8071	289380	297451	1,160,17,17,	
+Iter 70: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6820	297467	304287	1,160,17,17,	
+Iter 71: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6752	304298	311050	1,160,17,17,	
+Iter 72: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9628	311063	320691	1,192,17,17,	
+Iter 73: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8113	320709	328822	1,160,17,17,	
+Iter 74: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7849	328838	336687	1,192,17,17,	
+Iter 75: InceptionV3/InceptionV3/Mixed_6d/concat	Concat	CPU	547	336698	337245	1,768,17,17,	
+Iter 76: InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	912	337257	338169	1,768,17,17,	
+Iter 77: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3947	338185	342132	1,192,17,17,	
+Iter 78: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3877	342148	346025	1,192,17,17,	
+Iter 79: InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3950	346040	349990	1,192,17,17,	
+Iter 80: InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3928	350005	353933	1,192,17,17,	
+Iter 81: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	12282	353949	366231	1,192,17,17,	
+Iter 82: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10136	366250	376386	1,192,17,17,	
+Iter 83: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	10130	376403	386533	1,192,17,17,	
+Iter 84: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12299	386547	398846	1,192,17,17,	
+Iter 85: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	12294	398863	411157	1,192,17,17,	
+Iter 86: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	9964	411173	421137	1,192,17,17,	
+Iter 87: InceptionV3/InceptionV3/Mixed_6e/concat	Concat	CPU	491	421153	421644	1,768,17,17,	
+Iter 88: InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	291	421651	421942	1,768,8,8,	
+Iter 89: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3887	421988	425875	1,192,17,17,	
+Iter 90: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4280	425892	430172	1,192,17,17,	
+Iter 91: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10156	430187	440343	1,192,17,17,	
+Iter 92: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3368	440357	443725	1,320,8,8,	
+Iter 93: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12150	443742	455892	1,192,17,17,	
+Iter 94: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D	Convolution	CPU	2086	455909	457995	1,192,8,8,	
+Iter 95: InceptionV3/InceptionV3/Mixed_7a/concat	Concat	CPU	200	458010	458210	1,1280,8,8,	
+Iter 96: InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	373	458216	458589	1,1280,8,8,	
+Iter 97: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4607	458598	463205	1,448,8,8,	
+Iter 98: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3671	463220	466891	1,384,8,8,	
+Iter 99: InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3206	466940	470146	1,320,8,8,	
+Iter 100: InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	2092	470158	472250	1,192,8,8,	
+Iter 101: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	14142	472264	486406	1,384,8,8,	
+Iter 102: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D	Convolution	CPU	4394	486423	490817	1,384,8,8,	
+Iter 103: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4709	490832	495541	1,384,8,8,	
+Iter 104: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4352	495551	499903	1,384,8,8,	
+Iter 105: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4721	499918	504639	1,384,8,8,	
+Iter 106: InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat	Concat	CPU	107	504652	504759	1,768,8,8,	
+Iter 107: InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat	Concat	CPU	73	504764	504837	1,768,8,8,	
+Iter 108: InceptionV3/InceptionV3/Mixed_7b/concat	Concat	CPU	183	504840	505023	1,2048,8,8,	
+Iter 109: InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	555	505029	505584	1,2048,8,8,	
+Iter 110: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6739	505596	512335	1,448,8,8,	
+Iter 111: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5994	512348	518342	1,384,8,8,	
+Iter 112: InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5111	518355	523466	1,320,8,8,	
+Iter 113: InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3635	523482	527117	1,192,8,8,	
+Iter 114: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	13676	527132	540808	1,384,8,8,	
+Iter 115: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D	Convolution	CPU	4315	540820	545135	1,384,8,8,	
+Iter 116: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4781	545146	549927	1,384,8,8,	
+Iter 117: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4281	549943	554224	1,384,8,8,	
+Iter 118: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4844	554238	559082	1,384,8,8,	
+Iter 119: InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat	Concat	CPU	113	559094	559207	1,768,8,8,	
+Iter 120: InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat	Concat	CPU	82	559212	559294	1,768,8,8,	
+Iter 121: InceptionV3/InceptionV3/Mixed_7c/concat	Concat	CPU	235	559300	559535	1,2048,8,8,	
+Iter 122: InceptionV3/Logits/AvgPool_1a_8x8/AvgPool	Pooling	CPU	139	559542	559681	1,2048,1,1,	
+Iter 123: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D	Convolution	CPU	1277	559686	560963	1,1001,1,1,	
+Iter 124: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze	ConvertTensor	CPU	4	560972	560976	1,1,1,1001,	
+Iter 125: InceptionV3/Logits/SpatialSqueeze	Squeeze	CPU	3	560983	560986	1,1001,	
+Iter 126: InceptionV3/Predictions/Shape	Shape	CPU	0	560988	560988	2,	
+Iter 127: InceptionV3/Predictions/Reshape	Reshape	CPU	3	560991	560994	1,1001,	
+Iter 128: InceptionV3/Predictions/Softmax	Softmax	CPU	28	560996	561024	1,1001,	
+Iter 129: InceptionV3/Predictions/Reshape_1	Reshape	CPU	1	561039	561040	1,1001,	
+Start run pipeline in serial.
+In Pipline::execute mUnits size: 130
+Time in CPUConcat onExecute:598
+Time in Pipeline Unit execute:613
+Time in CPUConcat onExecute:622
+Time in Pipeline Unit execute:637
+Time in CPUConcat onExecute:623
+Time in Pipeline Unit execute:638
+Time in CPUConcat onExecute:368
+Time in Pipeline Unit execute:382
+Time in CPUConcat onExecute:466
+Time in Pipeline Unit execute:481
+Time in CPUConcat onExecute:493
+Time in Pipeline Unit execute:509
+Time in CPUConcat onExecute:479
+Time in Pipeline Unit execute:495
+Time in CPUConcat onExecute:464
+Time in Pipeline Unit execute:479
+Time in CPUConcat onExecute:176
+Time in Pipeline Unit execute:191
+Time in CPUConcat onExecute:89
+Time in Pipeline Unit execute:102
+Time in CPUConcat onExecute:68
+Time in Pipeline Unit execute:71
+Time in CPUConcat onExecute:180
+Time in Pipeline Unit execute:184
+Time in CPUConcat onExecute:94
+Time in Pipeline Unit execute:108
+Time in CPUConcat onExecute:77
+Time in Pipeline Unit execute:79
+Time in CPUConcat onExecute:224
+Time in Pipeline Unit execute:228
+Iter 0: InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3936	1	3937	1,32,149,149,	
+Iter 1: InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D	Convolution	CPU	10196	3952	14148	1,32,147,147,	
+Iter 2: InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D	Convolution	CPU	20545	14163	34708	1,64,147,147,	
+Iter 3: InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool	Pooling	CPU	1459	34723	36182	1,64,73,73,	
+Iter 4: InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D	Convolution	CPU	2568	36194	38762	1,80,73,73,	
+Iter 5: InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D	Convolution	CPU	26989	38783	65772	1,192,71,71,	
+Iter 6: InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool	Pooling	CPU	1130	65787	66917	1,192,35,35,	
+Iter 7: InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	958	66928	67886	1,192,35,35,	
+Iter 8: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1204	67897	69101	1,64,35,35,	
+Iter 9: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	934	69117	70051	1,48,35,35,	
+Iter 10: InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1189	70062	71251	1,64,35,35,	
+Iter 11: InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	723	71260	71983	1,32,35,35,	
+Iter 12: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3131	71993	75124	1,96,35,35,	
+Iter 13: InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3685	75140	78825	1,64,35,35,	
+Iter 14: InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	5020	78840	83860	1,96,35,35,	
+Iter 15: InceptionV3/InceptionV3/Mixed_5b/concat	Concat	CPU	617	83871	84488	1,256,35,35,	
+Iter 16: InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1212	84496	85708	1,256,35,35,	
+Iter 17: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1667	85726	87393	1,64,35,35,	
+Iter 18: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1365	87406	88771	1,48,35,35,	
+Iter 19: InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1641	88817	90458	1,64,35,35,	
+Iter 20: InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1717	90468	92185	1,64,35,35,	
+Iter 21: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3170	92198	95368	1,96,35,35,	
+Iter 22: InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D	Convolution	CPU	3661	95381	99042	1,64,35,35,	
+Iter 23: InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4915	99057	103972	1,96,35,35,	
+Iter 24: InceptionV3/InceptionV3/Mixed_5c/concat	Concat	CPU	641	103983	104624	1,288,35,35,	
+Iter 25: InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	1301	104635	105936	1,288,35,35,	
+Iter 26: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1925	105951	107876	1,64,35,35,	
+Iter 27: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1460	107889	109349	1,48,35,35,	
+Iter 28: InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1859	109359	111218	1,64,35,35,	
+Iter 29: InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	1911	111232	113143	1,64,35,35,	
+Iter 30: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3131	113156	116287	1,96,35,35,	
+Iter 31: InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D	Convolution	CPU	3667	116297	119964	1,64,35,35,	
+Iter 32: InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D	Convolution	CPU	4926	119976	124902	1,96,35,35,	
+Iter 33: InceptionV3/InceptionV3/Mixed_5d/concat	Concat	CPU	642	124924	125566	1,288,35,35,	
+Iter 34: InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	376	125577	125953	1,288,17,17,	
+Iter 35: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	1910	125962	127872	1,64,35,35,	
+Iter 36: InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D	Convolution	CPU	31651	127884	159535	1,384,17,17,	
+Iter 37: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D	Convolution	CPU	3266	159551	162817	1,96,35,35,	
+Iter 38: InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D	Convolution	CPU	2300	162830	165130	1,96,17,17,	
+Iter 39: InceptionV3/InceptionV3/Mixed_6a/concat	Concat	CPU	386	165141	165527	1,768,17,17,	
+Iter 40: InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	786	165533	166319	1,768,17,17,	
+Iter 41: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2896	166333	169229	1,128,17,17,	
+Iter 42: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	2737	169244	171981	1,128,17,17,	
+Iter 43: InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3820	171997	175817	1,192,17,17,	
+Iter 44: InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4053	175829	179882	1,192,17,17,	
+Iter 45: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	4812	179898	184710	1,128,17,17,	
+Iter 46: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	4325	184721	189046	1,128,17,17,	
+Iter 47: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	4139	189057	193196	1,128,17,17,	
+Iter 48: InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	7253	193205	200458	1,192,17,17,	
+Iter 49: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	4795	200475	205270	1,128,17,17,	
+Iter 50: InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	6044	205283	211327	1,192,17,17,	
+Iter 51: InceptionV3/InceptionV3/Mixed_6b/concat	Concat	CPU	485	211341	211826	1,768,17,17,	
+Iter 52: InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	899	211832	212731	1,768,17,17,	
+Iter 53: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3388	212746	216134	1,160,17,17,	
+Iter 54: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4334	216149	220483	1,160,17,17,	
+Iter 55: InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3936	220500	224436	1,192,17,17,	
+Iter 56: InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	4095	224450	228545	1,192,17,17,	
+Iter 57: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8034	228562	236596	1,160,17,17,	
+Iter 58: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6834	236612	243446	1,160,17,17,	
+Iter 59: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6871	243462	250333	1,160,17,17,	
+Iter 60: InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9636	250346	259982	1,192,17,17,	
+Iter 61: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8097	259999	268096	1,160,17,17,	
+Iter 62: InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7868	268111	275979	1,192,17,17,	
+Iter 63: InceptionV3/InceptionV3/Mixed_6c/concat	Concat	CPU	513	275994	276507	1,768,17,17,	
+Iter 64: InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	871	276515	277386	1,768,17,17,	
+Iter 65: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3882	277411	281293	1,160,17,17,	
+Iter 66: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3328	281309	284637	1,160,17,17,	
+Iter 67: InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3964	284648	288612	1,192,17,17,	
+Iter 68: InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3993	288625	292618	1,192,17,17,	
+Iter 69: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	8007	292632	300639	1,160,17,17,	
+Iter 70: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	6732	300654	307386	1,160,17,17,	
+Iter 71: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	6711	307396	314107	1,160,17,17,	
+Iter 72: InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	9565	314118	323683	1,192,17,17,	
+Iter 73: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	8150	323699	331849	1,160,17,17,	
+Iter 74: InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	7920	331866	339786	1,192,17,17,	
+Iter 75: InceptionV3/InceptionV3/Mixed_6d/concat	Concat	CPU	499	339800	340299	1,768,17,17,	
+Iter 76: InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	897	340308	341205	1,768,17,17,	
+Iter 77: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3932	341220	345152	1,192,17,17,	
+Iter 78: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4024	345168	349192	1,192,17,17,	
+Iter 79: InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3862	349210	353072	1,192,17,17,	
+Iter 80: InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3928	353085	357013	1,192,17,17,	
+Iter 81: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D	Convolution	CPU	12280	357030	369310	1,192,17,17,	
+Iter 82: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10226	369326	379552	1,192,17,17,	
+Iter 83: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D	Convolution	CPU	10376	379569	389945	1,192,17,17,	
+Iter 84: InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12692	389959	402651	1,192,17,17,	
+Iter 85: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D	Convolution	CPU	12382	402668	415050	1,192,17,17,	
+Iter 86: InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D	Convolution	CPU	9962	415067	425029	1,192,17,17,	
+Iter 87: InceptionV3/InceptionV3/Mixed_6e/concat	Concat	CPU	483	425046	425529	1,768,17,17,	
+Iter 88: InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool	Pooling	CPU	279	425536	425815	1,768,8,8,	
+Iter 89: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4245	425863	430108	1,192,17,17,	
+Iter 90: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3946	430124	434070	1,192,17,17,	
+Iter 91: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D	Convolution	CPU	10044	434081	444125	1,192,17,17,	
+Iter 92: InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D	Convolution	CPU	3369	444138	447507	1,320,8,8,	
+Iter 93: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D	Convolution	CPU	12111	447523	459634	1,192,17,17,	
+Iter 94: InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D	Convolution	CPU	2017	459649	461666	1,192,8,8,	
+Iter 95: InceptionV3/InceptionV3/Mixed_7a/concat	Concat	CPU	196	461676	461872	1,1280,8,8,	
+Iter 96: InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	352	461881	462233	1,1280,8,8,	
+Iter 97: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	4131	462241	466372	1,448,8,8,	
+Iter 98: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3798	466386	470184	1,384,8,8,	
+Iter 99: InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	3174	470230	473404	1,320,8,8,	
+Iter 100: InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	2067	473416	475483	1,192,8,8,	
+Iter 101: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	14147	475497	489644	1,384,8,8,	
+Iter 102: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D	Convolution	CPU	4307	489659	493966	1,384,8,8,	
+Iter 103: InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4803	493980	498783	1,384,8,8,	
+Iter 104: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4291	498796	503087	1,384,8,8,	
+Iter 105: InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4805	503101	507906	1,384,8,8,	
+Iter 106: InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat	Concat	CPU	105	507921	508026	1,768,8,8,	
+Iter 107: InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat	Concat	CPU	74	508031	508105	1,768,8,8,	
+Iter 108: InceptionV3/InceptionV3/Mixed_7b/concat	Concat	CPU	186	508108	508294	1,2048,8,8,	
+Iter 109: InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool	Pooling	CPU	554	508299	508853	1,2048,8,8,	
+Iter 110: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D	Convolution	CPU	6644	508864	515508	1,448,8,8,	
+Iter 111: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5986	515520	521506	1,384,8,8,	
+Iter 112: InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D	Convolution	CPU	5111	521519	526630	1,320,8,8,	
+Iter 113: InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D	Convolution	CPU	3675	526646	530321	1,192,8,8,	
+Iter 114: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D	Convolution	CPU	13526	530336	543862	1,384,8,8,	
+Iter 115: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D	Convolution	CPU	4378	543875	548253	1,384,8,8,	
+Iter 116: InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D	Convolution	CPU	4758	548266	553024	1,384,8,8,	
+Iter 117: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D	Convolution	CPU	4289	553038	557327	1,384,8,8,	
+Iter 118: InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D	Convolution	CPU	4770	557340	562110	1,384,8,8,	
+Iter 119: InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat	Concat	CPU	111	562122	562233	1,768,8,8,	
+Iter 120: InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat	Concat	CPU	81	562237	562318	1,768,8,8,	
+Iter 121: InceptionV3/InceptionV3/Mixed_7c/concat	Concat	CPU	230	562325	562555	1,2048,8,8,	
+Iter 122: InceptionV3/Logits/AvgPool_1a_8x8/AvgPool	Pooling	CPU	141	562561	562702	1,2048,1,1,	
+Iter 123: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D	Convolution	CPU	1281	562707	563988	1,1001,1,1,	
+Iter 124: InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze	ConvertTensor	CPU	5	563996	564001	1,1,1,1001,	
+Iter 125: InceptionV3/Logits/SpatialSqueeze	Squeeze	CPU	3	564007	564010	1,1001,	
+Iter 126: InceptionV3/Predictions/Shape	Shape	CPU	0	564013	564013	2,	
+Iter 127: InceptionV3/Predictions/Reshape	Reshape	CPU	3	564016	564019	1,1001,	
+Iter 128: InceptionV3/Predictions/Softmax	Softmax	CPU	27	564021	564048	1,1001,	
+Iter 129: InceptionV3/Predictions/Reshape_1	Reshape	CPU	2	564066	564068	1,1001,	
+[ - ] inception-v3.mnn            max =  609.427ms  min =  565.590ms  avg =  587.509ms

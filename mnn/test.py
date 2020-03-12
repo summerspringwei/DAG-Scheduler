@@ -1,16 +1,13 @@
 
-import queue
+from measure_inteference import *
+import numpy as np
 
-s = dict()
-print(len(s))
 
-q = queue.Queue()
-q.put('a')
-q.put('b')
-print(q.qsize())
-a = q.get()
-print(a)
-print(q.qsize())
+tmp_dict = {'a':1, 'b':2}
 
-line = "%d s_%d_%f" % (1, 2, 3.123)
-print(line)
+def update_dict(di):
+    di['c'] = 3
+    di['a'] += 1
+
+update_dict(tmp_dict)
+print(tmp_dict)

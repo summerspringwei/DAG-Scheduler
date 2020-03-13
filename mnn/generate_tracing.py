@@ -38,4 +38,4 @@ def read_bench_result(file_path):
 
 
 if __name__ == "__main__":
-    read_bench_result("./experimental_result_mnn/redmi-inception-v3-cpu-8-parallel.csv")
+    read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/pnasnet-cell-stem-1.csv")

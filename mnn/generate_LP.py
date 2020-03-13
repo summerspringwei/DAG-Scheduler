@@ -1,6 +1,7 @@
 import queue
 
 from read_profile_data import *
+from read_net_structure import *
 
 CPU = 1
 GPU = 2
@@ -8,7 +9,7 @@ M = 500
 
 
 # Read one module names and associate a name with one index
-def read_inception_one_module(file_path):
+def associate_op_name_with_idx(file_path):
     f = open(file_path)
     one_module_names_idx_dict = {}
     idx = 1
@@ -112,7 +113,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                                           op_name_parent, op_dict):
     idx_parent = one_module_names_idx_dict[op_name_parent]
     idx_child = one_module_names_idx_dict[op_name_child]
-    print("parent: %d child: %d" % (idx_parent, idx_child))
+    # print("parent: %d child: %d" % (idx_parent, idx_child))
     idx_parent_parent = get_parent_idx(one_module_names_idx_dict,
                                        op_name_parent, op_dict)
     idx_parent_parent = 0
@@ -265,12 +266,22 @@ def print_op_profile(one_module_names_idx_dict, op_dict):
 
 
 def generateLP():
-    one_module_names_idx_dict = read_inception_one_module(
-        "inception-v3-one-module.txt")
-    op_name_list, op_dict, net_def = read_inception_info(
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt",
+    # one_module_names_idx_dict = associate_op_name_with_idx(
+    #     "inception-v3-one-module.txt")
+    # op_name_list, op_dict, net_def = gather_model_profile(
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt",
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_inception-v3-layerwise-latency.txt")
+    one_module_names_idx_dict = associate_op_name_with_idx(
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-stem-1-subgraph-names.txt")
+    op_name_list, op_dict, net_def  = gather_model_profile(
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
         "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_inception-v3-layerwise-latency.txt")
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
+    # For one module with multiple subgraphs, we need build subgraph and update the op_dict
+    parent_subgraph = Subgraph('cell_stem_1/')
+    parent_subgraph.buildMultiSubgraph(op_name_list, op_dict, pnasnet_mobile_subgraph_subprefix(), pattern='cell_stem_1/')
+    # Print the relationship between op_name and index
     print_op_profile(one_module_names_idx_dict, op_dict)
 
     # Set s_cpu_%d of 'concat' to 1
@@ -317,4 +328,6 @@ def write_LP_contents(LP_contents, file_name):
 
 if __name__ == "__main__":
     LP_contents = generateLP()
-    write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
+    # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
+    write_LP_contents(LP_contents, "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/cell-stem-1-subgraphs.lp")
+

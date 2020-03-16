@@ -1,4 +1,5 @@
 import queue
+import os
 
 from read_profile_data import *
 from read_net_structure import *
@@ -15,6 +16,15 @@ def associate_op_name_with_idx(file_path):
     idx = 1
     for line in f.readlines():
         one_module_names_idx_dict[line.strip()] = idx
+        idx += 1
+    return one_module_names_idx_dict
+
+
+def associate_op_name_list_with_idx(op_name_list):
+    idx = 1
+    one_module_names_idx_dict = {}
+    for op_name in op_name_list:
+        one_module_names_idx_dict[op_name] = idx
         idx += 1
     return one_module_names_idx_dict
 
@@ -265,22 +275,15 @@ def print_op_profile(one_module_names_idx_dict, op_dict):
         print("%s %d %s" % (op_name, idx, op.op_def.operatorLatency))
 
 
-def generateLP():
+def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
     # one_module_names_idx_dict = associate_op_name_with_idx(
     #     "inception-v3-one-module.txt")
     # op_name_list, op_dict, net_def = gather_model_profile(
     #     "/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt",
     #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
     #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_inception-v3-layerwise-latency.txt")
-    one_module_names_idx_dict = associate_op_name_with_idx(
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-stem-1-subgraph-names.txt")
-    op_name_list, op_dict, net_def  = gather_model_profile(
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
-    # For one module with multiple subgraphs, we need build subgraph and update the op_dict
-    parent_subgraph = Subgraph('cell_stem_1/')
-    parent_subgraph.buildMultiSubgraph(op_name_list, op_dict, pnasnet_mobile_subgraph_subprefix(), pattern='cell_stem_1/')
+    
+    
     # Print the relationship between op_name and index
     print_op_profile(one_module_names_idx_dict, op_dict)
 
@@ -326,8 +329,75 @@ def write_LP_contents(LP_contents, file_name):
     f.close()
 
 
-if __name__ == "__main__":
-    LP_contents = generateLP()
-    # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
-    write_LP_contents(LP_contents, "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/cell-stem-1-subgraphs.lp")
+def run_glpsol(lp_file_path, result_file_path):
+    glpsol_file_path = "/mnt/d/home/software/GLPK/glpk-4.65/examples/glpsol"
+    os.system('%s --lp %s -o %s' % (glpsol_file_path, lp_file_path, result_file_path))
+    print("Run solver done!")
 
+
+# The result file are in follows:
+# '4 s_1_6        *              1             0             1 '
+def parse_glpk_result(one_module_names_idx_dict, result_file_path):
+    f = open(result_file_path, 'r')
+    name_device_tuple_list = []
+    lines = f.readlines()
+    for line in lines:
+        # Find lines with s_
+        line = line.strip()
+        if line.find('s_') >= 0:
+            com = line.split(' ')
+            striped_com = []
+            for c in com:
+                if c != '':
+                    striped_com.append(c)
+            
+            if len(striped_com) == 6 and striped_com[3] == '1':
+                print(striped_com)
+                s = striped_com[1]
+                sc = s.split('_')
+                if int(sc[1]) == CPU:
+                    device = 0
+                elif int(sc[1]) == GPU:
+                    device = 3
+                op_idx = sc[2]
+                for name, idx in one_module_names_idx_dict.items():
+                    if int(op_idx) == idx:
+                        name_device_tuple_list.append((name, device))
+                        break
+    for (name, device) in name_device_tuple_list:
+        print("%s %d" %(name, device))
+    return name_device_tuple_list
+
+
+
+if __name__ == "__main__":
+    # Read profile data
+    op_name_list, name_op_dict, net_def = gather_model_profile(
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
+    # For one module with multiple subgraphs, we need build subgraph and update the op_dict
+    module_name = 'cell_stem_1/'
+    parent_subgraph = Subgraph(module_name)
+    parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+    # one_module_names_idx_dict = associate_op_name_with_idx(
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
+    #
+    one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
+    # Generate LP constraints and write them to a file
+    LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
+    # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
+    module_name_striped = module_name[0:len(module_name) - 1]
+    lp_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+module_name_striped+"-subgraphs.lp"
+    result_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+ module_name_striped+ "lp-result-subgraphs.txt"
+    write_LP_contents(LP_contents, lp_file_path)
+    # Solve the LP
+    run_glpsol(lp_file_path, result_file_path)
+    # Parse subgraph device placement result
+    name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
+    # 
+    device_placement_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/mDevice_map_pnasnet-mobile-" + module_name_striped +".txt"
+    write_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
+        [name for (name, device) in name_device_tuple_list if device == 3], \
+        name_op_dict, device_placement_file_path)
+    print("Write result to %s" % (device_placement_file_path))

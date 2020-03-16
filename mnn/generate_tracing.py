@@ -38,4 +38,4 @@ def read_bench_result(file_path):
 
 
 if __name__ == "__main__":
-    read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/pnasnet-cell-stem-1.csv")
+    read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-mobile-parallel-cpu-1.csv")

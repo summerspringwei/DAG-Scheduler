@@ -15,7 +15,7 @@ def read_bench_result(file_path):
         name = com[0].strip().split('/')[-1]
         
         device = ''
-        print(com[2])
+        # print(com[2])
         if com[1].strip() == "CPU":
             device = '1'
         elif com[1].strip() in ["OpenCL"]:
@@ -38,4 +38,5 @@ def read_bench_result(file_path):
 
 
 if __name__ == "__main__":
-    read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-mobile-parallel-cpu-1.csv")
+    # read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3/tmp.csv")
+    read_bench_result("inception-v4/tmp.csv")

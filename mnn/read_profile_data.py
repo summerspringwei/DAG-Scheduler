@@ -1,5 +1,11 @@
 from net_struct import *
 
+# Set the cpu<->gpu transformation overhead
+TRANSFORM_OVERHEAD = 3
+# Set the Operator latency scale factor, deal with sum of ops is less than the end-to-end latency
+OP_LATENCY_SCALE = 1.4
+# CPU thread latency index
+CPU_thread_index = 1
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
@@ -31,11 +37,11 @@ def read_latency(file_path):
     op_name_list = []
     for line in f.readlines():
         com = line.strip().split(" ")
-        if len(com) < 3:
+        if len(com) < 4:
             continue
         op_latency = OperatorLatency()
-        op_latency.CPU_latency = float(com[1].strip())/1000
-        op_latency.GPU_latency = float(com[4].strip())/1000
+        op_latency.CPU_latency = float(com[CPU_thread_index].strip()) / 1000 * OP_LATENCY_SCALE
+        op_latency.GPU_latency = float(com[4].strip()) / 1000
         # Set GPU concat to a big value
         # if com[0].strip().split('/')[-1] == 'concat':
             # print("concat big value")
@@ -115,8 +121,8 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
                     op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor][0]
                     op_latency.Transpose_latency_NHWC_to_NCHW += data_trans_dict[tensor][1]
                 else:
-                    op_latency.Transpose_latency_NCHW_to_NHWC = 1.6
-                    op_latency.Transpose_latency_NHWC_to_NCHW = 1.6
+                    op_latency.Transpose_latency_NCHW_to_NHWC = TRANSFORM_OVERHEAD
+                    op_latency.Transpose_latency_NHWC_to_NCHW = TRANSFORM_OVERHEAD
         op_def.operatorLatency = op_latency
         op.op_def = op_def
         name_op_dict[op_name] = op

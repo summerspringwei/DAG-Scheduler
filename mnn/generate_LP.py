@@ -138,7 +138,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
                         % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
                             (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
-                    print(c)
+                    # print(c)
                 else:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
                         % (device1, idx_child, device2, idx_parent, \
@@ -369,35 +369,93 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
-
-if __name__ == "__main__":
+def solve_pnasnet_mobile():
     # Read profile data
     op_name_list, name_op_dict, net_def = gather_model_profile(
         "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
         "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
-    # For one module with multiple subgraphs, we need build subgraph and update the op_dict
-    module_name = 'cell_stem_1/'
-    parent_subgraph = Subgraph(module_name)
-    parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
-    # one_module_names_idx_dict = associate_op_name_with_idx(
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
-    #
-    one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
-    # Generate LP constraints and write them to a file
-    LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
-    # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
-    module_name_striped = module_name[0:len(module_name) - 1]
-    lp_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+module_name_striped+"-subgraphs.lp"
-    result_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+ module_name_striped+ "lp-result-subgraphs.txt"
-    write_LP_contents(LP_contents, lp_file_path)
-    # Solve the LP
-    run_glpsol(lp_file_path, result_file_path)
-    # Parse subgraph device placement result
-    name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
-    # 
-    device_placement_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/mDevice_map_pnasnet-mobile-" + module_name_striped +".txt"
-    write_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
-        [name for (name, device) in name_device_tuple_list if device == 3], \
-        name_op_dict, device_placement_file_path)
-    print("Write result to %s" % (device_placement_file_path))
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/redmi-pnasnet-mobile-latency.csv")
+    pnasnet_mobile_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
+        'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
+    for module_name in pnasnet_mobile_module_list:
+        # For one module with multiple subgraphs, we need build subgraph and update the op_dict
+        parent_subgraph = Subgraph(module_name)
+        parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+        # 
+        # one_module_names_idx_dict = associate_op_name_with_idx(
+        #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
+        one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
+        # Generate LP constraints and write them to a file
+        LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
+        # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
+        module_name_striped = module_name[0:len(module_name) - 1]
+        lp_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+module_name_striped+"-subgraphs.lp"
+        result_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+ module_name_striped+ "-lp-result-subgraphs.txt"
+        write_LP_contents(LP_contents, lp_file_path)
+        # Solve the LP
+        run_glpsol(lp_file_path, result_file_path)
+        # Parse subgraph device placement result
+        name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
+        # 
+        print(name_device_tuple_list)
+        device_placement_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/mDevice_map_pnasnet-mobile-" + module_name_striped +".txt"
+        write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
+            [name for (name, device) in name_device_tuple_list if device == 3], \
+            name_op_dict, device_placement_file_path)
+        print("Write result to %s" % (device_placement_file_path))
+
+
+def get_inception_one_module_name(op_name_prefix, op_name_list):
+    module_op_names = []
+    branches = set()
+    for op_name in op_name_list:
+        if op_name.find(op_name_prefix) == 0:
+            module_op_names.append(op_name)
+            if op_name.find("Branch") > 0:
+                branches.add(op_name.split("/")[3])
+    
+    return module_op_names, list(branches)
+
+
+def solve_inception():
+    inception_v3_prefix = "InceptionV3/InceptionV3/"
+    inception_v3_module_list = ["Mixed_5b/", "Mixed_5c/", "Mixed_5d/", \
+        "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/", "Mixed_7a/", "Mixed_7b/", "Mixed_7c/"]
+    op_name_list, name_op_dict, net_def = gather_model_profile(
+        "inception-v3/inception-v3-info.txt",
+        "inception-v3/redmi_data_trans.txt",
+        "inception-v3/redmi-inception-v3-layerwise-latency.csv")
+    # inception_v4_prefix = "InceptionV4/InceptionV4/"
+    # inception_v4_module_list = ["Mixed_4a/", "Mixed_5b/", "Mixed_5c/", "Mixed_5d/", "Mixed_5e/", \
+    #     "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/","Mixed_6f/","Mixed_6g/","Mixed_6h/",\
+    #         "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
+    # op_name_list, name_op_dict, net_def = gather_model_profile(
+    #     "inception-v4/inception-v4-info.txt",
+    #     "inception-v3/redmi_data_trans.txt",
+    #     "inception-v4/redmi-inception-v4-layerwise-latency.csv")
+    # folder_path = "inception-v4/"
+    for module_name in inception_v3_module_list:
+        module_name = inception_v3_prefix + module_name
+        print("Start solve module %s\n" % (module_name))
+        one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
+        parent_subgraph = Subgraph(module_name)
+        parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
+        one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
+        LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
+        module_name_striped = (module_name[0:len(module_name) - 1]).split("/")[-1]
+        lp_file_path = folder_path + "subgraphs_" +module_name_striped+".lp"
+        result_file_path = folder_path + "lp_result_subgraphs_" +module_name_striped+ ".txt"
+        write_LP_contents(LP_contents, lp_file_path)
+        # Solve the LP
+        run_glpsol(lp_file_path, result_file_path)
+        # Parse subgraph device placement result
+        name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
+        print(name_device_tuple_list)
+        device_placement_file_path = folder_path + "mDevice_map_inception-v4-" + module_name_striped +".txt"
+        write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
+            [name for (name, device) in name_device_tuple_list if device == 3], \
+            name_op_dict, device_placement_file_path)
+        print("Write result to %s" % (device_placement_file_path))
+
+if __name__ == "__main__":
+    solve_inception()

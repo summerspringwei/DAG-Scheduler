@@ -433,7 +433,7 @@ def solve_inception():
     #     "inception-v4/inception-v4-info.txt",
     #     "inception-v3/redmi_data_trans.txt",
     #     "inception-v4/redmi-inception-v4-layerwise-latency.csv")
-    # folder_path = "inception-v4/"
+    folder_path = "inception-v3/"
     for module_name in inception_v3_module_list:
         module_name = inception_v3_prefix + module_name
         print("Start solve module %s\n" % (module_name))
@@ -451,7 +451,7 @@ def solve_inception():
         # Parse subgraph device placement result
         name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
         print(name_device_tuple_list)
-        device_placement_file_path = folder_path + "mDevice_map_inception-v4-" + module_name_striped +".txt"
+        device_placement_file_path = folder_path + "mDevice_map_inception-v3-" + module_name_striped +".txt"
         write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
             [name for (name, device) in name_device_tuple_list if device == 3], \
             name_op_dict, device_placement_file_path)

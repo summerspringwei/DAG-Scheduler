@@ -1,5 +1,6 @@
 #! /usr/bin/python
 import logging
+import os
 from read_profile_data import *
 
 
@@ -55,7 +56,7 @@ def write_device_placement(filename, net_def):
   print("Write device placement done.")
 
 # Follow the mace
-def greedy_device_placement(netdef, ops_relation_dict):
+def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name):
   ops_not_support_by_GPU = set(['concat', 'SpatialSqueeze', 'Shape', 'Reshape', 'Softmax', 'Reshape_1'])
   # Record the CPU queue and GPU queue finish timestamp
   CPU_end_point = 0.0
@@ -77,6 +78,9 @@ def greedy_device_placement(netdef, ops_relation_dict):
     GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
   op_execute_order.append(op_to_idx_dict[op.name])
   ops_queue = list()
+  for op_name, op_const in ops_relation_dict.items():
+    if len(op_const.parents) == 0:
+      ops_queue.append(op_const)
   # Start greedy assign
   while(True):
     # Add child to ops_queue if all his parents has been executed
@@ -84,6 +88,7 @@ def greedy_device_placement(netdef, ops_relation_dict):
       if is_parents_executed(ops_relation_dict[child_name], ops_relation_dict) and\
         ops_relation_dict[child_name] not in ops_queue:
         ops_queue.append(ops_relation_dict[child_name])
+        print("Add %s" % (child_name))
     # All ops are assigned to devices, stop
     if(len(ops_queue) <= 0):
       break
@@ -117,7 +122,8 @@ def greedy_device_placement(netdef, ops_relation_dict):
     CPU_latency = op.op_def.operatorLatency.CPU_latency + to_CPU_transpose_latency
     GPU_latency = op.op_def.operatorLatency.GPU_latency + to_GPU_transpose_latency
     logging.debug("op %s CPU and GPU endpoint: %f %f " % ( op.name, CPU_end_point, GPU_end_point))
-    logging.debug("op %s CPU and GPU latency: %f %f " % ( op.name, CPU_latency, GPU_latency))
+    logging.debug("op %s CPU and GPU latency: %f %f to CPU and to GPU latency: %f %f" \
+      % ( op.name, CPU_latency, GPU_latency, to_CPU_transpose_latency, to_GPU_transpose_latency))
     # TODO(xcw)add to_GPU_transpose_latency to CPU_end_point
     # Op can be executed at the very first time, but CPU and GPU are busy
     if CPU_end_point >= op.earlist_start_point and GPU_end_point >= op.earlist_start_point:
@@ -150,8 +156,8 @@ def greedy_device_placement(netdef, ops_relation_dict):
   # for op in netdef.op:
   #   print(op.name + " " + str(op.op_def.device_type))
   
-  write_execute_order("op_execute_order.txt", op_execute_order)
-  write_device_placement('redmi_cpu-4-device-placement.txt', netdef)
+  write_execute_order(os.path.join(folder_path, "op_execute_order.txt") , op_execute_order)
+  write_device_placement(os.path.join(folder_path, 'greedy-oneplus3-' + model_name + '-device-placement.txt') , netdef)
   print("CPU end point: %s ms." % CPU_end_point)
   print("GPU end point: %s ms." % GPU_end_point)
   print(op_execute_order)
@@ -160,5 +166,18 @@ def greedy_device_placement(netdef, ops_relation_dict):
 
 if __name__ == "__main__":
   logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
-  op_name_list, op_dict, net_def = read_inception_info("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt")
-  greedy_device_placement(net_def, op_dict)
+  # folder_path = "inception-v3/"
+  # model_name = "inception-v3"
+  # op_name_list, name_op_dict, net_def = gather_model_profile(
+  #       "inception-v3/inception-v3-info.txt",
+  #       "inception-v3/redmi_data_trans.txt",
+  #       "inception-v3/redmi-inception-v3-layerwise-latency.csv")
+  # greedy_device_placement(net_def, op_dict, folder_path, model_name)
+
+  folder_path = "pnasnet-large/"
+  model_name = "pnasnet-large"
+  op_name_list, name_op_dict, net_def = gather_model_profile(
+        "pnasnet-large/pnasnet-large-info.bak",
+        "./inception-v3/redmi_data_trans.txt",
+        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
+  greedy_device_placement(net_def, name_op_dict, folder_path, model_name)

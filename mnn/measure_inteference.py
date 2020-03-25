@@ -145,8 +145,14 @@ if __name__ == "__main__":
     #             "lanenet/oneplus-3-lanenet-gpu.csv"], \
     #                 "lanenet/lanenet-info.txt", \
     #                 "lanenet/oneplus-3-lanenet-layerwise-latency.csv")
-    gather_multi_file_profile(["lanenet/oneplus3-lanenet-cpu-1.csv", \
-        "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid.csv"], \
-        "lanenet/", "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid-compare.csv")
+    # gather_multi_file_profile(["lanenet/oneplus3-lanenet-cpu-1.csv", \
+    #     "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid.csv"], \
+    #     "lanenet/", "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid-compare.csv")
+    gather_multi_file_profile(["pnasnet-large/oneplus3-pnasnet-large-cpu-1.csv", \
+        "pnasnet-large/oneplus3-pnasnet-large-cpu-2.csv", \
+        "pnasnet-large/oneplus3-pnasnet-large-cpu-4.csv", \
+        "pnasnet-large/oneplus3-pnasnet-large-gpu.csv"], \
+        "pnasnet-large/pnasnet-large-info.bak", \
+        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
 
 # InceptionV3\/InceptionV3\/Mixed_6e\/Branch_2\/Conv2d_0a_1x1\/Conv2D

@@ -3,9 +3,9 @@ from net_struct import *
 # Set the cpu<->gpu transformation overhead
 TRANSFORM_OVERHEAD = 3
 # Set the Operator latency scale factor, deal with sum of ops is less than the end-to-end latency
-OP_LATENCY_SCALE = 1.0
+OP_LATENCY_SCALE = 3
 # CPU thread latency index
-CPU_thread_index = 1
+CPU_thread_index = 2
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
@@ -66,6 +66,7 @@ def read_net_info(file_path):
         if len(com) < 5:
             print(com)
             print("Error")
+            continue
         new_com = [c.strip() for c in com]
         raw_info.append(new_com)
     for com in raw_info:

@@ -31,4 +31,5 @@ if __name__ == "__main__":
     # serial_optimal("pnasnet-mobile/redmi-pnasnet-mobile-latency-onwait.csv")
     # serial_optimal("inception-v3/redmi-inception-v3-layerwise-latency.csv")
     # serial_optimal("lanenet/oneplus-3-lanenet-layerwise-latency.csv")
-    serial_optimal("inception-v4/redmi-inception-v4-layerwise-latency.csv")
+    # serial_optimal("inception-v4/redmi-inception-v4-layerwise-latency.csv")
+    serial_optimal("pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")

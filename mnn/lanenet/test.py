@@ -15,7 +15,9 @@ def compare(f1, f2):
             print(name)
         else:
             model2.remove(name)
-    print(model2)
+    for name in model2:
+        print(name)
+
 
 if __name__ == "__main__":
-    compare("mDevice_map-lanenet.txt", "lanenet-names.txt")
+    compare("pnasnet-large/pnasnet-large-info.bak", "tmp.txt")

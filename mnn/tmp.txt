@@ -1,1581 +1,782 @@
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_4a.lp -o inception-v4/lp_result_subgraphs_Mixed_4a.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_4a.lp'...
-39 rows, 17 columns, 110 non-zeros
-10 integer variables, all of which are binary
-56 lines were read
-GLPK Integer Optimizer, v4.65
-39 rows, 17 columns, 110 non-zeros
-10 integer variables, all of which are binary
-Preprocessing...
-33 rows, 17 columns, 98 non-zeros
-10 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.127e+02  ratio =  5.127e+02
-GM: min|aij| =  3.281e-01  max|aij| =  3.048e+00  ratio =  9.289e+00
-EQ: min|aij| =  1.077e-01  max|aij| =  1.000e+00  ratio =  9.289e+00
-2N: min|aij| =  9.055e-02  max|aij| =  1.000e+00  ratio =  1.104e+01
-Constructing initial basis...
-Size of triangular part is 33
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-33 rows, 17 columns, 98 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.085e+01 (15)
-      9: obj =   5.684171059e+00 inf =   0.000e+00 (0)
-*    10: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    10: mip =     not found yet >=              -inf        (1; 0)
-+    38: >>>>>   1.237221000e+02 >=   8.415390000e+01  32.0% (14; 5)
-+    39: >>>>>   9.061580000e+01 >=   8.415390000e+01   7.1% (5; 23)
-+    39: mip =   9.061580000e+01 >=     tree is empty   0.0% (0; 39)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.1 Mb (99815 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_4a.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_5b.lp -o inception-v4/lp_result_subgraphs_Mixed_5b.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_5b.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.448e+02  ratio =  5.448e+02
-GM: min|aij| =  5.088e-01  max|aij| =  1.965e+00  ratio =  3.863e+00
-EQ: min|aij| =  2.589e-01  max|aij| =  1.000e+00  ratio =  3.863e+00
-2N: min|aij| =  1.752e-01  max|aij| =  1.042e+00  ratio =  5.948e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.593e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  4932: >>>>>   5.584912000e+01 >=   2.367866000e+01  57.6% (688; 425)
-+  4990: >>>>>   5.250788000e+01 >=   2.745662000e+01  47.7% (381; 1027)
-+  4997: >>>>>   4.952722000e+01 >=   2.745662000e+01  44.6% (322; 1146)
-+  5045: >>>>>   4.381838000e+01 >=   2.797014000e+01  36.2% (253; 1322)
-+  5180: mip =   4.381838000e+01 >=     tree is empty   0.0% (0; 2309)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.7 Mb (737209 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_5b.txt'...
-Start solve module InceptionV4/InceptionV4/Mixed_4a/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_4a/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_4a/Branch_0
-latency: (65.252740,33.106300,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_4a/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_4a/Branch_0/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_3a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_4a/concat', 'InceptionV4/InceptionV4/Mixed_4a/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_4a/Branch_1
-latency: (222.476800,84.153900,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_4a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_4a/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_4a/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_4a/Branch_1/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_3a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_4a/concat', 'InceptionV4/InceptionV4/Mixed_4a/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_4a/subgraph_0
-latency: (3.105978,3.461900,6.374560,2.897660)
-nodes:['InceptionV4/InceptionV4/Mixed_4a/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_4a/Branch_0', 'InceptionV4/InceptionV4/Mixed_4a/Branch_1/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_4a/Branch_1', 'InceptionV4/InceptionV4/Mixed_4a/Branch_0/Conv2d_1a_3x3/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_5a/Branch_0/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5a/Branch_1/MaxPool_1a_3x3/MaxPool'}
-
-InceptionV4/InceptionV4/Mixed_4a/Branch_0 1 Operator latency: 65.252740 33.106300 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_4a/Branch_1 2 Operator latency: 222.476800 84.153900 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_4a/subgraph_0 3 Operator latency: 3.105978 3.461900 2.897660 6.374560
-Run solver done!
-['2', 's_1_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_4a/Branch_0 0
-InceptionV4/InceptionV4/Mixed_4a/Branch_1 3
-InceptionV4/InceptionV4/Mixed_4a/subgraph_0 3
-[('InceptionV4/InceptionV4/Mixed_4a/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_4a/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_4a/subgraph_0', 3)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_4a/Branch_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_4a/Branch_1', 'InceptionV4/InceptionV4/Mixed_4a/subgraph_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_4a.txt
-Start solve module InceptionV4/InceptionV4/Mixed_5b/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_5b/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_5b/Branch_2
-latency: (39.717020,19.501600,5.783820,2.398580)
-nodes:['InceptionV4/InceptionV4/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5b/concat', 'InceptionV4/InceptionV4/Mixed_5b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5b/Branch_3
-latency: (28.829220,10.478000,5.783820,2.398580)
-nodes:['InceptionV4/InceptionV4/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5b/concat', 'InceptionV4/InceptionV4/Mixed_5b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5b/Branch_0
-latency: (19.108880,6.321900,5.783820,2.398580)
-nodes:['InceptionV4/InceptionV4/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5b/concat', 'InceptionV4/InceptionV4/Mixed_5b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5b/Branch_1
-latency: (23.838500,11.592600,5.783820,2.398580)
-nodes:['InceptionV4/InceptionV4/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5b/concat', 'InceptionV4/InceptionV4/Mixed_5b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5b/subgraph_0
-latency: (1.733060,2.171200,11.211930,8.378400)
-nodes:['InceptionV4/InceptionV4/Mixed_5b/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_3', 'InceptionV4/InceptionV4/Mixed_5b/Branch_2', 'InceptionV4/InceptionV4/Mixed_5b/Branch_1/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5b/Branch_0', 'InceptionV4/InceptionV4/Mixed_5b/Branch_1'}
-children:{'InceptionV4/InceptionV4/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_5b/Branch_2 1 Operator latency: 39.717020 19.501600 2.398580 5.783820
-InceptionV4/InceptionV4/Mixed_5b/Branch_3 2 Operator latency: 28.829220 10.478000 2.398580 5.783820
-InceptionV4/InceptionV4/Mixed_5b/Branch_0 3 Operator latency: 19.108880 6.321900 2.398580 5.783820
-InceptionV4/InceptionV4/Mixed_5b/Branch_1 4 Operator latency: 23.838500 11.592600 2.398580 5.783820
-InceptionV4/InceptionV4/Mixed_5b/subgraph_0 5 Operator latency: 1.733060 2.171200 8.378400 11.211930
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_5b/Branch_2 3
-InceptionV4/InceptionV4/Mixed_5b/Branch_3 3
-InceptionV4/InceptionV4/Mixed_5b/Branch_0 3
-InceptionV4/InceptionV4/Mixed_5b/Branch_1 0
-InceptionV4/InceptionV4/Mixed_5b/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_5b/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_5b/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_5b/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_5b/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_5b/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5b/Branch_1', 'InceptionV4/InceptionV4/Mixed_5b/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5b/Branch_2', 'InceptionV4/InceptionV4/Mixed_5b/Branch_3', 'InceptionV4/InceptionV4/Mixed_5b/Branch_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_5b.txt
-Start solve module InceptionV4/InceptionV4/Mixed_5c/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_5c/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_5c/Branch_2
-latency: (40.273940,18.472300,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5c/Branch_3
-latency: (28.998060,10.430000,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5c/Branch_0
-latency: (19.126380,6.267600,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5c/Branch_1
-latency: (24.114860,11.287700,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5c/concat'}
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_5c.lp -o inception-v4/lp_result_subgraphs_Mixed_5c.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_5c.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.448e+02  ratio =  5.448e+02
-GM: min|aij| =  5.088e-01  max|aij| =  1.965e+00  ratio =  3.863e+00
-EQ: min|aij| =  2.589e-01  max|aij| =  1.000e+00  ratio =  3.863e+00
-2N: min|aij| =  1.752e-01  max|aij| =  1.042e+00  ratio =  5.948e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.665e+01 (45)
-     33: obj =   0.000000000e+00 inf =   2.665e-15 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  4616: >>>>>   5.831694000e+01 >=   2.589380000e+01  55.6% (666; 421)
-+  4674: >>>>>   5.489186000e+01 >=   3.033164000e+01  44.7% (367; 1007)
-+  4681: >>>>>   5.204934000e+01 >=   3.033164000e+01  41.7% (316; 1110)
-+  4740: >>>>>   4.667024000e+01 >=   3.052328000e+01  34.6% (249; 1285)
-+  4884: mip =   4.667024000e+01 >=     tree is empty   0.0% (0; 2267)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.7 Mb (721145 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_5c.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_5d.lp -o inception-v4/lp_result_subgraphs_Mixed_5d.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_5d.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.448e+02  ratio =  5.448e+02
-GM: min|aij| =  5.088e-01  max|aij| =  1.965e+00  ratio =  3.863e+00
-EQ: min|aij| =  2.589e-01  max|aij| =  1.000e+00  ratio =  3.863e+00
-2N: min|aij| =  1.752e-01  max|aij| =  1.042e+00  ratio =  5.948e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.717e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+   882: >>>>>   4.770522900e+01 >=   1.905610000e+01  60.1% (171; 42)
-+  1190: >>>>>   4.701176900e+01 >=   4.701176900e+01 < 0.1% (7; 552)
-+  1190: mip =   4.701176900e+01 >=     tree is empty   0.0% (0; 595)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.3 Mb (304955 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_5d.txt'...
-
-name: InceptionV4/InceptionV4/Mixed_5c/subgraph_0
-latency: (1.829100,2.188100,11.211930,8.378400)
-nodes:['InceptionV4/InceptionV4/Mixed_5c/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_0', 'InceptionV4/InceptionV4/Mixed_5c/Branch_3', 'InceptionV4/InceptionV4/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_2', 'InceptionV4/InceptionV4/Mixed_5c/Branch_1', 'InceptionV4/InceptionV4/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5c/Branch_1/Conv2d_0b_3x3/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool'}
-
-InceptionV4/InceptionV4/Mixed_5c/Branch_2 1 Operator latency: 40.273940 18.472300 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5c/Branch_3 2 Operator latency: 28.998060 10.430000 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5c/Branch_0 3 Operator latency: 19.126380 6.267600 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5c/Branch_1 4 Operator latency: 24.114860 11.287700 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5c/subgraph_0 5 Operator latency: 1.829100 2.188100 8.378400 11.211930
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_5c/Branch_2 3
-InceptionV4/InceptionV4/Mixed_5c/Branch_3 3
-InceptionV4/InceptionV4/Mixed_5c/Branch_0 3
-InceptionV4/InceptionV4/Mixed_5c/Branch_1 0
-InceptionV4/InceptionV4/Mixed_5c/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_5c/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_5c/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_5c/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_5c/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_5c/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5c/Branch_1', 'InceptionV4/InceptionV4/Mixed_5c/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5c/Branch_2', 'InceptionV4/InceptionV4/Mixed_5c/Branch_3', 'InceptionV4/InceptionV4/Mixed_5c/Branch_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_5c.txt
-Start solve module InceptionV4/InceptionV4/Mixed_5d/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_5d/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_5d/Branch_2
-latency: (40.201560,19.056100,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5d/concat', 'InceptionV4/InceptionV4/Mixed_5d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5d/Branch_3
-latency: (28.988960,10.478700,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5d/concat', 'InceptionV4/InceptionV4/Mixed_5d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5d/Branch_0
-latency: (19.204220,6.268300,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5d/concat', 'InceptionV4/InceptionV4/Mixed_5d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5d/Branch_1
-latency: (24.149860,10.722600,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_1/Conv2d_0b_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5d/concat', 'InceptionV4/InceptionV4/Mixed_5d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_5d/subgraph_0
-latency: (1.824620,2.230889,11.211930,8.378400)
-nodes:['InceptionV4/InceptionV4/Mixed_5d/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_5d/Branch_1', 'InceptionV4/InceptionV4/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_3', 'InceptionV4/InceptionV4/Mixed_5d/Branch_2', 'InceptionV4/InceptionV4/Mixed_5d/Branch_1/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_0', 'InceptionV4/InceptionV4/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_5e/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5e/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_2/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_5d/Branch_2 1 Operator latency: 40.201560 19.056100 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5d/Branch_3 2 Operator latency: 28.988960 10.478700 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5d/Branch_0 3 Operator latency: 19.204220 6.268300 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5d/Branch_1 4 Operator latency: 24.149860 10.722600 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5d/subgraph_0 5 Operator latency: 1.824620 2.230889 8.378400 11.211930
-Run solver done!
-['2', 's_1_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['20', 's_2_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_5d/Branch_2 0
-InceptionV4/InceptionV4/Mixed_5d/Branch_3 3
-InceptionV4/InceptionV4/Mixed_5d/Branch_0 3
-InceptionV4/InceptionV4/Mixed_5d/Branch_1 3
-InceptionV4/InceptionV4/Mixed_5d/subgraph_0 3
-[('InceptionV4/InceptionV4/Mixed_5d/Branch_2', 0), ('InceptionV4/InceptionV4/Mixed_5d/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_5d/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_5d/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_5d/subgraph_0', 3)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5d/Branch_2']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5d/Branch_3', 'InceptionV4/InceptionV4/Mixed_5d/Branch_0', 'InceptionV4/InceptionV4/Mixed_5d/Branch_1', 'InceptionV4/InceptionV4/Mixed_5d/subgraph_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_5d.txt
-Start solve module InceptionV4/InceptionV4/Mixed_5e/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_5e/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_5e/Branch_2
-latency: (40.248320,18.621300,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5e/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_2/Conv2d_0c_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5e/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5e/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5e/Branch_3
-latency: (29.091300,10.547700,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5e/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_5e/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5e/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5e/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5e/Branch_0
-latency: (19.185040,6.308500,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5e/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5e/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5e/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5e/Branch_1
-latency: (24.045280,10.642300,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_5e/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_1/Conv2d_0b_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_5e/subgraph_0', 'InceptionV4/InceptionV4/Mixed_5e/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_5e/subgraph_0
-latency: (1.826020,2.215000,11.211930,8.378400)
-nodes:['InceptionV4/InceptionV4/Mixed_5e/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_5e/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_0', 'InceptionV4/InceptionV4/Mixed_5e/Branch_2', 'InceptionV4/InceptionV4/Mixed_5e/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_3', 'InceptionV4/InceptionV4/Mixed_5e/Branch_2/Conv2d_0c_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_1/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_5e/Branch_1'}
-children:{'InceptionV4/InceptionV4/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_0/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool'}
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_5e.lp -o inception-v4/lp_result_subgraphs_Mixed_5e.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_5e.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.448e+02  ratio =  5.448e+02
-GM: min|aij| =  5.088e-01  max|aij| =  1.965e+00  ratio =  3.863e+00
-EQ: min|aij| =  2.589e-01  max|aij| =  1.000e+00  ratio =  3.863e+00
-2N: min|aij| =  1.752e-01  max|aij| =  1.042e+00  ratio =  5.948e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.665e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  4640: >>>>>   5.800604000e+01 >=   2.597936000e+01  55.2% (666; 421)
-+  4663: >>>>>   5.761706000e+01 >=   3.045062000e+01  47.1% (365; 1005)
-+  4699: >>>>>   4.697476000e+01 >=   3.045062000e+01  35.2% (369; 1009)
-+  4858: mip =   4.697476000e+01 >=     tree is empty   0.0% (0; 2257)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.7 Mb (720821 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_5e.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6a.lp -o inception-v4/lp_result_subgraphs_Mixed_6a.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6a.lp'...
-68 rows, 29 columns, 194 non-zeros
-20 integer variables, all of which are binary
-95 lines were read
-GLPK Integer Optimizer, v4.65
-68 rows, 29 columns, 194 non-zeros
-20 integer variables, all of which are binary
-Preprocessing...
-60 rows, 29 columns, 178 non-zeros
-20 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.270e+02  ratio =  5.270e+02
-GM: min|aij| =  4.821e-01  max|aij| =  2.074e+00  ratio =  4.303e+00
-EQ: min|aij| =  2.324e-01  max|aij| =  1.000e+00  ratio =  4.303e+00
-2N: min|aij| =  2.109e-01  max|aij| =  1.000e+00  ratio =  4.741e+00
-Constructing initial basis...
-Size of triangular part is 60
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-60 rows, 29 columns, 178 non-zeros
-      0: obj =   0.000000000e+00 inf =   3.857e+01 (28)
-     19: obj =   2.474590760e+00 inf =   0.000e+00 (0)
-*    20: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    20: mip =     not found yet >=              -inf        (1; 0)
-+   323: >>>>>   1.545873600e+02 >=   8.658646000e+01  44.0% (67; 20)
-+   325: mip =   1.545873600e+02 >=     tree is empty   0.0% (0; 175)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.2 Mb (168101 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6a.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6b.lp -o inception-v4/lp_result_subgraphs_Mixed_6b.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6b.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.484e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1409: >>>>>   1.874005200e+02 >=   7.408770000e+01  60.5% (220; 56)
-+  1444: >>>>>   1.507152200e+02 >=   7.408770000e+01  50.8% (99; 297)
-+  1776: >>>>>   1.400577500e+02 >=   8.148770000e+01  41.8% (125; 367)
-+  1858: >>>>>   1.350690200e+02 >=   8.540240000e+01  36.8% (112; 421)
-+  1923: >>>>>   1.237543200e+02 >=   1.237543200e+02 < 0.1% (40; 588)
-+  1923: mip =   1.237543200e+02 >=     tree is empty   0.0% (0; 789)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.4 Mb (377297 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6b.txt'...
-
-InceptionV4/InceptionV4/Mixed_5e/Branch_2 1 Operator latency: 40.248320 18.621300 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5e/Branch_3 2 Operator latency: 29.091300 10.547700 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5e/Branch_0 3 Operator latency: 19.185040 6.308500 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5e/Branch_1 4 Operator latency: 24.045280 10.642300 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_5e/subgraph_0 5 Operator latency: 1.826020 2.215000 8.378400 11.211930
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_5e/Branch_2 3
-InceptionV4/InceptionV4/Mixed_5e/Branch_3 3
-InceptionV4/InceptionV4/Mixed_5e/Branch_0 3
-InceptionV4/InceptionV4/Mixed_5e/Branch_1 0
-InceptionV4/InceptionV4/Mixed_5e/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_5e/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_5e/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_5e/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_5e/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_5e/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5e/Branch_1', 'InceptionV4/InceptionV4/Mixed_5e/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_5e/Branch_2', 'InceptionV4/InceptionV4/Mixed_5e/Branch_3', 'InceptionV4/InceptionV4/Mixed_5e/Branch_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_5e.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6a/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6a/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6a/Branch_2
-latency: (2.608200,2.189700,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool']
-parents:{'InceptionV4/InceptionV4/Mixed_5e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6a/Branch_0
-latency: (219.241820,68.000900,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_6a/Branch_0/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6a/Branch_1
-latency: (181.734700,75.793400,9.671240,4.579320)
-nodes:['InceptionV4/InceptionV4/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_1/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_5e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6a/subgraph_0
-latency: (1.121820,1.834100,9.000000,9.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6a/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool', 'InceptionV4/InceptionV4/Mixed_6a/Branch_0', 'InceptionV4/InceptionV4/Mixed_6a/Branch_0/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_1', 'InceptionV4/InceptionV4/Mixed_6a/Branch_1/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_6a/Branch_2'}
-children:{'InceptionV4/InceptionV4/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool'}
-
-InceptionV4/InceptionV4/Mixed_6a/Branch_2 1 Operator latency: 2.608200 2.189700 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_6a/Branch_0 2 Operator latency: 219.241820 68.000900 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_6a/Branch_1 3 Operator latency: 181.734700 75.793400 4.579320 9.671240
-InceptionV4/InceptionV4/Mixed_6a/subgraph_0 4 Operator latency: 1.121820 1.834100 9.000000 9.000000
-Run solver done!
-['2', 's_1_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6a/Branch_2 0
-InceptionV4/InceptionV4/Mixed_6a/Branch_0 3
-InceptionV4/InceptionV4/Mixed_6a/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6a/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6a/Branch_2', 0), ('InceptionV4/InceptionV4/Mixed_6a/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_6a/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6a/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6a/Branch_2', 'InceptionV4/InceptionV4/Mixed_6a/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6a/Branch_0', 'InceptionV4/InceptionV4/Mixed_6a/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6a.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6b/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6b/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6b/Branch_2
-latency: (225.732640,74.087700,5.522700,3.986530)
-nodes:['InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6b/concat', 'InceptionV4/InceptionV4/Mixed_6b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6b/Branch_3
-latency: (23.001440,11.314700,5.522700,3.986530)
-nodes:['InceptionV4/InceptionV4/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6b/concat', 'InceptionV4/InceptionV4/Mixed_6b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6b/Branch_0
-latency: (48.706140,15.646200,5.522700,3.986530)
-nodes:['InceptionV4/InceptionV4/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6b/concat', 'InceptionV4/InceptionV4/Mixed_6b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6b/Branch_1
-latency: (134.193920,42.947200,5.522700,3.986530)
-nodes:['InceptionV4/InceptionV4/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6b/concat', 'InceptionV4/InceptionV4/Mixed_6b/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6b/subgraph_0
-latency: (1.196720,1.877300,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6b/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6b/Branch_1', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2', 'InceptionV4/InceptionV4/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6b/Branch_3', 'InceptionV4/InceptionV4/Mixed_6b/Branch_0'}
-children:{'InceptionV4/InceptionV4/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_6b/Branch_2 1 Operator latency: 225.732640 74.087700 3.986530 5.522700
-InceptionV4/InceptionV4/Mixed_6b/Branch_3 2 Operator latency: 23.001440 11.314700 3.986530 5.522700
-InceptionV4/InceptionV4/Mixed_6b/Branch_0 3 Operator latency: 48.706140 15.646200 3.986530 5.522700
-InceptionV4/InceptionV4/Mixed_6b/Branch_1 4 Operator latency: 134.193920 42.947200 3.986530 5.522700
-InceptionV4/InceptionV4/Mixed_6b/subgraph_0 5 Operator latency: 1.196720 1.877300 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6c.lp -o inception-v4/lp_result_subgraphs_Mixed_6c.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6c.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.034e+01 (45)
-     33: obj =   0.000000000e+00 inf =   5.329e-15 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1277: >>>>>   1.617372700e+02 >=   7.486200000e+01  53.7% (213; 50)
-+  1328: >>>>>   1.529608900e+02 >=   7.486200000e+01  51.1% (78; 313)
-+  1443: >>>>>   1.524070100e+02 >=   7.486200000e+01  50.9% (89; 329)
-+  1460: >>>>>   1.390044900e+02 >=   8.226199000e+01  40.8% (91; 332)
-+  1657: >>>>>   1.259532900e+02 >=   8.226199000e+01  34.7% (85; 425)
-+  1657: mip =   1.259532900e+02 >=     tree is empty   0.0% (0; 701)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.3 Mb (344659 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6c.txt'...
-
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6b/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6b/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6b/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6b/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6b/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6b/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6b/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6b/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6b/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6b/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6b/Branch_3', 'InceptionV4/InceptionV4/Mixed_6b/Branch_0', 'InceptionV4/InceptionV4/Mixed_6b/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6b/Branch_2', 'InceptionV4/InceptionV4/Mixed_6b/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6b.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6c/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6c/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6c/Branch_2
-latency: (224.787500,74.862000,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6c/concat', 'InceptionV4/InceptionV4/Mixed_6c/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6c/Branch_3
-latency: (22.732780,11.359300,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6c/concat', 'InceptionV4/InceptionV4/Mixed_6c/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6c/Branch_0
-latency: (48.397720,15.648300,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6c/concat', 'InceptionV4/InceptionV4/Mixed_6c/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6c/Branch_1
-latency: (134.172500,43.691300,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6c/concat', 'InceptionV4/InceptionV4/Mixed_6c/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6c/subgraph_0
-latency: (1.191120,1.745000,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6c/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6c/Branch_3', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2', 'InceptionV4/InceptionV4/Mixed_6c/Branch_0', 'InceptionV4/InceptionV4/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6c/Branch_1', 'InceptionV4/InceptionV4/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool'}
-
-InceptionV4/InceptionV4/Mixed_6c/Branch_2 1 Operator latency: 224.787500 74.862000 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6c/Branch_3 2 Operator latency: 22.732780 11.359300 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6c/Branch_0 3 Operator latency: 48.397720 15.648300 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6c/Branch_1 4 Operator latency: 134.172500 43.691300 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6c/subgraph_0 5 Operator latency: 1.191120 1.745000 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['20', 's_2_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6c/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6c/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6c/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6c/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6c/subgraph_0 3
-[('InceptionV4/InceptionV4/Mixed_6c/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6c/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6c/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6c/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6c/subgraph_0', 3)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6c/Branch_3', 'InceptionV4/InceptionV4/Mixed_6c/Branch_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6c/Branch_2', 'InceptionV4/InceptionV4/Mixed_6c/Branch_1', 'InceptionV4/InceptionV4/Mixed_6c/subgraph_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6c.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6d/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6d/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6d/Branch_2
-latency: (223.447140,74.203500,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6d/concat', 'InceptionV4/InceptionV4/Mixed_6d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6d/Branch_3
-latency: (22.585360,11.745400,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6d/concat', 'InceptionV4/InceptionV4/Mixed_6d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6d/Branch_0
-latency: (48.234060,15.647500,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6d/concat', 'InceptionV4/InceptionV4/Mixed_6d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6d/Branch_1
-latency: (133.854560,43.375000,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6d/concat', 'InceptionV4/InceptionV4/Mixed_6d/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6d/subgraph_0
-latency: (1.222340,1.907700,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6d/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6d/Branch_2', 'InceptionV4/InceptionV4/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_3', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1', 'InceptionV4/InceptionV4/Mixed_6d/Branch_0', 'InceptionV4/InceptionV4/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_6d/Branch_2 1 Operator latency: 223.447140 74.203500 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6d/Branch_3 2 Operator latency: 22.585360 11.745400 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6d/Branch_0 3 Operator latency: 48.234060 15.647500 3.640870 5.654990GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6d.lp -o inception-v4/lp_result_subgraphs_Mixed_6d.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6d.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.476e+01 (45)
-     33: obj =   0.000000000e+00 inf =   2.665e-15 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1438: >>>>>   1.362012300e+02 >=   7.420350000e+01  45.5% (226; 60)
-+  1689: >>>>>   1.244558300e+02 >=   1.244558300e+02   0.0% (32; 496)
-+  1689: mip =   1.244558300e+02 >=     tree is empty   0.0% (0; 667)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.3 Mb (345169 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6d.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6e.lp -o inception-v4/lp_result_subgraphs_Mixed_6e.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6e.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.594e+01 (45)
-     33: obj =   0.000000000e+00 inf =   2.665e-15 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+   897: >>>>>   2.769890700e+02 >=   1.566140000e+01  94.3% (131; 46)
-+  1003: >>>>>   1.410165500e+02 >=   6.628615000e+01  53.0% (91; 172)
-+  1089: >>>>>   1.372731900e+02 >=   7.473040000e+01  45.6% (61; 259)
-+  1176: >>>>>   1.366170500e+02 >=   8.159135000e+01  40.3% (59; 293)
-+  1211: >>>>>   1.253551500e+02 >=   8.159135000e+01  34.9% (63; 299)
-+  1261: mip =   1.253551500e+02 >=     tree is empty   0.0% (0; 533)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.3 Mb (291209 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6e.txt'...
-
-InceptionV4/InceptionV4/Mixed_6d/Branch_1 4 Operator latency: 133.854560 43.375000 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6d/subgraph_0 5 Operator latency: 1.222340 1.907700 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6d/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6d/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6d/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6d/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6d/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6d/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6d/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6d/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6d/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6d/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6d/Branch_3', 'InceptionV4/InceptionV4/Mixed_6d/Branch_0', 'InceptionV4/InceptionV4/Mixed_6d/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6d/Branch_2', 'InceptionV4/InceptionV4/Mixed_6d/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6d.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6e/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6e/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6e/Branch_2
-latency: (224.142240,74.730400,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6e/concat', 'InceptionV4/InceptionV4/Mixed_6e/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6e/Branch_3
-latency: (22.477280,11.261900,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6e/concat', 'InceptionV4/InceptionV4/Mixed_6e/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6e/Branch_0
-latency: (48.367760,15.661400,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6e/concat', 'InceptionV4/InceptionV4/Mixed_6e/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6e/Branch_1
-latency: (133.117600,43.763800,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6d/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6e/concat', 'InceptionV4/InceptionV4/Mixed_6e/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6e/subgraph_0
-latency: (1.205960,1.862100,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6e/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6e/Branch_0', 'InceptionV4/InceptionV4/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2', 'InceptionV4/InceptionV4/Mixed_6e/Branch_3', 'InceptionV4/InceptionV4/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_3/AvgPool_0a_3x3/AvgPool'}
-
-InceptionV4/InceptionV4/Mixed_6e/Branch_2 1 Operator latency: 224.142240 74.730400 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6e/Branch_3 2 Operator latency: 22.477280 11.261900 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6e/Branch_0 3 Operator latency: 48.367760 15.661400 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6e/Branch_1 4 Operator latency: 133.117600 43.763800 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6e/subgraph_0 5 Operator latency: 1.205960 1.862100 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6e/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6e/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6e/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6e/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6e/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6e/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6e/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6e/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6e/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6e/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6e/Branch_3', 'InceptionV4/InceptionV4/Mixed_6e/Branch_0', 'InceptionV4/InceptionV4/Mixed_6e/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6e/Branch_2', 'InceptionV4/InceptionV4/Mixed_6e/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6e.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6f/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6f/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6f/Branch_2
-latency: (223.471500,74.404800,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6f/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6f/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6f/Branch_3
-latency: (22.397760,11.707700,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6f/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6f/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6f/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6f/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6f/Branch_0
-latency: (48.439300,15.615400,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6f/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6f/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6f/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6f/Branch_1
-latency: (133.668500,43.744700,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6f/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6e/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6f/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6f/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6f/subgraph_0
-latency: (1.209740,1.748500,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6f/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6f/Branch_2', 'InceptionV4/InceptionV4/Mixed_6f/Branch_3', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6f/Branch_0', 'InceptionV4/InceptionV4/Mixed_6f/Branch_3/Conv2d_0b_1x1/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1/Conv2d_0a_1x1/Conv2D'}
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6f.lp -o inception-v4/lp_result_subgraphs_Mixed_6f.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6f.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.482e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1531: >>>>>   1.523373300e+02 >=   8.126953000e+01  46.7% (241; 69)
-+  1811: >>>>>   1.390578700e+02 >=   8.180829000e+01  41.2% (124; 385)
-+  1883: >>>>>   1.367219300e+02 >=   8.611250000e+01  37.0% (98; 466)
-+  1954: >>>>>   1.250142300e+02 >=   1.250142300e+02   0.0% (34; 635)
-+  1954: mip =   1.250142300e+02 >=     tree is empty   0.0% (0; 819)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.4 Mb (377297 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6f.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6g.lp -o inception-v4/lp_result_subgraphs_Mixed_6g.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6g.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.479e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1456: >>>>>   1.890657100e+02 >=   7.492200000e+01  60.4% (229; 59)
-+  1481: >>>>>   1.525744100e+02 >=   8.180311000e+01  46.4% (102; 310)
-+  1793: >>>>>   1.390203300e+02 >=   8.246099000e+01  40.7% (124; 376)
-+  1864: >>>>>   1.369086100e+02 >=   8.643070000e+01  36.9% (97; 456)
-+  1934: >>>>>   1.253999100e+02 >=   1.253999100e+02   0.0% (35; 614)
-+  1934: mip =   1.253999100e+02 >=     tree is empty   0.0% (0; 803)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.4 Mb (377297 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6g.txt'...
-
-InceptionV4/InceptionV4/Mixed_6f/Branch_2 1 Operator latency: 223.471500 74.404800 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6f/Branch_3 2 Operator latency: 22.397760 11.707700 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6f/Branch_0 3 Operator latency: 48.439300 15.615400 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6f/Branch_1 4 Operator latency: 133.668500 43.744700 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6f/subgraph_0 5 Operator latency: 1.209740 1.748500 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6f/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6f/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6f/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6f/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6f/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6f/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6f/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6f/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6f/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6f/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6f/Branch_3', 'InceptionV4/InceptionV4/Mixed_6f/Branch_0', 'InceptionV4/InceptionV4/Mixed_6f/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6f/Branch_2', 'InceptionV4/InceptionV4/Mixed_6f/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6f.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6g/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6g/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6g/Branch_2
-latency: (223.037220,74.922000,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6f/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6g/concat', 'InceptionV4/InceptionV4/Mixed_6g/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6g/Branch_3
-latency: (22.620220,11.508700,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6g/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6g/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6f/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6g/concat', 'InceptionV4/InceptionV4/Mixed_6g/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6g/Branch_0
-latency: (47.866280,15.665800,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6g/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6f/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6g/concat', 'InceptionV4/InceptionV4/Mixed_6g/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6g/Branch_1
-latency: (133.495460,43.596800,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6g/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6f/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6g/concat', 'InceptionV4/InceptionV4/Mixed_6g/subgraph_0'}
-
-name: InceptionV4/InceptionV4/Mixed_6g/subgraph_0
-latency: (1.226120,1.884000,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6g/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6g/Branch_2', 'InceptionV4/InceptionV4/Mixed_6g/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_3', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1', 'InceptionV4/InceptionV4/Mixed_6g/Branch_0', 'InceptionV4/InceptionV4/Mixed_6g/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1/Conv2d_0c_7x1/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_6h/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_6g/Branch_2 1 Operator latency: 223.037220 74.922000 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6g/Branch_3 2 Operator latency: 22.620220 11.508700 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6g/Branch_0 3 Operator latency: 47.866280 15.665800 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6g/Branch_1 4 Operator latency: 133.495460 43.596800 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6g/subgraph_0 5 Operator latency: 1.226120 1.884000 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6g/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6g/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6g/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6g/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6g/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6g/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6g/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6g/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6g/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6g/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6g/Branch_3', 'InceptionV4/InceptionV4/Mixed_6g/Branch_0', 'InceptionV4/InceptionV4/Mixed_6g/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6g/Branch_2', 'InceptionV4/InceptionV4/Mixed_6g/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6g.txt
-Start solve module InceptionV4/InceptionV4/Mixed_6h/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_6h/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_6h/Branch_2
-latency: (224.180040,74.742600,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0e_1x7/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6g/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6h/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6h/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6h/Branch_3
-latency: (22.644860,11.895300,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6h/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_6h/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6g/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6h/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6h/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6h/Branch_0
-latency: (48.571600,15.747200,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6h/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6g/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6h/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6h/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6h/Branch_1
-latency: (133.537600,43.755700,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_6h/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_1/Conv2d_0c_7x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6g/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_6h/subgraph_0', 'InceptionV4/InceptionV4/Mixed_6h/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_6h/subgraph_0
-latency: (1.196860,1.806500,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_6h/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_6h/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_0', 'InceptionV4/InceptionV4/Mixed_6h/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2', 'InceptionV4/InceptionV4/Mixed_6h/Branch_1', 'InceptionV4/InceptionV4/Mixed_6h/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_6h/Branch_3'}
-children:{'InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool', 'InceptionV4/InceptionV4/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D'}
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_6h.lp -o inception-v4/lp_result_subgraphs_Mixed_6h.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_6h.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.607e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1254: >>>>>   1.410973500e+02 >=   2.748259000e+01  80.5% (184; 68)
-+  1333: >>>>>   1.378550900e+02 >=   7.474260000e+01  45.8% (62; 335)
-+  1435: >>>>>   1.372454500e+02 >=   8.159445000e+01  40.5% (69; 349)
-+  1474: >>>>>   1.253501500e+02 >=   8.159445000e+01  34.9% (70; 360)
-+  1520: mip =   1.253501500e+02 >=     tree is empty   0.0% (0; 609)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.3 Mb (320749 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_6h.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_7a.lp -o inception-v4/lp_result_subgraphs_Mixed_7a.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_7a.lp'...
-68 rows, 29 columns, 194 non-zeros
-20 integer variables, all of which are binary
-95 lines were read
-GLPK Integer Optimizer, v4.65
-68 rows, 29 columns, 194 non-zeros
-20 integer variables, all of which are binary
-Preprocessing...
-60 rows, 29 columns, 178 non-zeros
-20 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.282e+02  ratio =  5.282e+02
-GM: min|aij| =  4.545e-01  max|aij| =  2.200e+00  ratio =  4.840e+00
-EQ: min|aij| =  2.066e-01  max|aij| =  1.000e+00  ratio =  4.840e+00
-2N: min|aij| =  1.250e-01  max|aij| =  1.000e+00  ratio =  8.000e+00
-Constructing initial basis...
-Size of triangular part is 60
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-60 rows, 29 columns, 178 non-zeros
-      0: obj =   0.000000000e+00 inf =   2.354e+01 (28)
-     19: obj =   2.510188035e+00 inf =   0.000e+00 (0)
-*    20: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    20: mip =     not found yet >=              -inf        (1; 0)
-+   234: >>>>>   8.098336800e+01 >=   7.896686800e+01   2.5% (51; 17)
-+   245: >>>>>   7.896686800e+01 >=   7.896686800e+01   0.0% (9; 107)
-+   245: mip =   7.896686800e+01 >=     tree is empty   0.0% (0; 143)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.0 secs
-Memory used: 0.2 Mb (160393 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_7a.txt'...
-
-InceptionV4/InceptionV4/Mixed_6h/Branch_2 1 Operator latency: 224.180040 74.742600 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6h/Branch_3 2 Operator latency: 22.644860 11.895300 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6h/Branch_0 3 Operator latency: 48.571600 15.747200 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6h/Branch_1 4 Operator latency: 133.537600 43.755700 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_6h/subgraph_0 5 Operator latency: 1.196860 1.806500 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['10', 's_1_3', '*', '1', '0', '1']
-['16', 's_2_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_6h/Branch_2 3
-InceptionV4/InceptionV4/Mixed_6h/Branch_3 0
-InceptionV4/InceptionV4/Mixed_6h/Branch_0 0
-InceptionV4/InceptionV4/Mixed_6h/Branch_1 3
-InceptionV4/InceptionV4/Mixed_6h/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_6h/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_6h/Branch_3', 0), ('InceptionV4/InceptionV4/Mixed_6h/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_6h/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_6h/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6h/Branch_3', 'InceptionV4/InceptionV4/Mixed_6h/Branch_0', 'InceptionV4/InceptionV4/Mixed_6h/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_6h/Branch_2', 'InceptionV4/InceptionV4/Mixed_6h/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_6h.txt
-Start solve module InceptionV4/InceptionV4/Mixed_7a/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_7a/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_7a/Branch_2
-latency: (1.177400,2.016500,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool']
-parents:{'InceptionV4/InceptionV4/Mixed_6h/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7a/Branch_0
-latency: (37.506280,12.214800,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6h/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7a/Branch_1
-latency: (238.030800,72.888300,5.654990,3.640870)
-nodes:['InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_6h/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7a/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7a/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7a/subgraph_0
-latency: (0.423578,1.502200,9.401230,7.114230)
-nodes:['InceptionV4/InceptionV4/Mixed_7a/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7a/Branch_1', 'InceptionV4/InceptionV4/Mixed_7a/Branch_2', 'InceptionV4/InceptionV4/Mixed_7a/Branch_0', 'InceptionV4/InceptionV4/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool'}
-children:{'InceptionV4/InceptionV4/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_7a/Branch_2 1 Operator latency: 1.177400 2.016500 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_7a/Branch_0 2 Operator latency: 37.506280 12.214800 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_7a/Branch_1 3 Operator latency: 238.030800 72.888300 3.640870 5.654990
-InceptionV4/InceptionV4/Mixed_7a/subgraph_0 4 Operator latency: 0.423578 1.502200 7.114230 9.401230
-Run solver done!
-['2', 's_1_1', '*', '1', '0', '1']
-['6', 's_1_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_7a/Branch_2 0
-InceptionV4/InceptionV4/Mixed_7a/Branch_0 0
-InceptionV4/InceptionV4/Mixed_7a/Branch_1 3
-InceptionV4/InceptionV4/Mixed_7a/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_7a/Branch_2', 0), ('InceptionV4/InceptionV4/Mixed_7a/Branch_0', 0), ('InceptionV4/InceptionV4/Mixed_7a/Branch_1', 3), ('InceptionV4/InceptionV4/Mixed_7a/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7a/Branch_2', 'InceptionV4/InceptionV4/Mixed_7a/Branch_0', 'InceptionV4/InceptionV4/Mixed_7a/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7a/Branch_1']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_7a.txt
-Start solve module InceptionV4/InceptionV4/Mixed_7b/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_7b/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_7b/Branch_2
-latency: (94.041500,29.444600,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0b_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0d_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/Conv2d_0e_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7b/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7b/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7b/Branch_3
-latency: (16.811620,6.078900,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7b/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7b/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7b/Branch_0
-latency: (14.976360,3.508200,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7b/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7b/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7b/Branch_1
-latency: (42.509460,14.457967,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_1/Conv2d_0c_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_1/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7a/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7b/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7b/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7b/subgraph_0
-latency: (0.479422,1.585500,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7b/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7b/Branch_3', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2/concat', 'InceptionV4/InceptionV4/Mixed_7b/Branch_1', 'InceptionV4/InceptionV4/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_0', 'InceptionV4/InceptionV4/Mixed_7b/Branch_1/concat', 'InceptionV4/InceptionV4/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7b/Branch_2'}
-children:{'InceptionV4/InceptionV4/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_7b/Branch_2 1 Operator latency: 94.041500 29.444600 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7b/Branch_3 2 Operator latency: 16.811620 6.078900 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7b/Branch_0 3 Operator latency: 14.976360 3.508200 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7b/Branch_1 4 Operator latency: 42.509460 14.457967 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7b/subgraph_0 5 Operator latency: 0.479422 1.585500 12.000000 12.000000GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_7b.lp -o inception-v4/lp_result_subgraphs_Mixed_7b.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_7b.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.718e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  2036: >>>>>   1.049690890e+02 >=   2.944460000e+01  71.9% (301; 126)
-+  2198: >>>>>   1.014608890e+02 >=   2.944460000e+01  71.0% (204; 383)
-+  2255: >>>>>   7.888294000e+01 >=   2.944460000e+01  62.7% (201; 410)
-+  2327: >>>>>   5.807516700e+01 >=   2.944460000e+01  49.3% (151; 552)
-+  2557: >>>>>   5.199626700e+01 >=   3.295280000e+01  36.6% (154; 588)
-+  2627: >>>>>   4.848806700e+01 >=   3.403010000e+01  29.8% (134; 646)
-+  2673: >>>>>   4.709496000e+01 >=   3.552350000e+01  24.6% (78; 773)
-+  2673: mip =   4.709496000e+01 >=     tree is empty   0.0% (0; 1117)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.4 Mb (420085 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_7b.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_7c.lp -o inception-v4/lp_result_subgraphs_Mixed_7c.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_7c.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.993e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  2170: >>>>>   1.727126800e+02 >=   3.491085000e+01  79.8% (314; 104)
-+  2207: >>>>>   7.880656000e+01 >=   3.491085000e+01  55.7% (302; 134)
-+  2222: >>>>>   5.876775000e+01 >=   3.491085000e+01  40.6% (142; 454)
-+  3696: >>>>>   4.602438000e+01 >=   4.602438000e+01   0.0% (216; 823)
-+  3696: mip =   4.602438000e+01 >=     tree is empty   0.0% (0; 1683)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.7 Mb (722583 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_7c.txt'...
-
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['20', 's_2_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_7b/Branch_2 3
-InceptionV4/InceptionV4/Mixed_7b/Branch_3 3
-InceptionV4/InceptionV4/Mixed_7b/Branch_0 3
-InceptionV4/InceptionV4/Mixed_7b/Branch_1 0
-InceptionV4/InceptionV4/Mixed_7b/subgraph_0 3
-[('InceptionV4/InceptionV4/Mixed_7b/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_7b/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_7b/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_7b/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_7b/subgraph_0', 3)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7b/Branch_1']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7b/Branch_2', 'InceptionV4/InceptionV4/Mixed_7b/Branch_3', 'InceptionV4/InceptionV4/Mixed_7b/Branch_0', 'InceptionV4/InceptionV4/Mixed_7b/subgraph_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_7b.txt
-Start solve module InceptionV4/InceptionV4/Mixed_7c/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_7c/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_7c/Branch_2
-latency: (93.906120,30.185850,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0b_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0d_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/Conv2d_0e_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7c/Branch_3
-latency: (16.801400,6.133000,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7c/Branch_0
-latency: (14.750820,3.609900,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7c/Branch_1
-latency: (42.529340,14.114000,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_1/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7b/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7c/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7c/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7c/subgraph_0
-latency: (0.495040,1.725000,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7c/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7c/Branch_2/concat', 'InceptionV4/InceptionV4/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7c/Branch_3', 'InceptionV4/InceptionV4/Mixed_7c/Branch_1/concat', 'InceptionV4/InceptionV4/Mixed_7c/Branch_2', 'InceptionV4/InceptionV4/Mixed_7c/Branch_0', 'InceptionV4/InceptionV4/Mixed_7c/Branch_1', 'InceptionV4/InceptionV4/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D'}
-children:{'InceptionV4/InceptionV4/Mixed_7d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0a_1x1/Conv2D'}
-
-InceptionV4/InceptionV4/Mixed_7c/Branch_2 1 Operator latency: 93.906120 30.185850 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7c/Branch_3 2 Operator latency: 16.801400 6.133000 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7c/Branch_0 3 Operator latency: 14.750820 3.609900 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7c/Branch_1 4 Operator latency: 42.529340 14.114000 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7c/subgraph_0 5 Operator latency: 0.495040 1.725000 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['18', 's_1_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_7c/Branch_2 3
-InceptionV4/InceptionV4/Mixed_7c/Branch_3 3
-InceptionV4/InceptionV4/Mixed_7c/Branch_0 3
-InceptionV4/InceptionV4/Mixed_7c/Branch_1 0
-InceptionV4/InceptionV4/Mixed_7c/subgraph_0 0
-[('InceptionV4/InceptionV4/Mixed_7c/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_7c/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_7c/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_7c/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_7c/subgraph_0', 0)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7c/Branch_1', 'InceptionV4/InceptionV4/Mixed_7c/subgraph_0']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7c/Branch_2', 'InceptionV4/InceptionV4/Mixed_7c/Branch_3', 'InceptionV4/InceptionV4/Mixed_7c/Branch_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_7c.txt
-Start solve module InceptionV4/InceptionV4/Mixed_7d/
-
-In buildMultiSubgraph print pattern InceptionV4/InceptionV4/Mixed_7d/
-All subgraph:
-name: InceptionV4/InceptionV4/Mixed_7d/Branch_2
-latency: (94.251080,29.977043,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0b_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0c_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0d_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/Conv2d_0e_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7d/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7d/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7d/Branch_3
-latency: (16.738680,6.127589,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV4/InceptionV4/Mixed_7d/Branch_3/Conv2d_0b_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7d/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7d/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7d/Branch_0
-latency: (14.640360,3.607200,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7d/Branch_0/Conv2d_0a_1x1/Conv2D']
-parents:{'InceptionV4/InceptionV4/Mixed_7c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7d/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7d/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7d/Branch_1
-latency: (42.651824,14.392989,3.000000,3.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1/Conv2d_0b_1x3/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1/Conv2d_0c_3x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7c/concat'}
-children:{'InceptionV4/InceptionV4/Mixed_7d/subgraph_0', 'InceptionV4/InceptionV4/Mixed_7d/concat'}
-
-name: InceptionV4/InceptionV4/Mixed_7d/subgraph_0
-latency: (0.510533,1.684200,12.000000,12.000000)
-nodes:['InceptionV4/InceptionV4/Mixed_7d/concat']
-parents:{'InceptionV4/InceptionV4/Mixed_7d/Branch_3', 'InceptionV4/InceptionV4/Mixed_7d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1', 'InceptionV4/InceptionV4/Mixed_7d/Branch_0', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2', 'InceptionV4/InceptionV4/Mixed_7d/Branch_2/concat', 'InceptionV4/InceptionV4/Mixed_7d/Branch_1/concat', 'InceptionV4/InceptionV4/Mixed_7d/Branch_3/Conv2d_0b_1x1/Conv2D'}
-children:{'InceptionV4/Logits/AvgPool_1a/AvgPool'}
-
-InceptionV4/InceptionV4/Mixed_7d/Branch_2 1 Operator latency: 94.251080 29.977043 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7d/Branch_3 2 Operator latency: 16.738680 6.127589 3.000000 3.000000GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp inception-v4/subgraphs_Mixed_7d.lp -o inception-v4/lp_result_subgraphs_Mixed_7d.txt
-Reading problem data from 'inception-v4/subgraphs_Mixed_7d.lp'...
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-146 lines were read
-GLPK Integer Optimizer, v4.65
-105 rows, 45 columns, 302 non-zeros
-34 integer variables, all of which are binary
-Preprocessing...
-95 rows, 45 columns, 282 non-zeros
-34 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  5.480e+02  ratio =  5.480e+02
-GM: min|aij| =  5.566e-01  max|aij| =  1.797e+00  ratio =  3.227e+00
-EQ: min|aij| =  3.098e-01  max|aij| =  1.000e+00  ratio =  3.227e+00
-2N: min|aij| =  1.875e-01  max|aij| =  1.000e+00  ratio =  5.333e+00
-Constructing initial basis...
-Size of triangular part is 95
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-95 rows, 45 columns, 282 non-zeros
-      0: obj =   0.000000000e+00 inf =   1.723e+01 (45)
-     33: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    33: mip =     not found yet >=              -inf        (1; 0)
-+  1731: >>>>>   1.056153540e+02 >=   1.439298900e+01  86.4% (298; 105)
-+  1735: >>>>>   1.020081540e+02 >=   1.439298900e+01  85.9% (154; 373)
-+  1759: >>>>>   9.588056500e+01 >=   2.997704300e+01  68.7% (146; 400)
-+  1770: >>>>>   5.878902100e+01 >=   2.997704300e+01  49.0% (128; 445)
-+  2088: >>>>>   5.518182100e+01 >=   3.137904000e+01  43.1% (125; 552)
-+  2099: >>>>>   5.266143200e+01 >=   3.358424300e+01  36.2% (112; 580)
-+  2196: >>>>>   4.905423200e+01 >=   3.466124300e+01  29.3% (106; 616)
-+  2283: >>>>>   4.733602400e+01 >=   3.610463200e+01  23.7% (72; 707)
-+  2283: mip =   4.733602400e+01 >=     tree is empty   0.0% (0; 1003)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   0.1 secs
-Memory used: 0.4 Mb (419503 bytes)
-Writing MIP solution to 'inception-v4/lp_result_subgraphs_Mixed_7d.txt'...
-
-InceptionV4/InceptionV4/Mixed_7d/Branch_0 3 Operator latency: 14.640360 3.607200 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7d/Branch_1 4 Operator latency: 42.651824 14.392989 3.000000 3.000000
-InceptionV4/InceptionV4/Mixed_7d/subgraph_0 5 Operator latency: 0.510533 1.684200 12.000000 12.000000
-Run solver done!
-['4', 's_2_1', '*', '1', '0', '1']
-['8', 's_2_2', '*', '1', '0', '1']
-['12', 's_2_3', '*', '1', '0', '1']
-['14', 's_1_4', '*', '1', '0', '1']
-['20', 's_2_5', '*', '1', '0', '1']
-InceptionV4/InceptionV4/Mixed_7d/Branch_2 3
-InceptionV4/InceptionV4/Mixed_7d/Branch_3 3
-InceptionV4/InceptionV4/Mixed_7d/Branch_0 3
-InceptionV4/InceptionV4/Mixed_7d/Branch_1 0
-InceptionV4/InceptionV4/Mixed_7d/subgraph_0 3
-[('InceptionV4/InceptionV4/Mixed_7d/Branch_2', 3), ('InceptionV4/InceptionV4/Mixed_7d/Branch_3', 3), ('InceptionV4/InceptionV4/Mixed_7d/Branch_0', 3), ('InceptionV4/InceptionV4/Mixed_7d/Branch_1', 0), ('InceptionV4/InceptionV4/Mixed_7d/subgraph_0', 3)]
-CPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7d/Branch_1']
-GPU subgraphs:
-['InceptionV4/InceptionV4/Mixed_7d/Branch_2', 'InceptionV4/InceptionV4/Mixed_7d/Branch_3', 'InceptionV4/InceptionV4/Mixed_7d/Branch_0', 'InceptionV4/InceptionV4/Mixed_7d/subgraph_0']
-Write result done.
-Write result to inception-v4/mDevice_map_inception-v4-Mixed_7d.txt
+conv0/Conv2D
+cell_stem_0/comb_iter_0/left/Relu
+cell_stem_0/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_stem_0/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_stem_0/comb_iter_0/combine/add
+cell_stem_0/cell_output/concat
+cell_stem_1/Relu_1
+cell_stem_1/1x1/Conv2D
+cell_stem_1/comb_iter_1/left/Relu
+cell_stem_1/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_stem_1/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_stem_1/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_stem_1/comb_iter_1/combine/add
+cell_stem_1/comb_iter_1/combine/add
+cell_stem_1/cell_output/concat
+cell_1/Relu
+cell_1/Relu___tr4cell_1/prev_1x1/Conv2D
+cell_1/prev_1x1/Conv2D
+cell_1/comb_iter_0/left/Relu
+cell_1/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_1/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_1/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_1/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_1/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_1/comb_iter_0/combine/add
+cell_1/comb_iter_0/combine/add
+cell_1/cell_output/concat
+cell_2/Relu_1
+cell_2/Relu_1___tr4cell_2/1x1/Conv2D
+cell_2/1x1/Conv2D
+cell_2/comb_iter_3/right/MaxPool2D/MaxPool
+cell_2/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_2/comb_iter_3/combine/add
+cell_2/comb_iter_3/combine/add
+cell_2/cell_output/concat
+cell_4/Relu
+cell_4/Relu___tr4cell_4/prev_1x1/Conv2D
+cell_4/prev_1x1/Conv2D
+cell_4/comb_iter_4/left/Relu
+cell_4/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_4/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_4/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_4/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_4/comb_iter_4/combine/add
+cell_4/comb_iter_4/combine/add___tr4cell_4/cell_output/concat
+cell_4/cell_output/concat
+cell_6/Relu
+cell_6/Relu___tr4cell_6/prev_1x1/Conv2D
+cell_6/prev_1x1/Conv2D
+cell_6/comb_iter_4/left/Relu
+cell_6/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_6/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_6/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_6/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_6/comb_iter_4/combine/add
+cell_6/comb_iter_4/combine/add___tr4cell_6/cell_output/concat
+cell_6/cell_output/concat
+cell_7/Relu_1
+cell_7/Relu_1___tr4cell_7/1x1/Conv2D
+cell_7/1x1/Conv2D
+cell_7/comb_iter_1/left/Relu
+cell_7/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_7/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_7/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_7/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_7/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_7/comb_iter_1/combine/add
+cell_7/comb_iter_1/combine/add
+cell_7/cell_output/concat
+cell_9/Relu
+cell_9/Pad
+cell_9/strided_slice
+cell_9/strided_slice___tr4cell_9/AvgPool2D_1
+cell_9/AvgPool2D_1
+cell_9/path2_conv/Conv2D
+cell_9/concat
+cell_9/final_path_bn/FusedBatchNormV3
+cell_9/comb_iter_0/left/Relu
+cell_9/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_9/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_9/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_9/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_9/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_9/comb_iter_0/combine/add
+cell_9/comb_iter_0/combine/add
+cell_9/cell_output/concat
+cell_10/Relu_1
+cell_10/Relu_1___tr4cell_10/1x1/Conv2D
+cell_10/1x1/Conv2D
+cell_10/comb_iter_4/combine/add
+cell_10/comb_iter_4/combine/add___tr4cell_10/cell_output/concat
+cell_10/cell_output/concat
+cell_11/Relu_1
+cell_11/Relu_1___tr4cell_11/1x1/Conv2D
+cell_11/1x1/Conv2D
+cell_11/comb_iter_4/combine/add
+cell_11/comb_iter_4/combine/add___tr4cell_11/cell_output/concat
+cell_11/cell_output/concat
+final_layer/Relu
+final_layer/Mean
+final_layer/FC/MatMul
+final_layer/FC/BiasAdd
+final_layer/predictions
+cell_11/comb_iter_3/right/MaxPool2D/MaxPool
+cell_11/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_11/comb_iter_3/combine/add
+cell_11/comb_iter_3/combine/add
+cell_11/comb_iter_1/right/MaxPool2D/MaxPool
+cell_11/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_11/comb_iter_1/combine/add
+cell_11/comb_iter_1/combine/add
+cell_11/comb_iter_1/left/Relu
+cell_11/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_11/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_11/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_11/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_11/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_11/comb_iter_1/combine/add
+cell_11/comb_iter_2/left/Relu
+cell_11/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_11/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_11/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_11/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_11/comb_iter_2/combine/add
+cell_11/comb_iter_2/combine/add___tr4cell_11/cell_output/concat
+cell_11/comb_iter_3/left/Relu
+cell_11/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_11/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_11/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_11/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_11/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_11/comb_iter_3/combine/add
+cell_11/comb_iter_2/right/Relu
+cell_11/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_11/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_11/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_11/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_10/comb_iter_3/right/MaxPool2D/MaxPool
+cell_10/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_10/comb_iter_3/combine/add
+cell_10/comb_iter_3/combine/add
+cell_10/comb_iter_2/left/Relu
+cell_10/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_10/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_10/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_10/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_10/comb_iter_2/combine/add
+cell_10/comb_iter_3/left/Relu
+cell_10/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_10/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_10/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_10/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_10/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_10/comb_iter_3/combine/add
+cell_10/comb_iter_2/combine/add___tr4cell_10/cell_output/concat
+cell_10/comb_iter_1/right/MaxPool2D/MaxPool
+cell_10/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_10/comb_iter_1/combine/add
+cell_10/comb_iter_1/combine/add
+cell_10/comb_iter_1/left/Relu
+cell_10/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_10/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_10/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_10/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_10/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_10/comb_iter_1/combine/add
+cell_10/comb_iter_2/right/Relu
+cell_10/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_10/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_10/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_10/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_11/Relu
+cell_11/Relu___tr4cell_11/prev_1x1/Conv2D
+cell_11/prev_1x1/Conv2D
+cell_11/comb_iter_0/left/Relu
+cell_11/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_11/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_11/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_11/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_11/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_11/comb_iter_0/combine/add
+cell_11/comb_iter_0/combine/add
+cell_11/comb_iter_0/right/MaxPool2D/MaxPool
+cell_11/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_11/comb_iter_0/combine/add
+cell_11/comb_iter_4/left/Relu
+cell_11/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_11/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_11/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_11/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_9/comb_iter_0/right/MaxPool2D/MaxPool
+cell_9/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_9/comb_iter_0/combine/add
+cell_9/comb_iter_4/left/Relu
+cell_9/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_9/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_9/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_9/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_9/comb_iter_4/combine/add
+cell_9/comb_iter_4/combine/add___tr4cell_9/cell_output/concat
+cell_9/Relu___tr4cell_9/AvgPool2D
+cell_9/AvgPool2D
+cell_9/path1_conv/Conv2D
+cell_8/Relu_1
+cell_8/Relu_1___tr4cell_8/1x1/Conv2D
+cell_8/1x1/Conv2D
+cell_8/comb_iter_1/right/MaxPool2D/MaxPool
+cell_8/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_8/comb_iter_1/combine/add
+cell_8/comb_iter_1/combine/add
+cell_8/cell_output/concat
+cell_10/Relu
+cell_10/Relu___tr4cell_10/prev_1x1/Conv2D
+cell_10/prev_1x1/Conv2D
+cell_10/comb_iter_0/right/MaxPool2D/MaxPool
+cell_10/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_10/comb_iter_0/combine/add
+cell_10/comb_iter_0/combine/add
+cell_10/comb_iter_0/left/Relu
+cell_10/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_10/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_10/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_10/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_10/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_10/comb_iter_0/combine/add
+cell_10/comb_iter_4/left/Relu
+cell_10/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_10/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_10/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_10/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_9/Relu_1
+cell_9/Relu_1___tr4cell_9/1x1/Conv2D
+cell_9/1x1/Conv2D
+cell_9/comb_iter_1/left/Relu
+cell_9/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_9/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_9/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_9/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_9/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_9/comb_iter_1/combine/add
+cell_9/comb_iter_1/combine/add
+cell_9/comb_iter_1/right/MaxPool2D/MaxPool
+cell_9/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_9/comb_iter_1/combine/add
+cell_9/comb_iter_3/right/MaxPool2D/MaxPool
+cell_9/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_9/comb_iter_3/combine/add
+cell_9/comb_iter_3/combine/add
+cell_9/comb_iter_2/right/Relu
+cell_9/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_9/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_9/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_9/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_9/comb_iter_2/combine/add
+cell_9/comb_iter_3/left/Relu
+cell_9/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_9/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_9/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_9/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_9/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_9/comb_iter_3/combine/add
+cell_9/comb_iter_2/combine/add___tr4cell_9/cell_output/concat
+cell_9/comb_iter_2/left/Relu
+cell_9/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_9/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_9/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_9/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_8/comb_iter_2/left/Relu
+cell_8/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_8/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_8/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_8/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_8/comb_iter_2/combine/add
+cell_8/comb_iter_2/combine/add___tr4cell_8/cell_output/concat
+cell_8/comb_iter_3/left/Relu
+cell_8/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_8/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_8/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_8/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_8/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_8/comb_iter_3/combine/add
+cell_8/comb_iter_3/combine/add
+cell_8/comb_iter_1/left/Relu
+cell_8/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_8/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_8/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_8/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_8/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_8/comb_iter_1/combine/add
+cell_8/comb_iter_2/right/Relu
+cell_8/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_8/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_8/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_8/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_8/comb_iter_3/right/MaxPool2D/MaxPool
+cell_8/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_8/comb_iter_3/combine/add
+cell_8/comb_iter_4/right/Relu
+cell_8/comb_iter_4/right/1x1/Conv2D
+cell_8/comb_iter_4/combine/add
+cell_8/comb_iter_4/combine/add___tr4cell_8/cell_output/concat
+cell_7/comb_iter_2/left/Relu
+cell_7/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_7/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_7/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_7/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_7/comb_iter_2/combine/add
+cell_7/comb_iter_3/left/Relu
+cell_7/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_7/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_7/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_7/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_7/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_7/comb_iter_3/combine/add
+cell_7/comb_iter_3/combine/add
+cell_7/comb_iter_2/combine/add___tr4cell_7/cell_output/concat
+cell_7/comb_iter_1/right/MaxPool2D/MaxPool
+cell_7/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_1/combine/add
+cell_7/comb_iter_4/combine/add
+cell_7/comb_iter_4/combine/add___tr4cell_7/cell_output/concat
+cell_7/comb_iter_3/right/MaxPool2D/MaxPool
+cell_7/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_3/combine/add
+cell_7/comb_iter_2/right/Relu
+cell_7/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_7/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_7/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_7/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_8/Relu
+cell_8/Relu___tr4cell_8/prev_1x1/Conv2D
+cell_8/prev_1x1/Conv2D
+cell_8/comb_iter_0/right/MaxPool2D/MaxPool
+cell_8/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_8/comb_iter_0/combine/add
+cell_8/comb_iter_0/combine/add
+cell_8/comb_iter_0/left/Relu
+cell_8/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_8/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_8/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_8/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_8/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_8/comb_iter_0/combine/add
+cell_8/comb_iter_4/left/Relu
+cell_8/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_8/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_8/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_8/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_6/comb_iter_0/right/MaxPool2D/MaxPool
+cell_6/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_6/comb_iter_0/combine/add
+cell_6/comb_iter_0/combine/add
+cell_6/comb_iter_0/left/Relu
+cell_6/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_6/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_6/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_6/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_6/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_6/comb_iter_0/combine/add
+cell_5/Relu_1
+cell_5/Relu_1___tr4cell_5/1x1/Conv2D
+cell_5/1x1/Conv2D
+cell_5/comb_iter_3/right/MaxPool2D/MaxPool
+cell_5/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_5/comb_iter_3/combine/add
+cell_5/comb_iter_3/combine/add
+cell_5/cell_output/concat
+cell_7/Relu
+cell_7/Relu___tr4cell_7/prev_1x1/Conv2D
+cell_7/prev_1x1/Conv2D
+cell_7/comb_iter_0/left/Relu
+cell_7/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_7/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_7/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_7/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_7/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_7/comb_iter_0/combine/add
+cell_7/comb_iter_0/combine/add
+cell_7/comb_iter_4/left/Relu
+cell_7/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_7/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_7/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_7/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_7/comb_iter_0/right/MaxPool2D/MaxPool
+cell_7/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_0/combine/add
+cell_6/Relu_1
+cell_6/Relu_1___tr4cell_6/1x1/Conv2D
+cell_6/1x1/Conv2D
+cell_6/comb_iter_3/right/MaxPool2D/MaxPool
+cell_6/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_6/comb_iter_3/combine/add
+cell_6/comb_iter_3/combine/add
+cell_6/comb_iter_2/right/Relu
+cell_6/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_6/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_6/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_6/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_6/comb_iter_2/combine/add
+cell_6/comb_iter_3/left/Relu
+cell_6/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_6/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_6/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_6/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_6/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_6/comb_iter_3/combine/add
+cell_6/comb_iter_2/combine/add___tr4cell_6/cell_output/concat
+cell_6/comb_iter_2/left/Relu
+cell_6/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_6/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_6/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_6/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_6/comb_iter_1/left/Relu
+cell_6/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_6/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_6/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_6/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_6/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_6/comb_iter_1/combine/add
+cell_6/comb_iter_1/combine/add
+cell_6/comb_iter_1/right/MaxPool2D/MaxPool
+cell_6/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_6/comb_iter_1/combine/add
+cell_5/comb_iter_1/left/Relu
+cell_5/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_5/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_5/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_5/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_5/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_5/comb_iter_1/combine/add
+cell_5/comb_iter_1/combine/add
+cell_5/comb_iter_2/left/Relu
+cell_5/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_5/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_5/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_5/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_5/comb_iter_2/combine/add
+cell_5/comb_iter_3/left/Relu
+cell_5/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_5/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_5/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_5/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_5/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_5/comb_iter_3/combine/add
+cell_5/comb_iter_2/combine/add___tr4cell_5/cell_output/concat
+cell_5/comb_iter_2/right/Relu
+cell_5/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_5/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_5/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_5/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_5/comb_iter_4/combine/add
+cell_5/comb_iter_4/combine/add___tr4cell_5/cell_output/concat
+cell_5/comb_iter_1/right/MaxPool2D/MaxPool
+cell_5/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_5/comb_iter_1/combine/add
+cell_4/comb_iter_0/left/Relu
+cell_4/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_4/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_4/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_4/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_4/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_4/comb_iter_0/combine/add
+cell_4/comb_iter_0/combine/add
+cell_4/comb_iter_0/right/MaxPool2D/MaxPool
+cell_4/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_4/comb_iter_0/combine/add
+cell_3/Relu_1
+cell_3/Relu_1___tr4cell_3/1x1/Conv2D
+cell_3/1x1/Conv2D
+cell_3/comb_iter_2/left/Relu
+cell_3/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_3/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_3/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_3/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_3/comb_iter_2/combine/add
+cell_3/comb_iter_3/left/Relu
+cell_3/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_3/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_3/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_3/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_3/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_3/comb_iter_3/combine/add
+cell_3/comb_iter_3/combine/add
+cell_3/cell_output/concat
+cell_5/Relu
+cell_5/Pad
+cell_5/strided_slice
+cell_5/strided_slice___tr4cell_5/AvgPool2D_1
+cell_5/AvgPool2D_1
+cell_5/path2_conv/Conv2D
+cell_5/concat
+cell_5/final_path_bn/FusedBatchNormV3
+cell_5/comb_iter_0/left/Relu
+cell_5/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_5/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_5/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_5/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_5/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_5/comb_iter_0/combine/add
+cell_5/comb_iter_0/combine/add
+cell_5/comb_iter_4/left/Relu
+cell_5/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_5/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_5/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_5/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_5/comb_iter_0/right/MaxPool2D/MaxPool
+cell_5/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_5/comb_iter_0/combine/add
+cell_5/Relu___tr4cell_5/AvgPool2D
+cell_5/AvgPool2D
+cell_5/path1_conv/Conv2D
+cell_4/Relu_1
+cell_4/Relu_1___tr4cell_4/1x1/Conv2D
+cell_4/1x1/Conv2D
+cell_4/comb_iter_1/right/MaxPool2D/MaxPool
+cell_4/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_4/comb_iter_1/combine/add
+cell_4/comb_iter_1/combine/add
+cell_4/comb_iter_2/left/Relu
+cell_4/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_4/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_4/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_4/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_4/comb_iter_2/combine/add
+cell_4/comb_iter_2/combine/add___tr4cell_4/cell_output/concat
+cell_4/comb_iter_3/left/Relu
+cell_4/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_4/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_4/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_4/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_4/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_4/comb_iter_3/combine/add
+cell_4/comb_iter_3/combine/add
+cell_4/comb_iter_4/right/Relu
+cell_4/comb_iter_4/right/1x1/Conv2D
+cell_4/comb_iter_3/right/MaxPool2D/MaxPool
+cell_4/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_4/comb_iter_3/combine/add
+cell_4/comb_iter_1/left/Relu
+cell_4/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_4/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_4/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_4/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_4/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_4/comb_iter_1/combine/add
+cell_4/comb_iter_2/right/Relu
+cell_4/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_4/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_4/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_4/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_3/comb_iter_2/combine/add___tr4cell_3/cell_output/concat
+cell_3/comb_iter_3/right/MaxPool2D/MaxPool
+cell_3/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_3/comb_iter_3/combine/add
+cell_3/comb_iter_4/combine/add
+cell_3/comb_iter_4/combine/add___tr4cell_3/cell_output/concat
+cell_3/comb_iter_1/left/Relu
+cell_3/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_3/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_3/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_3/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_3/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_3/comb_iter_1/combine/add
+cell_3/comb_iter_1/combine/add
+cell_3/comb_iter_2/right/Relu
+cell_3/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_3/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_3/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_3/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_3/comb_iter_1/right/MaxPool2D/MaxPool
+cell_3/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_3/comb_iter_1/combine/add
+cell_2/comb_iter_1/right/MaxPool2D/MaxPool
+cell_2/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_2/comb_iter_1/combine/add
+cell_2/comb_iter_1/combine/add
+cell_2/comb_iter_2/right/Relu
+cell_2/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_2/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_2/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_2/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_2/comb_iter_2/combine/add
+cell_2/comb_iter_3/left/Relu
+cell_2/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_2/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_2/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_2/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_2/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_2/comb_iter_3/combine/add
+cell_2/comb_iter_2/combine/add___tr4cell_2/cell_output/concat
+cell_2/comb_iter_2/left/Relu
+cell_2/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_2/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_2/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_2/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_2/comb_iter_1/left/Relu
+cell_2/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_2/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_2/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_2/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_2/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_2/comb_iter_1/combine/add
+cell_2/comb_iter_4/combine/add
+cell_2/comb_iter_4/combine/add___tr4cell_2/cell_output/concat
+cell_3/Relu
+cell_3/Relu___tr4cell_3/prev_1x1/Conv2D
+cell_3/prev_1x1/Conv2D
+cell_3/comb_iter_4/left/Relu
+cell_3/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_3/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_3/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_3/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_3/comb_iter_0/left/Relu
+cell_3/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_3/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_3/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_3/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_3/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_3/comb_iter_0/combine/add
+cell_3/comb_iter_0/combine/add
+cell_3/comb_iter_0/right/MaxPool2D/MaxPool
+cell_3/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_3/comb_iter_0/combine/add
+cell_1/comb_iter_4/left/Relu
+cell_1/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_1/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_1/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_1/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_1/comb_iter_4/combine/add
+cell_1/comb_iter_4/combine/add___tr4cell_1/cell_output/concat
+cell_1/comb_iter_0/right/MaxPool2D/MaxPool
+cell_1/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_0/combine/add
+cell_0/Relu_1
+cell_0/Relu_1___tr4cell_0/1x1/Conv2D
+cell_0/1x1/Conv2D
+cell_0/comb_iter_2/left/Relu
+cell_0/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_0/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_0/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_0/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_0/comb_iter_2/combine/add
+cell_0/comb_iter_2/combine/add___tr4cell_0/cell_output/concat
+cell_0/cell_output/concat
+cell_2/Relu
+cell_2/Relu___tr4cell_2/prev_1x1/Conv2D
+cell_2/prev_1x1/Conv2D
+cell_2/comb_iter_0/right/MaxPool2D/MaxPool
+cell_2/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_2/comb_iter_0/combine/add
+cell_2/comb_iter_0/combine/add
+cell_2/comb_iter_0/left/Relu
+cell_2/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_2/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_2/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_2/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_2/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_2/comb_iter_0/combine/add
+cell_2/comb_iter_4/left/Relu
+cell_2/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_2/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_2/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_2/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_1/Relu_1
+cell_1/Relu_1___tr4cell_1/1x1/Conv2D
+cell_1/1x1/Conv2D
+cell_1/comb_iter_3/right/MaxPool2D/MaxPool
+cell_1/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_3/combine/add
+cell_1/comb_iter_3/combine/add
+cell_1/comb_iter_1/right/MaxPool2D/MaxPool
+cell_1/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_1/combine/add
+cell_1/comb_iter_1/combine/add
+cell_1/comb_iter_2/right/Relu
+cell_1/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_1/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_1/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_1/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_1/comb_iter_2/combine/add
+cell_1/comb_iter_2/combine/add___tr4cell_1/cell_output/concat
+cell_1/comb_iter_3/left/Relu
+cell_1/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_1/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_1/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_1/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_1/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_1/comb_iter_3/combine/add
+cell_1/comb_iter_2/left/Relu
+cell_1/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_1/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_1/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_1/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_1/comb_iter_1/left/Relu
+cell_1/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_1/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_1/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_1/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_1/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_1/comb_iter_1/combine/add
+cell_0/comb_iter_3/left/Relu
+cell_0/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_0/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_0/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_0/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_0/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_0/comb_iter_3/combine/add
+cell_0/comb_iter_3/combine/add
+cell_0/comb_iter_4/combine/add
+cell_0/comb_iter_4/combine/add___tr4cell_0/cell_output/concat
+cell_0/comb_iter_3/right/MaxPool2D/MaxPool
+cell_0/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_3/combine/add
+cell_0/comb_iter_1/right/MaxPool2D/MaxPool
+cell_0/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_1/combine/add
+cell_0/comb_iter_1/combine/add
+cell_0/comb_iter_2/right/Relu
+cell_0/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_0/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_0/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_0/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_0/comb_iter_1/left/Relu
+cell_0/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_0/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_0/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_0/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_0/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_0/comb_iter_1/combine/add
+cell_stem_1/comb_iter_2/left/Relu
+cell_stem_1/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_stem_1/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_stem_1/comb_iter_2/combine/add
+cell_stem_1/comb_iter_2/combine/add___tr4cell_stem_1/cell_output/concat
+cell_stem_1/comb_iter_3/left/Relu
+cell_stem_1/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_stem_1/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_stem_1/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_stem_1/comb_iter_3/combine/add
+cell_stem_1/comb_iter_3/combine/add
+cell_stem_1/comb_iter_3/right/MaxPool2D/MaxPool
+cell_stem_1/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_3/combine/add
+cell_stem_1/comb_iter_2/right/Relu
+cell_stem_1/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_stem_1/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_stem_1/comb_iter_1/right/MaxPool2D/MaxPool
+cell_stem_1/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_1/combine/add
+cell_stem_1/comb_iter_4/right/Relu
+cell_stem_1/comb_iter_4/right/1x1/Conv2D
+cell_stem_1/comb_iter_4/combine/add
+cell_stem_1/comb_iter_4/combine/add___tr4cell_stem_1/cell_output/concat
+cell_0/Relu
+cell_0/Pad
+cell_0/Pad___tr4cell_0/strided_slice
+cell_0/strided_slice
+cell_0/strided_slice___tr4cell_0/AvgPool2D_1
+cell_0/AvgPool2D_1
+cell_0/path2_conv/Conv2D
+cell_0/concat
+cell_0/final_path_bn/FusedBatchNormV3
+cell_0/comb_iter_0/right/MaxPool2D/MaxPool
+cell_0/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_0/combine/add
+cell_0/comb_iter_0/combine/add
+cell_0/comb_iter_4/left/Relu
+cell_0/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_0/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_0/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_0/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_0/comb_iter_0/left/Relu
+cell_0/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_0/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_0/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_0/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_0/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_0/comb_iter_0/combine/add
+cell_0/AvgPool2D
+cell_0/path1_conv/Conv2D
+cell_stem_0/comb_iter_4/left/Relu
+cell_stem_0/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_stem_0/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_stem_0/comb_iter_4/combine/add
+cell_stem_0/Relu
+cell_stem_0/1x1/Conv2D
+cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool
+cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_stem_0/comb_iter_1/combine/add
+cell_stem_0/comb_iter_1/combine/add
+cell_stem_0/comb_iter_1/combine/add___tr4cell_stem_0/cell_output/concat
+cell_stem_0/comb_iter_1/left/Relu
+cell_stem_0/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_1/left/separable_7x7_1/separable_conv2d
+cell_stem_0/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_1/left/separable_7x7_2/separable_conv2d
+cell_stem_0/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNormV3___tr4cell_stem_0/comb_iter_1/combine/add
+cell_stem_0/comb_iter_4/right/Relu
+cell_stem_0/comb_iter_4/right/1x1/Conv2D
+cell_stem_0/comb_iter_2/right/Relu
+cell_stem_0/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_2/right/separable_3x3_1/separable_conv2d
+cell_stem_0/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_2/right/separable_3x3_2/separable_conv2d
+cell_stem_0/comb_iter_2/combine/add
+cell_stem_0/comb_iter_3/left/Relu
+cell_stem_0/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_3/left/separable_3x3_1/separable_conv2d
+cell_stem_0/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_3/left/separable_3x3_2/separable_conv2d
+cell_stem_0/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNormV3___tr4cell_stem_0/comb_iter_3/combine/add
+cell_stem_0/comb_iter_3/combine/add
+cell_stem_0/comb_iter_3/combine/add___tr4cell_stem_0/cell_output/concat
+cell_stem_0/comb_iter_2/left/Relu
+cell_stem_0/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise
+cell_stem_0/comb_iter_2/left/separable_5x5_1/separable_conv2d
+cell_stem_0/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise
+cell_stem_0/comb_iter_2/left/separable_5x5_2/separable_conv2d
+cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool
+cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_stem_0/comb_iter_3/combine/add
+cell_stem_1/Relu
+cell_stem_1/AvgPool2D
+cell_stem_1/path1_conv/Conv2D
+cell_stem_1/concat
+cell_stem_1/final_path_bn/FusedBatchNormV3
+cell_stem_1/comb_iter_0/right/MaxPool2D/MaxPool
+cell_stem_1/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_0/combine/add
+cell_stem_1/comb_iter_0/combine/add
+cell_stem_1/comb_iter_4/left/Relu
+cell_stem_1/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_4/left/separable_3x3_1/separable_conv2d
+cell_stem_1/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_4/left/separable_3x3_2/separable_conv2d
+cell_stem_1/comb_iter_0/left/Relu
+cell_stem_1/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise
+cell_stem_1/comb_iter_0/left/separable_5x5_1/separable_conv2d
+cell_stem_1/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise
+cell_stem_1/comb_iter_0/left/separable_5x5_2/separable_conv2d
+cell_stem_1/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNormV3___tr4cell_stem_1/comb_iter_0/combine/add
+cell_stem_1/Pad
+cell_stem_1/Pad___tr4cell_stem_1/strided_slice
+cell_stem_1/strided_slice
+cell_stem_1/strided_slice___tr4cell_stem_1/AvgPool2D_1
+cell_stem_1/AvgPool2D_1
+cell_stem_1/path2_conv/Conv2D
+cell_stem_0/comb_iter_0/right/MaxPool2D/MaxPool
+cell_stem_0/comb_iter_0/right/1x1/Conv2D

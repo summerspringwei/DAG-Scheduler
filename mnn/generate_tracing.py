@@ -39,4 +39,5 @@ def read_bench_result(file_path):
 
 if __name__ == "__main__":
     # read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3/tmp.csv")
-    read_bench_result("inception-v3/tmp.csv")
+    # read_bench_result("inception-v3/tmp.csv")
+    read_bench_result("pnasnet-large/tmp.csv")

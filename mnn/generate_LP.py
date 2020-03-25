@@ -330,7 +330,7 @@ def write_LP_contents(LP_contents, file_name):
 
 
 def run_glpsol(lp_file_path, result_file_path):
-    glpsol_file_path = "/mnt/d/home/software/GLPK/glpk-4.65/examples/glpsol"
+    glpsol_file_path = "glpsol"
     os.system('%s --lp %s -o %s' % (glpsol_file_path, lp_file_path, result_file_path))
     print("Run solver done!")
 
@@ -369,15 +369,8 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
-def solve_pnasnet_mobile():
-    # Read profile data
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/redmi-pnasnet-mobile-latency.csv")
-    pnasnet_mobile_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
-        'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
-    for module_name in pnasnet_mobile_module_list:
+def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name):
+    for module_name in module_name_list:
         # For one module with multiple subgraphs, we need build subgraph and update the op_dict
         parent_subgraph = Subgraph(module_name)
         parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
@@ -389,20 +382,38 @@ def solve_pnasnet_mobile():
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
         # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
         module_name_striped = module_name[0:len(module_name) - 1]
-        lp_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+module_name_striped+"-subgraphs.lp"
-        result_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/"+ module_name_striped+ "-lp-result-subgraphs.txt"
+        lp_file_path = folder_path+module_name_striped+"-subgraphs.lp"
+        result_file_path = folder_path + "lp-result-subgraphs-" + module_name_striped+ ".txt"
         write_LP_contents(LP_contents, lp_file_path)
         # Solve the LP
         run_glpsol(lp_file_path, result_file_path)
         # Parse subgraph device placement result
         name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
-        # 
         print(name_device_tuple_list)
-        device_placement_file_path = "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/mDevice_map_pnasnet-mobile-" + module_name_striped +".txt"
+        device_placement_file_path = folder_path + "mDevice_map_"+ model_name +" + _module_name_striped +".txt"
         write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
             [name for (name, device) in name_device_tuple_list if device == 3], \
             name_op_dict, device_placement_file_path)
         print("Write result to %s" % (device_placement_file_path))
+
+
+def solve_pnasnet():
+    # Read profile data
+    # op_name_list, name_op_dict, net_def = gather_model_profile(
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
+    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/redmi-pnasnet-mobile-latency.csv")
+    # pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
+    #     'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
+    op_name_list, name_op_dict, net_def = gather_model_profile(
+        "pnasnet-large/pnasnet-large-info.bak",
+        "./inception-v3/redmi_data_trans.txt",
+        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
+    pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
+        'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/', 'cell_9/', 'cell_10/', 'cell_11/']
+    folder_path = "pnasnet-large/"
+    model_name = "pnasnet-large"
+    solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model_name)
 
 
 def get_inception_one_module_name(op_name_prefix, op_name_list):
@@ -434,28 +445,9 @@ def solve_inception():
     #     "inception-v3/redmi_data_trans.txt",
     #     "inception-v4/redmi-inception-v4-layerwise-latency.csv")
     folder_path = "inception-v3/"
-    for module_name in inception_v3_module_list:
-        module_name = inception_v3_prefix + module_name
-        print("Start solve module %s\n" % (module_name))
-        one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
-        parent_subgraph = Subgraph(module_name)
-        parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
-        one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
-        LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
-        module_name_striped = (module_name[0:len(module_name) - 1]).split("/")[-1]
-        lp_file_path = folder_path + "subgraphs_" +module_name_striped+".lp"
-        result_file_path = folder_path + "lp_result_subgraphs_" +module_name_striped+ ".txt"
-        write_LP_contents(LP_contents, lp_file_path)
-        # Solve the LP
-        run_glpsol(lp_file_path, result_file_path)
-        # Parse subgraph device placement result
-        name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
-        print(name_device_tuple_list)
-        device_placement_file_path = folder_path + "mDevice_map_inception-v3-" + module_name_striped +".txt"
-        write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
-            [name for (name, device) in name_device_tuple_list if device == 3], \
-            name_op_dict, device_placement_file_path)
-        print("Write result to %s" % (device_placement_file_path))
+    solve_glpk(op_name_list, name_op_dict, net_def, inception_v3_module_list, folder_path)
+
 
 if __name__ == "__main__":
-    solve_inception()
+    # solve_inception()
+    solve_pnasnet()

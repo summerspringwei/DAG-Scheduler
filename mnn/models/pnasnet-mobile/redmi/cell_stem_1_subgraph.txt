@@ -1,0 +1,59 @@
+subgraph-a:
+cell_stem_1/Pad/paddings Const
+cell_stem_1/strided_slice/stack Const
+cell_stem_1/strided_slice/stack_1 Const
+cell_stem_1/strided_slice/stack_2 Const
+cell_stem_1/Relu ReLU
+cell_stem_1/AvgPool Pooling
+cell_stem_1/Pad_Gather_Index Const
+cell_stem_1/Pad_Gather GatherV2
+cell_stem_1/Pad Padding
+cell_stem_1/path1_conv/Conv2D Convolution
+cell_stem_1/Pad___tr4cell_stem_1/strided_slice ConvertTensor
+cell_stem_1/strided_slice StridedSlice
+cell_stem_1/strided_slice___tr4cell_stem_1/AvgPool_1 ConvertTensor
+cell_stem_1/AvgPool_1 Pooling
+cell_stem_1/path2_conv/Conv2D Convolution
+cell_stem_1/concat Concat
+cell_stem_1/final_path_bn/FusedBatchNorm Scale
+subgraph-b:
+cell_stem_1/Relu_1 ReLU
+cell_stem_1/1x1/Conv2D Convolution
+cell_stem_1/split Slice
+最后一个：
+cell_stem_1/cell_output/concat Concat
+其他的都是按照
+comb_iter_0
+comb_iter_1
+comb_iter_2
+comb_iter_3
+comb_iter_4
+
+
+conv0/Conv2D   Convolution
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_stem_0/" | wc -l
+51
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_stem_1/" | wc -l                                                                                               
+69
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_0/" | wc -l                                                                                                    
+69
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_1/" | wc -l                                                                                                    
+55
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_2/" | wc -l                                                                                                    
+55
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_3/" | wc -l                                                                                                    
+56
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_4/" | wc -l                                                                                                    
+67
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_5/" | wc -l                                                                                                    
+55
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_6/" | wc -l                                                                                                    
+56
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_7/" | wc -l                                                                                                    
+67
+mido:/data/local/tmp $ cat tmp.txt | grep ": cell_8/" | wc -l                                                                                                    
+55
+final_layer
+7
+
+共663个

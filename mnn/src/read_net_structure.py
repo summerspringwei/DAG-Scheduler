@@ -222,7 +222,7 @@ if __name__ == "__main__":
     op_name_list, name_op_dict, _  = gather_model_profile(
         "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
         "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv", 1)
     module_name = 'cell_0/'
     parent_subgraph = Subgraph(module_name)
     parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)

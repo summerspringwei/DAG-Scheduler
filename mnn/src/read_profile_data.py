@@ -1,11 +1,8 @@
 from net_struct import *
+import argparse
 
 # Set the cpu<->gpu transformation overhead
 TRANSFORM_OVERHEAD = 3
-# Set the Operator latency scale factor, deal with sum of ops is less than the end-to-end latency
-OP_LATENCY_SCALE = 3
-# CPU thread latency index
-CPU_thread_index = 2
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
@@ -29,9 +26,20 @@ def read_data_trans(file_path):
     return data_trans_dict
 
 
+def thread_index_to_thread_number(CPU_thread_index):
+    if CPU_thread_index == 1:
+        return 1
+    elif CPU_thread_index == 2:
+        return 2
+    elif CPU_thread_index == 4:
+        return 3
+
+
 # Read Operator latency, for now we read 4 thread for CPU
 # Note special case for 'concat'
-def read_latency(file_path):
+# CPU thread latency index
+# Set the Operator latency scale factor, deal with sum of ops is less than the end-to-end latency
+def read_latency(file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0):
     f = open(file_path, 'r')
     operator_latency_dict = {}
     op_name_list = []
@@ -40,7 +48,7 @@ def read_latency(file_path):
         if len(com) < 4:
             continue
         op_latency = OperatorLatency()
-        op_latency.CPU_latency = float(com[CPU_thread_index].strip()) / 1000 * OP_LATENCY_SCALE
+        op_latency.CPU_latency = float(com[thread_index_to_thread_number(CPU_thread_index)].strip()) / 1000 * OP_LATENCY_SCALE
         op_latency.GPU_latency = float(com[4].strip()) / 1000
         # Set GPU concat to a big value
         # if com[0].strip().split('/')[-1] == 'concat':
@@ -103,9 +111,9 @@ def read_net_info(file_path):
 
 # We need three file to read the profiling info
 # The 'raw_info_file_path' file describes the model structure
-def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path):
+def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0):
     data_trans_dict = read_data_trans(data_trans_file_path)
-    op_name_list, latency_dict = read_latency(inference_latency_file_path)
+    op_name_list, latency_dict = read_latency(inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0)
     op_name_list, name_op_dict = read_net_info(raw_info_file_path)
     net_def = NetDef()
     # Gather three file into name_op_dict
@@ -135,14 +143,10 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
 
 if __name__ == "__main__":
     
-    # op_name_list, op_dict, net_def = gather_model_profile(
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_inception-v3-layerwise-latency.txt")
-    op_name_list, op_dict, net_def = gather_model_profile(
+    op_name_list, op_dict, net_def = (
         "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
         "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv")
+        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv", 1)
     for op_name in op_name_list:
         print(op_dict[op_name])
     

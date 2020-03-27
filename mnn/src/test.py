@@ -1,23 +1,16 @@
-def read_names(file_path):
-    f = open(file_path, 'r')
-    names = set()
-    lines = f.readlines()
-    for line in lines:
-        names.add(line.strip())
-    return names
+from utils import *
+# import read_profile_data
+import read_profile_data
 
+print(read_profile_data.CPU_thread_index)
+read_profile_data.CPU_thread_index = 4
+print(read_profile_data.CPU_thread_index)
 
-def compare(f1, f2):
-    model1 = read_names(f1)
-    model2 = read_names(f2)
-    for name in model1:
-        if name not in model2:
-            print(name)
-        else:
-            model2.remove(name)
-    for name in model2:
-        print(name)
-
-
-if __name__ == "__main__":
-    compare("pnasnet-large/pnasnet-large-names.txt", "tmp.txt")
+model, mobile = parse_model_mobile()
+print(model+mobile)
+a = 10
+if a>0:
+    file_name = 'a'
+else:
+    file_name = 'b'
+print(file_name)

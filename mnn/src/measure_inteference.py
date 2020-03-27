@@ -5,8 +5,10 @@ with format (op_name, device, latency)
 and analyze the CPU or GPU performance latency suppression ratio.
 '''
 
-from read_profile_data import *
 import numpy as np
+import os
+from read_profile_data import *
+from utils import *
 
 
 def read_multi_runs_latency(file_path):
@@ -117,6 +119,7 @@ def gather_multi_file_profile(files_list, raw_info_file_path, result_file_path):
 
 
 if __name__ == "__main__":
+    # InceptionV3\/InceptionV3\/Mixed_6e\/Branch_2\/Conv2d_0a_1x1\/Conv2D
     # gather_profile("inception-inteference/redmi-cpu-4-parallel-20avgpool.csv", \
     #     "inception-inteference/redmi-cpu-4-alone-multi-0302.csv", \
     #         "inception-inteference/redmi-cpu-4-affinity-multi-0228.csv", \
@@ -148,11 +151,22 @@ if __name__ == "__main__":
     # gather_multi_file_profile(["lanenet/oneplus3-lanenet-cpu-1.csv", \
     #     "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid.csv"], \
     #     "lanenet/", "lanenet/oneplus3-lanenet-cpu-2-serial-hybrid-compare.csv")
-    gather_multi_file_profile(["pnasnet-large/oneplus3-pnasnet-large-cpu-1.csv", \
-        "pnasnet-large/oneplus3-pnasnet-large-cpu-2.csv", \
-        "pnasnet-large/oneplus3-pnasnet-large-cpu-4.csv", \
-        "pnasnet-large/oneplus3-pnasnet-large-gpu.csv"], \
-        "pnasnet-large/pnasnet-large-info.bak", \
-        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
-
-# InceptionV3\/InceptionV3\/Mixed_6e\/Branch_2\/Conv2d_0a_1x1\/Conv2D
+    # gather_multi_file_profile(["pnasnet-large/oneplus3-pnasnet-large-cpu-1.csv", \
+    #     "pnasnet-large/oneplus3-pnasnet-large-cpu-2.csv", \
+    #     "pnasnet-large/oneplus3-pnasnet-large-cpu-4.csv", \
+    #     "pnasnet-large/oneplus3-pnasnet-large-gpu.csv"], \
+    #     "pnasnet-large/pnasnet-large-info.bak", \
+    #     "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
+    
+    model, mobile, thread = parse_model_mobile()
+    model_dir = os.path.join("../models/", model)
+    file_prefix = mobile+"-"+model
+    result_file_path = os.path.join(model_dir, mobile, file_prefix+"-layerwise-latency.csv")
+    gather_multi_file_profile([
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-2.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-4.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),],
+        os.path.join(model_dir, model+"-info.txt"),
+        result_file_path)
+    print("Gather profile data for model %s on mobile %s done, write result to %s" % (model, mobile, result_file_path))

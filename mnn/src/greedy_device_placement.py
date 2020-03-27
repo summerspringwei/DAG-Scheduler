@@ -2,7 +2,7 @@
 import logging
 import os
 from read_profile_data import *
-
+from utils import *
 
 def update_children_start_point(op, ops_relation_dict, \
   device_start_point, latency):
@@ -56,7 +56,7 @@ def write_device_placement(filename, net_def):
   print("Write device placement done.")
 
 # Follow the mace
-def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name):
+def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, mobile):
   ops_not_support_by_GPU = set(['concat', 'SpatialSqueeze', 'Shape', 'Reshape', 'Softmax', 'Reshape_1'])
   # Record the CPU queue and GPU queue finish timestamp
   CPU_end_point = 0.0
@@ -156,8 +156,8 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name):
   # for op in netdef.op:
   #   print(op.name + " " + str(op.op_def.device_type))
   
-  write_execute_order(os.path.join(folder_path, "op_execute_order.txt") , op_execute_order)
-  write_device_placement(os.path.join(folder_path, 'greedy-oneplus3-' + model_name + '-device-placement.txt') , netdef)
+  write_execute_order(os.path.join(folder_path, "op_execute_order" + mobile + "-" + model_name +".txt") , op_execute_order)
+  write_device_placement(os.path.join(folder_path, 'greedy-' + mobile + "-" + model_name + '-device-placement.txt') , netdef)
   print("CPU end point: %s ms." % CPU_end_point)
   print("GPU end point: %s ms." % GPU_end_point)
   print(op_execute_order)
@@ -166,18 +166,12 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name):
 
 if __name__ == "__main__":
   logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
-  # folder_path = "inception-v3/"
-  # model_name = "inception-v3"
-  # op_name_list, name_op_dict, net_def = gather_model_profile(
-  #       "inception-v3/inception-v3-info.txt",
-  #       "inception-v3/redmi_data_trans.txt",
-  #       "inception-v3/redmi-inception-v3-layerwise-latency.csv")
-  # greedy_device_placement(net_def, op_dict, folder_path, model_name)
-
-  folder_path = "pnasnet-large/"
-  model_name = "pnasnet-large"
+  model, mobile, thread = parse_model_mobile()
+  model_dir = os.path.join("../models/", model)
+  folder_path = os.path.join(model_dir, mobile)
   op_name_list, name_op_dict, net_def = gather_model_profile(
-        "pnasnet-large/pnasnet-large-info.bak",
-        "./inception-v3/redmi_data_trans.txt",
-        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
-  greedy_device_placement(net_def, name_op_dict, folder_path, model_name)
+        os.path.join(model_dir, model + "-info.txt"),
+        "../models/inception-v3/redmi_data_trans.txt",
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
+        thread)
+  greedy_device_placement(net_def, name_op_dict, folder_path, model, mobile)

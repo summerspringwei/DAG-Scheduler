@@ -1,12 +1,13 @@
 import queue
 import os
 
-from read_profile_data import *
+import read_profile_data
 from read_net_structure import *
+from utils import *
 
 CPU = 1
 GPU = 2
-M = 500
+M = 2000
 
 
 # Read one module names and associate a name with one index
@@ -352,7 +353,7 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
                     striped_com.append(c)
             
             if len(striped_com) == 6 and striped_com[3] == '1':
-                print(striped_com)
+                # print(striped_com)
                 s = striped_com[1]
                 sc = s.split('_')
                 if int(sc[1]) == CPU:
@@ -373,6 +374,7 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
     for module_name in module_name_list:
         # For one module with multiple subgraphs, we need build subgraph and update the op_dict
         parent_subgraph = Subgraph(module_name)
+        
         parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
         # 
         # one_module_names_idx_dict = associate_op_name_with_idx(
@@ -382,38 +384,36 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
         # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
         module_name_striped = module_name[0:len(module_name) - 1]
-        lp_file_path = folder_path+module_name_striped+"-subgraphs.lp"
-        result_file_path = folder_path + "lp-result-subgraphs-" + module_name_striped+ ".txt"
+        lp_file_path = os.path.join(folder_path, "subgraphs-" + module_name_striped + ".lp")
+        result_file_path = os.path.join(folder_path, "lp-result-subgraphs-" + module_name_striped+ ".txt")
         write_LP_contents(LP_contents, lp_file_path)
         # Solve the LP
         run_glpsol(lp_file_path, result_file_path)
         # Parse subgraph device placement result
         name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
         print(name_device_tuple_list)
-        device_placement_file_path = folder_path + "mDevice_map_"+ model_name +" + _module_name_striped +".txt"
+        device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
         write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
             [name for (name, device) in name_device_tuple_list if device == 3], \
             name_op_dict, device_placement_file_path)
         print("Write result to %s" % (device_placement_file_path))
 
 
-def solve_pnasnet():
+def solve_pnasnet(model, mobile, thread):
     # Read profile data
-    # op_name_list, name_op_dict, net_def = gather_model_profile(
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/redmi-pnasnet-mobile-latency.csv")
-    # pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
-    #     'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
+    model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
-        "pnasnet-large/pnasnet-large-info.bak",
-        "./inception-v3/redmi_data_trans.txt",
-        "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
-    pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
-        'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/', 'cell_9/', 'cell_10/', 'cell_11/']
-    folder_path = "pnasnet-large/"
-    model_name = "pnasnet-large"
-    solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model_name)
+        os.path.join(model_dir, model + "-info.txt"),
+        "../models/inception-v3/redmi_data_trans.txt",
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread)
+    if model == 'pnasnet-large':
+        pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
+            'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/', 'cell_9/', 'cell_10/', 'cell_11/']
+    elif model == 'pnasnet-mobile':
+        pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
+            'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
+    folder_path = os.path.join(model_dir, mobile)
+    solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
 
 
 def get_inception_one_module_name(op_name_prefix, op_name_list):
@@ -428,26 +428,32 @@ def get_inception_one_module_name(op_name_prefix, op_name_list):
     return module_op_names, list(branches)
 
 
-def solve_inception():
-    inception_v3_prefix = "InceptionV3/InceptionV3/"
-    inception_v3_module_list = ["Mixed_5b/", "Mixed_5c/", "Mixed_5d/", \
-        "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/", "Mixed_7a/", "Mixed_7b/", "Mixed_7c/"]
+def solve_inception(model, mobile, thread):
+    model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
-        "inception-v3/inception-v3-info.txt",
-        "inception-v3/redmi_data_trans.txt",
-        "inception-v3/redmi-inception-v3-layerwise-latency.csv")
-    # inception_v4_prefix = "InceptionV4/InceptionV4/"
-    # inception_v4_module_list = ["Mixed_4a/", "Mixed_5b/", "Mixed_5c/", "Mixed_5d/", "Mixed_5e/", \
-    #     "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/","Mixed_6f/","Mixed_6g/","Mixed_6h/",\
-    #         "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
-    # op_name_list, name_op_dict, net_def = gather_model_profile(
-    #     "inception-v4/inception-v4-info.txt",
-    #     "inception-v3/redmi_data_trans.txt",
-    #     "inception-v4/redmi-inception-v4-layerwise-latency.csv")
-    folder_path = "inception-v3/"
-    solve_glpk(op_name_list, name_op_dict, net_def, inception_v3_module_list, folder_path)
+        os.path.join(model_dir, model + "-info.txt"),
+        "../models/inception-v3/redmi_data_trans.txt",
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
+        thread)
+    
+    if model == "inception-v3":
+        inception_prefix = "InceptionV3/InceptionV3/"
+        inception_module_list = ["Mixed_5b/", "Mixed_5c/", "Mixed_5d/", \
+            "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/", "Mixed_7a/", "Mixed_7b/", "Mixed_7c/"]
+    elif model == "inception-v4":
+        inception_prefix = "InceptionV4/InceptionV4/"
+        inception_module_list = ["Mixed_4a/", "Mixed_5b/", "Mixed_5c/", "Mixed_5d/", "Mixed_5e/", \
+            "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/","Mixed_6f/","Mixed_6g/","Mixed_6h/",\
+            "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
+    
+    folder_path = os.path.join(model_dir, mobile)
+    solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
 
 
-if __name__ == "__main__":
-    # solve_inception()
-    solve_pnasnet()
+if __name__ == "__main__":    
+    model, mobile, thread = parse_model_mobile()
+    if model in ['pnasnet-mobile', 'pnasnet-large']:
+        solve_pnasnet(model, mobile, thread)
+    elif model in ['inception-v3', 'inception-v4']:
+        solve_inception(model, mobile, thread)
+    

@@ -1,8 +1,8 @@
 
 ANDROID_DIR=/data/local/tmp
-MODEL=inception-v3
-MOBILE=vivo_z3
-THREAD=1
+MODEL=pnasnet-large
+MOBILE=lenovo_k5
+THREAD=4
 
 python generate_Lp.py $MODEL $MOBILE $THREAD
 cat ../models/$MODEL/$MOBILE/lp-result-subgraphs-* | grep Objective | awk "{print \$4}"

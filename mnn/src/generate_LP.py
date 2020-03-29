@@ -370,12 +370,27 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
+def get_inception_one_module_name(op_name_prefix, op_name_list):
+    module_op_names = []
+    branches = set()
+    for op_name in op_name_list:
+        if op_name.find(op_name_prefix) == 0:
+            module_op_names.append(op_name)
+            if op_name.find("Branch") > 0:
+                branches.add(op_name.split("/")[3])
+    
+    return module_op_names, list(branches)
+
+
 def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name):
     for module_name in module_name_list:
         # For one module with multiple subgraphs, we need build subgraph and update the op_dict
         parent_subgraph = Subgraph(module_name)
-        
-        parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+        if model_name != None and model_name.find("inception") >=0:
+            one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
+            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
+        elif model_name != None and model_name.find("pnasnet") >=0:
+            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
         # 
         # one_module_names_idx_dict = associate_op_name_with_idx(
         #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
@@ -383,7 +398,10 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         # Generate LP constraints and write them to a file
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
         # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
-        module_name_striped = module_name[0:len(module_name) - 1]
+        module_name_striped = module_name.replace('/','-')
+        if module_name_striped[-1] == '-':
+            module_name_striped = module_name_striped[0:len(module_name_striped)-1]
+            module_name_striped = module_name_striped.split('-')[-1]
         lp_file_path = os.path.join(folder_path, "subgraphs-" + module_name_striped + ".lp")
         result_file_path = os.path.join(folder_path, "lp-result-subgraphs-" + module_name_striped+ ".txt")
         write_LP_contents(LP_contents, lp_file_path)
@@ -416,17 +434,6 @@ def solve_pnasnet(model, mobile, thread):
     solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
 
 
-def get_inception_one_module_name(op_name_prefix, op_name_list):
-    module_op_names = []
-    branches = set()
-    for op_name in op_name_list:
-        if op_name.find(op_name_prefix) == 0:
-            module_op_names.append(op_name)
-            if op_name.find("Branch") > 0:
-                branches.add(op_name.split("/")[3])
-    
-    return module_op_names, list(branches)
-
 
 def solve_inception(model, mobile, thread):
     model_dir = os.path.join("../models/", model)
@@ -445,7 +452,7 @@ def solve_inception(model, mobile, thread):
         inception_module_list = ["Mixed_4a/", "Mixed_5b/", "Mixed_5c/", "Mixed_5d/", "Mixed_5e/", \
             "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/","Mixed_6f/","Mixed_6g/","Mixed_6h/",\
             "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
-    
+    inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
     solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
 

@@ -1,8 +1,8 @@
 import argparse
 
 def parse_model_mobile():
-    model_list = ['inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large']
-    mobile_list = ['lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5']
+    model_list = ['inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large', 'pnasnet-mobile']
+    mobile_list = ['lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20']
     thread_number = [1, 2, 4, 8]
 
     parser = argparse.ArgumentParser(description='Process some integers.')

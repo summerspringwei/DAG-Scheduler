@@ -56,7 +56,7 @@ def write_device_placement(filename, net_def):
   print("Write device placement done.")
 
 # Follow the mace
-def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, mobile):
+def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, mobile, thread):
   ops_not_support_by_GPU = set(['concat', 'SpatialSqueeze', 'Shape', 'Reshape', 'Softmax', 'Reshape_1'])
   # Record the CPU queue and GPU queue finish timestamp
   CPU_end_point = 0.0
@@ -85,7 +85,7 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, 
   while(True):
     # Add child to ops_queue if all his parents has been executed
     for child_name in op.children:
-      if is_parents_executed(ops_relation_dict[child_name], ops_relation_dict) and\
+      if is_parents_executed(ops_relation_dict[child_name], ops_relation_dict) and \
         ops_relation_dict[child_name] not in ops_queue:
         ops_queue.append(ops_relation_dict[child_name])
         print("Add %s" % (child_name))
@@ -129,6 +129,8 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, 
     if CPU_end_point >= op.earlist_start_point and GPU_end_point >= op.earlist_start_point:
       if CPU_end_point + CPU_latency < GPU_end_point + GPU_latency: # CPU can finish this op earlier(Greedy here)
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
+        # We need to add the to_CPU_transpose_latency to GPU_queue as the data transformation is done by GPU
+        GPU_end_point += to_CPU_transpose_latency
       else: # GPU is better
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
     
@@ -137,6 +139,7 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, 
       if op.earlist_start_point + CPU_latency < GPU_end_point + GPU_latency:# Note, CPU_end_point changed
         CPU_end_point = op.earlist_start_point
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
+        GPU_end_point += to_CPU_transpose_latency
       else:
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
     elif(op.earlist_start_point <= CPU_end_point and op.earlist_start_point >= GPU_end_point):
@@ -145,19 +148,22 @@ def greedy_device_placement(netdef, ops_relation_dict, folder_path, model_name, 
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
       else:
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
+        GPU_end_point += to_CPU_transpose_latency
     else:
       if CPU_latency < GPU_latency:
         CPU_end_point = op.earlist_start_point
         CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency)
+        GPU_end_point += to_CPU_transpose_latency
       else:
         GPU_end_point = op.earlist_start_point
         GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
+      
   # End of while
   # for op in netdef.op:
-  #   print(op.name + " " + str(op.op_def.device_type))
+  # print(op.name + " " + str(op.op_def.device_type))
   
   write_execute_order(os.path.join(folder_path, "op_execute_order" + mobile + "-" + model_name +".txt") , op_execute_order)
-  write_device_placement(os.path.join(folder_path, 'greedy-' + mobile + "-" + model_name + '-device-placement.txt') , netdef)
+  write_device_placement(os.path.join(folder_path, 'greedy-' + mobile + "-" + model_name + '-cpu-' + str(thread) +  '.txt') , netdef)
   print("CPU end point: %s ms." % CPU_end_point)
   print("GPU end point: %s ms." % GPU_end_point)
   print(op_execute_order)
@@ -171,7 +177,7 @@ if __name__ == "__main__":
   folder_path = os.path.join(model_dir, mobile)
   op_name_list, name_op_dict, net_def = gather_model_profile(
         os.path.join(model_dir, model + "-info.txt"),
-        "../models/inception-v3/redmi_data_trans.txt",
+        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
         os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
         thread)
-  greedy_device_placement(net_def, name_op_dict, folder_path, model, mobile)
+  greedy_device_placement(net_def, name_op_dict, folder_path, model, mobile, thread)

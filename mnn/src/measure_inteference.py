@@ -9,7 +9,7 @@ import numpy as np
 import os
 from read_profile_data import *
 from utils import *
-
+import re
 
 def read_multi_runs_latency(file_path):
     f_profile = open(file_path, 'r')
@@ -17,6 +17,9 @@ def read_multi_runs_latency(file_path):
     for line in f_profile.readlines():
         com = line.strip().split(' ')
         op_name = com[0].strip()
+        print(op_name)
+        if len(com) < 3 or len(re.findall('[0-9]+', com[2].strip())) <= 0:
+            continue
         if op_name not in profile_dict.keys():
             profile_dict[op_name] = (com[0].strip(), com[1].strip(), [float(com[2].strip()), ])
         else:
@@ -63,15 +66,17 @@ def gather_1x1_profile(alone_file_path, co_run_file_path):
         print(line)
 
 
-def gather_net_profile(cpu_alone_path, gpu_alone_path, parallel_path, result_file_path):
+def gather_net_profile(cpu_alone_path, gpu_alone_path, parallel_path, raw_info_file_path, result_file_path):
     cpu_alone_profile_dict = read_multi_runs_latency(cpu_alone_path)
     gpu_alone_profile_dict = read_multi_runs_latency(gpu_alone_path)
     parallel_profile_dict = read_multi_runs_latency(parallel_path)
 
-    op_name_list, _ = read_net_info("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt")
+    op_name_list, _ = read_net_info(raw_info_file_path)
     lines = []
 
     for op_name in op_name_list:
+        if op_name not in parallel_profile_dict.keys():
+            continue
         cpu_alone_avg = np.average(filter_list(cpu_alone_profile_dict[op_name][2]))
         gpu_alone_avg = np.average(filter_list(gpu_alone_profile_dict[op_name][2]))
         parallel_avg = np.average(filter_list(parallel_profile_dict[op_name][2]))

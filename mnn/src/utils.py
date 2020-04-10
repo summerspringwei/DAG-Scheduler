@@ -1,7 +1,8 @@
 import argparse
 
+
 def parse_model_mobile():
-    model_list = ['inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large', 'pnasnet-mobile']
+    model_list = ['inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large', 'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large']
     mobile_list = ['lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20']
     thread_number = [1, 2, 4, 8]
 
@@ -24,3 +25,10 @@ def parse_model_mobile():
     if thread not in thread_number:
         print("Thread number %d not avaliable. Exit now." % thread)
     return model, mobile, thread
+
+
+def write_lines(file_path, lines):
+    f = open(file_path, 'w')
+    f.writelines(lines)
+    f.flush()
+    f.close()

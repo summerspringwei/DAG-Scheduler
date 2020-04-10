@@ -113,12 +113,23 @@ class Subgraph(Operator):
         # print("untreated subgraphs:")
         # For op_names that are not match certain pattern
         # We group ops that have direct relationships into a subgraph
-        # And set
+
+        # Step 1. This passDeal with nasnet structure
+        # Let one concat op be a subgraph
+        # for op_name in untreated_op_name_list:
+        #     if op_name.find('cell_output/concat') >= 0:
+        #         subgraph = Subgraph(pattern+"subgraph_%d" % (subgraph_idx))
+        #         subgraph.buildWithOpList([op_name], name_op_dict)
+        #         subgraph_list.append(subgraph)
+        #         untreated_op_name_list.remove(op_name)
+        #         subgraph_idx += 1
+        # Step 2.
         while(len(untreated_op_name_list)>0):
             tmp_list = []
             op_name = untreated_op_name_list[0]
             tmp_list.append(op_name)
             untreated_op_name_list.remove(op_name)
+            
             op = name_op_dict[op_name]
             op_queue = queue.Queue()
             put_op_parents_and_children(op_queue, op, untreated_op_name_list)

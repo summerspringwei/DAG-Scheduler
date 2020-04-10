@@ -7,8 +7,11 @@ from utils import *
 
 CPU = 1
 GPU = 2
-M = 2000
-
+M = 500
+# GPU has to do the data transformation for CPU
+# there for the GPU execution time also increases
+# we use a scale factor to simulate the GPU execution time increasing
+GPU_TRANSFORM_SCALE_FACTOR = 2
 
 # Read one module names and associate a name with one index
 def associate_op_name_with_idx(file_path):
@@ -43,7 +46,8 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
     for parent in op.parents:
         if parent in one_module_names_idx_dict.keys():
             convert_format_to_cpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
+            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
+
             parent_idx = one_module_names_idx_dict[parent]
     idx = one_module_names_idx_dict[op_name]
     for device in device_list:
@@ -139,6 +143,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
                         % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
                             (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
+                            # (op_parent_latency.CPU_latency - M))
                     # print(c)
                 else:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
@@ -149,12 +154,13 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                 if idx_parent_parent == 0:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
                         % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
-                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC - M))
+                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR - M))
                 else:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
                         % (device1, idx_child, device2, idx_parent, \
-                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC),\
-                            device2, idx_parent, op_parent_latency.Transpose_latency_NCHW_to_NHWC, device2, idx_parent_parent)
+                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR),\
+                            device2, idx_parent, op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR, \
+                            device2, idx_parent_parent)
             constraints.append(c)
     return constraints
 
@@ -198,7 +204,7 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
                     (a_cpu_latency - M))
             elif device == GPU:
                 b_gpu_transform_latency = op_dict[
-                    op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
+                    op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
                 c1 = "t_%d_%d - t_%d_%d + %f u_%d_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
                     % (device, idx_a, device, idx_b, M, device, idx_a, idx_b, \
                     b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency)
@@ -277,14 +283,7 @@ def print_op_profile(one_module_names_idx_dict, op_dict):
 
 
 def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
-    # one_module_names_idx_dict = associate_op_name_with_idx(
-    #     "inception-v3-one-module.txt")
-    # op_name_list, op_dict, net_def = gather_model_profile(
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3-info.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-    #     "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_inception-v3-layerwise-latency.txt")
-    
-    
+
     # Print the relationship between op_name and index
     print_op_profile(one_module_names_idx_dict, op_dict)
 
@@ -389,9 +388,8 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         if model_name != None and model_name.find("inception") >=0:
             one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
             parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
-        elif model_name != None and model_name.find("pnasnet") >=0:
+        elif model_name != None and (model_name.find("pnasnet") >=0 or model_name.find("nasnet") >=0):
             parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
-        # 
         # one_module_names_idx_dict = associate_op_name_with_idx(
         #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
         one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
@@ -417,21 +415,38 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         print("Write result to %s" % (device_placement_file_path))
 
 
+def sum_lp_objectives(folder_path):
+    grep_cmd = "cat %s | grep Objective | awk '{print $4}'" % os.path.join(folder_path, "lp-result-subgraphs-*")
+    print("Execute "+grep_cmd)
+    lp_result = os.popen(grep_cmd).read()
+    print(lp_result)
+    com = lp_result.split("\n")
+    total = 0.
+    for c in com:
+        if c == '' or len(c) == 0:
+            continue
+        total += float(c)
+    return total
+
+
 def solve_pnasnet(model, mobile, thread):
     # Read profile data
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
         os.path.join(model_dir, model + "-info.txt"),
-        "../models/inception-v3/redmi_data_trans.txt",
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread)
+        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+    pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
     if model == 'pnasnet-large':
-        pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
-            'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/', 'cell_9/', 'cell_10/', 'cell_11/']
+        pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(12)])
     elif model == 'pnasnet-mobile':
-        pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/', 'cell_0/', 'cell_1/', 'cell_2/', 'cell_3/', \
-            'cell_4/', 'cell_5/', 'cell_6/', 'cell_7/', 'cell_8/']
+        pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(9)])
+    elif model == 'nasnet-large':
+        pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(18)])
     folder_path = os.path.join(model_dir, mobile)
     solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
+    lp_total = sum_lp_objectives(folder_path)
+    print("LP total: %f" % lp_total)
 
 
 
@@ -439,9 +454,9 @@ def solve_inception(model, mobile, thread):
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
         os.path.join(model_dir, model + "-info.txt"),
-        "../models/inception-v3/redmi_data_trans.txt",
+        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
         os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-        thread)
+        thread, SCALE=1.0)
     
     if model == "inception-v3":
         inception_prefix = "InceptionV3/InceptionV3/"
@@ -455,11 +470,41 @@ def solve_inception(model, mobile, thread):
     inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
     solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
+    lp_total = sum_lp_objectives(folder_path)
+    print("LP total: %f" % lp_total)
+    serial_file_path = os.path.join(model_dir, mobile, "mDeviceMap-serial-"+model+'-cpu-'+str(thread)+".txt")
+    serial_lines = []
+    # Sum up the op latency that are not include in the LP solver
+    serial_total = 0.
+    for op_name in op_name_list:
+        find = False
+        for module_name in inception_module_list:
+            if op_name.find(module_name) >= 0 or op_name not in name_op_dict.keys():
+                find = True
+                break
+        if not find:
+            # print("%s" % (op_name))
+            cpu_latency = name_op_dict[op_name].op_def.operatorLatency.CPU_latency
+            gpu_latency = name_op_dict[op_name].op_def.operatorLatency.GPU_latency
+            if cpu_latency > gpu_latency:
+                serial_lines.append("%s %d\n" % (op_name, 3))
+                print("%s %d" % (op_name, 3))
+            else:
+                serial_lines.append("%s %d\n" % (op_name, 0))
+                print("%s %d" % (op_name, 0))
+            serial_total += min(cpu_latency, gpu_latency)
+    
+    # If LP result is higher than alone, then use alone instead
+    
+
+    write_lines(serial_file_path, serial_lines)
+    print("serial total: %f" % serial_total)
+    print("Final: %f" % (lp_total + serial_total))
 
 
 if __name__ == "__main__":    
     model, mobile, thread = parse_model_mobile()
-    if model in ['pnasnet-mobile', 'pnasnet-large']:
+    if model in ['pnasnet-mobile', 'pnasnet-large', 'nasnet-large', 'nasnet-mobile']:
         solve_pnasnet(model, mobile, thread)
     elif model in ['inception-v3', 'inception-v4']:
         solve_inception(model, mobile, thread)

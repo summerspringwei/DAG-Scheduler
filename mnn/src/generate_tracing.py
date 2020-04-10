@@ -15,14 +15,16 @@ def read_bench_result(file_path):
         name = com[0].strip().split('/')[-1]
         
         device = ''
+        
         # print(com[2])
         if com[1].strip() == "CPU":
-            device = '1'
+            device = 'CPU'
         elif com[1].strip() in ["OpenCL"]:
-            device = '2'
+            device = 'GPU'
         else:
-            device = '3'
+            device = 'CONVERT'
         # latency = com[2]
+        print(device)
         start = com[3]
         end = com[4]
         op_start = {"name": name, "ph": "B", "pid": device, "ts": start}
@@ -40,4 +42,4 @@ def read_bench_result(file_path):
 if __name__ == "__main__":
     # read_bench_result("/mnt/d/home/Projects/DAG-scheduler/mnn/inception-v3/tmp.csv")
     # read_bench_result("inception-v3/tmp.csv")
-    read_bench_result("pnasnet-large/tmp.csv")
+    read_bench_result("../models/pnasnet-large/vivo_z3/tmp.csv")

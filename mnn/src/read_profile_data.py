@@ -1,8 +1,10 @@
 from net_struct import *
 import argparse
+from utils import *
+import os
 
 # Set the cpu<->gpu transformation overhead
-TRANSFORM_OVERHEAD = 3
+TRANSFORM_OVERHEAD = 1.5
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
@@ -11,7 +13,7 @@ def read_data_trans(file_path):
     data_trans_dict = {}
 
     for line in f.readlines():
-        com = line.strip().split("\t")
+        com = line.strip().split(" ")
         # print("%s*%s*%s" % (com[0],com[1],com[2]))
         if(len(com) != 3):
             print(com)
@@ -19,8 +21,8 @@ def read_data_trans(file_path):
         if first_line:
             first_line = False
             continue
-        com[0] = str(com[0])[1:len(com[0])-1]
-        data_trans_dict[com[0]] = [float(com[1]), float(com[2])]
+        com[0] = str(com[0])
+        data_trans_dict[com[0]] = [float(com[1]) / 1000, float(com[2]) / 1000]
     # print("dict--")
     # print(data_trans_dict)
     return data_trans_dict
@@ -111,9 +113,9 @@ def read_net_info(file_path):
 
 # We need three file to read the profiling info
 # The 'raw_info_file_path' file describes the model structure
-def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0):
+def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path, CPU_thread_index, SCALE = 1.0):
     data_trans_dict = read_data_trans(data_trans_file_path)
-    op_name_list, latency_dict = read_latency(inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0)
+    op_name_list, latency_dict = read_latency(inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = SCALE)
     op_name_list, name_op_dict = read_net_info(raw_info_file_path)
     net_def = NetDef()
     # Gather three file into name_op_dict
@@ -124,6 +126,7 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         op_def = OperatorDef()
         op_def.type = op_type
         # Set OperatorLatency transformation latency
+        print("%s %s" % (op_name, str(op.input_tensors)))
         for tensor in op.input_tensors:
             if(len(tensor) >= 1):
                 if tensor in data_trans_dict.keys():
@@ -142,11 +145,16 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
 
 
 if __name__ == "__main__":
-    
-    op_name_list, op_dict, net_def = (
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv", 1)
+    model, mobile, thread = parse_model_mobile()
+    model_dir = os.path.join("../models/", model)
+    folder_path = os.path.join(model_dir, mobile)
+    op_name_list, name_op_dict, net_def = gather_model_profile(
+            os.path.join(model_dir, model + "-info.txt"),
+            os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
+            os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
+            thread)
     for op_name in op_name_list:
-        print(op_dict[op_name])
+        print(op_name)
+        print(name_op_dict[op_name].op_def.operatorLatency)
+    
     

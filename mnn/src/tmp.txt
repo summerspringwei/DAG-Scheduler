@@ -664,540 +664,59 @@ final_layer/predictions ['1,0,1001,0']
 In buildMultiSubgraph print pattern cell_stem_0/
 All subgraph:
 name: cell_stem_0/comb_iter_0/
-latency: (5.868986,12.189071,2.764000,2.764000)
+latency: (5.868986,12.189071,0.000000,0.000000)
 nodes:['cell_stem_0/comb_iter_0/left/Relu', 'cell_stem_0/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_0/right/1x1/Conv2D', 'cell_stem_0/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_stem_0/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_stem_0/comb_iter_0/combine/add']
 parents:{'conv0/Conv2D'}
-children:{'cell_stem_0/subgraph_1', 'cell_stem_0/cell_output/concat'}
+children:{'cell_stem_0/cell_output/concat', 'cell_stem_0/subgraph_1'}
 
 name: cell_stem_0/comb_iter_1/
-latency: (4.861514,11.459878,1.500000,1.500000)
+latency: (4.861514,11.459878,0.000000,0.000000)
 nodes:['cell_stem_0/comb_iter_1/left/Relu', 'cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_stem_0/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_stem_0/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_stem_0/comb_iter_1/combine/add', 'cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_stem_0/comb_iter_1/combine/add', 'cell_stem_0/comb_iter_1/combine/add', 'cell_stem_0/comb_iter_1/combine/add___tr4cell_stem_0/cell_output/concat']
 parents:{'cell_stem_0/subgraph_0', 'cell_stem_0/split'}
-children:{'cell_stem_0/subgraph_1', 'cell_stem_0/cell_output/concat'}
+children:{'cell_stem_0/cell_output/concat', 'cell_stem_0/subgraph_1'}
 
 name: cell_stem_0/comb_iter_2/
-latency: (4.275322,14.383677,1.500000,1.500000)
+latency: (4.275322,14.383677,0.000000,0.000000)
 nodes:['cell_stem_0/comb_iter_2/left/Relu', 'cell_stem_0/comb_iter_2/right/Relu', 'cell_stem_0/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_stem_0/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_stem_0/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_stem_0/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_stem_0/comb_iter_2/combine/add']
 parents:{'cell_stem_0/subgraph_0', 'cell_stem_0/split'}
-children:{'cell_stem_0/subgraph_1', 'cell_stem_0/comb_iter_3/left/Relu', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/cell_output/concat'}
+children:{'cell_stem_0/comb_iter_3/', 'cell_stem_0/cell_output/concat', 'cell_stem_0/subgraph_1', 'cell_stem_0/comb_iter_3/left/Relu'}
 
 name: cell_stem_0/comb_iter_3/
-latency: (1.924956,8.481675,9.348000,9.348000)
+latency: (1.924956,8.481675,0.000000,0.000000)
 nodes:['cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_3/left/Relu', 'cell_stem_0/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_3/left/separable_3x3_1/separable_conv2d', 'cell_stem_0/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_3/left/separable_3x3_2/separable_conv2d', 'cell_stem_0/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_stem_0/comb_iter_3/combine/add', 'cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_stem_0/comb_iter_3/combine/add', 'cell_stem_0/comb_iter_3/combine/add', 'cell_stem_0/comb_iter_3/combine/add___tr4cell_stem_0/cell_output/concat']
-parents:{'cell_stem_0/subgraph_0', 'cell_stem_0/comb_iter_2/combine/add', 'cell_stem_0/split', 'cell_stem_0/comb_iter_2/'}
-children:{'cell_stem_0/subgraph_1', 'cell_stem_0/cell_output/concat'}
+parents:{'cell_stem_0/comb_iter_2/', 'cell_stem_0/subgraph_0', 'cell_stem_0/split', 'cell_stem_0/comb_iter_2/combine/add'}
+children:{'cell_stem_0/cell_output/concat', 'cell_stem_0/subgraph_1'}
 
 name: cell_stem_0/comb_iter_4/
-latency: (3.811811,10.263028,4.264000,4.264000)
+latency: (3.811811,10.263028,0.000000,0.000000)
 nodes:['cell_stem_0/comb_iter_4/left/Relu', 'cell_stem_0/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_4/left/separable_3x3_1/separable_conv2d', 'cell_stem_0/comb_iter_4/right/Relu', 'cell_stem_0/comb_iter_4/right/1x1/Conv2D', 'cell_stem_0/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_0/comb_iter_4/left/separable_3x3_2/separable_conv2d', 'cell_stem_0/comb_iter_4/combine/add']
-parents:{'cell_stem_0/subgraph_0', 'conv0/Conv2D', 'cell_stem_0/split'}
-children:{'cell_stem_0/subgraph_1', 'cell_stem_0/cell_output/concat'}
+parents:{'cell_stem_0/subgraph_0', 'cell_stem_0/split', 'conv0/Conv2D'}
+children:{'cell_stem_0/cell_output/concat', 'cell_stem_0/subgraph_1'}
 
 name: cell_stem_0/subgraph_0
-latency: (3.276544,5.424700,2.764000,2.764000)
+latency: (3.276544,5.424700,0.000000,0.000000)
 nodes:['cell_stem_0/Relu', 'cell_stem_0/1x1/Conv2D', 'cell_stem_0/split']
 parents:{'conv0/Conv2D'}
-children:{'cell_stem_0/comb_iter_1/', 'cell_stem_0/comb_iter_2/', 'cell_stem_0/comb_iter_2/left/Relu', 'cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_4/', 'cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/comb_iter_4/right/Relu', 'cell_stem_0/comb_iter_1/left/Relu', 'cell_stem_0/comb_iter_2/right/Relu'}
+children:{'cell_stem_0/comb_iter_2/left/Relu', 'cell_stem_0/comb_iter_2/', 'cell_stem_0/comb_iter_2/right/Relu', 'cell_stem_0/comb_iter_4/right/Relu', 'cell_stem_0/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/comb_iter_4/', 'cell_stem_0/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_stem_0/comb_iter_1/left/Relu', 'cell_stem_0/comb_iter_1/'}
 
 name: cell_stem_0/subgraph_1
-latency: (1.094500,6.166100,31.392000,31.392000)
+latency: (1.094500,6.166100,0.000000,0.000000)
 nodes:['cell_stem_0/cell_output/concat']
-parents:{'cell_stem_0/comb_iter_1/', 'cell_stem_0/comb_iter_2/', 'cell_stem_0/comb_iter_4/combine/add', 'cell_stem_0/comb_iter_3/combine/add___tr4cell_stem_0/cell_output/concat', 'cell_stem_0/comb_iter_0/combine/add', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/comb_iter_4/', 'cell_stem_0/comb_iter_1/combine/add___tr4cell_stem_0/cell_output/concat', 'cell_stem_0/comb_iter_2/combine/add', 'cell_stem_0/comb_iter_0/'}
-children:{'cell_stem_1/Relu_1', 'cell_0/Relu'}
+parents:{'cell_stem_0/comb_iter_2/', 'cell_stem_0/comb_iter_2/combine/add', 'cell_stem_0/comb_iter_0/', 'cell_stem_0/comb_iter_0/combine/add', 'cell_stem_0/comb_iter_3/combine/add___tr4cell_stem_0/cell_output/concat', 'cell_stem_0/comb_iter_4/combine/add', 'cell_stem_0/comb_iter_4/', 'cell_stem_0/comb_iter_1/combine/add___tr4cell_stem_0/cell_output/concat', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/comb_iter_1/'}
+children:{'cell_0/Relu', 'cell_stem_1/Relu_1'}
 GLPSOL: GLPK LP/MIP Solver, v4.65
 Parameter(s) specified in the command line:
  --lp ../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_stem_0.lp -o ../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_stem_0.txt
 Reading problem data from '../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_stem_0.lp'...
-195 rows, 69 columns, 630 non-zeros
-54 integer variables, all of which are binary
-256 lines were read
-GLPK Integer Optimizer, v4.65
-195 rows, 69 columns, 630 non-zeros
-54 integer variables, all of which are binary
-Preprocessing...
-181 rows, 69 columns, 602 non-zeros
-54 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  2.314e+03  ratio =  2.314e+03
-GM: min|aij| =  9.019e-02  max|aij| =  1.109e+01  ratio =  1.229e+02
-EQ: min|aij| =  8.170e-03  max|aij| =  1.000e+00  ratio =  1.224e+02
-2N: min|aij| =  5.859e-03  max|aij| =  1.000e+00  ratio =  1.707e+02
-Constructing initial basis...
-Size of triangular part is 181
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-181 rows, 69 columns, 602 non-zeros
-      0: obj =   0.000000000e+00 inf =   5.948e+00 (87)
-     55: obj =   8.946971464e+00 inf =   0.000e+00 (0)
-*    56: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    56: mip =     not found yet >=              -inf        (1; 0)
-+  4260: >>>>>   3.855378900e+01 >=   8.888442000e+00  76.9% (371; 161)
-+  7698: >>>>>   3.742274300e+01 >=   1.106179200e+01  70.4% (513; 648)
-+  7953: >>>>>   2.511363300e+01 >=   1.106179200e+01  56.0% (509; 710)
-+ 10921: >>>>>   2.025211900e+01 >=   1.206926400e+01  40.4% (663; 1092)
-+ 24411: mip =   2.025211900e+01 >=     tree is empty   0.0% (0; 9189)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   1.0 secs
-Memory used: 2.4 Mb (2496911 bytes)
-Writing MIP solution to '../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_stem_0.txt'...
+../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_stem_0.lp:1: 'minimize' or 'maximize' keyword missing
+CPLEX LP file processing error
 
-cell_stem_0/comb_iter_0/ 1 Operator latency: 5.868986 12.189071 2.764000 2.764000
-cell_stem_0/comb_iter_1/ 2 Operator latency: 4.861514 11.459878 1.500000 1.500000
-cell_stem_0/comb_iter_2/ 3 Operator latency: 4.275322 14.383677 1.500000 1.500000
-cell_stem_0/comb_iter_3/ 4 Operator latency: 1.924956 8.481675 9.348000 9.348000
-cell_stem_0/comb_iter_4/ 5 Operator latency: 3.811811 10.263028 4.264000 4.264000
-cell_stem_0/subgraph_0 6 Operator latency: 3.276544 5.424700 2.764000 2.764000
-cell_stem_0/subgraph_1 7 Operator latency: 1.094500 6.166100 31.392000 31.392000
+cell_stem_0/comb_iter_0/ 1 Operator latency: 5.868986 12.189071 0.000000 0.000000
+cell_stem_0/comb_iter_1/ 2 Operator latency: 4.861514 11.459878 0.000000 0.000000
+cell_stem_0/comb_iter_2/ 3 Operator latency: 4.275322 14.383677 0.000000 0.000000
+cell_stem_0/comb_iter_3/ 4 Operator latency: 1.924956 8.481675 0.000000 0.000000
+cell_stem_0/comb_iter_4/ 5 Operator latency: 3.811811 10.263028 0.000000 0.000000
+cell_stem_0/subgraph_0 6 Operator latency: 3.276544 5.424700 0.000000 0.000000
+cell_stem_0/subgraph_1 7 Operator latency: 1.094500 6.166100 0.000000 0.000000
 Run solver done!
-cell_stem_0/comb_iter_0/ 0
-cell_stem_0/subgraph_0 0
-cell_stem_0/comb_iter_1/ 3
-cell_stem_0/comb_iter_2/ 0
-cell_stem_0/comb_iter_3/ 0
-cell_stem_0/comb_iter_4/ 0
-cell_stem_0/subgraph_1 0
-[('cell_stem_0/comb_iter_0/', 0), ('cell_stem_0/subgraph_0', 0), ('cell_stem_0/comb_iter_1/', 3), ('cell_stem_0/comb_iter_2/', 0), ('cell_stem_0/comb_iter_3/', 0), ('cell_stem_0/comb_iter_4/', 0), ('cell_stem_0/subgraph_1', 0)]
-CPU subgraphs:
-['cell_stem_0/comb_iter_0/', 'cell_stem_0/subgraph_0', 'cell_stem_0/comb_iter_2/', 'cell_stem_0/comb_iter_3/', 'cell_stem_0/comb_iter_4/', 'cell_stem_0/subgraph_1']
-GPU subgraphs:
-['cell_stem_0/comb_iter_1/']
-Write result done.
-Write result to ../models/pnasnet-mobile/lenovo_k5/mDeviceMap-subgraphs-pnasnet-mobile-cell_stem_0.txt
-In buildMultiSubgraph print pattern cell_stem_1/
-All subgraph:
-name: cell_stem_1/comb_iter_0/
-latency: (2.022800,7.661963,1.707722,1.707722)
-nodes:['cell_stem_1/comb_iter_0/left/Relu', 'cell_stem_1/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_stem_1/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_stem_1/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNorm___tr4cell_stem_1/comb_iter_0/combine/add', 'cell_stem_1/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_0/combine/add', 'cell_stem_1/comb_iter_0/combine/add']
-parents:{'cell_stem_1/final_path_bn/FusedBatchNorm', 'cell_stem_1/subgraph_0'}
-children:{'cell_stem_1/subgraph_2', 'cell_stem_1/cell_output/concat'}
-
-name: cell_stem_1/comb_iter_1/
-latency: (2.576944,8.197462,1.707722,1.707722)
-nodes:['cell_stem_1/comb_iter_1/left/Relu', 'cell_stem_1/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_stem_1/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_stem_1/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_stem_1/comb_iter_1/combine/add', 'cell_stem_1/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_1/combine/add', 'cell_stem_1/comb_iter_1/combine/add']
-parents:{'cell_stem_1/split', 'cell_stem_1/subgraph_1'}
-children:{'cell_stem_1/subgraph_2', 'cell_stem_1/cell_output/concat'}
-
-name: cell_stem_1/comb_iter_2/
-latency: (2.380667,11.132390,1.707722,1.707722)
-nodes:['cell_stem_1/comb_iter_2/left/Relu', 'cell_stem_1/comb_iter_2/right/Relu', 'cell_stem_1/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_stem_1/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_stem_1/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_stem_1/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_stem_1/comb_iter_2/combine/add', 'cell_stem_1/comb_iter_2/combine/add___tr4cell_stem_1/cell_output/concat']
-parents:{'cell_stem_1/split', 'cell_stem_1/subgraph_1'}
-children:{'cell_stem_1/subgraph_2', 'cell_stem_1/comb_iter_3/left/Relu', 'cell_stem_1/cell_output/concat', 'cell_stem_1/comb_iter_3/'}
-
-name: cell_stem_1/comb_iter_3/
-latency: (1.006678,7.277976,3.207722,3.207722)
-nodes:['cell_stem_1/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_3/left/Relu', 'cell_stem_1/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_3/left/separable_3x3_1/separable_conv2d', 'cell_stem_1/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_3/left/separable_3x3_2/separable_conv2d', 'cell_stem_1/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_stem_1/comb_iter_3/combine/add', 'cell_stem_1/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_stem_1/comb_iter_3/combine/add', 'cell_stem_1/comb_iter_3/combine/add']
-parents:{'cell_stem_1/comb_iter_2/combine/add', 'cell_stem_1/split', 'cell_stem_1/comb_iter_2/', 'cell_stem_1/subgraph_1'}
-children:{'cell_stem_1/subgraph_2', 'cell_stem_1/cell_output/concat'}
-
-name: cell_stem_1/comb_iter_4/
-latency: (1.619611,7.387460,3.415444,3.415444)
-nodes:['cell_stem_1/comb_iter_4/left/Relu', 'cell_stem_1/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_4/left/separable_3x3_1/separable_conv2d', 'cell_stem_1/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_stem_1/comb_iter_4/left/separable_3x3_2/separable_conv2d', 'cell_stem_1/comb_iter_4/right/Relu', 'cell_stem_1/comb_iter_4/right/1x1/Conv2D', 'cell_stem_1/comb_iter_4/combine/add', 'cell_stem_1/comb_iter_4/combine/add___tr4cell_stem_1/cell_output/concat']
-parents:{'cell_stem_1/final_path_bn/FusedBatchNorm', 'cell_stem_1/split', 'cell_stem_1/subgraph_0', 'cell_stem_1/subgraph_1'}
-children:{'cell_stem_1/subgraph_2', 'cell_stem_1/cell_output/concat'}
-
-name: cell_stem_1/subgraph_0
-latency: (11.181864,31.064569,2.764000,2.764000)
-nodes:['cell_stem_1/Pad/paddings', 'cell_stem_1/Pad_Gather', 'cell_stem_1/Pad_Gather_Index', 'cell_stem_1/Pad', 'cell_stem_1/Relu', 'cell_stem_1/Pad___tr4cell_stem_1/strided_slice', 'cell_stem_1/AvgPool', 'cell_stem_1/strided_slice', 'cell_stem_1/path1_conv/Conv2D', 'cell_stem_1/strided_slice/stack', 'cell_stem_1/strided_slice/stack_2', 'cell_stem_1/strided_slice/stack_1', 'cell_stem_1/strided_slice___tr4cell_stem_1/AvgPool_1', 'cell_stem_1/concat', 'cell_stem_1/AvgPool_1', 'cell_stem_1/path2_conv/Conv2D', 'cell_stem_1/final_path_bn/FusedBatchNorm']
-parents:{'conv0/Conv2D'}
-children:{'cell_stem_1/comb_iter_4/', 'cell_stem_1/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_0/left/Relu', 'cell_stem_1/comb_iter_0/', 'cell_stem_1/comb_iter_4/left/Relu'}
-
-name: cell_stem_1/subgraph_1
-latency: (1.911800,5.073033,19.620000,19.620000)
-nodes:['cell_stem_1/Relu_1', 'cell_stem_1/1x1/Conv2D', 'cell_stem_1/split']
-parents:{'cell_stem_0/cell_output/concat'}
-children:{'cell_stem_1/comb_iter_1/left/Relu', 'cell_stem_1/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_4/', 'cell_stem_1/comb_iter_4/right/Relu', 'cell_stem_1/comb_iter_2/right/Relu', 'cell_stem_1/comb_iter_1/', 'cell_stem_1/comb_iter_3/', 'cell_stem_1/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_stem_1/comb_iter_2/', 'cell_stem_1/comb_iter_2/left/Relu'}
-
-name: cell_stem_1/subgraph_2
-latency: (0.403900,4.445400,7.500000,7.500000)
-nodes:['cell_stem_1/cell_output/concat']
-parents:{'cell_stem_1/comb_iter_1/combine/add', 'cell_stem_1/comb_iter_2/combine/add___tr4cell_stem_1/cell_output/concat', 'cell_stem_1/comb_iter_4/combine/add___tr4cell_stem_1/cell_output/concat', 'cell_stem_1/comb_iter_4/', 'cell_stem_1/comb_iter_3/', 'cell_stem_1/comb_iter_1/', 'cell_stem_1/comb_iter_3/combine/add', 'cell_stem_1/comb_iter_0/combine/add', 'cell_stem_1/comb_iter_2/', 'cell_stem_1/comb_iter_0/'}
-children:{'cell_0/Relu_1', 'cell_1/Relu'}
-
-cell_stem_1/comb_iter_0/ 1 Operator latency: 2.022800 7.661963 1.707722 1.707722
-cell_stem_1/comb_iter_1/ 2 Operator latency: 2.576944 8.197462 1.707722 1.707722
-cell_stem_1/comb_iter_2/ 3 Operator latency: 2.380667 11.132390 1.707722 1.707722
-cell_stem_1/comb_iter_3/ 4 Operator latency: 1.006678 7.277976 3.207722 3.207722
-cell_stem_1/comb_iter_4/ 5 Operator latency: 1.619611 7.387460 3.415444 3.415444
-cell_stem_1/subgraph_0 6 Operator latency: 11.181864 31.064569 2.764000 2.764000GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp ../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_stem_1.lp -o ../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_stem_1.txt
-Reading problem data from '../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_stem_1.lp'...
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-327 lines were read
-GLPK Integer Optimizer, v4.65
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-Preprocessing...
-232 rows, 89 columns, 788 non-zeros
-72 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  2.075e+03  ratio =  2.075e+03
-GM: min|aij| =  9.442e-02  max|aij| =  1.059e+01  ratio =  1.122e+02
-EQ: min|aij| =  8.915e-03  max|aij| =  1.000e+00  ratio =  1.122e+02
-2N: min|aij| =  6.671e-03  max|aij| =  1.000e+00  ratio =  1.499e+02
-Constructing initial basis...
-Size of triangular part is 232
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-232 rows, 89 columns, 788 non-zeros
-      0: obj =   0.000000000e+00 inf =   7.374e+00 (112)
-     74: obj =   4.860802763e+00 inf =   1.342e-15 (0)
-*    77: obj =   0.000000000e+00 inf =   1.203e-17 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    77: mip =     not found yet >=              -inf        (1; 0)
-+ 12605: >>>>>   4.103928100e+01 >=   2.980844000e+00  92.7% (609; 318)
-+ 12742: >>>>>   4.010719100e+01 >=   2.980844000e+00  92.6% (390; 699)
-+ 17071: >>>>>   2.310426400e+01 >=   3.791245000e+00  83.6% (578; 814)
-+ 18543: >>>>>   2.072359700e+01 >=   5.899322000e+00  71.5% (597; 1009)
-+ 23856: >>>>>   2.052732000e+01 >=   1.713997500e+01  16.5% (736; 1435)
-+135272: mip =   2.052732000e+01 >=   1.780511900e+01  13.3% (4766; 13764)
-+207364: mip =   2.052732000e+01 >=   1.890770900e+01   7.9% (5537; 29572)
-+263664: mip =   2.052732000e+01 >=   1.971691900e+01   3.9% (1891; 69506)
-+319133: mip =   2.052732000e+01 >=     tree is empty   0.0% (0; 98409)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   18.5 secs
-Memory used: 16.2 Mb (16994257 bytes)
-Writing MIP solution to '../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_stem_1.txt'...
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp ../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_0.lp -o ../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_0.txt
-Reading problem data from '../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_0.lp'...
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-327 lines were read
-GLPK Integer Optimizer, v4.65
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-Preprocessing...
-232 rows, 89 columns, 788 non-zeros
-72 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  2.124e+03  ratio =  2.124e+03
-GM: min|aij| =  8.778e-02  max|aij| =  1.139e+01  ratio =  1.298e+02
-EQ: min|aij| =  7.705e-03  max|aij| =  1.000e+00  ratio =  1.298e+02
-2N: min|aij| =  3.906e-03  max|aij| =  1.000e+00  ratio =  2.560e+02
-Constructing initial basis...
-Size of triangular part is 232
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-232 rows, 89 columns, 788 non-zeros
-      0: obj =   0.000000000e+00 inf =   7.540e+00 (112)
-     74: obj =   9.045339843e+00 inf =   5.551e-17 (0)
-*    77: obj =   0.000000000e+00 inf =   0.000e+00 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    77: mip =     not found yet >=              -inf        (1; 0)
-+ 48413: >>>>>   2.579113100e+01 >=   1.272952800e+01  50.6% (2553; 1082)
-+ 57179: >>>>>   2.099570900e+01 >=   1.272952800e+01  39.4% (1678; 3597)
-+200121: mip =   2.099570900e+01 >=   1.403785000e+01  33.1% (6351; 13019)
-+279789: mip =   2.099570900e+01 >=   1.489722000e+01  29.0% (8108; 22862)
-+351469: mip =   2.099570900e+01 >=   1.742445000e+01  17.0% (8769; 34649)
-+417452: mip =   2.099570900e+01 >=   1.906642000e+01   9.2% (6331; 58810)
-+426632: mip =   2.099570900e+01 >=     tree is empty   0.0% (0; 93125)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   23.0 secs
-Memory used: 26.5 Mb (27751733 bytes)
-Writing MIP solution to '../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_0.txt'...
-
-cell_stem_1/subgraph_1 7 Operator latency: 1.911800 5.073033 19.620000 19.620000
-cell_stem_1/subgraph_2 8 Operator latency: 0.403900 4.445400 7.500000 7.500000
-Run solver done!
-cell_stem_1/comb_iter_0/ 0
-cell_stem_1/subgraph_0 0
-cell_stem_1/subgraph_1 0
-cell_stem_1/comb_iter_1/ 3
-cell_stem_1/comb_iter_2/ 0
-cell_stem_1/comb_iter_3/ 0
-cell_stem_1/comb_iter_4/ 0
-cell_stem_1/subgraph_2 0
-[('cell_stem_1/comb_iter_0/', 0), ('cell_stem_1/subgraph_0', 0), ('cell_stem_1/subgraph_1', 0), ('cell_stem_1/comb_iter_1/', 3), ('cell_stem_1/comb_iter_2/', 0), ('cell_stem_1/comb_iter_3/', 0), ('cell_stem_1/comb_iter_4/', 0), ('cell_stem_1/subgraph_2', 0)]
-CPU subgraphs:
-['cell_stem_1/comb_iter_0/', 'cell_stem_1/subgraph_0', 'cell_stem_1/subgraph_1', 'cell_stem_1/comb_iter_2/', 'cell_stem_1/comb_iter_3/', 'cell_stem_1/comb_iter_4/', 'cell_stem_1/subgraph_2']
-GPU subgraphs:
-['cell_stem_1/comb_iter_1/']
-Write result done.
-Write result to ../models/pnasnet-mobile/lenovo_k5/mDeviceMap-subgraphs-pnasnet-mobile-cell_stem_1.txt
-In buildMultiSubgraph print pattern cell_0/
-All subgraph:
-name: cell_0/comb_iter_0/
-latency: (3.487100,8.984667,1.372489,1.372489)
-nodes:['cell_0/comb_iter_0/left/Relu', 'cell_0/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_0/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_0/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_0/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_0/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_0/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNorm___tr4cell_0/comb_iter_0/combine/add', 'cell_0/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_0/combine/add', 'cell_0/comb_iter_0/combine/add']
-parents:{'cell_0/final_path_bn/FusedBatchNorm', 'cell_0/subgraph_0'}
-children:{'cell_0/cell_output/concat', 'cell_0/subgraph_2'}
-
-name: cell_0/comb_iter_1/
-latency: (4.795422,9.899785,1.372489,1.372489)
-nodes:['cell_0/comb_iter_1/left/Relu', 'cell_0/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_0/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_0/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_0/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_0/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_0/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_0/comb_iter_1/combine/add', 'cell_0/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_1/combine/add', 'cell_0/comb_iter_1/combine/add']
-parents:{'cell_0/subgraph_1', 'cell_0/split'}
-children:{'cell_0/cell_output/concat', 'cell_0/subgraph_2'}
-
-name: cell_0/comb_iter_2/
-latency: (4.269700,13.921486,1.372489,1.372489)
-nodes:['cell_0/comb_iter_2/left/Relu', 'cell_0/comb_iter_2/right/Relu', 'cell_0/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_0/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_0/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_0/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_0/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_0/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_0/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_0/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_0/comb_iter_2/combine/add', 'cell_0/comb_iter_2/combine/add___tr4cell_0/cell_output/concat']
-parents:{'cell_0/subgraph_1', 'cell_0/split'}
-children:{'cell_0/comb_iter_3/', 'cell_0/comb_iter_3/left/Relu', 'cell_0/cell_output/concat', 'cell_0/subgraph_2'}
-
-name: cell_0/comb_iter_3/
-latency: (2.167692,8.205306,4.117467,4.117467)
-nodes:['cell_0/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_0/comb_iter_3/left/Relu', 'cell_0/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_0/comb_iter_3/left/separable_3x3_1/separable_conv2d', 'cell_0/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_0/comb_iter_3/left/separable_3x3_2/separable_conv2d', 'cell_0/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_0/comb_iter_3/combine/add', 'cell_0/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_0/comb_iter_3/combine/add', 'cell_0/comb_iter_3/combine/add']
-parents:{'cell_0/comb_iter_2/', 'cell_0/subgraph_1', 'cell_0/comb_iter_2/combine/add', 'cell_0/split'}
-children:{'cell_0/cell_output/concat', 'cell_0/subgraph_2'}
-
-name: cell_0/comb_iter_4/
-latency: (1.929289,7.307117,2.744978,2.744978)
-nodes:['cell_0/comb_iter_4/left/Relu', 'cell_0/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_0/comb_iter_4/left/separable_3x3_1/separable_conv2d', 'cell_0/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_0/comb_iter_4/left/separable_3x3_2/separable_conv2d', 'cell_0/comb_iter_4/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_0/comb_iter_4/combine/add', 'cell_0/comb_iter_4/combine/add']
-parents:{'cell_0/split___tr4cell_0/comb_iter_4/combine/add', 'cell_0/final_path_bn/FusedBatchNorm', 'cell_0/subgraph_0', 'cell_0/subgraph_1'}
-children:{'cell_0/cell_output/concat', 'cell_0/subgraph_2'}
-
-name: cell_0/subgraph_0
-latency: (6.625239,23.054146,19.620000,19.620000)
-nodes:['cell_0/Pad/paddings', 'cell_0/Pad_Gather', 'cell_0/Pad_Gather_Index', 'cell_0/Pad', 'cell_0/Relu', 'cell_0/Pad___tr4cell_0/strided_slice', 'cell_0/AvgPool', 'cell_0/strided_slice', 'cell_0/path1_conv/Conv2D', 'cell_0/strided_slice/stack_2', 'cell_0/strided_slice/stack_1', 'cell_0/strided_slice/stack', 'cell_0/strided_slice___tr4cell_0/AvgPool_1', 'cell_0/concat', 'cell_0/AvgPool_1', 'cell_0/path2_conv/Conv2D', 'cell_0/final_path_bn/FusedBatchNorm']
-parents:{'cell_stem_0/cell_output/concat'}
-children:{'cell_0/comb_iter_0/', 'cell_0/comb_iter_0/left/Relu', 'cell_0/comb_iter_4/left/Relu', 'cell_0/comb_iter_4/', 'cell_0/comb_iter_0/right/MaxPool2D/MaxPool'}
-
-name: cell_0/subgraph_1
-latency: (1.828789,4.796576,1.500000,1.500000)
-nodes:['cell_0/Relu_1', 'cell_0/Relu_1___tr4cell_0/1x1/Conv2D', 'cell_0/1x1/Conv2D', 'cell_0/split', 'cell_0/split___tr4cell_0/comb_iter_4/combine/add']
-parents:{'cell_stem_1/cell_output/concat'}
-children:{'cell_0/comb_iter_3/', 'cell_0/comb_iter_1/', 'cell_0/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_0/comb_iter_2/', 'cell_0/comb_iter_4/', 'cell_0/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_0/comb_iter_2/right/Relu', 'cell_0/comb_iter_2/left/Relu', 'cell_0/comb_iter_4/combine/add', 'cell_0/comb_iter_1/left/Relu'}
-
-name: cell_0/subgraph_2
-latency: (0.687900,7.694700,12.352400,12.352400)
-nodes:['cell_0/cell_output/concat']
-parents:{'cell_0/comb_iter_0/', 'cell_0/comb_iter_3/', 'cell_0/comb_iter_2/combine/add___tr4cell_0/cell_output/concat', 'cell_0/comb_iter_1/', 'cell_0/comb_iter_3/combine/add', 'cell_0/comb_iter_2/', 'cell_0/comb_iter_4/', 'cell_0/comb_iter_0/combine/add', 'cell_0/comb_iter_1/combine/add', 'cell_0/comb_iter_4/combine/add'}
-children:{'cell_2/Relu', 'cell_1/Relu_1'}
-
-cell_0/comb_iter_0/ 1 Operator latency: 3.487100 8.984667 1.372489 1.372489
-cell_0/comb_iter_1/ 2 Operator latency: 4.795422 9.899785 1.372489 1.372489
-cell_0/comb_iter_2/ 3 Operator latency: 4.269700 13.921486 1.372489 1.372489
-cell_0/comb_iter_3/ 4 Operator latency: 2.167692 8.205306 4.117467 4.117467
-cell_0/comb_iter_4/ 5 Operator latency: 1.929289 7.307117 2.744978 2.744978
-cell_0/subgraph_0 6 Operator latency: 6.625239 23.054146 19.620000 19.620000
-cell_0/subgraph_1 7 Operator latency: 1.828789 4.796576 1.500000 1.500000
-cell_0/subgraph_2 8 Operator latency: 0.687900 7.694700 12.352400 12.352400
-Run solver done!
-cell_0/comb_iter_0/ 0
-cell_0/subgraph_0 0
-cell_0/subgraph_1 0
-cell_0/comb_iter_1/ 3
-cell_0/comb_iter_2/ 0
-cell_0/comb_iter_3/ 0
-cell_0/comb_iter_4/ 0
-cell_0/subgraph_2 0
-[('cell_0/comb_iter_0/', 0), ('cell_0/subgraph_0', 0), ('cell_0/subgraph_1', 0), ('cell_0/comb_iter_1/', 3), ('cell_0/comb_iter_2/', 0), ('cell_0/comb_iter_3/', 0), ('cell_0/comb_iter_4/', 0), ('cell_0/subgraph_2', 0)]
-CPU subgraphs:
-['cell_0/comb_iter_0/', 'cell_0/subgraph_0', 'cell_0/subgraph_1', 'cell_0/comb_iter_2/', 'cell_0/comb_iter_3/', 'cell_0/comb_iter_4/', 'cell_0/subgraph_2']
-GPU subgraphs:
-['cell_0/comb_iter_1/']
-Write result done.
-Write result to ../models/pnasnet-mobile/lenovo_k5/mDeviceMap-subgraphs-pnasnet-mobile-cell_0.txt
-In buildMultiSubgraph print pattern cell_1/
-All subgraph:GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp ../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_1.lp -o ../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_1.txt
-Reading problem data from '../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_1.lp'...
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-327 lines were read
-GLPK Integer Optimizer, v4.65
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-Preprocessing...
-232 rows, 89 columns, 788 non-zeros
-72 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  2.124e+03  ratio =  2.124e+03
-GM: min|aij| =  8.778e-02  max|aij| =  1.139e+01  ratio =  1.298e+02
-EQ: min|aij| =  7.705e-03  max|aij| =  1.000e+00  ratio =  1.298e+02
-2N: min|aij| =  3.906e-03  max|aij| =  1.000e+00  ratio =  2.560e+02
-Constructing initial basis...
-Size of triangular part is 232
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-232 rows, 89 columns, 788 non-zeros
-      0: obj =   0.000000000e+00 inf =   6.106e+00 (112)
-     74: obj =   8.824078171e+00 inf =   8.747e-17 (0)
-*    77: obj =   0.000000000e+00 inf =   5.974e-17 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    77: mip =     not found yet >=              -inf        (1; 0)
-+ 65606: >>>>>   2.264118600e+01 >=   1.228428600e+01  45.7% (4064; 1869)
-+ 69943: >>>>>   2.250528600e+01 >=   1.264441900e+01  43.8% (3147; 4135)
-+157233: mip =   2.250528600e+01 >=   1.428031900e+01  36.5% (12672; 10719)
-+202378: >>>>>   2.246677200e+01 >=   1.464061900e+01  34.8% (16651; 15007)
-+244741: mip =   2.246677200e+01 >=   1.478736400e+01  34.2% (20793; 19650)
-+251267: >>>>>   1.909628600e+01 >=   1.478736400e+01  22.6% (21391; 20743)
-+307872: mip =   1.909628600e+01 >=   1.546435300e+01  19.0% (15317; 44951)
-+359207: mip =   1.909628600e+01 >=   1.599947700e+01  16.2% (17474; 49946)
-+386990: mip =   1.909628600e+01 >=   1.639915900e+01  14.1% (17634; 57921)
-+387202: >>>>>   1.803505900e+01 >=   1.639915900e+01   9.1% (17639; 58010)
-+387221: >>>>>   1.782521900e+01 >=   1.639915900e+01   8.0% (10305; 78958)
-+422852: >>>>>   1.768931900e+01 >=   1.675421700e+01   5.3% (5917; 100879)
-+423097: >>>>>   1.703731900e+01 >=   1.675421700e+01   1.7% (5762; 101593)
-+430901: mip =   1.703731900e+01 >=     tree is empty   0.0% (0; 130841)
-INTEGER OPTIMAL SOLUTION FOUND
-Time used:   37.4 secs
-Memory used: 47.3 Mb (49585149 bytes)
-Writing MIP solution to '../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_1.txt'...
-
-name: cell_1/comb_iter_0/
-latency: (3.544900,9.352719,1.500000,1.500000)
-nodes:['cell_1/comb_iter_0/left/Relu', 'cell_1/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_1/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_1/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_1/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_1/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_1/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNorm___tr4cell_1/comb_iter_0/combine/add', 'cell_1/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_0/combine/add', 'cell_1/comb_iter_0/combine/add']
-parents:{'cell_1/subgraph_0', 'cell_1/prev_1x1/Conv2D'}
-children:{'cell_1/subgraph_2', 'cell_1/cell_output/concat'}
-
-name: cell_1/comb_iter_1/
-latency: (4.815967,9.484950,1.372489,1.372489)
-nodes:['cell_1/comb_iter_1/left/Relu', 'cell_1/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_1/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_1/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_1/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_1/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_1/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_1/comb_iter_1/combine/add', 'cell_1/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_1/combine/add', 'cell_1/comb_iter_1/combine/add']
-parents:{'cell_1/subgraph_1', 'cell_1/split'}
-children:{'cell_1/subgraph_2', 'cell_1/cell_output/concat'}
-
-name: cell_1/comb_iter_2/
-latency: (4.308922,13.758542,1.372489,1.372489)
-nodes:['cell_1/comb_iter_2/left/Relu', 'cell_1/comb_iter_2/right/Relu', 'cell_1/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_1/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_1/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_1/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_1/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_1/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_1/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_1/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_1/comb_iter_2/combine/add', 'cell_1/comb_iter_2/combine/add___tr4cell_1/cell_output/concat']
-parents:{'cell_1/subgraph_1', 'cell_1/split'}
-children:{'cell_1/subgraph_2', 'cell_1/comb_iter_3/left/Relu', 'cell_1/cell_output/concat', 'cell_1/comb_iter_3/'}
-
-name: cell_1/comb_iter_3/
-latency: (2.170233,8.488375,4.117467,4.117467)
-nodes:['cell_1/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_1/comb_iter_3/left/Relu', 'cell_1/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_1/comb_iter_3/left/separable_3x3_1/separable_conv2d', 'cell_1/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_1/comb_iter_3/left/separable_3x3_2/separable_conv2d', 'cell_1/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_1/comb_iter_3/combine/add', 'cell_1/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_1/comb_iter_3/combine/add', 'cell_1/comb_iter_3/combine/add']
-parents:{'cell_1/comb_iter_2/combine/add', 'cell_1/comb_iter_2/', 'cell_1/subgraph_1', 'cell_1/split'}
-children:{'cell_1/subgraph_2', 'cell_1/cell_output/concat'}
-
-name: cell_1/comb_iter_4/
-latency: (1.996033,7.494760,2.872489,2.872489)
-nodes:['cell_1/comb_iter_4/left/Relu', 'cell_1/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_1/comb_iter_4/left/separable_3x3_1/separable_conv2d', 'cell_1/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_1/comb_iter_4/left/separable_3x3_2/separable_conv2d', 'cell_1/comb_iter_4/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_1/comb_iter_4/combine/add', 'cell_1/comb_iter_4/combine/add']
-parents:{'cell_1/subgraph_0', 'cell_1/split___tr4cell_1/comb_iter_4/combine/add', 'cell_1/subgraph_1', 'cell_1/prev_1x1/Conv2D'}
-children:{'cell_1/subgraph_2', 'cell_1/cell_output/concat'}
-
-name: cell_1/subgraph_0
-latency: (1.635900,3.872289,1.500000,1.500000)
-nodes:['cell_1/Relu', 'cell_1/Relu___tr4cell_1/prev_1x1/Conv2D', 'cell_1/prev_1x1/Conv2D']
-parents:{'cell_stem_1/cell_output/concat'}
-children:{'cell_1/comb_iter_0/', 'cell_1/comb_iter_0/left/Relu', 'cell_1/comb_iter_4/left/Relu', 'cell_1/comb_iter_4/', 'cell_1/comb_iter_0/right/MaxPool2D/MaxPool'}
-
-name: cell_1/subgraph_1
-latency: (3.517231,6.586186,6.862444,6.862444)
-nodes:['cell_1/Relu_1', 'cell_1/Relu_1___tr4cell_1/1x1/Conv2D', 'cell_1/1x1/Conv2D', 'cell_1/split', 'cell_1/split___tr4cell_1/comb_iter_4/combine/add']
-parents:{'cell_0/cell_output/concat'}
-children:{'cell_1/comb_iter_2/', 'cell_1/comb_iter_3/', 'cell_1/comb_iter_4/combine/add', 'cell_1/comb_iter_2/right/Relu', 'cell_1/comb_iter_1/', 'cell_1/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_1/comb_iter_2/left/Relu', 'cell_1/comb_iter_1/left/Relu', 'cell_1/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_1/comb_iter_4/'}
-
-name: cell_1/subgraph_2
-latency: (0.652000,7.428100,12.352400,12.352400)
-nodes:['cell_1/cell_output/concat']
-parents:{'cell_1/comb_iter_0/combine/add', 'cell_1/comb_iter_2/', 'cell_1/comb_iter_3/', 'cell_1/comb_iter_2/combine/add___tr4cell_1/cell_output/concat', 'cell_1/comb_iter_4/combine/add', 'cell_1/comb_iter_0/', 'cell_1/comb_iter_3/combine/add', 'cell_1/comb_iter_1/', 'cell_1/comb_iter_1/combine/add', 'cell_1/comb_iter_4/'}
-children:{'cell_2/Relu_1', 'cell_3/Relu'}
-
-cell_1/comb_iter_0/ 1 Operator latency: 3.544900 9.352719 1.500000 1.500000
-cell_1/comb_iter_1/ 2 Operator latency: 4.815967 9.484950 1.372489 1.372489
-cell_1/comb_iter_2/ 3 Operator latency: 4.308922 13.758542 1.372489 1.372489
-cell_1/comb_iter_3/ 4 Operator latency: 2.170233 8.488375 4.117467 4.117467
-cell_1/comb_iter_4/ 5 Operator latency: 1.996033 7.494760 2.872489 2.872489
-cell_1/subgraph_0 6 Operator latency: 1.635900 3.872289 1.500000 1.500000
-cell_1/subgraph_1 7 Operator latency: 3.517231 6.586186 6.862444 6.862444
-cell_1/subgraph_2 8 Operator latency: 0.652000 7.428100 12.352400 12.352400
-Run solver done!
-cell_1/comb_iter_0/ 0
-cell_1/subgraph_0 3
-cell_1/subgraph_1 0
-cell_1/comb_iter_1/ 3
-cell_1/comb_iter_2/ 0
-cell_1/comb_iter_3/ 0
-cell_1/comb_iter_4/ 0
-cell_1/subgraph_2 0
-[('cell_1/comb_iter_0/', 0), ('cell_1/subgraph_0', 3), ('cell_1/subgraph_1', 0), ('cell_1/comb_iter_1/', 3), ('cell_1/comb_iter_2/', 0), ('cell_1/comb_iter_3/', 0), ('cell_1/comb_iter_4/', 0), ('cell_1/subgraph_2', 0)]
-CPU subgraphs:
-['cell_1/comb_iter_0/', 'cell_1/subgraph_1', 'cell_1/comb_iter_2/', 'cell_1/comb_iter_3/', 'cell_1/comb_iter_4/', 'cell_1/subgraph_2']
-GPU subgraphs:
-['cell_1/subgraph_0', 'cell_1/comb_iter_1/']
-Write result done.
-Write result to ../models/pnasnet-mobile/lenovo_k5/mDeviceMap-subgraphs-pnasnet-mobile-cell_1.txt
-In buildMultiSubgraph print pattern cell_2/
-All subgraph:
-name: cell_2/comb_iter_0/
-latency: (3.612578,8.858962,1.500000,1.500000)
-nodes:['cell_2/comb_iter_0/left/Relu', 'cell_2/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_2/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_2/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_2/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_2/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_2/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNorm___tr4cell_2/comb_iter_0/combine/add', 'cell_2/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_2/comb_iter_0/combine/add', 'cell_2/comb_iter_0/combine/add']
-parents:{'cell_2/subgraph_0', 'cell_2/prev_1x1/Conv2D'}
-children:{'cell_2/subgraph_2', 'cell_2/cell_output/concat'}
-
-name: cell_2/comb_iter_1/
-latency: (4.824700,9.335736,1.372489,1.372489)
-nodes:['cell_2/comb_iter_1/left/Relu', 'cell_2/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_2/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_2/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_2/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_2/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_2/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_2/comb_iter_1/combine/add', 'cell_2/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_2/comb_iter_1/combine/add', 'cell_2/comb_iter_1/combine/add']
-parents:{'cell_2/split', 'cell_2/subgraph_1'}
-children:{'cell_2/subgraph_2', 'cell_2/cell_output/concat'}
-
-name: cell_2/comb_iter_2/
-latency: (4.318056,13.672874,1.372489,1.372489)
-nodes:['cell_2/comb_iter_2/left/Relu', 'cell_2/comb_iter_2/right/Relu', 'cell_2/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_2/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_2/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_2/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_2/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_2/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_2/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_2/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_2/comb_iter_2/combine/add', 'cell_2/comb_iter_2/combine/add___tr4cell_2/cell_output/concat']
-parents:{'cell_2/split', 'cell_2/subgraph_1'}
-children:{'cell_2/comb_iter_3/left/Relu', 'cell_2/subgraph_2', 'cell_2/cell_output/concat', 'cell_2/comb_iter_3/'}
-GLPSOL: GLPK LP/MIP Solver, v4.65
-Parameter(s) specified in the command line:
- --lp ../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_2.lp -o ../models/pnasnet-mobile/lenovo_k5/lp-result-subgraphs-cell_2.txt
-Reading problem data from '../models/pnasnet-mobile/lenovo_k5/subgraphs-cell_2.lp'...
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-327 lines were read
-GLPK Integer Optimizer, v4.65
-248 rows, 89 columns, 820 non-zeros
-72 integer variables, all of which are binary
-Preprocessing...
-232 rows, 89 columns, 788 non-zeros
-72 integer variables, all of which are binary
-Scaling...
- A: min|aij| =  1.000e+00  max|aij| =  2.124e+03  ratio =  2.124e+03
-GM: min|aij| =  8.139e-02  max|aij| =  1.229e+01  ratio =  1.510e+02
-EQ: min|aij| =  6.975e-03  max|aij| =  1.000e+00  ratio =  1.434e+02
-2N: min|aij| =  3.906e-03  max|aij| =  1.000e+00  ratio =  2.560e+02
-Constructing initial basis...
-Size of triangular part is 232
-Solving LP relaxation...
-GLPK Simplex Optimizer, v4.65
-232 rows, 89 columns, 788 non-zeros
-      0: obj =   0.000000000e+00 inf =   6.477e+00 (112)
-     72: obj =   9.145199446e+00 inf =   1.332e-15 (0)
-*    73: obj =   0.000000000e+00 inf =   1.332e-15 (0)
-OPTIMAL LP SOLUTION FOUND
-Integer optimization begins...
-Long-step dual simplex will be used
-+    73: mip =     not found yet >=              -inf        (1; 0)
-+161284: mip =     not found yet >=   9.113911000e+00        (9653; 5405)
-+296209: mip =     not found yet >=   1.080854500e+01        (17896; 9960)
-+365695: mip =     not found yet >=   1.272648900e+01        (24675; 14812)
-+423300: mip =     not found yet >=   1.272648900e+01        (30414; 18908)
-+476408: mip =     not found yet >=   1.343196700e+01        (34215; 22356)
-+518993: mip =     not found yet >=   1.471807800e+01        (38239; 25387)
-+540825: mip =     not found yet >=   1.471807800e+01        (39982; 28246)
-+561025: mip =     not found yet >=   1.471807800e+01        (41641; 30990)
-+580938: mip =     not found yet >=   1.492776700e+01        (43590; 33406)
-+599359: mip =     not found yet >=   1.492776700e+01        (45414; 35687)
-+618128: mip =     not found yet >=   1.492776700e+01        (47284; 37749)
-+633797: mip =     not found yet >=   1.542355600e+01        (48465; 39722)
-Time used: 60.0 secs.  Memory used: 44.3 Mb.
-+646729: mip =     not found yet >=   1.542355600e+01        (49330; 41488)
-+661132: mip =     not found yet >=   1.542355600e+01        (50486; 43459)
-+677298: mip =     not found yet >=   1.563324500e+01        (51715; 45359)
-+693192: mip =     not found yet >=   1.563324500e+01        (53428; 47072)
-+704729: mip =     not found yet >=   1.563324500e+01        (54675; 48319)
-+715770: mip =     not found yet >=   1.563324500e+01        (55854; 49406)
-+724361: mip =     not found yet >=   1.563324500e+01        (56793; 50037)
-+733227: mip =     not found yet >=   1.563324500e+01        (57785; 50705)
-+742339: mip =     not found yet >=   1.563324500e+01        (58769; 51388)
-+751241: mip =     not found yet >=   1.563324500e+01        (59788; 52076)
-+765321: mip =     not found yet >=   1.563324500e+01        (61374; 53144)
-Time used: 120.0 secs.  Memory used: 59.4 Mb.
-+777673: mip =     not found yet >=   1.563324500e+01        (62515; 54226)
-+787252: mip =     not found yet >=   1.563324500e+01        (63265; 55266)
-+795155: mip =     not found yet >=   1.579028400e+01        (63901; 56087)
-+803388: mip =     not found yet >=   1.579028400e+01        (64604; 56835)
-+811602: mip =     not found yet >=   1.579028400e+01        (65322; 57624)
-+823594: mip =     not found yet >=   1.579028400e+01        (66002; 58418)
-+825353: >>>>>   2.090365600e+01 >=   1.579028400e+01  24.5% (66155; 58533)
+adb: error: failed to get feature set: no devices/emulators found

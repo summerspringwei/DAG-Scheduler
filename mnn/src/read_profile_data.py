@@ -4,7 +4,7 @@ from utils import *
 import os
 
 # Set the cpu<->gpu transformation overhead
-TRANSFORM_OVERHEAD = 1.5
+TRANSFORM_OVERHEAD = 1.0
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
@@ -129,12 +129,14 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         print("%s %s" % (op_name, str(op.input_tensors)))
         for tensor in op.input_tensors:
             if(len(tensor) >= 1):
-                if tensor in data_trans_dict.keys():
-                    op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor][0]
-                    op_latency.Transpose_latency_NHWC_to_NCHW += data_trans_dict[tensor][1]
-                else:
-                    op_latency.Transpose_latency_NCHW_to_NHWC = TRANSFORM_OVERHEAD
-                    op_latency.Transpose_latency_NHWC_to_NCHW = TRANSFORM_OVERHEAD
+                # if tensor in data_trans_dict.keys():
+                #     op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor][0]
+                #     op_latency.Transpose_latency_NHWC_to_NCHW += data_trans_dict[tensor][1]
+                # else:
+                #     op_latency.Transpose_latency_NCHW_to_NHWC = TRANSFORM_OVERHEAD
+                #     op_latency.Transpose_latency_NHWC_to_NCHW = TRANSFORM_OVERHEAD
+                op_latency.Transpose_latency_NCHW_to_NHWC = 0
+                op_latency.Transpose_latency_NHWC_to_NCHW = 0
         op_def.operatorLatency = op_latency
         op.op_def = op_def
         name_op_dict[op_name] = op

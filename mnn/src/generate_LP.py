@@ -11,7 +11,7 @@ M = 500
 # GPU has to do the data transformation for CPU
 # there for the GPU execution time also increases
 # we use a scale factor to simulate the GPU execution time increasing
-GPU_TRANSFORM_SCALE_FACTOR = 2
+GPU_TRANSFORM_SCALE_FACTOR = 1
 
 # Read one module names and associate a name with one index
 def associate_op_name_with_idx(file_path):
@@ -47,7 +47,6 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
         if parent in one_module_names_idx_dict.keys():
             convert_format_to_cpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
             convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
-
             parent_idx = one_module_names_idx_dict[parent]
     idx = one_module_names_idx_dict[op_name]
     for device in device_list:
@@ -131,7 +130,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
     # print("parent: %d child: %d" % (idx_parent, idx_child))
     idx_parent_parent = get_parent_idx(one_module_names_idx_dict,
                                        op_name_parent, op_dict)
-    idx_parent_parent = 0
+    # idx_parent_parent = 0
     constraints = []
     for device1 in device_list:
         for device2 in device_list:
@@ -142,27 +141,36 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                 if idx_parent_parent == 0:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
                         % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
-                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
-                            # (op_parent_latency.CPU_latency - M))
+                            # (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
+                            (op_parent_latency.CPU_latency - M))
                     # print(c)
                 else:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0\n" \
                         % (device1, idx_child, device2, idx_parent, \
-                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW),\
+                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW), \
                             device2, idx_parent, op_parent_latency.Transpose_latency_NHWC_to_NCHW, device2, idx_parent_parent)
             elif device2 == GPU:
                 if idx_parent_parent == 0:
                     c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
                         % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
-                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR - M))
+                            # (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR - M))
+                            (op_parent_latency.GPU_latency - M))
                 else:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0" \
+                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0\n" \
                         % (device1, idx_child, device2, idx_parent, \
-                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR),\
+                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR), \
                             device2, idx_parent, op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR, \
                             device2, idx_parent_parent)
             constraints.append(c)
     return constraints
+
+
+def get_parent_idxes(one_module_names_idx_dict, op_name, op_dict):
+    idx_parent = []
+    for parent in op_dict[op_name].parents:
+        if parent in one_module_names_idx_dict.keys():
+            idx_parent.append(one_module_names_idx_dict[parent])
+    return idx_parent
 
 
 def get_parent_idx(one_module_names_idx_dict, op_name, op_dict):
@@ -177,56 +185,71 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
                                   op_name_b, device_list, op_dict):
     idx_a = one_module_names_idx_dict[op_name_a]
     idx_b = one_module_names_idx_dict[op_name_b]
-    idx_a_parent = get_parent_idx(one_module_names_idx_dict, op_name_a,
-                                  op_dict)
+    # idx_a_parent = get_parent_idx(one_module_names_idx_dict, op_name_a,
+    #                               op_dict)
     idx_b_parent = get_parent_idx(one_module_names_idx_dict, op_name_b,
                                   op_dict)
     b_cpu_latency = op_dict[op_name_b].op_def.operatorLatency.CPU_latency
-    a_cpu_latency = op_dict[op_name_a].op_def.operatorLatency.CPU_latency
+    # a_cpu_latency = op_dict[op_name_a].op_def.operatorLatency.CPU_latency
     b_gpu_latency = op_dict[op_name_b].op_def.operatorLatency.GPU_latency
-    a_gpu_latency = op_dict[op_name_a].op_def.operatorLatency.GPU_latency
+    # a_gpu_latency = op_dict[op_name_a].op_def.operatorLatency.GPU_latency
     constraints = []
     u_variable = []
 
     for device in device_list:
         c1 = ""
-        c2 = ""
-        u_variable.append("u_%d_%d_%d\n" % (device, idx_a, idx_b))
+        # c2 = ""
+        li = [idx_a, idx_b]
+        li.sort()
+        [u_idx_a, u_idx_b] = li
+        u_val_str = "u_%d_%d_%d" % (device, u_idx_a, u_idx_b)
+        assert(idx_a != idx_b)
+        if u_val_str not in u_variable:
+            u_variable.append(u_val_str+"\n")
         if idx_b_parent != 0:
             if device == CPU:
+                # c1 and c2 share the same `u` variable
                 b_cpu_transform_latency = op_dict[
                     op_name_b].op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-                c1 = "t_%d_%d - t_%d_%d + %f u_%d_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
-                    % (device, idx_a, device, idx_b, M, device, idx_a, idx_b, \
-                    b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency)
-                c2 = "t_%d_%d - t_%d_%d - %f u_%d_%d_%d > %f\n" % (
-                    device, idx_b, device, idx_a, M, device, idx_a, idx_b,
-                    (a_cpu_latency - M))
+                if idx_a > idx_b:
+                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
+                        % (device, idx_a, device, idx_b, M, u_val_str, \
+                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency)
+                else:
+                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
+                        % (device, idx_a, device, idx_b, M, u_val_str, \
+                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency - M)
             elif device == GPU:
                 b_gpu_transform_latency = op_dict[
                     op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
-                c1 = "t_%d_%d - t_%d_%d + %f u_%d_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
-                    % (device, idx_a, device, idx_b, M, device, idx_a, idx_b, \
-                    b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency)
-                c2 = "t_%d_%d - t_%d_%d - %f u_%d_%d_%d > %f\n" % (
-                    device, idx_b, device, idx_a, M, device, idx_a, idx_b,
-                    (a_gpu_latency - M))
+                if idx_a > idx_b:
+                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
+                        % (device, idx_a, device, idx_b, M, u_val_str, \
+                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency)
+                else:
+                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
+                        % (device, idx_a, device, idx_b, M, u_val_str, \
+                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency - M)
         else:
             if device == CPU:
-                c1 = "t_%d_%d - t_%d_%d + %f u_%d_%d_%d > %f\n" % (
-                    device, idx_a, device, idx_b, M, device, idx_a, idx_b,
-                    b_cpu_latency)
-                c2 = "t_%d_%d - t_%d_%d - %f u_%d_%d_%d > %f\n" % (
-                    device, idx_b, device, idx_a, M, device, idx_a, idx_b,
-                    (a_cpu_latency - M))
+                if idx_a > idx_b:
+                    c1 = "t_%d_%d - t_%d_%d + %f %s > %f\n" % (
+                        device, idx_a, device, idx_b, M, u_val_str,
+                        b_cpu_latency)
+                else:
+                    c1 = "t_%d_%d - t_%d_%d - %f %s > %f\n" % (
+                        device, idx_a, device, idx_b, M, u_val_str,
+                        b_cpu_latency - M)
             if device == GPU:
-                c1 = "t_%d_%d - t_%d_%d + %f u_%d_%d_%d > %f\n" % (
-                    device, idx_a, device, idx_b, M, device, idx_a, idx_b,
-                    b_gpu_latency)
-                c2 = "t_%d_%d - t_%d_%d - %f u_%d_%d_%d > %f\n" % (
-                    device, idx_b, device, idx_a, M, device, idx_a, idx_b,
-                    (a_gpu_latency - M))
-        constraints.extend([c1, c2])
+                if idx_a > idx_b:
+                    c1 = "t_%d_%d - t_%d_%d + %f %s > %f\n" % (
+                        device, idx_a, device, idx_b, M, u_val_str,
+                        b_gpu_latency)
+                else:
+                    c1 = "t_%d_%d - t_%d_%d - %f %s > %f\n" % (
+                        device, idx_a, device, idx_b, M, u_val_str,
+                        b_gpu_latency - M)
+        constraints.extend([c1])
 
     return constraints, u_variable
 
@@ -241,12 +264,14 @@ def generate_device_execute_once_at_a_time(one_module_names_idx_dict,
         for op_name_b, idx_b in one_module_names_idx_dict.items():
             if op_name_a == op_name_b:
                 continue
+            # Generate DAG constraints
             if have_parent_relation(op_name_a, op_name_b, op_dict):
                 constraints.extend( \
                     generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_a, op_name_b, op_dict))
             elif have_parent_relation(op_name_b, op_name_a, op_dict):
                 constraints.extend( \
                     generate_parent_and_child_constraints(one_module_names_idx_dict, device_list, op_name_b, op_name_a, op_dict))
+            # Generate one device constraints
             if not have_relative_relation(one_module_names_idx_dict, op_name_a, op_name_b, op_dict) and \
                 not have_relative_relation(one_module_names_idx_dict, op_name_b, op_name_a, op_dict):
                 constraints_one_device, u_variable_one_device =  generate_one_node_at_a_device( \
@@ -313,12 +338,15 @@ def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
 
     binary_content = generate_binary(one_module_names_idx_dict, device_list)
     binary_content.extend(u_variable)
-
+    # Remove the dulplicate variables
+    binary_content = sorted(set(binary_content), key=binary_content.index)
+    LP_constraints = sorted(set(LP_constraints), key=LP_constraints.index)
+    
     LP_contents.extend(LP_objective)
     LP_contents.extend(LP_constraints)
     LP_contents.extend(binary_content)
     LP_contents.append("\nEnd\n")
-
+    
     return LP_contents
 
 

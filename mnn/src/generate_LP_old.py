@@ -8,7 +8,6 @@ from utils import *
 CPU = 1
 GPU = 2
 M = 500
-K = 2048
 # GPU has to do the data transformation for CPU
 # there for the GPU execution time also increases
 # we use a scale factor to simulate the GPU execution time increasing
@@ -204,60 +203,53 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
         li.sort()
         [u_idx_a, u_idx_b] = li
         u_val_str = "u_%d_%d_%d" % (device, u_idx_a, u_idx_b)
-        cond_val_str = "r_%d_%d_%d" % (device, u_idx_a, u_idx_b)
         assert(idx_a != idx_b)
         if u_val_str not in u_variable:
             u_variable.append(u_val_str+"\n")
-            u_variable.append(cond_val_str+"\n")
-        # Judge whether the two op are executed on the same device
-        # 0 <= s1 + s2 -2 + Kx <= K - 1
-        # from: https://blog.adamfurmanek.pl/2015/09/12/ilp-part-4/
-        judge_constraint1 = "s_%d_%d + s_%d_%d + %d %s >= 2\n" % (device, idx_a, device, idx_b, M, cond_val_str)
-        judge_constraint2 = "- s_%d_%d - s_%d_%d - %d %s >= %d\n" % (device, idx_a, device, idx_b, M, cond_val_str, - M - 1)
         if idx_b_parent != 0:
             if device == CPU:
                 # c1 and c2 share the same `u` variable
                 b_cpu_transform_latency = op_dict[
                     op_name_b].op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
                 if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
+                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_cpu_latency)
+                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency)
                 else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
+                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_cpu_latency - M)
+                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency - M)
             elif device == GPU:
                 b_gpu_transform_latency = op_dict[
                     op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
                 if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
+                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_gpu_latency)
+                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency)
                 else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
+                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_gpu_latency - M)
+                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, b_gpu_latency - M)
         else:
             if device == CPU:
                 if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s + %f %s > %f\n" % (
+                    c1 = "t_%d_%d - t_%d_%d + %f %s > %f\n" % (
                         device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_cpu_latency)
+                        b_cpu_latency)
                 else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s + %f %s > %f\n" % (
+                    c1 = "t_%d_%d - t_%d_%d - %f %s > %f\n" % (
                         device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_cpu_latency - M)
+                        b_cpu_latency - M)
             if device == GPU:
                 if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s + %f %s > %f\n" % (
+                    c1 = "t_%d_%d - t_%d_%d + %f %s > %f\n" % (
                         device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_gpu_latency)
+                        b_gpu_latency)
                 else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s + %f %s > %f\n" % (
+                    c1 = "t_%d_%d - t_%d_%d - %f %s > %f\n" % (
                         device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_gpu_latency - M)
-        constraints.extend([judge_constraint1, judge_constraint2, c1])
+                        b_gpu_latency - M)
+        constraints.extend([c1])
 
     return constraints, u_variable
 
@@ -349,7 +341,7 @@ def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
     # Remove the dulplicate variables
     binary_content = sorted(set(binary_content), key=binary_content.index)
     LP_constraints = sorted(set(LP_constraints), key=LP_constraints.index)
-
+    
     LP_contents.extend(LP_objective)
     LP_contents.extend(LP_constraints)
     LP_contents.extend(binary_content)

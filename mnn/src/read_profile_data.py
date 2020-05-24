@@ -23,6 +23,7 @@ def read_data_trans(file_path):
             continue
         com[0] = str(com[0])
         data_trans_dict[com[0]] = [float(com[1]) / 1000, float(com[2]) / 1000]
+        
     # print("dict--")
     # print(data_trans_dict)
     return data_trans_dict
@@ -75,7 +76,7 @@ def read_net_info(file_path):
         com = line.split(" ")
         if len(com) < 5:
             print(com)
-            print("Error")
+            print("--Error")
             continue
         new_com = [c.strip() for c in com]
         raw_info.append(new_com)
@@ -86,12 +87,14 @@ def read_net_info(file_path):
             input_tensors = com[1].split(';')
             for it in input_tensors:
                 if it.strip() != '':
-                    op.input_tensors.append(it)
+                    [shape, addr] = it.split('@')
+                    op.input_tensors.append((addr, shape))
         if com[2] != 'none':
             output_tensors = com[2].split(';')
             for ot in output_tensors:
                 if ot.strip() != '':
-                    op.output_tensors.append(ot)
+                    [shape, addr] = ot.split('@')
+                    op.output_tensors.append((addr, shape))
         if com[3] != 'none':
             parents = com[3].split(';')
             for p in parents:
@@ -104,6 +107,7 @@ def read_net_info(file_path):
                 if c.strip() != '':
                     child_name = raw_info[int(c.strip())][0]
                     op.children.add(child_name)
+
         name_list.append(name)
         name_op_dict[name] = op
         # for op_name in name_list:
@@ -127,16 +131,17 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         op_def.type = op_type
         # Set OperatorLatency transformation latency
         print("%s %s" % (op_name, str(op.input_tensors)))
-        for tensor in op.input_tensors:
-            if(len(tensor) >= 1):
-                # if tensor in data_trans_dict.keys():
-                #     op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor][0]
-                #     op_latency.Transpose_latency_NHWC_to_NCHW += data_trans_dict[tensor][1]
-                # else:
-                #     op_latency.Transpose_latency_NCHW_to_NHWC = TRANSFORM_OVERHEAD
-                #     op_latency.Transpose_latency_NHWC_to_NCHW = TRANSFORM_OVERHEAD
-                op_latency.Transpose_latency_NCHW_to_NHWC = 0
-                op_latency.Transpose_latency_NHWC_to_NCHW = 0
+        # The data transformation latency is the sum of all the input tensor transformation latency
+        for (tensor_addr, tensor_shape) in op.input_tensors:
+            if(len(tensor_shape) >= 1):
+                if tensor_shape in data_trans_dict.keys():
+                    op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor_shape][0]
+                    op_latency.Transpose_latency_NHWC_to_NCHW += data_trans_dict[tensor_shape][1]
+                    op_latency.input_data_trans_latency[tensor_addr] = data_trans_dict[tensor_shape]
+                else:
+                    op_latency.Transpose_latency_NCHW_to_NHWC = TRANSFORM_OVERHEAD
+                    op_latency.Transpose_latency_NHWC_to_NCHW = TRANSFORM_OVERHEAD
+
         op_def.operatorLatency = op_latency
         op.op_def = op_def
         name_op_dict[op_name] = op
@@ -155,6 +160,7 @@ if __name__ == "__main__":
             os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
             os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
             thread)
+    
     for op_name in op_name_list:
         print(op_name)
         print(name_op_dict[op_name].op_def.operatorLatency)

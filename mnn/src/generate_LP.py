@@ -4,11 +4,15 @@ import os
 import read_profile_data
 from read_net_structure import *
 from utils import *
+from draw_gantt import *
 
+# DO NOT MODIFY THE VALUE OF `CPU` AND `GPU`
 CPU = 1
 GPU = 2
-M = 500
-K = 2048
+
+# `M` and `K` can be changed based on the latency of the subgraph
+M = 1000
+K = 2000
 # GPU has to do the data transformation for CPU
 # there for the GPU execution time also increases
 # we use a scale factor to simulate the GPU execution time increasing
@@ -34,45 +38,59 @@ def associate_op_name_list_with_idx(op_name_list):
     return one_module_names_idx_dict
 
 
+# Used to generate (s[y][i]*c[u][j][i] for all i belongs to j's parents)
+def get_parent_idxes_and_data_trans(op_name, one_module_names_idx_dict, op_dict, device):
+    op = op_dict[op_name]
+    assert(device in [CPU, GPU])
+    # For all 
+    acc_data_trans_latency = 0.0
+    parent_idx_data_trans = []
+    for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+        data_trans_latency = data_trans[device-1]
+        for op_parent_name in op.parents:
+            op_parent = op_dict[op_parent_name]
+            if not isinstance(op_parent, Subgraph):
+                continue
+            parent_idx = one_module_names_idx_dict[op_parent_name]
+            parent_output_tensors_addr = [paddr for (paddr, _) in op_parent.output_tensors]
+            if addr in parent_output_tensors_addr:
+                acc_data_trans_latency += data_trans_latency
+                parent_idx_data_trans.append((parent_idx, data_trans_latency))
+    return (acc_data_trans_latency, parent_idx_data_trans)
+
+
+def get_input_tensor_data_trans_latency(op_name, op_dict, device):
+    op = op_dict[op_name]
+    acc_data_trans_latency = 0.0
+    assert(device in [CPU, GPU])
+    for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+        acc_data_trans_latency += data_trans[device]
+    return acc_data_trans_latency
+
+
 # Generate constraints for the "tt > node finish time"
 def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
                                         device_list, op_dict):
     constraints = []
     op = op_dict[op_name]
-    # For now we only consider one parent,
-    # for multi parent, we have to re-consider the logic
-    convert_format_to_cpu_overhead = 0.0
-    convert_format_to_gpu_overhead = 0.0
-    parent_idx = 0
-    for parent in op.parents:
-        if parent in one_module_names_idx_dict.keys():
-            convert_format_to_cpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
-            parent_idx = one_module_names_idx_dict[parent]
     idx = one_module_names_idx_dict[op_name]
+    
     for device in device_list:
+        assert(device in [CPU, GPU])
+        (acc_data_trans_latency, parent_idx_data_trans) = get_parent_idxes_and_data_trans(op_name, one_module_names_idx_dict, op_dict, device)    
         c1 = "tt + %d s_%d_%d > 0.0\n" % (M, device, idx)
         c2 = ""
-        if parent_idx != 0:
-            if device == CPU:
-                c2 = "tt - t_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
-                % (device, idx, (M + convert_format_to_cpu_overhead), device, idx, \
-                convert_format_to_cpu_overhead, device, parent_idx, (op.op_def.operatorLatency.CPU_latency - M))
-            elif device == GPU:
-                c2 = "tt - t_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
-                % (device, idx, (M + convert_format_to_gpu_overhead), device, idx, \
-                convert_format_to_gpu_overhead, device, parent_idx, (op.op_def.operatorLatency.GPU_latency - M))
-            else:
-                print("Device value error")
-        else:
-            if device == CPU:
-                c2 = "tt - t_%d_%d - %f s_%d_%d > %f\n" \
-                % (device, idx, M, device, idx, (op.op_def.operatorLatency.CPU_latency - M))
-            elif device == GPU:
-                c2 = "tt - t_%d_%d - %f s_%d_%d > %f\n" \
-                % (device, idx, M, device, idx, (op.op_def.operatorLatency.GPU_latency - M))
-            else:
-                print("Device value error")
+
+        if device == CPU:
+            device_latency = op.op_def.operatorLatency.CPU_latency
+        elif device == GPU:
+            device_latency = op.op_def.operatorLatency.GPU_latency
+        
+        lp_data_trans = ""
+        for (parent_idx, data_trans_latency) in parent_idx_data_trans:
+            lp_data_trans += " + %f s_%d_%d " % (data_trans_latency, device, parent_idx)
+        c2 = "tt - t_%d_%d - %f s_%d_%d %s > %f\n" \
+            % (device, idx, M + acc_data_trans_latency, device, idx, lp_data_trans, (device_latency - M))
         constraints.extend([c1, c2])
     return constraints
 
@@ -80,11 +98,11 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
 # One node can only be executed once, so the sum of s_i_j is equal to 1
 def generate_node_execute_once(one_module_names_idx_dict, device_list):
     constraints = []
-    for op_name, idx in one_module_names_idx_dict.items():
+    for _, idx in one_module_names_idx_dict.items():
         s = ""
         for device in device_list:
             if device == device_list[-1]:
-                s += ("s_%d_%d  = 1\n" % (device, idx))
+                s += ("s_%d_%d = 1\n" % (device, idx))
             else:
                 s += ("s_%d_%d + " % (device, idx))
         constraints.append(s)
@@ -128,40 +146,26 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
                                           op_name_parent, op_dict):
     idx_parent = one_module_names_idx_dict[op_name_parent]
     idx_child = one_module_names_idx_dict[op_name_child]
-    # print("parent: %d child: %d" % (idx_parent, idx_child))
-    idx_parent_parent = get_parent_idx(one_module_names_idx_dict,
-                                       op_name_parent, op_dict)
     # idx_parent_parent = 0
     constraints = []
     for device1 in device_list:
         for device2 in device_list:
             c = ""
             op_parent_latency = op_dict[op_name_parent].op_def.operatorLatency
+            
+            device_latency = 0.0
             if device2 == CPU:
-                # If parent does not have parent, then there is no transformat constrains
-                if idx_parent_parent == 0:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
-                        % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
-                            # (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW - M))
-                            (op_parent_latency.CPU_latency - M))
-                    # print(c)
-                else:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0.0\n" \
-                        % (device1, idx_child, device2, idx_parent, \
-                            (op_parent_latency.CPU_latency + op_parent_latency.Transpose_latency_NHWC_to_NCHW), \
-                            device2, idx_parent, op_parent_latency.Transpose_latency_NHWC_to_NCHW, device2, idx_parent_parent)
+                device_latency = op_parent_latency.CPU_latency
             elif device2 == GPU:
-                if idx_parent_parent == 0:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d > %f\n" \
-                        % (device1, idx_child, device2, idx_parent, M, device2, idx_parent, \
-                            # (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR - M))
-                            (op_parent_latency.GPU_latency - M))
-                else:
-                    c = "t_%d_%d - t_%d_%d - %f s_%d_%d + %f s_%d_%d > 0.0\n" \
-                        % (device1, idx_child, device2, idx_parent, \
-                            (op_parent_latency.GPU_latency + op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR), \
-                            device2, idx_parent, op_parent_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR, \
-                            device2, idx_parent_parent)
+                device_latency = op_parent_latency.GPU_latency
+            (acc_data_trans_latency, parent_idx_data_trans) = get_parent_idxes_and_data_trans(op_name_parent, one_module_names_idx_dict, op_dict, device2)
+            lp_data_trans = ""
+            for (parent_idx, data_trans_latency) in parent_idx_data_trans:
+                lp_data_trans += " + %f s_%d_%d " % (data_trans_latency, device2, parent_idx)
+            c = "t_%d_%d - t_%d_%d - %f s_%d_%d %s > %f\n" \
+                % (device1, idx_child, device2, idx_parent, (M + acc_data_trans_latency), device2, idx_parent, \
+                    lp_data_trans, device_latency - M)
+            
             constraints.append(c)
     return constraints
 
@@ -198,8 +202,7 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
     u_variable = []
 
     for device in device_list:
-        c1 = ""
-        # c2 = ""
+        c = ""
         li = [idx_a, idx_b]
         li.sort()
         [u_idx_a, u_idx_b] = li
@@ -214,50 +217,27 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
         # from: https://blog.adamfurmanek.pl/2015/09/12/ilp-part-4/
         judge_constraint1 = "s_%d_%d + s_%d_%d + %d %s >= 2\n" % (device, idx_a, device, idx_b, M, cond_val_str)
         judge_constraint2 = "- s_%d_%d - s_%d_%d - %d %s >= %d\n" % (device, idx_a, device, idx_b, M, cond_val_str, - M - 1)
-        if idx_b_parent != 0:
-            if device == CPU:
-                # c1 and c2 share the same `u` variable
-                b_cpu_transform_latency = op_dict[
-                    op_name_b].op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-                if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
-                        % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_cpu_latency)
-                else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
-                        % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_cpu_latency - M)
-            elif device == GPU:
-                b_gpu_transform_latency = op_dict[
-                    op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
-                if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
-                        % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_gpu_latency)
-                else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d + %f s_%d_%d + %f %s > %f\n" \
-                        % (device, idx_a, device, idx_b, M, u_val_str, \
-                        b_gpu_transform_latency, device, idx_b, b_gpu_transform_latency, device, idx_b_parent, K, cond_val_str, b_gpu_latency - M)
+
+        device_latency = 0.0
+        if device == CPU:
+            device_latency = b_cpu_latency
+        elif device ==GPU:
+            device_latency = b_gpu_latency
+        
+        (acc_data_trans_latency, parent_idx_data_trans) = get_parent_idxes_and_data_trans(op_name_b, one_module_names_idx_dict, op_dict, device)
+        lp_data_trans = ""
+        for (parent_idx, data_trans_latency) in parent_idx_data_trans:
+            lp_data_trans += " + %f s_%d_%d " % (data_trans_latency, device, parent_idx)
+        
+        if idx_a > idx_b:
+            c = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d %s + %f %s > %f\n" \
+                % (device, idx_a, device, idx_b, M, u_val_str, \
+                acc_data_trans_latency, device, idx_b, lp_data_trans, K, cond_val_str, device_latency)
         else:
-            if device == CPU:
-                if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s + %f %s > %f\n" % (
-                        device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_cpu_latency)
-                else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s + %f %s > %f\n" % (
-                        device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_cpu_latency - M)
-            if device == GPU:
-                if idx_a > idx_b:
-                    c1 = "t_%d_%d - t_%d_%d + %f %s + %f %s > %f\n" % (
-                        device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_gpu_latency)
-                else:
-                    c1 = "t_%d_%d - t_%d_%d - %f %s + %f %s > %f\n" % (
-                        device, idx_a, device, idx_b, M, u_val_str,
-                        K, cond_val_str, b_gpu_latency - M)
-        constraints.extend([judge_constraint1, judge_constraint2, c1])
+            c = "t_%d_%d - t_%d_%d - %f %s - %f s_%d_%d %s + %f %s > %f\n" \
+                 % (device, idx_a, device, idx_b, M, u_val_str, \
+                    acc_data_trans_latency, device, idx_b, lp_data_trans, K, cond_val_str, device_latency - M)
+        constraints.extend([judge_constraint1, judge_constraint2, c])
 
     return constraints, u_variable
 
@@ -367,7 +347,9 @@ def write_LP_contents(LP_contents, file_name):
 
 def run_glpsol(lp_file_path, result_file_path):
     glpsol_file_path = "glpsol"
-    os.system('%s --lp %s -o %s' % (glpsol_file_path, lp_file_path, result_file_path))
+    cmd_str = '%s --lp %s -o %s' % (glpsol_file_path, lp_file_path, result_file_path)
+    print("Execute %s" % (cmd_str))
+    os.system(cmd_str)
     print("Run solver done!")
 
 
@@ -405,6 +387,80 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
+def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
+    idx_name_dict = {v:k for k,v in one_module_names_idx_dict.items()}
+    print(idx_name_dict)
+    s_dict = {}
+    t_dict = {}
+    f = open(result_file_path, 'r')
+    lines = f.readlines()
+    for line in lines:
+        line = line.strip()
+        if line.find('s_') >=0 or line.find('t_') >=0:
+            com = line.split(' ')
+            striped_com = []
+            for c in com:
+                if c != '':
+                    striped_com.append(c)
+            if striped_com[1].find('s_')>=0 and striped_com[3] == '1':
+                sc = striped_com[1].split('_')
+                device, idx = sc[1], sc[2]
+                s_dict[int(device), int(idx)] = int(striped_com[3])
+            elif striped_com[1].find('t_')>=0:
+                sc = striped_com[1].split('_')
+                device, idx = sc[1], sc[2]
+                t_dict[(int(device), int(idx))] = float(striped_com[2])
+    result = []
+    op_execution_order_list = []
+    for (device, idx), _ in s_dict.items():
+        start_time = t_dict[(device, idx)]
+        op_name = idx_name_dict[idx]
+        op = op_dict[op_name]
+        device_latency = 0.0
+        if device == CPU:
+            device_latency = op.op_def.operatorLatency.CPU_latency
+        elif device == GPU:
+            device_latency = op.op_def.operatorLatency.GPU_latency
+        # Compute data trans latency
+        acc_data_trans_latency = 0.0
+        for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+            data_trans_latency = data_trans[device-1]
+            for op_parent_name in op.parents:
+                op_parent = op_dict[op_parent_name]
+                if not isinstance(op_parent, Subgraph):
+                    continue
+                parent_idx = one_module_names_idx_dict[op_parent_name]
+                if device == CPU and (GPU, parent_idx) not in s_dict.keys():
+                    continue
+                elif device == GPU and (CPU, parent_idx) not in s_dict.keys():
+                    continue
+                parent_output_tensors_addr = [paddr for (paddr, _) in op_parent.output_tensors]
+                if addr in parent_output_tensors_addr:
+                    acc_data_trans_latency += data_trans_latency
+                    break
+        
+        result.append((op_name, device, start_time, device_latency, acc_data_trans_latency))
+        op_execution_order_list.append((op_name, device, start_time))
+    
+    result = sorted(result, key=lambda x: x[2])
+    op_execution_order_list = sorted(op_execution_order_list, key=lambda x: x[2])
+    for t in op_execution_order_list:
+        print(t)
+    cpu_data, gpu_data, convert_data = [], [], []
+    for (op_name, device, start_time, device_latency, acc_data_trans_latency) in result:
+        print("name:{}, device:{}, start_time:{}, latency:{}, data_trans:{}"\
+            .format(op_name, device, start_time, device_latency, acc_data_trans_latency))
+        if device == 1:
+            cpu_data.append((start_time, device_latency))
+        elif device == 2:
+            gpu_data.append((start_time, device_latency))
+        if acc_data_trans_latency >0 :
+            convert_data.append((start_time+device_latency, acc_data_trans_latency))
+    
+    return cpu_data, gpu_data, convert_data, op_execution_order_list
+
+
+
 def get_inception_one_module_name(op_name_prefix, op_name_list):
     module_op_names = []
     branches = set()
@@ -418,6 +474,7 @@ def get_inception_one_module_name(op_name_prefix, op_name_list):
 
 
 def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name):
+    lines = []
     for module_name in module_name_list:
         # For one module with multiple subgraphs, we need build subgraph and update the op_dict
         parent_subgraph = Subgraph(module_name)
@@ -442,13 +499,25 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         # Solve the LP
         run_glpsol(lp_file_path, result_file_path)
         # Parse subgraph device placement result
-        name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
-        print(name_device_tuple_list)
+        # name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
+        # print(name_device_tuple_list)
+        cpu_data, gpu_data, convert_data, op_execution_order_list = parse_glpk_timeline(one_module_names_idx_dict, result_file_path, name_op_dict)
+        print("module_name")
+
+        tmp_module_name_list = []
+        for c in module_name.split("/"):
+            if len(c.strip()) > 0:
+                tmp_module_name_list.append(c)
+        
+        draw_gantt(cpu_data, gpu_data, convert_data, os.path.join(folder_path, tmp_module_name_list[-1]))
+            
         device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
-        write_subgraph_device_placement_result([name for (name, device) in name_device_tuple_list if device == 0],\
-            [name for (name, device) in name_device_tuple_list if device == 3], \
-            name_op_dict, device_placement_file_path)
-        print("Write result to %s" % (device_placement_file_path))
+        results = write_subgraph_device_placement_result([name for (name, device, start_time) in op_execution_order_list if device == CPU],\
+            [name for (name, device, start_time) in op_execution_order_list if device == GPU], \
+            name_op_dict, device_placement_file_path, op_execution_order_list=op_execution_order_list)
+        lines.extend(results)
+        # print("Write result to %s" % (device_placement_file_path))
+    return lines
 
 
 def sum_lp_objectives(folder_path):
@@ -465,6 +534,44 @@ def sum_lp_objectives(folder_path):
     return total
 
 
+
+def insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=[]):
+    solved_op_name_list = []
+    for l in lines:
+        solved_op_name_list.append(l.split(' ')[0])
+    print(len(lines))
+    print(len(op_name_list))
+    
+    untreated_op_name_list = set(op_name_list).difference(set(solved_op_name_list))
+    untreated_op_latency = 0.0
+    # print(untreated_op_name_list)
+    for op_name in op_name_list:
+        if op_name in untreated_op_name_list:
+            op = name_op_dict[op_name]
+            parents_set = set(op.parents)
+            if len(op.parents) == 0:
+                lines.insert(0, "%s %d\n" % (op_name, 0))
+            else:
+                index = 0
+                for line in lines:
+                    index += 1
+                    op_tmp_name = line.strip().split(" ")[0]
+                    if op_tmp_name in parents_set:
+                        parents_set.remove(op_tmp_name)
+                        if len(parents_set) == 0:
+                            cpu_latency = op.op_def.operatorLatency.CPU_latency
+                            gpu_latency = op.op_def.operatorLatency.CPU_latency
+                            if op_name not in unsupported_op_names and gpu_latency < cpu_latency:
+                                lines.insert(index, "%s %d\n" % (op_name, 3))
+                                untreated_op_latency += gpu_latency
+                            else:
+                                lines.insert(index, "%s %d\n" % (op_name, 0))
+                                untreated_op_latency += cpu_latency
+                            print(index, "%s %d\n" % (op_name, 0))
+                            break
+    return lines, untreated_op_latency
+
+
 def solve_pnasnet(model, mobile, thread):
     # Read profile data
     model_dir = os.path.join("../models/", model)
@@ -472,6 +579,8 @@ def solve_pnasnet(model, mobile, thread):
         os.path.join(model_dir, model + "-info.txt"),
         os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
         os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+    
+    # Using module prefix to form the subgraph
     pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
     if model == 'pnasnet-large':
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(12)])
@@ -479,11 +588,36 @@ def solve_pnasnet(model, mobile, thread):
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(9)])
     elif model == 'nasnet-large':
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(18)])
+        pnasnet_module_list.insert(6, 'reduction_cell_0/')
+        pnasnet_module_list.insert(13, 'reduction_cell_1/')
+        
+    elif model == 'nasnet-mobile':
+        pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(12)])
+        pnasnet_module_list.insert(6, 'reduction_cell_0/')
+        pnasnet_module_list.insert(11, 'reduction_cell_1/')
+    else:
+        print("Model %s does not suport yet." % (model))
+        return
+    
+    # Using GLPK solve device placement here
     folder_path = os.path.join(model_dir, mobile)
-    solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
+    lines = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
+    unsupported_op_names = ["final_layer/Relu", "final_layer/Mean/reduction_indices", \
+        "final_layer/Relu___tr4final_layer/Mean", "final_layer/Mean", \
+        "final_layer/FC/weights", "final_layer/FC/MatMul", \
+        "final_layer/FC/biases", "final_layer/FC/BiasAdd", "final_layer/predictions"]
+    # Deal with ops that are not in the module prefix
+    lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=unsupported_op_names)
     lp_total = sum_lp_objectives(folder_path)
-    print("LP total: %f" % lp_total)
-
+    
+    # Write results
+    device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
+    f = open(device_map_file_path, 'w')
+    f.writelines(lines)
+    f.flush()
+    f.close()
+    print(untreated_op_latency)
+    print("LP+serial total: {}".format(lp_total+untreated_op_latency))
 
 
 def solve_inception(model, mobile, thread):
@@ -505,37 +639,17 @@ def solve_inception(model, mobile, thread):
             "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
     inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
-    solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
+    lines = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
+    lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict)
     lp_total = sum_lp_objectives(folder_path)
-    print("LP total: %f" % lp_total)
-    serial_file_path = os.path.join(model_dir, mobile, "mDeviceMap-serial-"+model+'-cpu-'+str(thread)+".txt")
-    serial_lines = []
-    # Sum up the op latency that are not include in the LP solver
-    serial_total = 0.
-    for op_name in op_name_list:
-        find = False
-        for module_name in inception_module_list:
-            if op_name.find(module_name) >= 0 or op_name not in name_op_dict.keys():
-                find = True
-                break
-        if not find:
-            # print("%s" % (op_name))
-            cpu_latency = name_op_dict[op_name].op_def.operatorLatency.CPU_latency
-            gpu_latency = name_op_dict[op_name].op_def.operatorLatency.GPU_latency
-            if cpu_latency > gpu_latency:
-                serial_lines.append("%s %d\n" % (op_name, 3))
-                print("%s %d" % (op_name, 3))
-            else:
-                serial_lines.append("%s %d\n" % (op_name, 0))
-                print("%s %d" % (op_name, 0))
-            serial_total += min(cpu_latency, gpu_latency)
-    
-    # If LP result is higher than alone, then use alone instead
-    
+    print("LP+serial total: {}".format(lp_total+untreated_op_latency))
 
-    write_lines(serial_file_path, serial_lines)
-    print("serial total: %f" % serial_total)
-    print("Final: %f" % (lp_total + serial_total))
+    device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
+    f = open(device_map_file_path, 'w')
+    f.writelines(lines)
+    f.flush()
+    f.close()
+
 
 
 if __name__ == "__main__":    

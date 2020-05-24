@@ -2,7 +2,7 @@
 from net_struct import *
 from read_profile_data import *
 import queue
-
+import re
         
 def pnasnet_mobile_subgraph_subprefix():
     subprefix_list = []
@@ -47,7 +47,7 @@ class Subgraph(Operator):
         self.op_def = OperatorDef()
         self.op_def.type = "OpType_Subgraph"
 
-
+    # Set subgraph's parents and children with operators
     def _findGraphInputsOutputs(self):
         internal_parent = set()
         internal_children = set()
@@ -55,19 +55,35 @@ class Subgraph(Operator):
             op = self.name_op_dict[op_name]
             internal_parent = internal_parent.union(op.parents)
             internal_children = internal_children.union(op.children)
-        internal_parent.difference_update(internal_children)
-        internal_children.difference_update(internal_parent)
+        common_ops = internal_parent.intersection(internal_children)
+        internal_parent.difference_update(common_ops)
+        internal_children.difference_update(common_ops)
         self.parents = internal_parent.difference(set(self.op_name_list))
         self.children = internal_children.difference(set(self.op_name_list))
+        
+        # for parent in self.parents:
+        #     op_parent = self.name_op_dict[parent]
+        #     for op_name in self.op_name_list:
+        #         if op_name in op_parent.children:
+        #             op = self.name_op_dict[op_name]
+        #             self.input_tensors.extend(op.input_tensors)
+        # for child in self.children:
+        #     op_child = self.name_op_dict[child]
+        #     if op_name in self.op_name_list:
+        #         if op_name in op_child.parents:
+        #             op = self.name_op_dict[op_name]
+        #             self.output_tensors.extend(op.output_tensors)
+
     
-    
+    # Fill this subgraph with operators
     def _set_op_list_with_filter(self, op_name_list, name_op_dict, pattern=None):
-        # Filter op
+        # Filter op, preserve execution order
+        self.name_op_dict = name_op_dict
         if pattern != None:
             for op_name in op_name_list:
                 if op_name.find(pattern) == 0:
                     self.op_name_list.append(op_name)
-                    self.name_op_dict[op_name] = name_op_dict[op_name]
+                    # self.name_op_dict[op_name] = name_op_dict[op_name]
         else:
             self.op_name_list.extend(op_name_list)
             self.name_op_dict = name_op_dict
@@ -79,25 +95,70 @@ class Subgraph(Operator):
         self._findGraphInputsOutputs()
         self._summaryLatency(name_op_dict, name_op_dict)
 
-
+    # Set the subgraph computing latency as the sum of all the internal operators latency
+    # Set the subgraph data transformation latency as the sum of all the input operators' data transformation latency
     def _summaryLatency(self, name_op_latency, global_name_op_dict):
         for op_name in self.op_name_list:
             op = self.name_op_dict[op_name]
             self.op_def.operatorLatency.CPU_latency += op.op_def.operatorLatency.CPU_latency
             self.op_def.operatorLatency.GPU_latency += op.op_def.operatorLatency.GPU_latency
+        # The data transformation latency is the sum of all the operators that are directly connect with
+        # the subgraph's parents operator
+        input_tensor_set = set()
+        output_tensor_set = set()
+        parent_output_tensor_set = set()
+        children_input_tensor_set = set()
+        for op_name in self.op_name_list:
+            op = global_name_op_dict[op_name]
+            input_tensor_set = input_tensor_set.union(op.input_tensors)
+            output_tensor_set = output_tensor_set.union(op.output_tensors)
         for op_name in self.parents:
             op = global_name_op_dict[op_name]
-            if isinstance(op, Subgraph):
-                continue
-            self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-            self.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
-    
+            parent_output_tensor_set = parent_output_tensor_set.union(op.output_tensors)
+        for op_name in self.children:
+            op = global_name_op_dict[op_name]
+            children_input_tensor_set = children_input_tensor_set.union(op.input_tensors)
+        
+        self.input_tensors = input_tensor_set.intersection(parent_output_tensor_set)
+        self.output_tensors = output_tensor_set.intersection(children_input_tensor_set)
+        for op_name in self.op_name_list:
+            op = global_name_op_dict[op_name]
+            for input_tensor in op.input_tensors:
+                if input_tensor in self.input_tensors:
+                    self.input_nodes.append(op_name)
+            for output_tensor in op.output_tensors:
+                if output_tensor in self.output_tensors:
+                    self.output_nodes.append(op_name)
+        
+        for op_name in self.input_nodes:
+            op_input = global_name_op_dict[op_name]
+            self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW += op_input.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
+            self.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC += op_input.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
+            for (addr, _) in self.input_tensors:
+                if addr in op_input.op_def.operatorLatency.input_data_trans_latency.keys():
+                    self.op_def.operatorLatency.input_data_trans_latency[addr] = op_input.op_def.operatorLatency.input_data_trans_latency[addr]
+
+        
+        # Debug info
+        print(self.name + "input nodes and output nodes:")
+        print(self.parents)
+        print(self.children)
+        print(self.input_nodes)
+        print(self.input_tensors)
+        print(self.output_nodes)
+        print(self.output_tensors)
+        print(self.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC)
+        print(self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW)
+        print(self.op_def.operatorLatency.input_data_trans_latency)
+        print()
+
 
     def buildMultiSubgraph(self, op_name_list, name_op_dict, sub_prefix_list, pattern=None):
         subgraph_list = []
         # Filter op_names with the most outer pattern
         op_name_list = filter_op_name_list(op_name_list, pattern)
         untreated_op_name_list = op_name_list
+        # Build subgraph with prefix
         print("In buildMultiSubgraph print pattern %s" % (pattern))
         for subprefix in sub_prefix_list:
             prefix = pattern + subprefix
@@ -116,14 +177,23 @@ class Subgraph(Operator):
 
         # Step 1. This passDeal with nasnet structure
         # Let one concat op be a subgraph
-        # for op_name in untreated_op_name_list:
-        #     if op_name.find('cell_output/concat') >= 0:
-        #         subgraph = Subgraph(pattern+"subgraph_%d" % (subgraph_idx))
-        #         subgraph.buildWithOpList([op_name], name_op_dict)
-        #         subgraph_list.append(subgraph)
-        #         untreated_op_name_list.remove(op_name)
-        #         subgraph_idx += 1
+        concat_reg = 'cell_(stem_)?[0-9]+/cell_output/concat'
+        tmp_untreated_op_name_list = untreated_op_name_list
+        for op_name in tmp_untreated_op_name_list:
+            matched_str = re.finditer(concat_reg, op_name)
+            is_concat =False
+            for ms in matched_str:
+                if ms.group() == op_name:
+                    is_concat = True
+                    break
+            if is_concat:
+                subgraph = Subgraph(pattern+"subgraph_%d" % (subgraph_idx))
+                subgraph.buildWithOpList([op_name], name_op_dict)
+                subgraph_list.append(subgraph)
+                untreated_op_name_list.remove(op_name)
+                subgraph_idx += 1
         # Step 2.
+        # Build subgraph with operators that does not belong to prefix
         while(len(untreated_op_name_list)>0):
             tmp_list = []
             op_name = untreated_op_name_list[0]
@@ -163,6 +233,11 @@ class Subgraph(Operator):
                         child_subgraph.parents.add(parent_subgraph.name)
                         parent_subgraph.children.add(child_subgraph.name)
                         break
+                for c in parent_subgraph.children:
+                    if c in child_subgraph.op_name_list:
+                        parent_subgraph.children.add(child_subgraph.name)
+                        child_subgraph.parents.add(parent_subgraph.name)
+
         print("All subgraph:")
         for subgraph_name in self.op_name_list:
             print(self.name_op_dict[subgraph_name])
@@ -174,7 +249,18 @@ class Subgraph(Operator):
             line = "%s %d\n" % (op_name, self.op_def.device_type)
             lines.append(line)
         return lines
+
     
+    # Used to compare the alone result with parallel result
+    def summary_new_latency(self, new_op_name_dict):
+        cpu_latency = 0.0
+        gpu_latency = 0.0
+        for op_name in self.op_name_list:
+            op = new_op_name_dict[op_name]
+            cpu_latency += op.op_def.operatorLatency.CPU_latency
+            gpu_latency += op.op_def.operatorLatency.GPU_latency
+        return cpu_latency, gpu_latency
+
 
     def __str__(self):
         operator_latency = self.op_def.operatorLatency
@@ -183,32 +269,48 @@ class Subgraph(Operator):
                 operator_latency.GPU_latency, \
                     operator_latency.Transpose_latency_NCHW_to_NHWC, \
                         operator_latency.Transpose_latency_NHWC_to_NCHW)
-        return ("name: %s\nlatency: %s\nnodes:%s\nparents:%s\nchildren:%s\n" \
-            %(self.name, str_latency, self.op_name_list, self.parents, self.children))
+        return ("name: %s\nlatency: %s\nnodes:%s\nparents:%s\nchildren:%s\ninput_tensors%s\noutput_tensors%s\n" \
+            %(self.name, str_latency, self.op_name_list, self.parents, self.children,\
+                self.op_def.operatorLatency.input_data_trans_latency, self.output_tensors))
 
     
 
-def write_subgraph_device_placement_result(cpu_name_list, gpu_name_list, name_op_dict, result_file_path):
+def write_subgraph_device_placement_result(cpu_name_list, gpu_name_list, \
+    name_op_dict, result_file_path, op_execution_order_list=None):
     print("CPU subgraphs:")
     print(cpu_name_list)
     print("GPU subgraphs:")
     print(gpu_name_list)
     f = open(result_file_path, 'w')
     lines = []
-    for op_name in cpu_name_list:
-        subgraph = name_op_dict[op_name]
-        assert(isinstance(subgraph, Subgraph))
-        subgraph.op_def.device_type = DeviceType.CPU
-        lines.extend(subgraph.out_op_device_type())
-    for op_name in gpu_name_list:
-        subgraph = name_op_dict[op_name]
-        assert(isinstance(subgraph, Subgraph))
-        subgraph.op_def.device_type = DeviceType.GPU
-        lines.extend(subgraph.out_op_device_type())
-    f.writelines(lines)
-    f.flush()
-    f.close()
-    print("Write result done.")
+    # if has op execution order, append op name 
+    if op_execution_order_list != None:
+        cpu_name_list = []
+        gpu_name_list = []
+        for (op_name, device, start_time) in op_execution_order_list:
+            subgraph = name_op_dict[op_name]
+            assert(isinstance(subgraph, Subgraph))
+            if device == 1:    
+                subgraph.op_def.device_type = DeviceType.CPU
+            elif device == 2:
+                subgraph.op_def.device_type = DeviceType.GPU
+            lines.extend(subgraph.out_op_device_type())
+    else:
+        for op_name in cpu_name_list:
+            subgraph = name_op_dict[op_name]
+            assert(isinstance(subgraph, Subgraph))
+            subgraph.op_def.device_type = DeviceType.CPU
+            lines.extend(subgraph.out_op_device_type())
+        for op_name in gpu_name_list:
+            subgraph = name_op_dict[op_name]
+            assert(isinstance(subgraph, Subgraph))
+            subgraph.op_def.device_type = DeviceType.GPU
+            lines.extend(subgraph.out_op_device_type())
+    # f.writelines(lines)
+    # f.flush()
+    # f.close()
+    # print("Write result done.")
+    return lines
 
 
 def write_op_device_placement_result(cpu_name_list, gpu_name_list, result_file_path):
@@ -226,6 +328,7 @@ def write_op_device_placement_result(cpu_name_list, gpu_name_list, result_file_p
     f.flush()
     f.close()
     print("Write result done.")
+
 
 
 if __name__ == "__main__":

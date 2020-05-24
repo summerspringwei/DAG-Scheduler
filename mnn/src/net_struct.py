@@ -11,10 +11,11 @@ class OperatorLatency:
         self.GPU_latency = 0
         self.Transpose_latency_NHWC_to_NCHW = 0  # Transformation latency GPU to CPU
         self.Transpose_latency_NCHW_to_NHWC = 0  # Transformation latency CPU to GPU
+        self.input_data_trans_latency = {}
 
     def __str__(self):
-        return "Operator latency: %f %f %f %f" % (self.CPU_latency, self.GPU_latency, \
-            self.Transpose_latency_NHWC_to_NCHW, self.Transpose_latency_NCHW_to_NHWC)
+        return "Operator latency: %f %f %s" % (self.CPU_latency, self.GPU_latency, \
+            self.input_data_trans_latency)
 
 
 class OperatorDef:
@@ -33,15 +34,17 @@ class Operator:
         self.executed = False
         self.device_type = DeviceType.CPU  # 0 for CPU, 1 for GPU
         self.earlist_start_point = 0.0
-        self.input_tensors = [] # 'String list seperated by ","'
-        self.output_tensors = [] # 'String list seperated by ","'
+        self.input_tensors = [] # Tuple list '(tensor_addr, tensor_shape)'
+        self.output_tensors = []
+        self.input_nodes = []
+        self.output_nodes = []
 
     def __str__(self):
         return self.name + " " + self.op_def.type + " " \
                 + str(self.op_def.operatorLatency.CPU_latency) + " " \
                 + str(self.op_def.operatorLatency.GPU_latency) + " " \
-                + str(self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW) + " " \
-                + str(self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW) + " " \
+                + str(self.input_tensors) + " " \
+                + str(self.output_tensors) + " " \
                 + str(self.parents) + " " + str(self.children)
 
 

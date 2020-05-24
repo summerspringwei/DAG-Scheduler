@@ -10,11 +10,12 @@ def parse_model_mobile():
     parser.add_argument('model', type=str, help='Enter the model name')
     parser.add_argument('mobile', type=str, help='Enter the mobile name')
     parser.add_argument('thread', type=int, help='Enter the thread number')
-
+    
     args = parser.parse_args()
     model = args.model
     mobile = args.mobile
     thread = args.thread
+    print("Get model name %s mobile %s thread %d" % (model, mobile, thread))
     # Check args
     if model not in model_list:
         print("Model name %s not support yet. Exit now." % model)

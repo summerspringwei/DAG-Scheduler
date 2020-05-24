@@ -1,0 +1,141 @@
+All subgraph:
+name: cell_7/comb_iter_0/
+latency: (1.629011,7.414561,2.035230,1.663480)
+nodes:['cell_7/comb_iter_0/left/Relu', 'cell_7/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_0/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_7/comb_iter_0/left/separable_5x5_1/separable_conv2d', 'cell_7/comb_iter_0/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_7/comb_iter_0/left/separable_5x5_2/separable_conv2d', 'cell_7/comb_iter_0/left/bn_sep_5x5_2/FusedBatchNorm___tr4cell_7/comb_iter_0/combine/add', 'cell_7/comb_iter_0/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_0/combine/add', 'cell_7/comb_iter_0/combine/add']
+parents:{'cell_7/final_path_bn/FusedBatchNorm', 'cell_7/subgraph_1'}
+children:{'cell_7/subgraph_0', 'cell_7/cell_output/concat'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,216,7,7']
+
+name: cell_7/comb_iter_1/
+latency: (1.839878,8.132652,2.035230,1.663480)
+nodes:['cell_7/comb_iter_1/left/Relu', 'cell_7/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_1/left/separable_7x7_1/separable_conv2d/depthwise', 'cell_7/comb_iter_1/left/separable_7x7_1/separable_conv2d', 'cell_7/comb_iter_1/left/separable_7x7_2/separable_conv2d/depthwise', 'cell_7/comb_iter_1/left/separable_7x7_2/separable_conv2d', 'cell_7/comb_iter_1/left/bn_sep_7x7_2/FusedBatchNorm___tr4cell_7/comb_iter_1/combine/add', 'cell_7/comb_iter_1/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_1/combine/add', 'cell_7/comb_iter_1/combine/add']
+parents:{'cell_7/split', 'cell_7/subgraph_2'}
+children:{'cell_7/subgraph_0', 'cell_7/cell_output/concat'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,216,7,7']
+
+name: cell_7/comb_iter_2/
+latency: (2.602167,12.494339,2.035230,1.663480)
+nodes:['cell_7/comb_iter_2/left/Relu', 'cell_7/comb_iter_2/right/Relu', 'cell_7/comb_iter_2/left/separable_5x5_1/separable_conv2d/depthwise', 'cell_7/comb_iter_2/right/separable_3x3_1/separable_conv2d/depthwise', 'cell_7/comb_iter_2/left/separable_5x5_1/separable_conv2d', 'cell_7/comb_iter_2/right/separable_3x3_1/separable_conv2d', 'cell_7/comb_iter_2/left/separable_5x5_2/separable_conv2d/depthwise', 'cell_7/comb_iter_2/right/separable_3x3_2/separable_conv2d/depthwise', 'cell_7/comb_iter_2/left/separable_5x5_2/separable_conv2d', 'cell_7/comb_iter_2/right/separable_3x3_2/separable_conv2d', 'cell_7/comb_iter_2/combine/add', 'cell_7/comb_iter_2/combine/add___tr4cell_7/cell_output/concat']
+parents:{'cell_7/split', 'cell_7/subgraph_2'}
+children:{'cell_7/subgraph_0', 'cell_7/comb_iter_3/left/Relu', 'cell_7/cell_output/concat', 'cell_7/comb_iter_3/'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,216,7,7']
+
+name: cell_7/comb_iter_3/
+latency: (1.252189,7.180456,2.035230,1.663480)
+nodes:['cell_7/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_3/left/Relu', 'cell_7/comb_iter_3/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_7/comb_iter_3/left/separable_3x3_1/separable_conv2d', 'cell_7/comb_iter_3/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_7/comb_iter_3/left/separable_3x3_2/separable_conv2d', 'cell_7/comb_iter_3/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_7/comb_iter_3/combine/add', 'cell_7/comb_iter_3/right/MaxPool2D/MaxPool___tr4cell_7/comb_iter_3/combine/add', 'cell_7/comb_iter_3/combine/add']
+parents:{'cell_7/split', 'cell_7/comb_iter_2/', 'cell_7/subgraph_2', 'cell_7/comb_iter_2/combine/add'}
+children:{'cell_7/subgraph_0', 'cell_7/cell_output/concat'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,216,7,7']
+
+name: cell_7/comb_iter_4/
+latency: (1.203222,6.081275,3.052845,2.495221)
+nodes:['cell_7/comb_iter_4/left/Relu', 'cell_7/comb_iter_4/left/separable_3x3_1/separable_conv2d/depthwise', 'cell_7/comb_iter_4/left/separable_3x3_1/separable_conv2d', 'cell_7/comb_iter_4/left/separable_3x3_2/separable_conv2d/depthwise', 'cell_7/comb_iter_4/left/separable_3x3_2/separable_conv2d', 'cell_7/comb_iter_4/left/bn_sep_3x3_2/FusedBatchNorm___tr4cell_7/comb_iter_4/combine/add', 'cell_7/comb_iter_4/combine/add']
+parents:{'cell_7/subgraph_2', 'cell_7/final_path_bn/FusedBatchNorm', 'cell_7/split___tr4cell_7/comb_iter_4/combine/add', 'cell_7/subgraph_1'}
+children:{'cell_7/subgraph_0', 'cell_7/cell_output/concat'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,216,7,7']
+
+name: cell_7/subgraph_0
+latency: (0.104300,3.530100,5.088074,4.158701)
+nodes:['cell_7/cell_output/concat']
+parents:{'cell_7/comb_iter_2/combine/add___tr4cell_7/cell_output/concat', 'cell_7/comb_iter_4/', 'cell_7/comb_iter_4/combine/add', 'cell_7/comb_iter_1/combine/add', 'cell_7/comb_iter_2/', 'cell_7/comb_iter_1/', 'cell_7/comb_iter_3/combine/add', 'cell_7/comb_iter_3/', 'cell_7/comb_iter_0/', 'cell_7/comb_iter_0/combine/add'}
+children:{'cell_8/Relu_1'}
+input_tensors[('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851), ('1,216,7,7', 1.017614851)]
+output_tensors['1,1080,7,7']
+
+name: cell_7/subgraph_1
+latency: (3.238053,13.845153,2.364896,1.992791)
+nodes:['cell_7/Pad/paddings', 'cell_7/Pad', 'cell_7/Relu', 'cell_7/strided_slice', 'cell_7/Relu___tr4cell_7/AvgPool', 'cell_7/strided_slice/stack_1', 'cell_7/strided_slice/stack_2', 'cell_7/strided_slice/stack', 'cell_7/strided_slice___tr4cell_7/AvgPool_1', 'cell_7/AvgPool', 'cell_7/AvgPool_1', 'cell_7/path1_conv/Conv2D', 'cell_7/path2_conv/Conv2D', 'cell_7/concat', 'cell_7/final_path_bn/FusedBatchNorm']
+parents:{'cell_5/cell_output/concat'}
+children:{'cell_7/comb_iter_4/', 'cell_7/comb_iter_4/left/Relu', 'cell_7/comb_iter_0/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_0/', 'cell_7/comb_iter_0/left/Relu'}
+input_tensors[('1,540,14,14', 2.364895522)]
+output_tensors['1,540,14,14']
+
+name: cell_7/subgraph_2
+latency: (3.303325,6.216603,2.106400,1.685080)
+nodes:['cell_7/Relu_1', 'cell_7/Relu_1___tr4cell_7/1x1/Conv2D', 'cell_7/1x1/Conv2D', 'cell_7/split', 'cell_7/split___tr4cell_7/comb_iter_4/combine/add']
+parents:{'cell_6/cell_output/concat'}
+children:{'cell_7/comb_iter_1/left/Relu', 'cell_7/comb_iter_4/', 'cell_7/comb_iter_4/combine/add', 'cell_7/comb_iter_2/', 'cell_7/comb_iter_3/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_1/right/MaxPool2D/MaxPool', 'cell_7/comb_iter_1/', 'cell_7/comb_iter_2/right/Relu', 'cell_7/comb_iter_3/', 'cell_7/comb_iter_2/left/Relu'}
+input_tensors[('1,1080,7,7', 2.1064000000000003)]
+output_tensors['1,1080,7,7']
+
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/comb_iter_0/
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/subgraph_1 output_tensors: ['1,540,14,14']
+7
+['1,540,14,14']
+parent idx lp string: cell_7/comb_iter_0/ 
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/comb_iter_1/
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/subgraph_2 output_tensors: ['1,1080,7,7']
+8
+['1,1080,7,7']
+parent idx lp string: cell_7/comb_iter_1/ 
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/comb_iter_2/
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/subgraph_2 output_tensors: ['1,1080,7,7']
+8
+['1,1080,7,7']
+parent idx lp string: cell_7/comb_iter_2/ 
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/comb_iter_3/
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/comb_iter_2/ output_tensors: ['1,216,7,7']
+3
+['1,216,7,7']
+Parent name cell_7/subgraph_2 output_tensors: ['1,1080,7,7']
+8
+['1,1080,7,7']
+parent idx lp string: cell_7/comb_iter_3/  + 0.831740 3
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/comb_iter_4/
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/subgraph_2 output_tensors: ['1,1080,7,7']
+8
+['1,1080,7,7']
+Parent name cell_7/subgraph_1 output_tensors: ['1,540,14,14']
+7
+['1,540,14,14']
+parent idx lp string: cell_7/comb_iter_4/ 
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/subgraph_0
+input_data_trans_latency [('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206), ('1,216,7,7', 0.831740206)]
+Parent name cell_7/comb_iter_4/ output_tensors: ['1,216,7,7']
+5
+['1,216,7,7']
+Parent name cell_7/comb_iter_2/ output_tensors: ['1,216,7,7']
+3
+['1,216,7,7']
+Parent name cell_7/comb_iter_1/ output_tensors: ['1,216,7,7']
+2
+['1,216,7,7']
+Parent name cell_7/comb_iter_3/ output_tensors: ['1,216,7,7']
+4
+['1,216,7,7']
+Parent name cell_7/comb_iter_0/ output_tensors: ['1,216,7,7']
+1
+['1,216,7,7']
+parent idx lp string: cell_7/subgraph_0  + 0.831740 5 + 0.831740 3 + 0.831740 2 + 0.831740 4 + 0.831740 1
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/subgraph_1
+input_data_trans_latency [('1,540,14,14', 1.992791045)]
+parent idx lp string: cell_7/subgraph_1 
+--------------------
+^^^^^^^^^^^^^^^^^^^^
+Op name: cell_7/subgraph_2
+input_data_trans_latency [('1,1080,7,7', 1.68508)]
+parent idx lp string: cell_7/subgraph_2 
+--------------------

@@ -387,6 +387,30 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
+def compute_data_trans_intersection(cpu_data, gpu_data, convert_data):
+    def add_latency(data):
+        return [(start, start+latency) for (start, latency) in data]
+    cpu_data = add_latency(cpu_data)
+    gpu_data = add_latency(gpu_data)
+    convert_data = add_latency(convert_data)
+    print(cpu_data)
+    print(gpu_data)
+    print(convert_data)
+    sum_of_intersection = 0
+    for (cs, ce) in convert_data:
+        for (gs, ge) in gpu_data:
+            if cs >= gs and cs <= ge:
+                sum_of_intersection += (min(ce, ge) - cs)
+            elif gs > cs and gs < ce:
+                sum_of_intersection += (min(ce, ge) - gs)
+    cpu_max = max([endtime for (_, endtime) in cpu_data])
+    gpu_max = max([endtime for (_, endtime) in gpu_data])
+    convert_max = max([endtime for (_, endtime) in convert_data])
+    endpoint = max([cpu_max, gpu_max, convert_max])
+
+    return endpoint, sum_of_intersection
+
+
 def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
     idx_name_dict = {v:k for k,v in one_module_names_idx_dict.items()}
     print(idx_name_dict)
@@ -460,19 +484,6 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
     return cpu_data, gpu_data, convert_data, op_execution_order_list
 
 
-
-def get_inception_one_module_name(op_name_prefix, op_name_list):
-    module_op_names = []
-    branches = set()
-    for op_name in op_name_list:
-        if op_name.find(op_name_prefix) == 0:
-            module_op_names.append(op_name)
-            if op_name.find("Branch") > 0:
-                branches.add(op_name.split("/")[3])
-    
-    return module_op_names, list(branches)
-
-
 def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name):
     lines = []
     for module_name in module_name_list:
@@ -485,6 +496,7 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
             parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
         # one_module_names_idx_dict = associate_op_name_with_idx(
         #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
+        print("aaa", parent_subgraph.op_name_list)
         one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
         # Generate LP constraints and write them to a file
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
@@ -510,11 +522,11 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
                 tmp_module_name_list.append(c)
         
         draw_gantt(cpu_data, gpu_data, convert_data, os.path.join(folder_path, tmp_module_name_list[-1]))
-            
+        
         device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
         results = write_subgraph_device_placement_result([name for (name, device, start_time) in op_execution_order_list if device == CPU],\
             [name for (name, device, start_time) in op_execution_order_list if device == GPU], \
-            name_op_dict, device_placement_file_path, op_execution_order_list=op_execution_order_list)
+            name_op_dict, op_execution_order_list=op_execution_order_list)
         lines.extend(results)
         # print("Write result to %s" % (device_placement_file_path))
     return lines
@@ -535,43 +547,6 @@ def sum_lp_objectives(folder_path):
 
 
 
-def insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=[]):
-    solved_op_name_list = []
-    for l in lines:
-        solved_op_name_list.append(l.split(' ')[0])
-    print(len(lines))
-    print(len(op_name_list))
-    
-    untreated_op_name_list = set(op_name_list).difference(set(solved_op_name_list))
-    untreated_op_latency = 0.0
-    # print(untreated_op_name_list)
-    for op_name in op_name_list:
-        if op_name in untreated_op_name_list:
-            op = name_op_dict[op_name]
-            parents_set = set(op.parents)
-            if len(op.parents) == 0:
-                lines.insert(0, "%s %d\n" % (op_name, 0))
-            else:
-                index = 0
-                for line in lines:
-                    index += 1
-                    op_tmp_name = line.strip().split(" ")[0]
-                    if op_tmp_name in parents_set:
-                        parents_set.remove(op_tmp_name)
-                        if len(parents_set) == 0:
-                            cpu_latency = op.op_def.operatorLatency.CPU_latency
-                            gpu_latency = op.op_def.operatorLatency.CPU_latency
-                            if op_name not in unsupported_op_names and gpu_latency < cpu_latency:
-                                lines.insert(index, "%s %d\n" % (op_name, 3))
-                                untreated_op_latency += gpu_latency
-                            else:
-                                lines.insert(index, "%s %d\n" % (op_name, 0))
-                                untreated_op_latency += cpu_latency
-                            print(index, "%s %d\n" % (op_name, 0))
-                            break
-    return lines, untreated_op_latency
-
-
 def solve_pnasnet(model, mobile, thread):
     # Read profile data
     model_dir = os.path.join("../models/", model)
@@ -588,9 +563,9 @@ def solve_pnasnet(model, mobile, thread):
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(9)])
     elif model == 'nasnet-large':
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(18)])
-        pnasnet_module_list.insert(6, 'reduction_cell_0/')
-        pnasnet_module_list.insert(13, 'reduction_cell_1/')
-        
+        pnasnet_module_list.insert(8, 'reduction_cell_0/')
+        pnasnet_module_list.insert(15, 'reduction_cell_1/')
+        print('aaa', pnasnet_module_list)
     elif model == 'nasnet-mobile':
         pnasnet_module_list.extend(['cell_'+str(i)+'/' for i in range(12)])
         pnasnet_module_list.insert(6, 'reduction_cell_0/')

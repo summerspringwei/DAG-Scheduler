@@ -130,7 +130,7 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         op_def = OperatorDef()
         op_def.type = op_type
         # Set OperatorLatency transformation latency
-        print("%s %s" % (op_name, str(op.input_tensors)))
+        # print("%s %s" % (op_name, str(op.input_tensors)))
         # The data transformation latency is the sum of all the input tensor transformation latency
         for (tensor_addr, tensor_shape) in op.input_tensors:
             if(len(tensor_shape) >= 1):

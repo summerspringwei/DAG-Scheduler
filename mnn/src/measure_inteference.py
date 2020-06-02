@@ -127,15 +127,15 @@ def gather_multi_file_profile(files_list, raw_info_file_path, result_file_path):
 
 
 if __name__ == "__main__":
-    model, mobile, thread = parse_model_mobile()
-    model_dir = os.path.join("../models/", model)
-    os.path.join(model_dir, mobile, '{}-{}-cpu-{}.csv'.format(mobile, model, thread))
-    device_dir = "../models/pnasnet-large/redmi/"
-    gather_net_profile(os.path.join(model_dir, mobile, '{}-{}-cpu-{}.csv'.format(mobile, model, thread)),\
-        os.path.join(model_dir, mobile, '{}-{}-gpu-{}.csv'.format(mobile, model, 1)), \
-            os.path.join(model_dir, mobile, '{}-{}-cpu-{}-parallel.csv'.format(mobile, model, thread)), \
-                os.path.join(model_dir, '{}-info.txt'.format(model)), \
-                    os.path.join(model_dir, mobile, '{}-{}-cpu-{}-compare.csv'.format(mobile, model, thread)))
+    # model, mobile, thread = parse_model_mobile()
+    # model_dir = os.path.join("../models/", model)
+    # os.path.join(model_dir, mobile, '{}-{}-cpu-{}.csv'.format(mobile, model, thread))
+    # device_dir = "../models/pnasnet-large/redmi/"
+    # gather_net_profile(os.path.join(model_dir, mobile, '{}-{}-cpu-{}.csv'.format(mobile, model, thread)),\
+    #     os.path.join(model_dir, mobile, '{}-{}-gpu-{}.csv'.format(mobile, model, 1)), \
+    #         os.path.join(model_dir, mobile, '{}-{}-cpu-{}-parallel.csv'.format(mobile, model, thread)), \
+    #             os.path.join(model_dir, '{}-info.txt'.format(model)), \
+    #                 os.path.join(model_dir, mobile, '{}-{}-cpu-{}-compare.csv'.format(mobile, model, thread)))
                     
     
     # gather_net_profile("experimental_result_mnn/redmi-inception-cpu-4.csv", \
@@ -170,15 +170,15 @@ if __name__ == "__main__":
     #     "pnasnet-large/pnasnet-large-info.bak", \
     #     "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
     
-    # model, mobile, thread = parse_model_mobile()
-    # model_dir = os.path.join("../models/", model)
-    # file_prefix = mobile+"-"+model
-    # result_file_path = os.path.join(model_dir, mobile, file_prefix+"-layerwise-latency.csv")
-    # gather_multi_file_profile([
-    #     os.path.join(model_dir, mobile, file_prefix+"-cpu-1.csv"),
-    #     os.path.join(model_dir, mobile, file_prefix+"-cpu-2.csv"),
-    #     os.path.join(model_dir, mobile, file_prefix+"-cpu-4.csv"),
-    #     os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),],
-    #     os.path.join(model_dir, model+"-info.txt"),
-    #     result_file_path)
-    # print("Gather profile data for model %s on mobile %s done, write result to %s" % (model, mobile, result_file_path))
+    model, mobile, thread = parse_model_mobile()
+    model_dir = os.path.join("../models/", model)
+    file_prefix = mobile+"-"+model
+    result_file_path = os.path.join(model_dir, mobile, file_prefix+"-layerwise-latency.csv")
+    gather_multi_file_profile([
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-2.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-4.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),],
+        os.path.join(model_dir, model+"-info.txt"),
+        result_file_path)
+    print("Gather profile data for model %s on mobile %s done, write result to %s" % (model, mobile, result_file_path))

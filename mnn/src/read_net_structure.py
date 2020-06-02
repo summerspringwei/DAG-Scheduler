@@ -3,6 +3,7 @@ from net_struct import *
 from read_profile_data import *
 import queue
 import re
+import os
         
 def pnasnet_mobile_subgraph_subprefix():
     subprefix_list = []
@@ -140,17 +141,17 @@ class Subgraph(Operator):
 
         
         # Debug info
-        print(self.name + "input nodes and output nodes:")
-        print(self.parents)
-        print(self.children)
-        print(self.input_nodes)
-        print(self.input_tensors)
-        print(self.output_nodes)
-        print(self.output_tensors)
-        print(self.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC)
-        print(self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW)
-        print(self.op_def.operatorLatency.input_data_trans_latency)
-        print()
+        # print(self.name + "input nodes and output nodes:")
+        # print(self.parents)
+        # print(self.children)
+        # print(self.input_nodes)
+        # print(self.input_tensors)
+        # print(self.output_nodes)
+        # print(self.output_tensors)
+        # print(self.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC)
+        # print(self.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW)
+        # print(self.op_def.operatorLatency.input_data_trans_latency)
+        # print()
 
 
     def buildMultiSubgraph(self, op_name_list, name_op_dict, sub_prefix_list, pattern=None):
@@ -238,9 +239,9 @@ class Subgraph(Operator):
                         parent_subgraph.children.add(child_subgraph.name)
                         child_subgraph.parents.add(parent_subgraph.name)
 
-        print("All subgraph:")
-        for subgraph_name in self.op_name_list:
-            print(self.name_op_dict[subgraph_name])
+        # print("All subgraph:")
+        # for subgraph_name in self.op_name_list:
+        #     print(self.name_op_dict[subgraph_name])
     
 
     def out_op_device_type(self):
@@ -274,14 +275,13 @@ class Subgraph(Operator):
                 self.op_def.operatorLatency.input_data_trans_latency, self.output_tensors))
 
     
-
-def write_subgraph_device_placement_result(cpu_name_list, gpu_name_list, \
-    name_op_dict, result_file_path, op_execution_order_list=None):
+# Get 'cpu_name_list' and gpu_name_list from GLPK result file
+def write_subgraph_device_placement_result(cpu_name_list=None, gpu_name_list=None, \
+    name_op_dict=None, op_execution_order_list=None):
     print("CPU subgraphs:")
     print(cpu_name_list)
     print("GPU subgraphs:")
     print(gpu_name_list)
-    f = open(result_file_path, 'w')
     lines = []
     # if has op execution order, append op name 
     if op_execution_order_list != None:
@@ -289,13 +289,17 @@ def write_subgraph_device_placement_result(cpu_name_list, gpu_name_list, \
         gpu_name_list = []
         for (op_name, device, start_time) in op_execution_order_list:
             subgraph = name_op_dict[op_name]
-            assert(isinstance(subgraph, Subgraph))
-            if device == 1:    
+            # compatibility for Greedy and LP
+            if device == 1 or device == 0:
                 subgraph.op_def.device_type = DeviceType.CPU
-            elif device == 2:
+            elif device == 2 or device == 3:
                 subgraph.op_def.device_type = DeviceType.GPU
-            lines.extend(subgraph.out_op_device_type())
-    else:
+            
+            if isinstance(subgraph, Subgraph):
+                lines.extend(subgraph.out_op_device_type())
+            else:
+                lines.append("%s %d\n" % (op_name, subgraph.op_def.device_type))
+    elif cpu_name_list != None and gpu_name_list != None:
         for op_name in cpu_name_list:
             subgraph = name_op_dict[op_name]
             assert(isinstance(subgraph, Subgraph))
@@ -306,10 +310,7 @@ def write_subgraph_device_placement_result(cpu_name_list, gpu_name_list, \
             assert(isinstance(subgraph, Subgraph))
             subgraph.op_def.device_type = DeviceType.GPU
             lines.extend(subgraph.out_op_device_type())
-    # f.writelines(lines)
-    # f.flush()
-    # f.close()
-    # print("Write result done.")
+
     return lines
 
 
@@ -330,28 +331,143 @@ def write_op_device_placement_result(cpu_name_list, gpu_name_list, result_file_p
     print("Write result done.")
 
 
+def get_model_module_name_list(model):
+    # Using module prefix to form the subgraph
+    module_name_list = []
+    if model.find('nasnet') >= 0:
+        module_name_list.extend(['cell_stem_0/', 'cell_stem_1/'])
+    if model == 'pnasnet-large':
+        module_name_list.extend(['cell_'+str(i)+'/' for i in range(12)])
+    elif model == 'pnasnet-mobile':
+        module_name_list.extend(['cell_'+str(i)+'/' for i in range(9)])
+    elif model == 'nasnet-large':
+        module_name_list.extend(['cell_'+str(i)+'/' for i in range(18)])
+        module_name_list.insert(8, 'reduction_cell_0/')
+        module_name_list.insert(15, 'reduction_cell_1/')
+    elif model == 'nasnet-mobile':
+        module_name_list.extend(['cell_'+str(i)+'/' for i in range(12)])
+        module_name_list.insert(6, 'reduction_cell_0/')
+        module_name_list.insert(11, 'reduction_cell_1/')
+    elif model == "inception-v3":
+        inception_prefix = "InceptionV3/InceptionV3/"
+        inception_module_list = ["Mixed_5b/", "Mixed_5c/", "Mixed_5d/", \
+            "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/", "Mixed_7a/", "Mixed_7b/", "Mixed_7c/"]
+        inception_module_list = [inception_prefix + module for module in inception_module_list]
+        module_name_list.extend(inception_module_list)
+    elif model == "inception-v4":
+        inception_prefix = "InceptionV4/InceptionV4/"
+        inception_module_list = ["Mixed_4a/", "Mixed_5b/", "Mixed_5c/", "Mixed_5d/", "Mixed_5e/", \
+            "Mixed_6a/", "Mixed_6b/", "Mixed_6c/", "Mixed_6d/", "Mixed_6e/","Mixed_6f/","Mixed_6g/","Mixed_6h/",\
+            "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
+        inception_module_list = [inception_prefix + module for module in inception_module_list]
+        module_name_list.extend(inception_module_list)
+    else:
+        print("Model %s does not suport yet." % (model))
+        return None
+    return module_name_list
+
+
+def get_inception_one_module_name(op_name_prefix, op_name_list):
+    module_op_names = []
+    branches = set()
+    for op_name in op_name_list:
+        if op_name.find(op_name_prefix) == 0:
+            module_op_names.append(op_name)
+            if op_name.find("Branch") > 0:
+                branches.add(op_name.split("/")[3])
+    
+    return module_op_names, list(branches)
+
+
+def build_multi_subgraphs(model, mobile, thread):
+    # Read profile data
+    model_dir = os.path.join("../models/", model)
+    op_name_list, name_op_dict, net_def = gather_model_profile(
+        os.path.join(model_dir, model + "-info.txt"),
+        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+    
+    module_name_list = get_model_module_name_list(model)
+    subgraph_name_list = []
+    for module_name in module_name_list:
+        # For one module with multiple subgraphs, we need build subgraph and update the op_dict
+        parent_subgraph = Subgraph(module_name)
+        if model != None and model.find("inception") >=0:
+            one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
+            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
+            subgraph_name_list.extend(parent_subgraph.op_name_list)
+        elif model != None and (model.find("pnasnet") >=0 or model.find("nasnet") >=0):
+            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+            subgraph_name_list.extend(parent_subgraph.op_name_list)
+    # Build the relationship for subgraphs
+    for subgraph_a_name in subgraph_name_list:
+        subgraph_a = name_op_dict[subgraph_a_name]
+        
+        for subgraph_b_name in subgraph_name_list:
+            subgraph_b = name_op_dict[subgraph_b_name]
+            if subgraph_a_name == subgraph_b_name:
+                continue
+            
+            for parent_name in subgraph_a.parents:
+                if parent_name in subgraph_b.op_name_list:
+                    subgraph_b.children.add(subgraph_a_name)
+                    subgraph_a.parents.add(subgraph_b_name)
+                    name_op_dict[subgraph_b_name] = subgraph_b
+                    name_op_dict[subgraph_a_name] = subgraph_a
+                    break
+    # for subgraph_name in subgraph_name_list:
+    #     print(name_op_dict[subgraph_name])
+    return subgraph_name_list, name_op_dict
+    
+
+def find_input_nodes(op_name_list, name_op_dict):
+    children_set = set()
+    # [print(op_name) for op_name in op_name_list]
+    for op_name in op_name_list:
+        op = name_op_dict[op_name]
+        children_set = children_set.union(op.children)
+    input_nodes = list(set(op_name_list).difference(children_set))
+    return input_nodes
+
+def insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=[]):
+    solved_op_name_list = []
+    for l in lines:
+        solved_op_name_list.append(l.split(' ')[0])
+    print(len(lines))
+    print(len(op_name_list))
+    
+    untreated_op_name_list = set(op_name_list).difference(set(solved_op_name_list))
+    untreated_op_latency = 0.0
+    # print(untreated_op_name_list)
+    for op_name in op_name_list:
+        if op_name in untreated_op_name_list:
+            op = name_op_dict[op_name]
+            parents_set = set(op.parents)
+            if len(op.parents) == 0:
+                lines.insert(0, "%s %d\n" % (op_name, 0))
+            else:
+                index = 0
+                for line in lines:
+                    index += 1
+                    op_tmp_name = line.strip().split(" ")[0]
+                    if op_tmp_name in parents_set:
+                        parents_set.remove(op_tmp_name)
+                        if len(parents_set) == 0:
+                            cpu_latency = op.op_def.operatorLatency.CPU_latency
+                            gpu_latency = op.op_def.operatorLatency.CPU_latency
+                            if op_name not in unsupported_op_names and gpu_latency < cpu_latency:
+                                lines.insert(index, "%s %d\n" % (op_name, 3))
+                                untreated_op_latency += gpu_latency
+                            else:
+                                lines.insert(index, "%s %d\n" % (op_name, 0))
+                                untreated_op_latency += cpu_latency
+                            print(index, "%s %d\n" % (op_name, 0))
+                            break
+    return lines, untreated_op_latency
+
+
 
 if __name__ == "__main__":
-    # op_name_list, name_op_dict = read_net_info("pnasnet-mobile/pnasnet-info.txt")
-    op_name_list, name_op_dict, _  = gather_model_profile(
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-info.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/redmi_data_trans.txt",
-        "/mnt/d/home/Projects/DAG-scheduler/mnn/experimental_result_mnn/redmi-pnasnet-mobile-latency.csv", 1)
-    module_name = 'cell_0/'
-    parent_subgraph = Subgraph(module_name)
-    parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
-    write_device_placement_result(['cell_0/subgraph_0', 'cell_0/comb_iter_0/', 'cell_0/comb_iter_1/', 'cell_0/subgraph_2'],\
-        ['cell_0/subgraph_1', 'cell_0/comb_iter_2/', 'cell_0/comb_iter_3/', 'cell_0/comb_iter_4/'], \
-         name_op_dict, \
-        '/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/mDevice_map_pnasnet-mobile-cell_0.txt')
-    
-    
-
-# cell_stem_1/comb_iter_0/ 1 Operator latency: 2.531502 4.512119 1.600000 1.600000
-# cell_stem_1/comb_iter_1/ 2 Operator latency: 3.601987 4.949267 1.600000 1.600000
-# cell_stem_1/comb_iter_2/ 3 Operator latency: 3.249724 6.747899 1.600000 1.600000
-# cell_stem_1/comb_iter_3/ 4 Operator latency: 1.272897 3.625851 3.200000 3.200000
-# cell_stem_1/comb_iter_4/ 5 Operator latency: 2.046891 3.655301 3.200000 3.200000
-# cell_stem_1/subgraph_0 6 Operator latency: 12.171825 25.147106 1.600000 1.600000
-# cell_stem_1/subgraph_1 7 Operator latency: 2.874615 2.618410 1.600000 1.600000
-# cell_stem_1/subgraph_2 8 Operator latency: 0.294615 4.516769 8.000000 8.000000
+    model, mobile, thread = parse_model_mobile()
+    subgraph_name_list, name_op_dict = build_multi_subgraphs(model, mobile, thread)
+    print(find_input_nodes(subgraph_name_list, name_op_dict))

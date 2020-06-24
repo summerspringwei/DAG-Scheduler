@@ -484,20 +484,31 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
     return cpu_data, gpu_data, convert_data, op_execution_order_list
 
 
-def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name):
+class LPMode:
+    Mode_Subgraph = 0
+    Mode_Operator = 1
+
+
+
+def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name, mode=LPMode.Mode_Subgraph):
     lines = []
     for module_name in module_name_list:
-        # For one module with multiple subgraphs, we need build subgraph and update the op_dict
-        parent_subgraph = Subgraph(module_name)
-        if model_name != None and model_name.find("inception") >=0:
-            one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
-            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
-        elif model_name != None and (model_name.find("pnasnet") >=0 or model_name.find("nasnet") >=0):
-            parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
-        # one_module_names_idx_dict = associate_op_name_with_idx(
-        #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
-        print("aaa", parent_subgraph.op_name_list)
-        one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
+        one_module_names_idx_dict = {}
+        if mode == LPMode.Mode_Subgraph:
+            # For one module with multiple subgraphs, we need build subgraph and update the op_dict
+            parent_subgraph = Subgraph(module_name)
+            if model_name != None and model_name.find("inception") >=0:
+                one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
+                parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
+            elif model_name != None and (model_name.find("pnasnet") >=0 or model_name.find("nasnet") >=0):
+                parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+            # one_module_names_idx_dict = associate_op_name_with_idx(
+            #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
+            print("aaa", parent_subgraph.op_name_list)
+            one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
+        elif mode == LPMode.Mode_Operator:
+            one_module_names_idx_dict = associate_op_name_list_with_idx(filter_op_name_list(op_name_list, module_name))
+
         # Generate LP constraints and write them to a file
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
         # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
@@ -547,13 +558,14 @@ def sum_lp_objectives(folder_path):
 
 
 
-def solve_pnasnet(model, mobile, thread):
+def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
     # Read profile data
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
         os.path.join(model_dir, model + "-info.txt"),
         os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), \
+        thread, SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
     
     # Using module prefix to form the subgraph
     pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
@@ -576,7 +588,7 @@ def solve_pnasnet(model, mobile, thread):
     
     # Using GLPK solve device placement here
     folder_path = os.path.join(model_dir, mobile)
-    lines = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model)
+    lines = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
     unsupported_op_names = ["final_layer/Relu", "final_layer/Mean/reduction_indices", \
         "final_layer/Relu___tr4final_layer/Mean", "final_layer/Mean", \
         "final_layer/FC/weights", "final_layer/FC/MatMul", \
@@ -587,21 +599,31 @@ def solve_pnasnet(model, mobile, thread):
     
     # Write results
     device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
-    f = open(device_map_file_path, 'w')
-    f.writelines(lines)
-    f.flush()
-    f.close()
+    new_lines = []
+    if CPU_little_thread_index != None:
+        device_map_file_path = os.path.join(model_dir, mobile, \
+            "mDeviceMap-{}-cpu-big-{}-little-{}.txt".format(model, thread, CPU_little_thread_index))
+        # Little core device type is 2
+        for line in lines:
+            line = line.replace(' 3', ' 2')
+            new_lines.append(line)
+        lines = new_lines
+    
+    write_lines(device_map_file_path, lines)
+    sh_cmd = "adb push {} /data/local/tmp/".format(device_map_file_path)
+    print(sh_cmd)
+    os.system(sh_cmd)
     print(untreated_op_latency)
     print("LP+serial total: {}".format(lp_total+untreated_op_latency))
 
 
-def solve_inception(model, mobile, thread):
+def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
         os.path.join(model_dir, model + "-info.txt"),
         os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
         os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-        thread, SCALE=1.0)
+        thread, SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
     
     if model == "inception-v3":
         inception_prefix = "InceptionV3/InceptionV3/"
@@ -614,23 +636,32 @@ def solve_inception(model, mobile, thread):
             "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
     inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
-    lines = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model)
+    lines = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
     lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict)
     lp_total = sum_lp_objectives(folder_path)
     print("LP+serial total: {}".format(lp_total+untreated_op_latency))
-
     device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
-    f = open(device_map_file_path, 'w')
-    f.writelines(lines)
-    f.flush()
-    f.close()
+    new_lines = []
+    if CPU_little_thread_index != None:
+        device_map_file_path = os.path.join(model_dir, mobile, \
+            "mDeviceMap-{}-cpu-big-{}-little-{}.txt".format(model, thread, CPU_little_thread_index))
+        # Little core device type is 2
+        for line in lines:
+            line = line.replace(' 3', ' 2')
+            new_lines.append(line)
+        lines = new_lines
 
+    write_lines(device_map_file_path, lines)
+
+    sh_cmd = "adb push {} /data/local/tmp/".format(device_map_file_path)
+    print(sh_cmd)
+    os.system(sh_cmd)
 
 
 if __name__ == "__main__":    
     model, mobile, thread = parse_model_mobile()
     if model in ['pnasnet-mobile', 'pnasnet-large', 'nasnet-large', 'nasnet-mobile']:
-        solve_pnasnet(model, mobile, thread)
+        solve_pnasnet(model, mobile, thread, CPU_little_thread_index=4)
     elif model in ['inception-v3', 'inception-v4']:
-        solve_inception(model, mobile, thread)
+        solve_inception(model, mobile, thread, CPU_little_thread_index=4)
     

@@ -42,7 +42,7 @@ def thread_index_to_thread_number(CPU_thread_index):
 # Note special case for 'concat'
 # CPU thread latency index
 # Set the Operator latency scale factor, deal with sum of ops is less than the end-to-end latency
-def read_latency(file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0):
+def read_latency(file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0, CPU_little_thread_index=None):
     f = open(file_path, 'r')
     operator_latency_dict = {}
     op_name_list = []
@@ -53,6 +53,11 @@ def read_latency(file_path, CPU_thread_index, OP_LATENCY_SCALE = 1.0):
         op_latency = OperatorLatency()
         op_latency.CPU_latency = float(com[thread_index_to_thread_number(CPU_thread_index)].strip()) / 1000 * OP_LATENCY_SCALE
         op_latency.GPU_latency = float(com[4].strip()) / 1000
+        
+        if CPU_little_thread_index != None:
+            assert(4+thread_index_to_thread_number(CPU_little_thread_index) < len(com))
+            op_latency.GPU_latency = float(com[4+thread_index_to_thread_number(CPU_little_thread_index)].strip()) / 1000
+        
         # Set GPU concat to a big value
         # if com[0].strip().split('/')[-1] == 'concat':
             # print("concat big value")
@@ -117,9 +122,11 @@ def read_net_info(file_path):
 
 # We need three file to read the profiling info
 # The 'raw_info_file_path' file describes the model structure
-def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path, CPU_thread_index, SCALE = 1.0):
+def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_latency_file_path, \
+    CPU_thread_index, SCALE = 1.0, CPU_little_thread_index = None):
     data_trans_dict = read_data_trans(data_trans_file_path)
-    op_name_list, latency_dict = read_latency(inference_latency_file_path, CPU_thread_index, OP_LATENCY_SCALE = SCALE)
+    op_name_list, latency_dict = read_latency(inference_latency_file_path, \
+        CPU_thread_index, OP_LATENCY_SCALE = SCALE, CPU_little_thread_index=CPU_little_thread_index)
     op_name_list, name_op_dict = read_net_info(raw_info_file_path)
     net_def = NetDef()
     # Gather three file into name_op_dict
@@ -129,10 +136,16 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         op_type = op_name.split('/')[-1]
         op_def = OperatorDef()
         op_def.type = op_type
+        
+
         # Set OperatorLatency transformation latency
         # print("%s %s" % (op_name, str(op.input_tensors)))
         # The data transformation latency is the sum of all the input tensor transformation latency
         for (tensor_addr, tensor_shape) in op.input_tensors:
+            # (TODO): measure the communication latency between CPU big and little cluster
+            if CPU_little_thread_index != None:
+                op_latency.input_data_trans_latency[tensor_addr] = [0, 0]
+                continue
             if(len(tensor_shape) >= 1):
                 if tensor_shape in data_trans_dict.keys():
                     op_latency.Transpose_latency_NCHW_to_NHWC += data_trans_dict[tensor_shape][0]
@@ -159,7 +172,7 @@ if __name__ == "__main__":
             os.path.join(model_dir, model + "-info.txt"),
             os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
             os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-            thread)
+            thread, CPU_little_thread_index=4)
     
     for op_name in op_name_list:
         print(op_name)

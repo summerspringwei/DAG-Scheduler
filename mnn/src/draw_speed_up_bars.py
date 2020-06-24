@@ -87,7 +87,7 @@ def read_and_normalize_data(mobile, policy_labels):
 
 
 def main():
-    mobile = 'vivo_z3'
+    mobile = 'oneplus5t'
     policy_labels=["Theory", "Real", "Alone"]
     model_data_dict  = read_and_normalize_data(mobile, policy_labels)
     fig = plt.figure()

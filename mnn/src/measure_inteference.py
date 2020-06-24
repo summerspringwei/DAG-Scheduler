@@ -16,6 +16,7 @@ Return profile map: name => (name, device, [latency_1,...,latency_n])
 '''
 def read_multi_runs_latency(file_path):
     f_profile = open(file_path, 'r')
+    # (op_name)->(op_name, device, latency)
     profile_dict = {}
     for line in f_profile.readlines():
         com = line.strip().split(' ')
@@ -175,10 +176,13 @@ if __name__ == "__main__":
     file_prefix = mobile+"-"+model
     result_file_path = os.path.join(model_dir, mobile, file_prefix+"-layerwise-latency.csv")
     gather_multi_file_profile([
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-1.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-2.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-4.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),],
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-big-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-big-2.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-big-4.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-2.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-4.csv"),],
         os.path.join(model_dir, model+"-info.txt"),
         result_file_path)
     print("Gather profile data for model %s on mobile %s done, write result to %s" % (model, mobile, result_file_path))

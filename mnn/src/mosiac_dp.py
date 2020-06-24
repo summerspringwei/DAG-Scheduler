@@ -99,7 +99,7 @@ def get_sample_ops():
     return op_name_list, name_op_dict
 
 
-def my_dp(op_name_list, name_op_dict):
+def my_serial_dp(op_name_list, name_op_dict):
     acc_latency = prepare_slice_latency(op_name_list, name_op_dict)
     devices = [0, 1]
     dp = []
@@ -139,6 +139,48 @@ def my_dp(op_name_list, name_op_dict):
     return dp[LENGTH], device_dp
 
 
+def my_parallel_dp(op_name_list, name_op_dict):
+    acc_latency = prepare_slice_latency(op_name_list, name_op_dict)
+    devices = [0, 1]
+    dp = []
+    device_dp = []
+    LENGTH = len(op_name_list)
+    for i in range(LENGTH+1):
+        if i == 0:
+            dp.append(0)
+            device_dp.append(0)
+            continue
+        (cpu_latency, gpu_latency, c2g, g2c) = get_slice_latency(0, i, acc_latency)
+        dp.append(cpu_latency)
+        device_dp.append(0)
+    CPU_endpoint = 0.0
+    GPU_endpoint = 0.0
+    for l in range(1, LENGTH+1):
+        cost = 1e6
+        # print("*-" * 10)
+        for k in range(l):
+            (cpu_latency, gpu_latency, c2g, g2c) = get_slice_latency(k, l, acc_latency)
+            device_latencies = [cpu_latency, gpu_latency]
+            trans_costes = [g2c, c2g]
+            # print("(%d %d)->(%f, %f)" % (k, l, cpu_latency, gpu_latency))
+            for d in devices:
+                trans_latency = 0.0
+                if device_dp[k] != d:
+                    trans_latency = trans_costes[d]
+                slice_cost = dp[k] + device_latencies[d] + trans_latency
+                # print("last device %d, device %d, dp[%d] %f, device_latency %f, trans_latency %f, cost %f" \
+                #     % (device_dp[k], d, k, dp[k], device_latencies[d], trans_latency, cost))
+                if slice_cost < cost:
+                    tmp_device = d
+                    cost = slice_cost
+        device_dp[l] = tmp_device
+        dp[l] = cost
+        # print(dp[l])
+        # print('-*' * 10)
+    return dp[LENGTH], device_dp
+
+
+
 def solve_mosiac_dp(model, mobile, thread):
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict, net_def = gather_model_profile(
@@ -153,7 +195,7 @@ def solve_mosiac_dp(model, mobile, thread):
 def test_my_dp():
     # op_name_list, name_op_dict = get_sample_ops()
     # find_efficient_slice_and_execution_plan(op_name_list, name_op_dict)
-    result = my_dp(op_name_list, name_op_dict)
+    result = my_serial_dp(op_name_list, name_op_dict)
     print(result)
 
 

@@ -52,12 +52,18 @@ def find_critical_node(model, input_name):
             # print("<%s %s %f>" % (op_name, child_name, weight))
             op_queue.put(child_name)
     
+    weight_count = {}
     for name in name_op_list:
         print("%s %d" %(name, name_weight_map[name]))
-        
+        if name_weight_map[name] not in weight_count.keys():
+            weight_count[name_weight_map[name]] = 1
+        else:
+            weight_count[name_weight_map[name]] += 1
+    result = sorted(weight_count.items())
+    print(result)
 
 
 if __name__ == "__main__":
     model, mobile, thread = parse_model_mobile()
-    find_critical_node(model, 'InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D')
-    # find_critical_node(model, 'conv0/Conv2D')
+    # find_critical_node(model, 'InceptionV3/InceptionV3/Conv2d_1a_3x3/Conv2D')
+    find_critical_node(model, 'conv0/Conv2D')

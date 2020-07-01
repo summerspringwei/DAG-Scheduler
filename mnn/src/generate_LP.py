@@ -661,7 +661,9 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
 if __name__ == "__main__":    
     model, mobile, thread = parse_model_mobile()
     if model in ['pnasnet-mobile', 'pnasnet-large', 'nasnet-large', 'nasnet-mobile']:
-        solve_pnasnet(model, mobile, thread, CPU_little_thread_index=4)
+        # solve_pnasnet(model, mobile, thread, CPU_little_thread_index=4)
+        solve_pnasnet(model, mobile, thread)
     elif model in ['inception-v3', 'inception-v4']:
-        solve_inception(model, mobile, thread, CPU_little_thread_index=4)
+        # solve_inception(model, mobile, thread, CPU_little_thread_index=4)
+        solve_inception(model, mobile, thread)
     

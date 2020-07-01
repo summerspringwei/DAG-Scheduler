@@ -454,7 +454,7 @@ def insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names
                         parents_set.remove(op_tmp_name)
                         if len(parents_set) == 0:
                             cpu_latency = op.op_def.operatorLatency.CPU_latency
-                            gpu_latency = op.op_def.operatorLatency.CPU_latency
+                            gpu_latency = op.op_def.operatorLatency.GPU_latency
                             if op_name not in unsupported_op_names and gpu_latency < cpu_latency:
                                 lines.insert(index, "%s %d\n" % (op_name, 3))
                                 untreated_op_latency += gpu_latency

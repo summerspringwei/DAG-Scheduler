@@ -1,0 +1,1089 @@
+GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_5b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5b.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_5b.lp'...
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+471 lines were read
+GLPK Integer Optimizer, v4.65
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+Preprocessing...
+92 hidden covering inequaliti(es) were detected
+92 constraint coefficient(s) were reduced
+334 rows, 127 columns, 1084 non-zeros
+108 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 334
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+334 rows, 127 columns, 1084 non-zeros
+      0: obj =   7.209000000e-01 inf =   7.387e+02 (116)
+    116: obj =   1.924780000e+01 inf =   2.396e-13 (0)
+*   158: obj =   7.209000000e-01 inf =   1.226e-13 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   158: mip =     not found yet >=              -inf        (1; 0)
++   259: >>>>>   2.956230000e+01 >=   3.521100000e+00  88.1% (15; 0)
++   369: >>>>>   2.388840000e+01 >=   5.259700000e+00  78.0% (26; 1)
++   946: >>>>>   2.245450000e+01 >=   6.296100000e+00  72.0% (72; 21)
++  1895: >>>>>   2.181040000e+01 >=   1.194960000e+01  45.2% (136; 80)
++  2070: >>>>>   2.035970000e+01 >=   1.287690000e+01  36.8% (138; 104)
++  3512: >>>>>   2.004200000e+01 >=   1.643800000e+01  18.0% (126; 448)
++  3778: >>>>>   2.002710000e+01 >=   1.724180000e+01  13.9% (105; 566)
++  4229: mip =   2.002710000e+01 >=     tree is empty   0.0% (0; 1031)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.2 secs
+Memory used: 1.0 Mb (1030259 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5b.txt'...
+GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_5c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5c.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_5c.lp'...
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+471 lines were read
+GLPK Integer Optimizer, v4.65
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+Preprocessing...
+92 hidden covering inequaliti(es) were detected
+92 constraint coefficient(s) were reduced
+334 rows, 127 columns, 1084 non-zeros
+108 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 334
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+334 rows, 127 columns, 1084 non-zeros
+      0: obj =   7.436000000e-01 inf =   7.393e+02 (116)
+    122: obj =   2.335270000e+01 inf =   2.359e-16 (0) 1
+*   176: obj =   7.436000000e-01 inf =   3.916e-14 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   176: mip =     not found yet >=              -inf        (1; 0)
++   390: >>>>>   3.270960000e+01 >=   8.579200000e+00  73.8% (23; 1)
++   621: >>>>>   3.101390000e+01 >=   1.055370000e+01  66.0% (43; 5)
++   992: >>>>>   2.781040000e+01 >=   1.055370000e+01  62.1% (65; 14)
++  1663: >>>>>   2.780720000e+01 >=   1.200100000e+01  56.8% (108; 64)
++  1870: >>>>>   2.728450000e+01 >=   1.204800000e+01  55.8% (125; 70)
++  2034: >>>>>   2.636340000e+01 >=   1.237030000e+01  53.1% (137; 83)
++  2153: >>>>>   2.473320000e+01 >=   1.254100000e+01  49.3% (146; 91)
++  2655: >>>>>   2.464240000e+01 >=   1.441230000e+01  41.5% (167; 144)
++  2856: >>>>>   2.455540000e+01 >=   1.472620000e+01  40.0% (181; 156)
++  4091: >>>>>   2.406950000e+01 >=   1.562060000e+01  35.1% (212; 263)
++  4252: >>>>>   2.348630000e+01 >=   1.563310000e+01  33.4% (220; 275)
++  4861: >>>>>   2.226550000e+01 >=   1.744430000e+01  21.7% (225; 410)
++  5136: >>>>>   2.214890000e+01 >=   1.868010000e+01  15.7% (133; 721)
++  5488: mip =   2.214890000e+01 >=     tree is empty   0.0% (0; 1267)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.2 secs
+Memory used: 1.2 Mb (1256343 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5c.txt'...
+Get model name inception-v3 mobile redmi thread 1
+InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 3.480400 1.912600 {'0x741fc3ba40': [3.878851064, 2.20325]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 4.517900 2.785300 {'0x741fc3ba40': [3.878851064, 2.20325]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 3.621000 2.467600 {'0x741fc3ba40': [3.878851064, 2.20325]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 4.538800 2.800200 {'0x741fc3ba40': [3.878851064, 2.20325]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 2.664200 2.094800 {'0x741fc3ba90': [3.878851064, 2.20325]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D 6 Operator latency: 7.985900 5.966900 {'0x741fc3bae0': [2.309666667, 1.851166667]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D 7 Operator latency: 8.535000 7.607700 {'0x741fc3bb30': [2.093222222, 1.7295]}
+InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D 8 Operator latency: 11.323900 8.086400 {'0x741fc3bc20': [2.3311111110000002, 1.834551724]}
+InceptionV3/InceptionV3/Mixed_5b/concat 9 Operator latency: 0.720900 1.686200 {'0x741fc3bb80': [2.309666667, 1.851166667], '0x741fc3bc70': [2.309666667, 1.851166667], '0x741fc3bcc0': [2.3311111110000002, 1.834551724], '0x741fc3bbd0': [2.978777778, 1.1044]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_5b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5b.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_5b/concat'}
+('InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D', 2, 2.7853)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D', 1, 3.4804)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D', 2, 5.2529)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D', 1, 8.107)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D', 1, 10.7712)
+('InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D', 2, 11.2198)
+('InceptionV3/InceptionV3/Mixed_5b/concat', 1, 19.3062)
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:3.4804, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:2.7853000000000003, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D, device:2, start_time:2.7853, latency:2.4676, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D, device:1, start_time:3.4804, latency:4.5388, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D, device:2, start_time:5.2529, latency:5.9669, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D, device:1, start_time:8.107, latency:2.6641999999999997, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D, device:1, start_time:10.7712, latency:8.535, data_trans:2.093222222
+name:InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D, device:2, start_time:11.2198, latency:8.0864, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5b/concat, device:1, start_time:19.3062, latency:0.7209, data_trans:2.3311111110000002
+[(0.0, 3.4804), (3.4804, 8.0192), (8.107, 10.771199999999999), (10.7712, 19.3062), (19.3062, 20.0271)]
+[(0.0, 2.7853000000000003), (2.7853, 5.2529), (5.2529, 11.2198), (11.2198, 19.306199999999997)]
+[(19.3062, 21.399422222000002), (20.0271, 22.358211111000003)]
+endpoint: 22.358211 , intersection: 0.000000
+module_name
+draw_gantt
+[(0.0, 3.4804), (3.4804, 4.5388), (8.107, 2.6641999999999997), (10.7712, 8.535), (19.3062, 0.7209)] [(0.0, 2.7853000000000003), (2.7853, 2.4676), (5.2529, 5.9669), (11.2198, 8.0864)] [(19.3062, 2.093222222), (20.0271, 2.3311111110000002)]
+../models/inception-v3/redmi/Mixed_5b
+[(0.0, 3.4804), (3.4804, 4.5388), (8.107, 2.6641999999999997), (10.7712, 8.535), (19.3062, 0.7209)]
+[(0.0, 2.7853000000000003), (2.7853, 2.4676), (5.2529, 5.9669), (11.2198, 8.0864)]
+[(19.3062, 2.093222222), (20.0271, 2.3311111110000002)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_5b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0b_5x5/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_5b/Branch_2/Conv2d_0c_3x3/Conv2D']
+InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 4.680900 2.718100 {'0x741fc3bd10': [3.0207800000000002, 3.0034166669999998]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 6.158700 3.421800 {'0x741fc3bd10': [3.0207800000000002, 3.0034166669999998]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D 3 Operator latency: 4.937900 2.895900 {'0x741fc3bd10': [3.0207800000000002, 3.0034166669999998]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 6.146200 3.468800 {'0x741fc3bd10': [3.0207800000000002, 3.0034166669999998]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 6.183400 3.475600 {'0x741fc3bd60': [3.0207800000000002, 3.0034166669999998]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D 6 Operator latency: 7.853200 6.146900 {'0x741fc3bdb0': [2.309666667, 1.851166667]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D 7 Operator latency: 8.730800 7.835600 {'0x741fc3be00': [2.093222222, 1.7295]}
+InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D 8 Operator latency: 11.525000 8.143200 {'0x741fc3bef0': [2.3311111110000002, 1.834551724]}
+InceptionV3/InceptionV3/Mixed_5c/concat 9 Operator latency: 0.743600 1.748100 {'0x741fc3be50': [2.309666667, 1.851166667], '0x741fc3bf40': [2.309666667, 1.851166667], '0x741fc3bf90': [2.3311111110000002, 1.834551724], '0x741fc3bea0': [2.309666667, 1.851166667]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_5c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5c.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_5c/concat'}
+('InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D', 2, 3.4218)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D', 1, 4.6809)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D', 2, 6.3177)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 9.7933)GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_5d.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5d.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_5d.lp'...
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+471 lines were read
+GLPK Integer Optimizer, v4.65
+354 rows, 129 columns, 1125 non-zeros
+110 integer variables, all of which are binary
+Preprocessing...
+92 hidden covering inequaliti(es) were detected
+92 constraint coefficient(s) were reduced
+334 rows, 127 columns, 1084 non-zeros
+108 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 334
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+334 rows, 127 columns, 1084 non-zeros
+      0: obj =   7.948000000e-01 inf =   7.396e+02 (116)
+    117: obj =   2.606400000e+01 inf =   0.000e+00 (0) 1
+*   183: obj =   7.948000000e-01 inf =   7.017e-14 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   183: mip =     not found yet >=              -inf        (1; 0)
++   485: >>>>>   3.264040000e+01 >=   9.658300000e+00  70.4% (37; 2)
++   629: >>>>>   3.250120000e+01 >=   1.062170000e+01  67.3% (48; 6)
++  1094: >>>>>   3.052870000e+01 >=   1.062170000e+01  65.2% (78; 24)
++  1396: >>>>>   2.745740000e+01 >=   1.218670000e+01  55.6% (103; 35)
++  1909: >>>>>   2.587790000e+01 >=   1.393770000e+01  46.1% (128; 75)
++  2529: >>>>>   2.576220000e+01 >=   1.476430000e+01  42.7% (170; 117)
++  2545: >>>>>   2.452340000e+01 >=   1.476430000e+01  39.8% (163; 132)
++  3833: >>>>>   2.443650000e+01 >=   1.657230000e+01  32.2% (225; 251)
++  4296: >>>>>   2.316170000e+01 >=   1.762260000e+01  23.9% (247; 303)
++  5246: mip =   2.316170000e+01 >=     tree is empty   0.0% (0; 1281)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.2 secs
+Memory used: 1.2 Mb (1239913 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5d.txt'...
+
+('InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D', 1, 12.5341)
+('InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D', 2, 13.2621)
+('InceptionV3/InceptionV3/Mixed_5c/concat', 1, 21.4053)
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:4.680899999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:3.4218, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D, device:2, start_time:3.4218, latency:2.8959, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D, device:1, start_time:4.6809, latency:7.8532, data_trans:2.309666667
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D, device:2, start_time:6.3177, latency:3.4756, data_trans:3.0034166669999998
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:9.7933, latency:3.4688000000000003, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D, device:1, start_time:12.5341, latency:8.730799999999999, data_trans:2.093222222
+name:InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D, device:2, start_time:13.2621, latency:8.1432, data_trans:1.834551724
+name:InceptionV3/InceptionV3/Mixed_5c/concat, device:1, start_time:21.4053, latency:0.7436, data_trans:6.9504444450000005
+[(0.0, 4.680899999999999), (4.6809, 12.5341), (12.5341, 21.264899999999997), (21.4053, 22.1489)]
+[(0.0, 3.4218), (3.4218, 6.3177), (6.3177, 9.7933), (9.7933, 13.2621), (13.2621, 21.4053)]
+[(12.5341, 14.843766667), (9.7933, 12.796716667), (21.264899999999997, 23.358122222), (21.4053, 23.239851724), (22.1489, 29.099344445)]
+endpoint: 29.099344 , intersection: 2.450067
+module_name
+draw_gantt
+[(0.0, 4.680899999999999), (4.6809, 7.8532), (12.5341, 8.730799999999999), (21.4053, 0.7436)] [(0.0, 3.4218), (3.4218, 2.8959), (6.3177, 3.4756), (9.7933, 3.4688000000000003), (13.2621, 8.1432)] [(12.5341, 2.309666667), (9.7933, 3.0034166669999998), (21.264899999999997, 2.093222222), (21.4053, 1.834551724), (22.1489, 6.9504444450000005)]
+../models/inception-v3/redmi/Mixed_5c
+[(0.0, 4.680899999999999), (4.6809, 7.8532), (12.5341, 8.730799999999999), (21.4053, 0.7436)]
+[(0.0, 3.4218), (3.4218, 2.8959), (6.3177, 3.4756), (9.7933, 3.4688000000000003), (13.2621, 8.1432)]
+[(12.5341, 2.309666667), (9.7933, 3.0034166669999998), (21.264899999999997, 2.093222222), (21.4053, 1.834551724), (22.1489, 6.9504444450000005)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv_1_0c_5x5/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/Branch_1/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5c/Branch_2/Conv2d_0c_3x3/Conv2D']
+InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 5.106000 2.984400 {'0x741fc3bfe0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 6.914000 3.743500 {'0x741fc3bfe0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 5.505600 3.257400 {'0x741fc3bfe0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 6.856600 3.754600 {'0x741fc3bfe0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 6.971100 3.757900 {'0x741fc3c030': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D 6 Operator latency: 7.864200 6.082100 {'0x741fc3c080': [2.309666667, 1.851166667]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D 7 Operator latency: 8.863500 7.637300 {'0x741fc3c0d0': [2.093222222, 1.7295]}
+InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D 8 Operator latency: 11.384100 8.126500 {'0x741fc3c1c0': [2.3311111110000002, 1.834551724]}
+InceptionV3/InceptionV3/Mixed_5d/concat 9 Operator latency: 0.794800 2.051600 {'0x741fc3c120': [2.309666667, 1.851166667], '0x741fc3c210': [2.309666667, 1.851166667], '0x741fc3c260': [2.3311111110000002, 1.834551724], '0x741fc3c170': [2.309666667, 1.851166667]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_5d.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_5d.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_5d/concat'}
+('InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool', 2, 3.7435)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D', 1, 5.5056)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D', 2, 6.7279)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 10.4858)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D', 1, 13.5034)
+('InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D', 2, 14.2404)
+('InceptionV3/InceptionV3/Mixed_5d/concat', 1, 22.3669)
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:3.7435, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D, device:1, start_time:0.0, latency:5.5056, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool, device:2, start_time:3.7435, latency:2.9844, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D, device:1, start_time:5.5056, latency:7.864199999999999, data_trans:2.309666667
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D, device:2, start_time:6.7279, latency:3.7579000000000002, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:10.4858, latency:3.7546, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D, device:1, start_time:13.5034, latency:8.8635, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D, device:2, start_time:14.2404, latency:8.1265, data_trans:1.834551724
+name:InceptionV3/InceptionV3/Mixed_5d/concat, device:1, start_time:22.3669, latency:0.7948, data_trans:6.9504444450000005
+[(0.0, 5.5056), (5.5056, 13.3698), (13.5034, 22.3669), (22.3669, 23.1617)]
+[(0.0, 3.7435), (3.7435, 6.7279), (6.7279, 10.485800000000001), (10.4858, 14.2404), (14.2404, 22.3669)]
+[(13.3698, 15.679466667), (22.3669, 24.201451724), (23.1617, 30.112144445)]
+endpoint: 30.112144 , intersection: 2.309667
+module_name
+draw_gantt
+[(0.0, 5.5056), (5.5056, 7.864199999999999), (13.5034, 8.8635), (22.3669, 0.7948)] [(0.0, 3.7435), (3.7435, 2.9844), (6.7279, 3.7579000000000002), (10.4858, 3.7546), (14.2404, 8.1265)] [(13.3698, 2.309666667), (22.3669, 1.834551724), (23.1617, 6.9504444450000005)]
+../models/inception-v3/redmi/Mixed_5d
+[(0.0, 5.5056), (5.5056, 7.864199999999999), (13.5034, 8.8635), (22.3669, 0.7948)]
+[(0.0, 3.7435), (3.7435, 2.9844), (6.7279, 3.7579000000000002), (10.4858, 3.7546), (14.2404, 8.1265)]
+[(13.3698, 2.309666667), (22.3669, 1.834551724), (23.1617, 6.9504444450000005)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/Branch_1/Conv2d_0b_5x5/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/concat']GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_6a.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6a.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_6a.lp'...
+135 rows, 53 columns, 413 non-zeros
+40 integer variables, all of which are binary
+182 lines were read
+GLPK Integer Optimizer, v4.65
+135 rows, 53 columns, 413 non-zeros
+40 integer variables, all of which are binary
+Preprocessing...
+28 hidden covering inequaliti(es) were detected
+28 constraint coefficient(s) were reduced
+121 rows, 51 columns, 384 non-zeros
+38 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 121
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+121 rows, 51 columns, 384 non-zeros
+      0: obj =   4.766000000e-01 inf =   2.300e+02 (43)
+     51: obj =   9.967096000e+02 inf =   1.465e-14 (0)
+*    61: obj =   4.766000000e-01 inf =   1.055e-14 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++    61: mip =     not found yet >=              -inf        (1; 0)
++   100: >>>>>   7.158770000e+01 >=   5.181680000e+01  27.6% (9; 0)
++   131: >>>>>   6.345570000e+01 >=   5.181680000e+01  18.3% (11; 6)
++   145: >>>>>   5.181680000e+01 >=   5.181680000e+01   0.0% (10; 9)
++   145: mip =   5.181680000e+01 >=     tree is empty   0.0% (0; 33)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.2 Mb (247127 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6a.txt'...
+GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_6b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6b.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_6b.lp'...
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+792 lines were read
+GLPK Integer Optimizer, v4.65
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+Preprocessing...
+164 hidden covering inequaliti(es) were detected
+164 constraint coefficient(s) were reduced
+571 rows, 211 columns, 1864 non-zeros
+186 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 571
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+571 rows, 211 columns, 1864 non-zeros
+      0: obj =   5.180000000e-01 inf =   1.320e+03 (197)
+    232: obj =   5.749540000e+01 inf =   6.800e-16 (0) 2
+*   323: obj =   5.180000000e-01 inf =   3.990e-13 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   323: mip =     not found yet >=              -inf        (1; 0)
++   679: >>>>>   5.908710000e+01 >=   1.084720000e+01  81.6% (39; 1)
++  1540: >>>>>   5.135110000e+01 >=   1.355410000e+01  73.6% (113; 17)
++  2537: >>>>>   5.075630000e+01 >=   1.416770000e+01  72.1% (174; 38)
++  3277: >>>>>   4.692880000e+01 >=   1.655630000e+01  64.7% (240; 47)
++  6090: >>>>>   4.666070000e+01 >=   2.207660000e+01  52.7% (434; 158)
++  8874: >>>>>   4.657440000e+01 >=   2.478610000e+01  46.8% (651; 239)
++  9377: >>>>>   4.484130000e+01 >=   2.478610000e+01  44.7% (692; 251)
++ 11011: >>>>>   4.392570000e+01 >=   2.598190000e+01  40.9% (770; 406)
++ 19997: >>>>>   4.374580000e+01 >=   3.173510000e+01  27.5% (1109; 1484)
++ 39432: mip =   4.374580000e+01 >=     tree is empty   0.0% (0; 9807)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   3.1 secs
+Memory used: 5.3 Mb (5523499 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6b.txt'...
+
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_5d/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_5d/Branch_2/Conv2d_0c_3x3/Conv2D']
+InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool 1 Operator latency: 1.344700 1.437000 {'0x741fc3c2b0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D 2 Operator latency: 6.925600 3.767000 {'0x741fc3c2b0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D 3 Operator latency: 117.982500 51.340200 {'0x741fc3c2b0': [3.400571429, 3.120318182]}
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D 4 Operator latency: 7.820800 6.434900 {'0x741fc3c350': [2.309666667, 1.851166667]}
+InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D 5 Operator latency: 8.902800 5.024500 {'0x741fc3c3f0': [2.3311111110000002, 1.834551724]}
+InceptionV3/InceptionV3/Mixed_6a/concat 6 Operator latency: 0.476600 1.678500 {'0x741fc3c300': [4.0027, 2.729]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_6a.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6a.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool', 2: 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_6a/concat'}
+('InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D', 1, 1.3447)
+('InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D', 1, 8.2703)
+('InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D', 1, 16.0911)
+('InceptionV3/InceptionV3/Mixed_6a/concat', 1, 51.3402)
+name:InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool, device:1, start_time:0.0, latency:1.3447, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D, device:2, start_time:0.0, latency:51.340199999999996, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D, device:1, start_time:1.3447, latency:6.9256, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D, device:1, start_time:8.2703, latency:7.8208, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D, device:1, start_time:16.0911, latency:8.9028, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6a/concat, device:1, start_time:51.3402, latency:0.4766, data_trans:0.0
+[(0.0, 1.3447), (1.3447, 8.2703), (8.2703, 16.0911), (16.0911, 24.9939), (51.3402, 51.8168)]
+[(0.0, 51.340199999999996)]
+[]
+endpoint: 51.816800 , intersection: 0.000000
+module_name
+draw_gantt
+[(0.0, 1.3447), (1.3447, 6.9256), (8.2703, 7.8208), (16.0911, 8.9028), (51.3402, 0.4766)] [(0.0, 51.340199999999996)] []
+../models/inception-v3/redmi/Mixed_6a
+[(0.0, 1.3447), (1.3447, 6.9256), (8.2703, 7.8208), (16.0911, 8.9028), (51.3402, 0.4766)]
+[(0.0, 51.340199999999996)]
+[]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6a/Branch_2/MaxPool_1a_3x3/MaxPool', 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_6a/Branch_1/Conv2d_1a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6a/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6a/Branch_0/Conv2d_1a_1x1/Conv2D']
+InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 3.320500 3.395800 {'0x741fc3c490': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 8.638800 4.556500 {'0x741fc3c490': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 8.697600 4.560400 {'0x741fc3c490': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 13.000100 6.199300 {'0x741fc3c490': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 13.036100 6.219100 {'0x741fc3c4e0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D 6 Operator latency: 10.847200 6.266400 {'0x741fc3c530': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D 7 Operator latency: 10.618400 6.446300 {'0x741fc3c580': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D 8 Operator latency: 10.578200 6.783300 {'0x741fc3c670': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D 9 Operator latency: 16.038300 9.027900 {'0x741fc3c6c0': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D 10 Operator latency: 10.754500 6.285900 {'0x741fc3c710': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D 11 Operator latency: 15.850400 9.140200 {'0x741fc3c7b0': [1.6624791669999999, 1.499241379]}
+InceptionV3/InceptionV3/Mixed_6b/concat 12 Operator latency: 0.518000 1.715000 {'0x741fc3c5d0': [1.777384615, 1.590514286], '0x741fc3c760': [1.777384615, 1.590514286], '0x741fc3c800': [1.777384615, 1.590514286], '0x741fc3c620': [1.777384615, 1.590514286]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_6b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6b.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D', 12: 'InceptionV3/InceptionV3/Mixed_6b/concat'}
+('InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 4.5604)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D', 1, 4.7649)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D', 2, 9.1169)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D', 2, 15.3833)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D', 1, 15.3833)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 21.6024)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D', 1, 27.1895)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D', 2, 27.8017)
+('InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D', 2, 34.0876)
+('InceptionV3/InceptionV3/Mixed_6b/concat', 1, 43.2278)
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:3.3205, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:4.5604, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:4.5604, latency:4.5565, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D, device:1, start_time:4.7649, latency:10.6184, data_trans:1.6624791669999999
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D, device:2, start_time:9.1169, latency:6.2664, data_trans:0.0GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_6c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6c.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_6c.lp'...
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+792 lines were read
+GLPK Integer Optimizer, v4.65
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+Preprocessing...
+164 hidden covering inequaliti(es) were detected
+164 constraint coefficient(s) were reduced
+571 rows, 211 columns, 1864 non-zeros
+186 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 571
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+571 rows, 211 columns, 1864 non-zeros
+      0: obj =   4.913330000e-01 inf =   1.322e+03 (197)
+    232: obj =   6.506893300e+01 inf =   3.469e-13 (0) 1
+*   306: obj =   4.913330000e-01 inf =   1.113e-13 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   306: mip =     not found yet >=              -inf        (1; 0)
++  1899: >>>>>   8.170873300e+01 >=   1.739833300e+01  78.7% (123; 9)
++  2131: >>>>>   6.521003300e+01 >=   1.739833300e+01  73.3% (139; 18)
++  2535: >>>>>   6.176323300e+01 >=   1.739833300e+01  71.8% (170; 39)
++  5795: >>>>>   6.164903300e+01 >=   2.144953300e+01  65.2% (406; 112)
++  6503: >>>>>   5.920253300e+01 >=   2.336320000e+01  60.5% (455; 129)
++ 10636: >>>>>   5.870163300e+01 >=   2.511243300e+01  57.2% (729; 269)
++ 19690: >>>>>   5.837933300e+01 >=   3.004383300e+01  48.5% (1218; 644)
++ 25490: >>>>>   5.810653300e+01 >=   3.156863300e+01  45.7% (1527; 930)
++ 37286: >>>>>   5.809723300e+01 >=   3.392030000e+01  41.6% (1910; 1949)
++ 45983: >>>>>   5.745853300e+01 >=   3.732773300e+01  35.0% (2067; 2989)
++ 67620: mip =   5.745853300e+01 >=     tree is empty   0.0% (0; 14027)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   5.3 secs
+Memory used: 8.0 Mb (8427519 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6c.txt'...
+
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D, device:2, start_time:15.3833, latency:6.2191, data_trans:2.960628866
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D, device:1, start_time:15.3833, latency:10.5782, data_trans:1.6624791669999999
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:21.6024, latency:6.1993, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D, device:1, start_time:27.1895, latency:16.0383, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D, device:2, start_time:27.8017, latency:6.2859, data_trans:1.499241379
+name:InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D, device:2, start_time:34.0876, latency:9.1402, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6b/concat, device:1, start_time:43.2278, latency:0.518, data_trans:5.332153845
+[(0.0, 3.3205), (4.7649, 15.383299999999998), (15.3833, 25.9615), (27.1895, 43.2278), (43.2278, 43.7458)]
+[(0.0, 4.5604), (4.5604, 9.1169), (9.1169, 15.383299999999998), (15.3833, 21.6024), (21.6024, 27.8017), (27.8017, 34.0876), (34.0876, 43.2278)]
+[(15.383299999999998, 17.045779167), (21.6024, 24.563028866), (25.9615, 27.623979167), (34.0876, 35.586841379), (43.7458, 49.077953845)]
+endpoint: 49.077954 , intersection: 3.324958
+module_name
+draw_gantt
+[(0.0, 3.3205), (4.7649, 10.6184), (15.3833, 10.5782), (27.1895, 16.0383), (43.2278, 0.518)] [(0.0, 4.5604), (4.5604, 4.5565), (9.1169, 6.2664), (15.3833, 6.2191), (21.6024, 6.1993), (27.8017, 6.2859), (34.0876, 9.1402)] [(15.383299999999998, 1.6624791669999999), (21.6024, 2.960628866), (25.9615, 1.6624791669999999), (34.0876, 1.499241379), (43.7458, 5.332153845)]
+../models/inception-v3/redmi/Mixed_6b
+[(0.0, 3.3205), (4.7649, 10.6184), (15.3833, 10.5782), (27.1895, 16.0383), (43.2278, 0.518)]
+[(0.0, 4.5604), (4.5604, 4.5565), (9.1169, 6.2664), (15.3833, 6.2191), (21.6024, 6.1993), (27.8017, 6.2859), (34.0876, 9.1402)]
+[(15.383299999999998, 1.6624791669999999), (21.6024, 2.960628866), (25.9615, 1.6624791669999999), (34.0876, 1.499241379), (43.7458, 5.332153845)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6b/Branch_2/Conv2d_0e_1x7/Conv2D']
+InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 3.446800 3.290900 {'0x741fc3c850': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 10.855000 5.898300 {'0x741fc3c850': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 10.730700 5.851800 {'0x741fc3c850': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 12.964200 6.288400 {'0x741fc3c850': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 13.141500 6.456200 {'0x741fc3c8a0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D 6 Operator latency: 16.878400 9.412800 {'0x741fc3c8f0': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D 7 Operator latency: 17.332000 9.633800 {'0x741fc3c940': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D 8 Operator latency: 16.493000 9.703700 {'0x741fc3ca30': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D 9 Operator latency: 21.174300 10.849500 {'0x741fc3ca80': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D 10 Operator latency: 16.684000 9.395700 {'0x741fc3cad0': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D 11 Operator latency: 19.830900 11.055200 {'0x741fc3cb70': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6c/concat 12 Operator latency: 0.491333 2.040100 {'0x741fc3c990': [1.777384615, 1.590514286], '0x741fc3cb20': [1.777384615, 1.590514286], '0x741fc3cbc0': [1.777384615, 1.590514286], '0x741fc3c9e0': [1.777384615, 1.590514286]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_6c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6c.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D', 12: 'InceptionV3/InceptionV3/Mixed_6c/concat'}
+('InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D', 1, 3.4468)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D', 2, 5.8983)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D', 1, 14.1775)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D', 2, 15.3111)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D', 2, 25.0148)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D', 1, 27.319)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D', 2, 34.6486)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D', 1, 44.003)
+('InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D', 2, 45.4981)
+('InceptionV3/InceptionV3/Mixed_6c/concat', 1, 56.9672)
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:3.4468, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:5.8983, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D, device:1, start_time:3.4468, latency:10.7307, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D, device:2, start_time:5.8983, latency:9.412799999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D, device:1, start_time:14.1775, latency:13.1415, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D, device:2, start_time:15.3111, latency:9.703700000000001, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D, device:2, start_time:25.0148, latency:9.633799999999999, data_trans:1.544045455
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D, device:1, start_time:27.319, latency:16.684, data_trans:1.777415929
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D, device:2, start_time:34.6486, latency:10.8495, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D, device:1, start_time:44.003, latency:12.9642, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D, device:2, start_time:45.4981, latency:11.055200000000001, data_trans:1.544045455GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_6d.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6d.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_6d.lp'...
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+792 lines were read
+GLPK Integer Optimizer, v4.65
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+Preprocessing...
+164 hidden covering inequaliti(es) were detected
+164 constraint coefficient(s) were reduced
+571 rows, 211 columns, 1864 non-zeros
+186 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 571
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+571 rows, 211 columns, 1864 non-zeros
+      0: obj =   5.137000000e-01 inf =   1.322e+03 (197)
+    210: obj =   1.011266900e+03 inf =   3.251e-13 (0) 1
+*   295: obj =   5.137000000e-01 inf =   3.428e-13 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   295: mip =     not found yet >=              -inf        (1; 0)
++  1229: >>>>>   8.764130000e+01 >=   1.616650000e+01  81.6% (86; 5)
++  1424: >>>>>   8.419010000e+01 >=   1.616650000e+01  80.8% (98; 13)
++  1510: >>>>>   7.019500000e+01 >=   1.616650000e+01  77.0% (101; 14)
++  1866: >>>>>   6.790240000e+01 >=   1.616650000e+01  76.2% (114; 30)
++  2730: >>>>>   6.747400000e+01 >=   1.698210000e+01  74.8% (175; 50)
++  3096: >>>>>   6.371620000e+01 >=   1.698210000e+01  73.3% (200; 55)
++  3470: >>>>>   5.728560000e+01 >=   1.706420000e+01  70.2% (209; 102)
++ 47744: mip =   5.728560000e+01 >=     tree is empty   0.0% (0; 10245)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   3.5 secs
+Memory used: 6.3 Mb (6581521 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6d.txt'...
+
+name:InceptionV3/InceptionV3/Mixed_6c/concat, device:1, start_time:56.9672, latency:0.4913333333333333, data_trans:3.55476923
+[(0.0, 3.4468), (3.4468, 14.1775), (14.1775, 27.319000000000003), (27.319, 44.003), (44.003, 56.9672), (56.9672, 57.45853333333333)]
+[(0.0, 5.8983), (5.8983, 15.3111), (15.3111, 25.0148), (25.0148, 34.6486), (34.6486, 45.4981), (45.4981, 56.5533)]
+[(34.6486, 36.192645455000005), (44.003, 45.780415929), (56.5533, 58.097345455), (57.45853333333333, 61.013302563333326)]
+endpoint: 61.013303 , intersection: 1.777416
+module_name
+draw_gantt
+[(0.0, 3.4468), (3.4468, 10.7307), (14.1775, 13.1415), (27.319, 16.684), (44.003, 12.9642), (56.9672, 0.4913333333333333)] [(0.0, 5.8983), (5.8983, 9.412799999999999), (15.3111, 9.703700000000001), (25.0148, 9.633799999999999), (34.6486, 10.8495), (45.4981, 11.055200000000001)] [(34.6486, 1.544045455), (44.003, 1.777415929), (56.5533, 1.544045455), (57.45853333333333, 3.55476923)]
+../models/inception-v3/redmi/Mixed_6c
+[(0.0, 3.4468), (3.4468, 10.7307), (14.1775, 13.1415), (27.319, 16.684), (44.003, 12.9642), (56.9672, 0.4913333333333333)]
+[(0.0, 5.8983), (5.8983, 9.412799999999999), (15.3111, 9.703700000000001), (25.0148, 9.633799999999999), (34.6486, 10.8495), (45.4981, 11.055200000000001)]
+[(34.6486, 1.544045455), (44.003, 1.777415929), (56.5533, 1.544045455), (57.45853333333333, 3.55476923)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6c/Branch_2/Conv2d_0e_1x7/Conv2D']
+InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 3.420500 3.338400 {'0x741fc3cc10': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 10.753200 5.983400 {'0x741fc3cc10': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 10.766500 5.964500 {'0x741fc3cc10': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 12.940800 6.293200 {'0x741fc3cc10': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 13.130000 6.264900 {'0x741fc3cc60': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D 6 Operator latency: 16.963800 9.364000 {'0x741fc3ccb0': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D 7 Operator latency: 16.249000 9.533600 {'0x741fc3cd00': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D 8 Operator latency: 16.335900 9.485900 {'0x741fc3cdf0': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D 9 Operator latency: 20.715900 11.404500 {'0x741fc3ce40': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D 10 Operator latency: 16.673300 9.387900 {'0x741fc3ce90': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D 11 Operator latency: 19.718600 11.146200 {'0x741fc3cf30': [1.777415929, 1.544045455]}
+InceptionV3/InceptionV3/Mixed_6d/concat 12 Operator latency: 0.513700 1.715300 {'0x741fc3cd50': [1.777384615, 1.590514286], '0x741fc3cee0': [1.777384615, 1.590514286], '0x741fc3cf80': [1.777384615, 1.590514286], '0x741fc3cda0': [1.777384615, 1.590514286]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_6d.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6d.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D', 12: 'InceptionV3/InceptionV3/Mixed_6d/concat'}
+('InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D', 1, 3.4205)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D', 2, 5.9834)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D', 1, 14.187)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D', 2, 15.3474)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D', 2, 24.8333)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D', 1, 30.436)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D', 2, 34.2212)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D', 1, 43.566)
+('InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D', 2, 45.3674)
+('InceptionV3/InceptionV3/Mixed_6d/concat', 1, 56.7719)
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:3.4205, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:5.9834, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D, device:1, start_time:3.4205, latency:10.7665, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D, device:2, start_time:5.9834, latency:9.364, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D, device:1, start_time:14.187, latency:16.249, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D, device:2, start_time:15.3474, latency:9.485899999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D, device:2, start_time:24.8333, latency:9.3879, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D, device:1, start_time:30.436, latency:13.13, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D, device:2, start_time:34.2212, latency:11.1462, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D, device:1, start_time:43.566, latency:12.9408, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D, device:2, start_time:45.3674, latency:11.4045, data_trans:1.544045455
+name:InceptionV3/InceptionV3/Mixed_6d/concat, device:1, start_time:56.7719, latency:0.5137, data_trans:3.55476923
+[(0.0, 3.4205), (3.4205, 14.187000000000001), (14.187, 30.436), (30.436, 43.566), (43.566, 56.5068), (56.7719, 57.2856)]
+[(0.0, 5.9834), (5.9834, 15.3474), (15.3474, 24.8333), (24.8333, 34.2212), (34.2212, 45.3674), (45.3674, 56.7719)]
+[(56.7719, 58.315945455000005), (57.2856, 60.84036923)]
+endpoint: 60.840369 , intersection: 0.000000
+module_name
+draw_gantt
+[(0.0, 3.4205), (3.4205, 10.7665), (14.187, 16.249), (30.436, 13.13), (43.566, 12.9408), (56.7719, 0.5137)] [(0.0, 5.9834), (5.9834, 9.364), (15.3474, 9.485899999999999), (24.8333, 9.3879), (34.2212, 11.1462), (45.3674, 11.4045)] [(56.7719, 1.544045455), (57.2856, 3.55476923)]
+../models/inception-v3/redmi/Mixed_6d
+[(0.0, 3.4205), (3.4205, 10.7665), (14.187, 16.249), (30.436, 13.13), (43.566, 12.9408), (56.7719, 0.5137)]GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_6e.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6e.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_6e.lp'...
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+792 lines were read
+GLPK Integer Optimizer, v4.65
+597 rows, 213 columns, 1917 non-zeros
+188 integer variables, all of which are binary
+Preprocessing...
+164 hidden covering inequaliti(es) were detected
+164 constraint coefficient(s) were reduced
+571 rows, 211 columns, 1864 non-zeros
+186 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 571
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+571 rows, 211 columns, 1864 non-zeros
+      0: obj =   5.221110000e-01 inf =   1.323e+03 (197)
+    229: obj =   1.011067110e+02 inf =   3.657e-15 (0) 2
+*   300: obj =   5.221110000e-01 inf =   1.699e-13 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   300: mip =     not found yet >=              -inf        (1; 0)
++   510: >>>>>   1.048218110e+02 >=   1.913610000e+01  81.7% (31; 0)
++   631: >>>>>   9.427431100e+01 >=   2.602740000e+01  72.4% (36; 11)
++   765: >>>>>   8.568411100e+01 >=   2.602740000e+01  69.6% (43; 29)
++   857: >>>>>   7.911151100e+01 >=   2.602740000e+01  67.1% (41; 45)
++  3288: >>>>>   7.888321100e+01 >=   2.951520000e+01  62.6% (180; 115)
++  4556: >>>>>   7.307441100e+01 >=   3.017150000e+01  58.7% (253; 152)
++  5012: >>>>>   7.182101100e+01 >=   3.159420000e+01  56.0% (217; 265)
++ 10698: >>>>>   7.151241100e+01 >=   4.185160000e+01  41.5% (452; 664)
++ 16472: mip =   7.151241100e+01 >=     tree is empty   0.0% (0; 3059)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   1.1 secs
+Memory used: 2.6 Mb (2742141 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6e.txt'...
+
+[(0.0, 5.9834), (5.9834, 9.364), (15.3474, 9.485899999999999), (24.8333, 9.3879), (34.2212, 11.1462), (45.3674, 11.4045)]
+[(56.7719, 1.544045455), (57.2856, 3.55476923)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6d/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6d/Branch_1/Conv2d_0c_7x1/Conv2D']
+InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 3.487800 3.271000 {'0x741fc3cfd0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 13.081200 6.189900 {'0x741fc3cfd0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 12.979900 6.280300 {'0x741fc3cfd0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 13.020800 6.277200 {'0x741fc3cfd0': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 13.049900 6.219100 {'0x741fc3d020': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D 6 Operator latency: 26.920600 12.946200 {'0x741fc3d070': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D 7 Operator latency: 25.313900 13.275300 {'0x741fc3d0c0': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D 8 Operator latency: 25.143800 13.488400 {'0x741fc3d1b0': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D 9 Operator latency: 26.654800 13.019900 {'0x741fc3d200': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D 10 Operator latency: 26.683700 12.849600 {'0x741fc3d250': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D 11 Operator latency: 25.451500 13.244100 {'0x741fc3d2f0': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_6e/concat 12 Operator latency: 0.522111 1.686800 {'0x741fc3d110': [1.777384615, 1.590514286], '0x741fc3d2a0': [1.777384615, 1.590514286], '0x741fc3d340': [1.777384615, 1.590514286], '0x741fc3d160': [1.777384615, 1.590514286]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_6e.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_6e.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D', 12: 'InceptionV3/InceptionV3/Mixed_6e/concat'}
+('InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D', 2, 6.1899)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D', 1, 12.9799)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D', 2, 19.1361)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D', 2, 32.6245)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 38.2938)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D', 2, 45.4741)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D', 1, 45.5388)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 58.494)
+('InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D', 2, 64.7712)
+('InceptionV3/InceptionV3/Mixed_6e/concat', 1, 70.9903)
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:6.1899, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D, device:1, start_time:0.0, latency:12.979899999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D, device:2, start_time:6.1899, latency:12.946200000000001, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D, device:1, start_time:12.9799, latency:25.3139, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D, device:2, start_time:19.1361, latency:13.4884, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D, device:2, start_time:32.6245, latency:12.8496, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:38.2938, latency:3.4878, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D, device:2, start_time:45.4741, latency:13.0199, data_trans:1.590514286
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D, device:1, start_time:45.5388, latency:25.4515, data_trans:1.777384615
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:58.494, latency:6.2772, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D, device:2, start_time:64.7712, latency:6.2191, data_trans:2.960628866
+name:InceptionV3/InceptionV3/Mixed_6e/concat, device:1, start_time:70.9903, latency:0.5221111111111111, data_trans:5.332153845
+[(0.0, 12.979899999999999), (12.9799, 38.293800000000005), (38.2938, 41.7816), (45.5388, 70.9903), (70.9903, 71.51241111111112)]
+[(0.0, 6.1899), (6.1899, 19.1361), (19.1361, 32.6245), (32.6245, 45.4741), (45.4741, 58.494), (58.494, 64.7712), (64.7712, 70.99029999999999)]
+[(58.494, 60.084514286), (70.9903, 72.76768461500001), (70.99029999999999, 73.95092886599998), (71.51241111111112, 76.84456495611111)]
+endpoint: 76.844565 , intersection: 0.000000
+module_name
+draw_gantt
+[(0.0, 12.979899999999999), (12.9799, 25.3139), (38.2938, 3.4878), (45.5388, 25.4515), (70.9903, 0.5221111111111111)] [(0.0, 6.1899), (6.1899, 12.946200000000001), (19.1361, 13.4884), (32.6245, 12.8496), (45.4741, 13.0199), (58.494, 6.2772), (64.7712, 6.2191)] [(58.494, 1.590514286), (70.9903, 1.777384615), (70.99029999999999, 2.960628866), (71.51241111111112, 5.332153845)]
+../models/inception-v3/redmi/Mixed_6e
+[(0.0, 12.979899999999999), (12.9799, 25.3139), (38.2938, 3.4878), (45.5388, 25.4515), (70.9903, 0.5221111111111111)]
+[(0.0, 6.1899), (6.1899, 12.946200000000001), (19.1361, 13.4884), (32.6245, 12.8496), (45.4741, 13.0199), (58.494, 6.2772), (64.7712, 6.2191)]
+[(58.494, 1.590514286), (70.9903, 1.777384615), (70.99029999999999, 2.960628866), (71.51241111111112, 5.332153845)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0e_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0b_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0c_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_2/Conv2d_0d_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_6e/Branch_3/Conv2d_0b_1x1/Conv2D']GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_7a.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7a.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_7a.lp'...
+237 rows, 89 columns, 741 non-zeros
+72 integer variables, all of which are binary
+316 lines were read
+GLPK Integer Optimizer, v4.65
+237 rows, 89 columns, 741 non-zeros
+72 integer variables, all of which are binary
+Preprocessing...
+56 hidden covering inequaliti(es) were detected
+56 constraint coefficient(s) were reduced
+219 rows, 87 columns, 704 non-zeros
+70 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 219
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+219 rows, 87 columns, 704 non-zeros
+      0: obj =   0.000000000e+00 inf =   4.519e+02 (78)
+     91: obj =   1.353930000e+01 inf =   3.891e-14 (0)
+*   108: obj =   1.835000000e-01 inf =   1.321e-14 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   108: mip =     not found yet >=              -inf        (1; 0)
++   259: >>>>>   4.808930000e+01 >=   1.484290000e+01  69.1% (21; 1)
++   318: >>>>>   4.317380000e+01 >=   1.955480000e+01  54.7% (24; 6)
++   517: >>>>>   4.135880000e+01 >=   2.768410000e+01  33.1% (34; 21)
++   572: >>>>>   3.686590000e+01 >=   3.201880000e+01  13.1% (29; 43)
++   586: mip =   3.686590000e+01 >=     tree is empty   0.0% (0; 123)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.0 secs
+Memory used: 0.4 Mb (465343 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7a.txt'...
+GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_7b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7b.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_7b.lp'...
+734 rows, 257 columns, 2365 non-zeros
+230 integer variables, all of which are binary
+971 lines were read
+GLPK Integer Optimizer, v4.65
+734 rows, 257 columns, 2365 non-zeros
+230 integer variables, all of which are binary
+Preprocessing...
+204 hidden covering inequaliti(es) were detected
+204 constraint coefficient(s) were reduced
+706 rows, 255 columns, 2308 non-zeros
+228 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 706
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+706 rows, 255 columns, 2308 non-zeros
+      0: obj =   0.000000000e+00 inf =   1.640e+03 (245)
+    242: obj =   4.354185600e+01 inf =   3.553e-15 (0) 2
+*   366: obj =   2.590000000e-01 inf =   1.893e-14 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   366: mip =     not found yet >=              -inf        (1; 0)
++  1557: >>>>>   3.888340000e+01 >=   1.102770000e+01  71.6% (102; 6)
++  2276: >>>>>   3.789587800e+01 >=   1.140125600e+01  69.9% (161; 16)
++  2428: >>>>>   3.483880000e+01 >=   1.140125600e+01  67.3% (169; 29)
++ 10915: >>>>>   3.298130000e+01 >=   1.561490000e+01  52.7% (772; 162)
++ 20804: >>>>>   3.269994700e+01 >=   2.003712500e+01  38.7% (1440; 555)
++ 24915: >>>>>   3.234464700e+01 >=   2.070542200e+01  36.0% (1755; 722)
++ 26016: >>>>>   3.229067800e+01 >=   2.081035600e+01  35.6% (1814; 827)
++ 28894: >>>>>   3.221217500e+01 >=   2.134207500e+01  33.7% (2056; 963)
++ 29759: >>>>>   3.220345600e+01 >=   2.134207500e+01  33.7% (2100; 1029)
++ 30159: >>>>>   3.068565600e+01 >=   2.134207500e+01  30.4% (2133; 1058)
++ 86395: mip =   3.068565600e+01 >=   2.591407800e+01  15.5% (4062; 9357)
++108887: mip =   3.068565600e+01 >=     tree is empty   0.0% (0; 28777)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   9.7 secs
+Memory used: 14.0 Mb (14660487 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7b.txt'...
+
+InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool 1 Operator latency: 0.637800 1.436000 {'0x741fc3d390': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D 2 Operator latency: 12.901500 6.240700 {'0x741fc3d390': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D 3 Operator latency: 12.841200 6.307900 {'0x741fc3d390': [2.979533333, 2.960628866]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D 4 Operator latency: 25.778100 13.314100 {'0x741fc3d430': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D 5 Operator latency: 14.659400 6.663300 {'0x741fc3d480': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D 6 Operator latency: 26.709100 12.847200 {'0x741fc3d4d0': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D 7 Operator latency: 8.773300 4.280400 {'0x741fc3d570': [1.777384615, 1.590514286]}
+InceptionV3/InceptionV3/Mixed_7a/concat 8 Operator latency: 0.183500 1.294400 {'0x741fc3d520': [1.8855625, 1.2629000000000001], '0x741fc3d3e0': [2.1285, 1.52284]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_7a.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7a.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool', 2: 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_7a/concat'}
+('InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D', 2, 6.2407)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D', 1, 12.8412)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D', 2, 19.5548)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool', 1, 27.5006)
+('InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D', 2, 32.402)
+('InceptionV3/InceptionV3/Mixed_7a/concat', 1, 36.6824)
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:6.2406999999999995, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D, device:1, start_time:0.0, latency:12.8412, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D, device:2, start_time:6.2407, latency:13.3141, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D, device:1, start_time:12.8412, latency:14.6594, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D, device:2, start_time:19.5548, latency:12.8472, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool, device:1, start_time:27.5006, latency:0.6377999999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D, device:2, start_time:32.402, latency:4.280399999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7a/concat, device:1, start_time:36.6824, latency:0.1835, data_trans:0.0
+[(0.0, 12.8412), (12.8412, 27.5006), (27.5006, 28.138399999999997), (36.6824, 36.8659)]
+[(0.0, 6.2406999999999995), (6.2407, 19.5548), (19.5548, 32.402), (32.402, 36.6824)]
+[]
+endpoint: 36.865900 , intersection: 0.000000
+module_name
+draw_gantt
+[(0.0, 12.8412), (12.8412, 14.6594), (27.5006, 0.6377999999999999), (36.6824, 0.1835)] [(0.0, 6.2406999999999995), (6.2407, 13.3141), (19.5548, 12.8472), (32.402, 4.280399999999999)] []
+../models/inception-v3/redmi/Mixed_7a
+[(0.0, 12.8412), (12.8412, 14.6594), (27.5006, 0.6377999999999999), (36.6824, 0.1835)]
+[(0.0, 6.2406999999999995), (6.2407, 13.3141), (19.5548, 12.8472), (32.402, 4.280399999999999)]
+[]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7a/Branch_0/Conv2d_1a_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7a/Branch_2/MaxPool_1a_3x3/MaxPool', 'InceptionV3/InceptionV3/Mixed_7a/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0b_1x7/Conv2D', 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_0c_7x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7a/Branch_1/Conv2d_1a_3x3/Conv2D']
+InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 1.220700 2.128500 {'0x741fc3d610': [2.134102564, 1.915387755]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 15.118100 4.821900 {'0x741fc3d610': [2.134102564, 1.915387755]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 12.803200 4.185500 {'0x741fc3d610': [2.134102564, 1.915387755]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 10.672300 3.725400 {'0x741fc3d610': [2.134102564, 1.915387755]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 6.268900 2.535100 {'0x741fc3d660': [2.134102564, 1.915387755]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D 6 Operator latency: 22.994300 5.797100 {'0x741fc3d6b0': [1.791166667, 1.818857143]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D 7 Operator latency: 11.393100 5.390400 {'0x741fc3d700': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D 8 Operator latency: 11.429400 6.205800 {'0x741fc3d700': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D 9 Operator latency: 11.587600 5.479700 {'0x741fc3d7f0': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D 10 Operator latency: 11.482400 5.554700 {'0x741fc3d7f0': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat 11 Operator latency: 0.114556 0.769125 {'0x741fc3d890': [1.6758015270000002, 1.356556818], '0x741fc3d840': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat 12 Operator latency: 0.087222 0.723875 {'0x741fc3d980': [1.6758015270000002, 1.356556818], '0x741fc3d930': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7b/concat 13 Operator latency: 0.259000 1.534700 {'0x741fc3d750': [1.8855625, 1.2629000000000001], '0x741fc3d8e0': [2.1285, 1.52284], '0x741fc3d9d0': [2.1285, 1.52284]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_7b.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7b.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat', 12: 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat', 13: 'InceptionV3/InceptionV3/Mixed_7b/concat'}
+('InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D', 1, 1.2207)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 4.1855)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D', 1, 7.4896)GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ --lp ../models/inception-v3/redmi/subgraphs-Mixed_7c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7c.txt
+Reading problem data from '../models/inception-v3/redmi/subgraphs-Mixed_7c.lp'...
+734 rows, 257 columns, 2365 non-zeros
+230 integer variables, all of which are binary
+971 lines were read
+GLPK Integer Optimizer, v4.65
+734 rows, 257 columns, 2365 non-zeros
+230 integer variables, all of which are binary
+Preprocessing...
+204 hidden covering inequaliti(es) were detected
+204 constraint coefficient(s) were reduced
+706 rows, 255 columns, 2308 non-zeros
+228 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  2.000e+03  ratio =  2.000e+03
+GM: min|aij| =  8.408e-01  max|aij| =  1.189e+00  ratio =  1.415e+00
+EQ: min|aij| =  7.070e-01  max|aij| =  1.000e+00  ratio =  1.414e+00
+2N: min|aij| =  4.883e-01  max|aij| =  1.000e+00  ratio =  2.048e+00
+Constructing initial basis...
+Size of triangular part is 706
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+706 rows, 255 columns, 2308 non-zeros
+      0: obj =   0.000000000e+00 inf =   1.642e+03 (245)
+    277: obj =   4.702797800e+01 inf =   9.079e-14 (0) 2
+*   374: obj =   2.517780000e-01 inf =   7.278e-14 (0) 1
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++   374: mip =     not found yet >=              -inf        (1; 0)
++   835: >>>>>   4.642029900e+01 >=   1.287230000e+01  72.3% (41; 1)
++  1096: >>>>>   4.279284900e+01 >=   1.287230000e+01  69.9% (58; 3)
++  1375: >>>>>   4.138859900e+01 >=   1.287230000e+01  68.9% (66; 26)
++  2767: >>>>>   3.748639900e+01 >=   1.334490000e+01  64.4% (157; 63)
++ 28891: >>>>>   3.714098900e+01 >=   2.194860000e+01  40.9% (1805; 730)
++ 34792: >>>>>   3.694354900e+01 >=   2.429587800e+01  34.2% (2144; 1027)
++ 35226: >>>>>   3.625297800e+01 >=   2.437798900e+01  32.8% (2087; 1221)
++ 89895: mip =   3.625297800e+01 >=   3.053518900e+01  15.8% (4067; 7914)
++127697: >>>>>   3.616927800e+01 >=   3.580552800e+01   1.0% (428; 28514)
++127913: >>>>>   3.606107800e+01 >=   3.588188900e+01   0.5% (264; 29424)
++128691: mip =   3.606107800e+01 >=     tree is empty   0.0% (0; 31033)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   11.9 secs
+Memory used: 15.0 Mb (15683583 bytes)
+Writing MIP solution to '../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7c.txt'...
+
+('InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 9.0074)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D', 2, 12.7328)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D', 2, 18.5299)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D', 1, 18.8827)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D', 2, 24.0096)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat', 2, 29.7028)
+('InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat', 1, 30.3121)
+('InceptionV3/InceptionV3/Mixed_7b/concat', 1, 30.4267)
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:1.2207000000000001, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:4.1855, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D, device:1, start_time:1.2207, latency:6.2688999999999995, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:4.1855, latency:4.821899999999999, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D, device:1, start_time:7.4896, latency:11.3931, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:9.0074, latency:3.7254, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D, device:2, start_time:12.7328, latency:5.7971, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D, device:2, start_time:18.5299, latency:5.4797, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D, device:1, start_time:18.8827, latency:11.4294, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D, device:2, start_time:24.0096, latency:5.5546999999999995, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat, device:2, start_time:29.7028, latency:0.723875, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat, device:1, start_time:30.3121, latency:0.11455555555555556, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7b/concat, device:1, start_time:30.4267, latency:0.259, data_trans:4.0140625
+[(0.0, 1.2207000000000001), (1.2207, 7.489599999999999), (7.4896, 18.8827), (18.8827, 30.3121), (30.3121, 30.426655555555556), (30.4267, 30.6857)]
+[(0.0, 4.1855), (4.1855, 9.0074), (9.0074, 12.732800000000001), (12.7328, 18.529899999999998), (18.5299, 24.009600000000002), (24.0096, 29.5643), (29.7028, 30.426675)]
+[(18.8827, 20.558501527), (30.3121, 31.987901527000002), (30.6857, 34.6997625)]
+endpoint: 34.699762 , intersection: 1.790377
+module_name
+draw_gantt
+[(0.0, 1.2207000000000001), (1.2207, 6.2688999999999995), (7.4896, 11.3931), (18.8827, 11.4294), (30.3121, 0.11455555555555556), (30.4267, 0.259)] [(0.0, 4.1855), (4.1855, 4.821899999999999), (9.0074, 3.7254), (12.7328, 5.7971), (18.5299, 5.4797), (24.0096, 5.5546999999999995), (29.7028, 0.723875)] [(18.8827, 1.6758015270000002), (30.3121, 1.6758015270000002), (30.6857, 4.0140625)]
+../models/inception-v3/redmi/Mixed_7b
+[(0.0, 1.2207000000000001), (1.2207, 6.2688999999999995), (7.4896, 11.3931), (18.8827, 11.4294), (30.3121, 0.11455555555555556), (30.4267, 0.259)]
+[(0.0, 4.1855), (4.1855, 4.821899999999999), (9.0074, 3.7254), (12.7328, 5.7971), (18.5299, 5.4797), (24.0096, 5.5546999999999995), (29.7028, 0.723875)]
+[(18.8827, 1.6758015270000002), (30.3121, 1.6758015270000002), (30.6857, 4.0140625)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7b/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_7b/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_3x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0b_1x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_1/concat', 'InceptionV3/InceptionV3/Mixed_7b/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7b/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_0/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0d_3x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/Conv2d_0c_1x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7b/Branch_2/concat']
+InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool 1 Operator latency: 1.987300 2.996500 {'0x741fc3da20': [2.344844828, 2.272981132]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D 2 Operator latency: 23.956900 7.340800 {'0x741fc3da20': [2.344844828, 2.272981132]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D 3 Operator latency: 20.421500 6.399000 {'0x741fc3da20': [2.344844828, 2.272981132]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D 4 Operator latency: 17.273700 5.372400 {'0x741fc3da20': [2.344844828, 2.272981132]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D 5 Operator latency: 10.595100 3.522400 {'0x741fc3da70': [2.344844828, 2.272981132]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D 6 Operator latency: 22.987200 5.822000 {'0x741fc3dac0': [1.791166667, 1.818857143]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D 7 Operator latency: 11.353500 5.531500 {'0x741fc3db10': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D 8 Operator latency: 11.357600 5.745500 {'0x741fc3db10': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D 9 Operator latency: 11.511500 5.343600 {'0x741fc3dc00': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D 10 Operator latency: 11.499800 5.723400 {'0x741fc3dc00': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat 11 Operator latency: 0.108200 0.734750 {'0x741fc3dca0': [1.6758015270000002, 1.356556818], '0x741fc3dc50': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat 12 Operator latency: 0.082111 0.690571 {'0x741fc3dd90': [1.6758015270000002, 1.356556818], '0x741fc3dd40': [1.6758015270000002, 1.356556818]}
+InceptionV3/InceptionV3/Mixed_7c/concat 13 Operator latency: 0.251778 1.565400 {'0x741fc3db60': [1.8855625, 1.2629000000000001], '0x741fc3dcf0': [2.1285, 1.52284], '0x741fc3dde0': [2.1285, 1.52284]}
+Execute glpsol --lp ../models/inception-v3/redmi/subgraphs-Mixed_7c.lp -o ../models/inception-v3/redmi/lp-result-subgraphs-Mixed_7c.txt
+Run solver done!
+{1: 'InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool', 2: 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D', 3: 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D', 4: 'InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D', 5: 'InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D', 6: 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D', 7: 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D', 8: 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D', 9: 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D', 10: 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D', 11: 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat', 12: 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat', 13: 'InceptionV3/InceptionV3/Mixed_7c/concat'}
+('InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool', 1, 0.0)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D', 2, 0.0)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D', 1, 1.9873)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D', 2, 6.399)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D', 1, 12.5824)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D', 2, 13.7398)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D', 2, 19.5618)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D', 1, 23.94)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D', 2, 24.9054)adb: error: failed to get feature set: no devices/emulators found
+
+('InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D', 2, 30.4369)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat', 1, 35.4398)
+('InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat', 1, 35.5219)
+('InceptionV3/InceptionV3/Mixed_7c/concat', 1, 35.8093)
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool, device:1, start_time:0.0, latency:1.9872999999999998, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D, device:2, start_time:0.0, latency:6.399, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D, device:1, start_time:1.9873, latency:10.5951, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D, device:2, start_time:6.399, latency:7.3408, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D, device:1, start_time:12.5824, latency:11.3576, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D, device:2, start_time:13.7398, latency:5.822, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D, device:2, start_time:19.5618, latency:5.3436, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D, device:1, start_time:23.94, latency:11.499799999999999, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D, device:2, start_time:24.9054, latency:5.5315, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D, device:2, start_time:30.4369, latency:5.3724, data_trans:0.0
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat, device:1, start_time:35.4398, latency:0.08211111111111112, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat, device:1, start_time:35.5219, latency:0.1082, data_trans:1.6758015270000002
+name:InceptionV3/InceptionV3/Mixed_7c/concat, device:1, start_time:35.8093, latency:0.25177777777777777, data_trans:1.8855625
+[(0.0, 1.9872999999999998), (1.9873, 12.5824), (12.5824, 23.939999999999998), (23.94, 35.4398), (35.4398, 35.52191111111111), (35.5219, 35.6301), (35.8093, 36.061077777777776)]
+[(0.0, 6.399), (6.399, 13.739799999999999), (13.7398, 19.5618), (19.5618, 24.9054), (24.9054, 30.4369), (30.4369, 35.8093)]
+[(23.939999999999998, 25.615801527), (35.4398, 37.115601526999995), (35.52191111111111, 37.197712638111106), (35.6301, 37.305901526999996), (36.061077777777776, 37.946640277777774)]
+endpoint: 37.946640 , intersection: 2.511890
+module_name
+draw_gantt
+[(0.0, 1.9872999999999998), (1.9873, 10.5951), (12.5824, 11.3576), (23.94, 11.499799999999999), (35.4398, 0.08211111111111112), (35.5219, 0.1082), (35.8093, 0.25177777777777777)] [(0.0, 6.399), (6.399, 7.3408), (13.7398, 5.822), (19.5618, 5.3436), (24.9054, 5.5315), (30.4369, 5.3724)] [(23.939999999999998, 1.6758015270000002), (35.4398, 1.6758015270000002), (35.52191111111111, 1.6758015270000002), (35.6301, 1.6758015270000002), (36.061077777777776, 1.8855625)]
+../models/inception-v3/redmi/Mixed_7c
+[(0.0, 1.9872999999999998), (1.9873, 10.5951), (12.5824, 11.3576), (23.94, 11.499799999999999), (35.4398, 0.08211111111111112), (35.5219, 0.1082), (35.8093, 0.25177777777777777)]
+[(0.0, 6.399), (6.399, 7.3408), (13.7398, 5.822), (19.5618, 5.3436), (24.9054, 5.5315), (30.4369, 5.3724)]
+[(23.939999999999998, 1.6758015270000002), (35.4398, 1.6758015270000002), (35.52191111111111, 1.6758015270000002), (35.6301, 1.6758015270000002), (36.061077777777776, 1.8855625)]
+CPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7c/Branch_3/AvgPool_0a_3x3/AvgPool', 'InceptionV3/InceptionV3/Mixed_7c/Branch_3/Conv2d_0b_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0b_1x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0c_1x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/concat', 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/concat', 'InceptionV3/InceptionV3/Mixed_7c/concat']
+GPU subgraphs:
+['InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0a_1x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0b_3x3/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_2/Conv2d_0d_3x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_1/Conv2d_0c_3x1/Conv2D', 'InceptionV3/InceptionV3/Mixed_7c/Branch_0/Conv2d_0a_1x1/Conv2D']
+115
+130
+1 InceptionV3/InceptionV3/Conv2d_2a_3x3/Conv2D 0
+
+2 InceptionV3/InceptionV3/Conv2d_2b_3x3/Conv2D 0
+
+3 InceptionV3/InceptionV3/MaxPool_3a_3x3/MaxPool 0
+
+4 InceptionV3/InceptionV3/Conv2d_3b_1x1/Conv2D 0
+
+5 InceptionV3/InceptionV3/Conv2d_4a_3x3/Conv2D 0
+
+6 InceptionV3/InceptionV3/MaxPool_5a_3x3/MaxPool 0
+
+122 InceptionV3/Logits/AvgPool_1a_8x8/AvgPool 0
+
+123 InceptionV3/Logits/Conv2d_1c_1x1/Conv2D 0
+
+124 InceptionV3/Logits/Conv2d_1c_1x1/Conv2D___tr4InceptionV3/Logits/SpatialSqueeze 0
+
+125 InceptionV3/Logits/SpatialSqueeze 0
+
+126 InceptionV3/Predictions/Shape 0
+
+126 InceptionV3/Predictions/Reshape 0
+
+127 InceptionV3/Predictions/Softmax 0
+
+129 InceptionV3/Predictions/Reshape_1 0
+
+Execute cat ../models/inception-v3/redmi/lp-result-subgraphs-* | grep Objective | awk '{print $4}'
+20.0271
+22.1489
+23.1617
+51.8168
+43.7458
+57.458533
+57.2856
+71.512411
+36.8659
+30.685656
+36.061078
+
+LP+serial total: 569.950378
+LP+serial+intersection total: 584.1147525398889
+adb push ../models/inception-v3/redmi/mDeviceMap-inception-v3-cpu-1.txt /data/local/tmp/

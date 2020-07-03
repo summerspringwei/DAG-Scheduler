@@ -387,9 +387,14 @@ def parse_glpk_result(one_module_names_idx_dict, result_file_path):
     return name_device_tuple_list
 
 
-def compute_data_trans_intersection(cpu_data, gpu_data, convert_data):
+def compute_data_trans_intersection(cpu_data, gpu_data, convert_data, convert_device):
     def add_latency(data):
         return [(start, start+latency) for (start, latency) in data]
+    def max_time(data):
+        if len(data) == 0:
+            return 0
+        else:
+            return max([endtime for (_, endtime) in data])
     cpu_data = add_latency(cpu_data)
     gpu_data = add_latency(gpu_data)
     convert_data = add_latency(convert_data)
@@ -397,21 +402,27 @@ def compute_data_trans_intersection(cpu_data, gpu_data, convert_data):
     print(gpu_data)
     print(convert_data)
     sum_of_intersection = 0
-    for (cs, ce) in convert_data:
+    for (cs, ce), device in list(zip(convert_data, convert_device)):
         for (gs, ge) in gpu_data:
+            # if op execute on GPU, skip 
+            if device == 2:
+                continue
             if cs >= gs and cs <= ge:
                 sum_of_intersection += (min(ce, ge) - cs)
             elif gs > cs and gs < ce:
                 sum_of_intersection += (min(ce, ge) - gs)
-    cpu_max = max([endtime for (_, endtime) in cpu_data])
-    gpu_max = max([endtime for (_, endtime) in gpu_data])
-    convert_max = max([endtime for (_, endtime) in convert_data])
+    cpu_max, gpu_max, convert_max = max_time(cpu_data), max_time(gpu_data), max_time(convert_data)
     endpoint = max([cpu_max, gpu_max, convert_max])
 
     return endpoint, sum_of_intersection
 
 
-def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
+class LPMode:
+    Mode_Subgraph = 0
+    Mode_Operator = 1
+
+
+def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict, mode=LPMode.Mode_Subgraph):
     idx_name_dict = {v:k for k,v in one_module_names_idx_dict.items()}
     print(idx_name_dict)
     s_dict = {}
@@ -451,7 +462,9 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
             data_trans_latency = data_trans[device-1]
             for op_parent_name in op.parents:
                 op_parent = op_dict[op_parent_name]
-                if not isinstance(op_parent, Subgraph):
+                if mode==LPMode.Mode_Subgraph and not isinstance(op_parent, Subgraph):
+                    continue
+                if op_parent_name not in one_module_names_idx_dict.keys():
                     continue
                 parent_idx = one_module_names_idx_dict[op_parent_name]
                 if device == CPU and (GPU, parent_idx) not in s_dict.keys():
@@ -470,7 +483,7 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
     op_execution_order_list = sorted(op_execution_order_list, key=lambda x: x[2])
     for t in op_execution_order_list:
         print(t)
-    cpu_data, gpu_data, convert_data = [], [], []
+    cpu_data, gpu_data, convert_data, convert_device = [], [], [], []
     for (op_name, device, start_time, device_latency, acc_data_trans_latency) in result:
         print("name:{}, device:{}, start_time:{}, latency:{}, data_trans:{}"\
             .format(op_name, device, start_time, device_latency, acc_data_trans_latency))
@@ -480,18 +493,16 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict):
             gpu_data.append((start_time, device_latency))
         if acc_data_trans_latency >0 :
             convert_data.append((start_time+device_latency, acc_data_trans_latency))
+            convert_device.append(device)
     
-    return cpu_data, gpu_data, convert_data, op_execution_order_list
+    return cpu_data, gpu_data, convert_data, convert_device, op_execution_order_list
 
-
-class LPMode:
-    Mode_Subgraph = 0
-    Mode_Operator = 1
 
 
 
 def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name, mode=LPMode.Mode_Subgraph):
     lines = []
+    intersection_list = []
     for module_name in module_name_list:
         one_module_names_idx_dict = {}
         if mode == LPMode.Mode_Subgraph:
@@ -524,9 +535,12 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         # Parse subgraph device placement result
         # name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
         # print(name_device_tuple_list)
-        cpu_data, gpu_data, convert_data, op_execution_order_list = parse_glpk_timeline(one_module_names_idx_dict, result_file_path, name_op_dict)
+        cpu_data, gpu_data, convert_data, convert_device, op_execution_order_list = parse_glpk_timeline(one_module_names_idx_dict, result_file_path, name_op_dict, mode=mode)
+        endpoint, sum_of_intersection = compute_data_trans_intersection(cpu_data, gpu_data, convert_data, convert_device)
+        intersection_list.append((endpoint, sum_of_intersection))
+        print("endpoint: %f , intersection: %f" % (endpoint, sum_of_intersection))
         print("module_name")
-
+    
         tmp_module_name_list = []
         for c in module_name.split("/"):
             if len(c.strip()) > 0:
@@ -534,13 +548,13 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         
         draw_gantt(cpu_data, gpu_data, convert_data, os.path.join(folder_path, tmp_module_name_list[-1]))
         
-        device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
+        # device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
         results = write_subgraph_device_placement_result([name for (name, device, start_time) in op_execution_order_list if device == CPU],\
             [name for (name, device, start_time) in op_execution_order_list if device == GPU], \
             name_op_dict, op_execution_order_list=op_execution_order_list)
         lines.extend(results)
         # print("Write result to %s" % (device_placement_file_path))
-    return lines
+    return lines, intersection_list
 
 
 def sum_lp_objectives(folder_path):
@@ -555,7 +569,6 @@ def sum_lp_objectives(folder_path):
             continue
         total += float(c)
     return total
-
 
 
 def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
@@ -588,7 +601,7 @@ def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
     
     # Using GLPK solve device placement here
     folder_path = os.path.join(model_dir, mobile)
-    lines = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
+    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
     unsupported_op_names = ["final_layer/Relu", "final_layer/Mean/reduction_indices", \
         "final_layer/Relu___tr4final_layer/Mean", "final_layer/Mean", \
         "final_layer/FC/weights", "final_layer/FC/MatMul", \
@@ -615,6 +628,7 @@ def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
     os.system(sh_cmd)
     print(untreated_op_latency)
     print("LP+serial total: {}".format(lp_total+untreated_op_latency))
+    print("LP+serial total: {}".format(lp_total+untreated_op_latency+sum([intersection for _, intersection in intersection_list])))
 
 
 def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
@@ -636,10 +650,11 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
             "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
     inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
-    lines = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
+    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model, mode=LPMode.Mode_Operator)
     lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict)
     lp_total = sum_lp_objectives(folder_path)
     print("LP+serial total: {}".format(lp_total+untreated_op_latency))
+    print("LP+serial+intersection total: {}".format(lp_total+untreated_op_latency+sum([intersection for _, intersection in intersection_list])))
     device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
     new_lines = []
     if CPU_little_thread_index != None:

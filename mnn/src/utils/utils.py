@@ -1,9 +1,18 @@
 import argparse
-
+import logging
+import subprocess
 
 def parse_model_mobile():
-    model_list = ['inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large', 'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large', 'inception-resnet-v2']
-    mobile_list = ['lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20', 'snapdragon_855', 'huawei_p40']
+    model_list = [
+        'inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large',
+        'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large',
+        'inception-resnet-v2', 'model1', 'model2', 'model3', 'model4',
+        'example1'
+    ]
+    mobile_list = [
+        'lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20',
+        'snapdragon_855', 'huawei_p40', 'device1', 'device2', 'device3'
+    ]
     thread_number = [1, 2, 4, 8]
 
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -32,6 +41,24 @@ def parse_model_mobile():
 
 def write_lines(file_path, lines):
     f = open(file_path, 'w')
-    f.writelines(lines)
-    f.flush()
-    f.close()
+    try:
+        f.writelines(lines)
+        f.flush()
+    finally:
+        f.close()
+
+
+def get_logger():
+    """Returns the logger to replace the print function
+    """
+    logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
+    level=logging.INFO)
+    logging.root.setLevel(logging.INFO)
+    logger = logging.getLogger()
+    return logger
+
+def get_project_path():
+    sh_cmd = "cd ../../ && pwd"
+    result = str(subprocess.check_output(sh_cmd, shell=True), encoding = "utf-8").strip()
+    return result

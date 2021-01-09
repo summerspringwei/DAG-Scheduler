@@ -30,7 +30,7 @@ class TreeNode:
                 if is_parent_executed(op, op_name_list, name_op_dict):
                     # Assign to CPU
                     node = TreeNode(self)
-                    node.CPU_endpoint = max(op.op_def.op.earlist_start_point, self.CPU_endpoint) + op.op_def.operatorLatency.CPU_latency
+                    node.CPU_endpoint = max(op.op_def.op.earlist_start_point, self.CPU_endpoint) + op.op_def.operator_latency.CPU_latency
                     node.GPU_endpoint = self.GPU_endpoint
                     self._children.append(node)
                     to_be_add = list(to_be_add_op_names)
@@ -38,7 +38,7 @@ class TreeNode:
                     node.expand(to_be_add, depth+1)
                     # Assign to GPU
                     node = TreeNode(self)
-                    node.GPU_endpoint = max(op.op_def.op.earlist_start_point, self.GPU_endpoint) + op.op_def.operatorLatency.GPU_latency
+                    node.GPU_endpoint = max(op.op_def.op.earlist_start_point, self.GPU_endpoint) + op.op_def.operator_latency.GPU_latency
                     node.CPU_endpoint = self.CPU_endpoint
                     self._children.append(node)
                     node.expand(to_be_add, depth+1)

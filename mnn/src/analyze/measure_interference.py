@@ -9,7 +9,7 @@ import numpy as np
 import os
 import re
 from profile import *
-from utils import *
+from utils import utils
 
 
 '''
@@ -172,8 +172,8 @@ if __name__ == "__main__":
     #     "pnasnet-large/pnasnet-large-info.bak", \
     #     "pnasnet-large/oneplus3-pnasnet-large-latency-onwait.csv")
     
-    model, mobile, thread, _ = parse_model_mobile()
-    model_dir = os.path.join("/Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/", model)
+    model, mobile, thread, _ = utils.parse_model_mobile()
+    model_dir = os.path.join(utils.get_project_path(), "mnn/models/", model)
     file_prefix = mobile+"-"+model
     result_file_path = os.path.join(model_dir, mobile, file_prefix+"-layerwise-latency.csv")
     gather_multi_file_profile([

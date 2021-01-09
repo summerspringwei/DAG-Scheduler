@@ -1,16 +1,18 @@
 
 import queue
 import pysnooper
+import os
 
-from profile.read_net_structure import *
-from utils import *
-from profile.find_critical_node import *
+from profile import subgraph
+from utils import utils
+from profile import find_critical_node
+from profile import read_profile_data
 
 def auto_build_multi_subgraph(op_name_list, name_op_dict):
     def add_new_subgraph(subgraph_op_name_list, name_op_dict):
         pass
     subgraph_list = []
-    input_nodes = find_input_nodes(op_name_list, name_op_dict)
+    input_nodes = subgraph.find_input_nodes(op_name_list, name_op_dict)
     visited = set()
     subgraph_op_name_list = []
     to_be_sche_ops = input_nodes
@@ -37,7 +39,7 @@ def auto_build_multi_subgraph(op_name_list, name_op_dict):
             op = name_op_dict[op_name]
             subgraph_op_name_list.append(op_name)
             visited.add(op_name)
-        subgraph = Subgraph(str(subgraph_idx))
+        subgraph = subgraph.Subgraph(str(subgraph_idx))
         subgraph_idx += 1
         subgraph.buildWithOpList(subgraph_op_name_list, name_op_dict)
         subgraph_op_name_list.clear()
@@ -46,7 +48,7 @@ def auto_build_multi_subgraph(op_name_list, name_op_dict):
         if op_name not in visited and (len(op.children) > 1 or len(op.parents) > 1):
             subgraph_op_name_list = [op_name]
             visited.add(op_name)
-            subgraph = Subgraph(str(subgraph_idx))
+            subgraph = subgraph.Subgraph(str(subgraph_idx))
             subgraph_idx += 1
             subgraph.buildWithOpList(subgraph_op_name_list, name_op_dict)
             subgraph_list.append(subgraph)
@@ -61,7 +63,7 @@ def auto_build_multi_subgraph(op_name_list, name_op_dict):
 def auto_build_multi_subgrap_with_weight(op_name_list, name_op_dict, name_weight_dict, weight_threshold):
 
     def add_new_subgraph(subgraph_op_name_list, subgraph_idx, name_op_dict):
-        subgraph = Subgraph(str(subgraph_idx))
+        subgraph = subgraph.Subgraph(str(subgraph_idx))
         subgraph.buildWithOpList(subgraph_op_name_list, name_op_dict)
         subgraph_list.append(subgraph)
         name_op_dict[str(subgraph_idx)] = subgraph
@@ -69,7 +71,7 @@ def auto_build_multi_subgrap_with_weight(op_name_list, name_op_dict, name_weight
         return subgraph_idx + 1
 
     subgraph_list = []
-    input_nodes = find_input_nodes(op_name_list, name_op_dict)
+    input_nodes = subgraph.find_input_nodes(op_name_list, name_op_dict)
     visited = set()
     subgraph_op_name_list = []
     to_be_sche_ops = input_nodes
@@ -210,13 +212,9 @@ def auto_merge_subgraph(subgraph_list, name_op_dict, num_ops_threshold=3, num_su
 
 
 if __name__ == "__main__":
-    model, mobile, thread = parse_model_mobile()
+    model, mobile, thread = utils.parse_model_mobile()
     model_dir = os.path.join("../models/", model)
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-        thread, SCALE=1.0)
+    op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread)
     name_weight_dict, result = get_node_weight_wrapper(model)
     pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
     if model == 'pnasnet-large':
@@ -236,12 +234,12 @@ if __name__ == "__main__":
         nodes = []
         for subgraph in subgraph_list:
             name_op_dict[subgraph.name] = subgraph
-        build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
+        subgraph.build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
         print(len(subgraph_list))
         for subgraph in subgraph_list:
             print(subgraph)
         auto_merge_subgraph(subgraph_list, name_op_dict, num_ops_threshold=5)
-        build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
+        subgraph.build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
         print("After merge " + str(len(subgraph_list)))
         
         for subgraph in subgraph_list:

@@ -1,6 +1,6 @@
 import os
 
-from profile.read_profile_data import *
+from profile import read_profile_data
 from utils import utils
 
 MAX_COST = 1e6
@@ -29,13 +29,13 @@ def prepare_slice_latency(op_name_list, name_op_dict):
     acc_latency.append((acc_cpu, acc_gpu, 0.0, 0.0))
     for op_name in op_name_list:
         op = name_op_dict[op_name]
-        cpu_latency = op.op_def.operatorLatency.CPU_latency
-        gpu_latency = op.op_def.operatorLatency.GPU_latency
+        cpu_latency = op.op_def.operator_latency.CPU_latency
+        gpu_latency = op.op_def.operator_latency.GPU_latency
         acc_cpu += cpu_latency
         acc_gpu += gpu_latency
         acc_latency.append((acc_cpu, acc_gpu, \
-            op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW, \
-                op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW))
+            op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW, \
+                op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW))
     return acc_latency
 
 
@@ -87,10 +87,10 @@ def get_sample_ops():
     for latency in latency_list:
         op = Operator("nade_%d" % idx)
         idx += 1
-        op.op_def.operatorLatency.CPU_latency = latency[0]
-        op.op_def.operatorLatency.GPU_latency = latency[1]
-        op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC = latency[2]
-        op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW = latency[3]
+        op.op_def.operator_latency.CPU_latency = latency[0]
+        op.op_def.operator_latency.GPU_latency = latency[1]
+        op.op_def.operator_latency.Transpose_latency_NCHW_to_NHWC = latency[2]
+        op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW = latency[3]
         op_name_list.append(op.name)
         name_op_dict[op.name] = op
     
@@ -199,14 +199,9 @@ def generate_mosaic_device_map(model, mobile, thread, op_name_list, device_dp):
     os.system('adb push {} {}'.format(file_path, '/data/local/tmp/'))
 
 
-
-
 def solve_mosaic_dp(model, mobile, thread):
     model_dir = os.path.join("../models/", model)
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+    op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread)
     # find_efficient_slice_and_execution_plan(op_name_list, name_op_dict)
     result = my_serial_dp(op_name_list, name_op_dict)
     print("MOSAIC result: {}".format(result[0]))

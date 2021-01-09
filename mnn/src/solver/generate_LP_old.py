@@ -45,8 +45,8 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
     parent_idx = 0
     for parent in op.parents:
         if parent in one_module_names_idx_dict.keys():
-            convert_format_to_cpu_overhead += op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-            convert_format_to_gpu_overhead += op.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
+            convert_format_to_cpu_overhead += op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
+            convert_format_to_gpu_overhead += op.op_def.operator_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
             parent_idx = one_module_names_idx_dict[parent]
     idx = one_module_names_idx_dict[op_name]
     for device in device_list:
@@ -56,20 +56,20 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
             if device == CPU:
                 c2 = "tt - t_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
                 % (device, idx, (M + convert_format_to_cpu_overhead), device, idx, \
-                convert_format_to_cpu_overhead, device, parent_idx, (op.op_def.operatorLatency.CPU_latency - M))
+                convert_format_to_cpu_overhead, device, parent_idx, (op.op_def.operator_latency.CPU_latency - M))
             elif device == GPU:
                 c2 = "tt - t_%d_%d - %f s_%d_%d + %f s_%d_%d > %f\n" \
                 % (device, idx, (M + convert_format_to_gpu_overhead), device, idx, \
-                convert_format_to_gpu_overhead, device, parent_idx, (op.op_def.operatorLatency.GPU_latency - M))
+                convert_format_to_gpu_overhead, device, parent_idx, (op.op_def.operator_latency.GPU_latency - M))
             else:
                 print("Device value error")
         else:
             if device == CPU:
                 c2 = "tt - t_%d_%d - %f s_%d_%d > %f\n" \
-                % (device, idx, M, device, idx, (op.op_def.operatorLatency.CPU_latency - M))
+                % (device, idx, M, device, idx, (op.op_def.operator_latency.CPU_latency - M))
             elif device == GPU:
                 c2 = "tt - t_%d_%d - %f s_%d_%d > %f\n" \
-                % (device, idx, M, device, idx, (op.op_def.operatorLatency.GPU_latency - M))
+                % (device, idx, M, device, idx, (op.op_def.operator_latency.GPU_latency - M))
             else:
                 print("Device value error")
         constraints.extend([c1, c2])
@@ -135,7 +135,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
     for device1 in device_list:
         for device2 in device_list:
             c = ""
-            op_parent_latency = op_dict[op_name_parent].op_def.operatorLatency
+            op_parent_latency = op_dict[op_name_parent].op_def.operator_latency
             if device2 == CPU:
                 # If parent does not have parent, then there is no transformat constrains
                 if idx_parent_parent == 0:
@@ -189,10 +189,10 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
     #                               op_dict)
     idx_b_parent = get_parent_idx(one_module_names_idx_dict, op_name_b,
                                   op_dict)
-    b_cpu_latency = op_dict[op_name_b].op_def.operatorLatency.CPU_latency
-    # a_cpu_latency = op_dict[op_name_a].op_def.operatorLatency.CPU_latency
-    b_gpu_latency = op_dict[op_name_b].op_def.operatorLatency.GPU_latency
-    # a_gpu_latency = op_dict[op_name_a].op_def.operatorLatency.GPU_latency
+    b_cpu_latency = op_dict[op_name_b].op_def.operator_latency.CPU_latency
+    # a_cpu_latency = op_dict[op_name_a].op_def.operator_latency.CPU_latency
+    b_gpu_latency = op_dict[op_name_b].op_def.operator_latency.GPU_latency
+    # a_gpu_latency = op_dict[op_name_a].op_def.operator_latency.GPU_latency
     constraints = []
     u_variable = []
 
@@ -210,7 +210,7 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
             if device == CPU:
                 # c1 and c2 share the same `u` variable
                 b_cpu_transform_latency = op_dict[
-                    op_name_b].op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
+                    op_name_b].op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
                 if idx_a > idx_b:
                     c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
@@ -221,7 +221,7 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
                         b_cpu_transform_latency, device, idx_b, b_cpu_transform_latency, device, idx_b_parent, b_cpu_latency - M)
             elif device == GPU:
                 b_gpu_transform_latency = op_dict[
-                    op_name_b].op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
+                    op_name_b].op_def.operator_latency.Transpose_latency_NCHW_to_NHWC * GPU_TRANSFORM_SCALE_FACTOR
                 if idx_a > idx_b:
                     c1 = "t_%d_%d - t_%d_%d + %f %s - %f s_%d_%d + %f s_%d_%d > %f\n" \
                         % (device, idx_a, device, idx_b, M, u_val_str, \
@@ -298,13 +298,13 @@ def print_op_profile(one_module_names_idx_dict, op_dict):
     op_profile_list = []
     for op_name, idx in one_module_names_idx_dict.items():
         op = op_dict[op_name]
-        op_profile_list.append((op_name, idx, op.op_def.operatorLatency))
+        op_profile_list.append((op_name, idx, op.op_def.operator_latency))
     op_profile_list = sorted(op_profile_list,
                              key=lambda op_profile: op_profile[1])
 
     for op_profile in op_profile_list:
-        (op_name, idx, op.op_def.operatorLatency) = op_profile
-        print("%s %d %s" % (op_name, idx, op.op_def.operatorLatency))
+        (op_name, idx, op.op_def.operator_latency) = op_profile
+        print("%s %d %s" % (op_name, idx, op.op_def.operator_latency))
 
 
 def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
@@ -512,8 +512,8 @@ def solve_inception(model, mobile, thread):
                 break
         if not find:
             # print("%s" % (op_name))
-            cpu_latency = name_op_dict[op_name].op_def.operatorLatency.CPU_latency
-            gpu_latency = name_op_dict[op_name].op_def.operatorLatency.GPU_latency
+            cpu_latency = name_op_dict[op_name].op_def.operator_latency.CPU_latency
+            gpu_latency = name_op_dict[op_name].op_def.operator_latency.GPU_latency
             if cpu_latency > gpu_latency:
                 serial_lines.append("%s %d\n" % (op_name, 3))
                 print("%s %d" % (op_name, 3))

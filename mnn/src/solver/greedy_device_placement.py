@@ -1,80 +1,29 @@
 #! /usr/bin/python
-import logging
+
 import os
 import queue
 from operator import itemgetter, attrgetter
 import timeit
+import logging
 
-from solver import optimizer
-from profile import *
-from utils import *
-from visualization import *
+logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
+    level=logging.INFO)
+logger = logging.getLogger()
+
+from profile import read_profile_data
 from profile import graph_partition
 from profile import find_critical_node
+from profile import subgraph
+from profile import net_struct
+from solver import optimizer
 from solver import search_tree
-
-
-def update_children_start_point(op, ops_relation_dict, \
-  device_start_point, latency):
-  for child_name in op.children:
-    if child_name in ops_relation_dict:
-      op_child = ops_relation_dict[child_name]
-      op_child.earlist_start_point = \
-        max(op_child.earlist_start_point, device_start_point + latency)
-    else:
-      print("Can not find op %s in dict" % child_name)
+from solver import scheduler_utils
+from utils import utils
 
 
 def key_sort_operator(operator):
   return operator.earlist_start_point
-
-
-# Place the op on CPU or GPU, return the updated device end point
-def assign_op_to_device(op, ops_relation_dict, device_type, device_end_point, latency, op_execute_order_list):
-  op.executed = True
-  op.op_def.device_type = device_type
-  op_execute_order_list.append((op.name, device_type, device_end_point + latency))
-  update_children_start_point(op, ops_relation_dict, device_end_point, latency)
-  return device_end_point + latency
-
-
-def is_parents_executed(op, op_name_list, ops_relation_dict):
-  ready = True # When all his father has been executed, then the op can start executing
-  for op_parent_name in op.parents:
-    if not op_parent_name in ops_relation_dict.keys():
-      raise KeyError()
-    if op_parent_name not in op_name_list:
-      continue
-    op_parent = ops_relation_dict[op_parent_name]
-    if op_parent.executed == False:
-      ready = False
-  return ready
-
-
-def write_device_placement(filename, net_def):
-  f = open(filename, 'w')
-  for op in net_def.op:
-    f.write("%s %d\n" % (op.name, op.op_def.device_type))
-  f.flush()
-  f.close()
-  print("Write device placement done.")
-
-
-def get_ops_total_latency(op, ops_relation_dict):
-  to_CPU_transpose_latency = 0.0
-  to_GPU_transpose_latency = 0.0
-  
-  for op_parent_name in op.parents:
-    op_parent = ops_relation_dict[op_parent_name]
-    if op_parent.op_def.device_type == DeviceType.CPU:
-      to_GPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC)
-    elif op_parent.op_def.device_type == DeviceType.GPU:
-      to_CPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW)
-  
-  # print(op.op_def.operatorLatency)
-  CPU_latency = op.op_def.operatorLatency.CPU_latency + to_CPU_transpose_latency
-  GPU_latency = op.op_def.operatorLatency.GPU_latency + to_GPU_transpose_latency
-  return CPU_latency, GPU_latency
 
 
 def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_name, mobile, thread):
@@ -87,24 +36,12 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
   # Need to record the execute order
   op_execute_order_list = []
   
-  input_op_names = find_input_nodes(op_name_list, name_op_dict)
+  input_op_names = subgraph.find_input_nodes(op_name_list, name_op_dict)
   ops_queue = [name_op_dict[op_name] for op_name in input_op_names]
   print(input_op_names)
   assert(len(ops_queue) > 0)
   print("Start Greedy")
   
-  # op = ops_queue[0]
-  # # Execute the first op
-  # GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-  # if op.op_def.operatorLatency.CPU_latency < GPU_latency:
-  #   CPU_end_point = assign_op_to_device(op, name_op_dict, DeviceType.CPU, CPU_end_point, \
-  #     op.op_def.operatorLatency.CPU_latency, op_execute_order_list)
-  # else:
-  #   GPU_end_point = assign_op_to_device(op, name_op_dict, DeviceType.GPU, GPU_end_point, \
-  #     GPU_latency, op_execute_order_list)
-  # ops_queue.remove(op)
-  # to_be_sche_ops = []
-  # to_be_sche_ops.append(op)
   # Start greedy assign
   to_be_sche_ops = []
   while(True):
@@ -117,7 +54,7 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
       # If a child's parents are executed and this child is not executed and not in queue
       # Add this child to queue
       if child_name in op_name_list and \
-        is_parents_executed(name_op_dict[child_name], op_name_list, name_op_dict) and \
+        scheduler_utils.is_parents_executed(name_op_dict[child_name], op_name_list, name_op_dict) and \
         name_op_dict[child_name] not in ops_queue and \
         not name_op_dict[child_name].executed:
         ops_queue.append(name_op_dict[child_name])
@@ -129,11 +66,11 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
     # ops_queue= sorted(ops_queue, key=key_sort_operator)
     ops_queue = sorted(ops_queue, key=attrgetter("earlist_start_point", "name"))
     # Using search tree to find optimal device placement strategy
-    to_be_scheduled_op_names = [op.name for op in ops_queue][0:5]
-    print("Start Schedule {}".format(len(to_be_scheduled_op_names)))
+    to_be_scheduled_op_names = [op.name for op in ops_queue][0:1]
+    logger.info("Search tree schedule {}".format((to_be_scheduled_op_names)))
     root, leaf_node_list = search_tree.build_search_tree(to_be_scheduled_op_names, name_op_dict, [CPU_end_point, GPU_end_point])
     [CPU_end_point, GPU_end_point], device_placement = search_tree.get_optimal_device_placement(root, leaf_node_list, name_op_dict)
-    print(device_placement)
+    utils.get_logger().info(device_placement)
     op_execute_order_list.extend(device_placement)
     
     for scheduled_op_name in to_be_scheduled_op_names:
@@ -150,7 +87,7 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
   print("GPU end point: %s ms." % GPU_end_point)
   print("Greedy Result %f" % (max(CPU_end_point, GPU_end_point)))
   # print(op_execute_order_list)
-  lines = write_subgraph_device_placement_result(name_op_dict=name_op_dict, op_execution_order_list=op_execute_order_list)
+  lines = subgraph.write_subgraph_device_placement_result(name_op_dict=name_op_dict, op_execution_order_list=op_execute_order_list)
   return lines
 
 
@@ -173,12 +110,12 @@ def greedy_device_placement_v2(op_name_list, ops_relation_dict, folder_path, mod
   print("Start Greedy")
   op = ops_queue[0]
   # Execute the first op
-  GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-  if op.op_def.operatorLatency.CPU_latency < GPU_latency:
-    CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, \
-      op.op_def.operatorLatency.CPU_latency, op_execute_order_list)
+  GPU_latency = op.op_def.operator_latency.GPU_latency + op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
+  if op.op_def.operator_latency.CPU_latency < GPU_latency:
+    CPU_end_point = scheduler_utils.assign_op_to_device(op, ops_relation_dict, net_struct.DeviceType.CPU, CPU_end_point, \
+      op.op_def.operator_latency.CPU_latency, op_execute_order_list)
   else:
-    GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, \
+    GPU_end_point = scheduler_utils.assign_op_to_device(op, ops_relation_dict, net_struct.DeviceType.GPU, GPU_end_point, \
       GPU_latency, op_execute_order_list)
   ops_queue.remove(op)
   to_be_sche_ops = []
@@ -191,7 +128,7 @@ def greedy_device_placement_v2(op_name_list, ops_relation_dict, folder_path, mod
       child_list.extend(op.children)
     for child_name in child_list:
       if child_name in op_name_list and \
-        is_parents_executed(ops_relation_dict[child_name], op_name_list, ops_relation_dict) and \
+        scheduler_utils.is_parents_executed(ops_relation_dict[child_name], op_name_list, ops_relation_dict) and \
         ops_relation_dict[child_name] not in ops_queue and \
         not ops_relation_dict[child_name].executed:
         ops_queue.append(ops_relation_dict[child_name])
@@ -208,7 +145,7 @@ def greedy_device_placement_v2(op_name_list, ops_relation_dict, folder_path, mod
     # Try to fetch two ops from queue
     for op_in_queue in ops_queue:
       # When all his father has been executed, then the op can start executing
-      if is_parents_executed(op_in_queue, op_name_list, ops_relation_dict):
+      if scheduler_utils.is_parents_executed(op_in_queue, op_name_list, ops_relation_dict):
         to_be_sche_ops.append(op_in_queue)
         ops_queue.remove(op_in_queue)
         logging.debug("Fetch op %s " % op.name)
@@ -221,32 +158,32 @@ def greedy_device_placement_v2(op_name_list, ops_relation_dict, folder_path, mod
       op = to_be_sche_ops[0]
       # For ops that are not supported by GPU, set their device type as CPU(Fall back to CPU)
       if op.op_def.type in ops_not_support_by_GPU:
-        CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, \
-          CPU_end_point, op.op_def.operatorLatency.CPU_latency, op_execute_order_list)
+        CPU_end_point = scheduler_utils.assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, \
+          CPU_end_point, op.op_def.operator_latency.CPU_latency, op_execute_order_list)
         continue
       # Assign the op to CPU or GPU
       # Find its father, get transpose latency
-      CPU_latency, GPU_latency = get_ops_total_latency(op, ops_relation_dict)
+      CPU_latency, GPU_latency = scheduler_utils.get_ops_total_latency(op, ops_relation_dict)
       CPU_latency = CPU_latency * CPU_latency_scale
       # Get computation latency on devices
       logging.debug("op %s CPU and GPU endpoint: %f %f ,op endpoint %f" % ( op.name, CPU_end_point, GPU_end_point, op.earlist_start_point))
       # logging.debug("op %s CPU and GPU latency: %f %f to CPU and to GPU latency: %f %f" \
-      #   % ( op.name, op.op_def.operatorLatency.CPU_latency, op.op_def.operatorLatency.GPU_latency, to_CPU_transpose_latency, to_GPU_transpose_latency))
+      #   % ( op.name, op.op_def.operator_latency.CPU_latency, op.op_def.operator_latency.GPU_latency, to_CPU_transpose_latency, to_GPU_transpose_latency))
       
       # Execute on CPU will be faster
       if max(CPU_end_point, op.earlist_start_point) + CPU_latency \
         <= max(GPU_end_point, op.earlist_start_point) + GPU_latency:
         CPU_end_point = max(CPU_end_point, op.earlist_start_point)
-        CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, CPU_latency, op_execute_order_list)
+        CPU_end_point = scheduler_utils.assign_op_to_device(op, ops_relation_dict, net_struct.DeviceType.CPU, CPU_end_point, CPU_latency, op_execute_order_list)
       else:
         GPU_end_point = max(GPU_end_point, op.earlist_start_point)
-        GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency, op_execute_order_list)
+        GPU_end_point = scheduler_utils.assign_op_to_device(op, ops_relation_dict, net_struct.DeviceType.GPU, GPU_end_point, GPU_latency, op_execute_order_list)
       # End of one Op
       
     else:
-      CPU_latency0, GPU_latency0 = get_ops_total_latency(to_be_sche_ops[0], ops_relation_dict)
+      CPU_latency0, GPU_latency0 = scheduler_utils.get_ops_total_latency(to_be_sche_ops[0], ops_relation_dict)
       CPU_latency0 = CPU_latency0 * CPU_latency_scale
-      CPU_latency1, GPU_latency1 = get_ops_total_latency(to_be_sche_ops[1], ops_relation_dict)
+      CPU_latency1, GPU_latency1 = scheduler_utils.get_ops_total_latency(to_be_sche_ops[1], ops_relation_dict)
       CPU_latency1 = CPU_latency1 * CPU_latency_scale
       to_be_CPU_latencies = [CPU_latency0, CPU_latency1]
       to_be_GPU_latencies = [GPU_latency0, GPU_latency1]
@@ -317,10 +254,10 @@ def greedy_device_placement(op_name_list, ops_relation_dict, folder_path, model_
   print("Start Greedy")
   op = ops_queue[0]
   # Execute the first op
-  GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-  if op.op_def.operatorLatency.CPU_latency < GPU_latency:
+  GPU_latency = op.op_def.operator_latency.GPU_latency + op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
+  if op.op_def.operator_latency.CPU_latency < GPU_latency:
     CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, \
-      op.op_def.operatorLatency.CPU_latency, op_execute_order_list)
+      op.op_def.operator_latency.CPU_latency, op_execute_order_list)
   else:
     GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, \
       GPU_latency, op_execute_order_list)
@@ -355,8 +292,8 @@ def greedy_device_placement(op_name_list, ops_relation_dict, folder_path, model_
     
     # For ops that are not supported by GPU, set their device type as CPU(Fall back to CPU)
     if op.op_def.type in ops_not_support_by_GPU:
-      CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, \
-        CPU_end_point, op.op_def.operatorLatency.CPU_latency, op_execute_order_list)
+      CPU_end_point = assign_op_to_device(op, ops_relation_dict, net_struct.DeviceType.CPU, \
+        CPU_end_point, op.op_def.operator_latency.CPU_latency, op_execute_order_list)
       continue
     # Assign the op to CPU or GPU
     # Find its father, get transpose latency
@@ -365,18 +302,18 @@ def greedy_device_placement(op_name_list, ops_relation_dict, folder_path, model_
     
     for op_parent_name in op.parents:
       op_parent = ops_relation_dict[op_parent_name]
-      if op_parent.op_def.device_type == DeviceType.CPU:
-        to_GPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC)
-      elif op_parent.op_def.device_type == DeviceType.GPU:
-        to_CPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW)
+      if op_parent.op_def.device_type == net_struct.DeviceType.CPU:
+        to_GPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operator_latency.Transpose_latency_NCHW_to_NHWC)
+      elif op_parent.op_def.device_type == net_struct.DeviceType.GPU:
+        to_CPU_transpose_latency = max(to_GPU_transpose_latency, op_parent.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW)
     
     # Get computation latency on devices
     logging.debug("op %s CPU and GPU endpoint: %f %f ,op endpoint %f" % ( op.name, CPU_end_point, GPU_end_point, op.earlist_start_point))
     logging.debug("op %s CPU and GPU latency: %f %f to CPU and to GPU latency: %f %f" \
-      % ( op.name, op.op_def.operatorLatency.CPU_latency, op.op_def.operatorLatency.GPU_latency, to_CPU_transpose_latency, to_GPU_transpose_latency))
-    # print(op.op_def.operatorLatency)
-    CPU_latency = op.op_def.operatorLatency.CPU_latency + to_CPU_transpose_latency
-    GPU_latency = op.op_def.operatorLatency.GPU_latency + to_GPU_transpose_latency
+      % ( op.name, op.op_def.operator_latency.CPU_latency, op.op_def.operator_latency.GPU_latency, to_CPU_transpose_latency, to_GPU_transpose_latency))
+    # print(op.op_def.operator_latency)
+    CPU_latency = op.op_def.operator_latency.CPU_latency + to_CPU_transpose_latency
+    GPU_latency = op.op_def.operator_latency.GPU_latency + to_GPU_transpose_latency
     
     
     # Execute on CPU will be faster
@@ -403,15 +340,12 @@ def greedy_device_placement(op_name_list, ops_relation_dict, folder_path, model_
 
 if __name__ == "__main__":
   logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
-  model, mobile, thread, CPU_little_thread_index = parse_model_mobile()
+  model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
   # model, mobile, thread = "inception-v3", "redmi", 2
-  model_dir = os.path.join("/Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/", model)
+  model_dir = os.path.join(utils.get_project_path(), "mnn/models/", model)
   folder_path = os.path.join(model_dir, mobile)
-  op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-        thread, CPU_little_thread_index=CPU_little_thread_index)
+  op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread, CPU_little_thread_index=CPU_little_thread_index)
+
   # greedy_device_placement(op_name_list, name_op_dict, folder_path, model, mobile, thread)
   unsupported_op_names = []
   if model.find("nasnet") >= 0:
@@ -423,7 +357,7 @@ if __name__ == "__main__":
   graph_mode = 0
   # 
   if graph_mode == 0:
-    subgraph_name_list, name_op_dict = build_multi_subgraphs(model, mobile, thread)
+    subgraph_name_list, name_op_dict = subgraph.build_multi_subgraphs(model, mobile, thread)
     lines = greedy_device_placement_v3(subgraph_name_list, name_op_dict, folder_path, model, mobile, thread)
     # edges = []
     # for graph in subgraph_name_list:
@@ -453,10 +387,10 @@ if __name__ == "__main__":
       exit(0)
     name_weight_dict, result = find_critical_node.get_node_weight(model, input_node_name)
     subgraph_list = graph_partition.auto_build_multi_subgrap_with_weight(op_name_list, name_op_dict, name_weight_dict, 648000)
-    graph_partition.build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
+    subgraph.build_subgraph_relationship([subgraph.name for subgraph in subgraph_list], name_op_dict)
     lines = greedy_device_placement_v3([subgraph.name for subgraph in subgraph_list], name_op_dict, folder_path, model, mobile, thread)
     # Deal with ops that are not in the module prefix
-  lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict, \
+  lines, untreated_op_latency = subgraph.insert_untreated_ops(lines, op_name_list, name_op_dict, \
     unsupported_op_names=unsupported_op_names)
   # Write results
   device_map_file_path = os.path.join(model_dir, mobile, "greedy-placement-{}-cpu-{}.txt".format(model, thread))
@@ -470,14 +404,17 @@ if __name__ == "__main__":
           line = line.replace(' 3', ' 2')
           new_lines.append(line)
       lines = new_lines
-  write_lines(device_map_file_path, lines)
+  utils.write_lines(device_map_file_path, lines)
 
   optimized_lines = optimizer.depth_first_reorder(lines, op_name_list, name_op_dict)
-  write_lines(device_map_file_path+".opt", optimized_lines)
+  utils.write_lines(device_map_file_path+".opt", optimized_lines)
   
   rc = os.system("adb push {} /data/local/tmp/".format(device_map_file_path))
   if rc == 0:
     print("Push greedy device file to device")
+  else:
+    print("There is no device")
+    exit(0)
   rc = os.system("adb push {} /data/local/tmp/".format(device_map_file_path+".opt"))
   if rc == 0:
     print("Push greedy device opt file to device")

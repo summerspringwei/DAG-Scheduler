@@ -23,4 +23,4 @@ def test_connection():
 
 
 def diff_two_file(f1_path, f2_path):
-    
+    pass

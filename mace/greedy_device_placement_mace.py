@@ -118,9 +118,9 @@ def greedy_device_placement(netdef, ops_relation_dict):
   
   # Execute the first op
   op = ops_relation_dict[input_node_name]
-  GPU_latency = op.op_def.operatorLatency.GPU_latency + op.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
-  if op.op_def.operatorLatency.CPU_latency < GPU_latency:
-    CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
+  GPU_latency = op.op_def.operator_latency.GPU_latency + op.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
+  if op.op_def.operator_latency.CPU_latency < GPU_latency:
+    CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operator_latency.CPU_latency)
   else:
     GPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.GPU, GPU_end_point, GPU_latency)
   op_execute_order.append(op_to_idx_dict[input_node_name])
@@ -149,7 +149,7 @@ def greedy_device_placement(netdef, ops_relation_dict):
     op_execute_order.append(op_to_idx_dict[op.name])
     # For ops that are not supported by GPU, set their device type as CPU(Fall back to CPU)
     if op.op_def.type == "Concat":
-      CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operatorLatency.CPU_latency)
+      CPU_end_point = assign_op_to_device(op, ops_relation_dict, DeviceType.CPU, CPU_end_point, op.op_def.operator_latency.CPU_latency)
       continue
     # Assign the op to CPU or GPU
     # Find its father, get transpose latency
@@ -158,12 +158,12 @@ def greedy_device_placement(netdef, ops_relation_dict):
     for op_parent_name in op.parents:
       op_parent = ops_relation_dict[op_parent_name]
       if op_parent.op_def.device_type == DeviceType.CPU:
-        to_GPU_transpose_latency += op_parent.op_def.operatorLatency.Transpose_latency_NCHW_to_NHWC
+        to_GPU_transpose_latency += op_parent.op_def.operator_latency.Transpose_latency_NCHW_to_NHWC
       elif op_parent.op_def.device_type == DeviceType.GPU:
-        to_CPU_transpose_latency += op_parent.op_def.operatorLatency.Transpose_latency_NHWC_to_NCHW
+        to_CPU_transpose_latency += op_parent.op_def.operator_latency.Transpose_latency_NHWC_to_NCHW
     # Get computation latency on devices
-    CPU_latency = op.op_def.operatorLatency.CPU_latency + to_CPU_transpose_latency
-    GPU_latency = op.op_def.operatorLatency.GPU_latency + to_GPU_transpose_latency
+    CPU_latency = op.op_def.operator_latency.CPU_latency + to_CPU_transpose_latency
+    GPU_latency = op.op_def.operator_latency.GPU_latency + to_GPU_transpose_latency
     logging.debug("op %s CPU and GPU endpoint: %f %f " % ( op.name, CPU_end_point, GPU_end_point))
     logging.debug("op %s CPU and GPU latency: %f %f " % ( op.name, CPU_latency, GPU_latency))
     # TODO(xcw)add to_GPU_transpose_latency to CPU_end_point

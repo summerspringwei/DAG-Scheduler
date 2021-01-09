@@ -4,7 +4,7 @@ import os
 
 from utils import utils
 from analyze import measure_interference
-
+from profile import read_profile_data
 
 if __name__ == "__main__":
     model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
@@ -12,9 +12,9 @@ if __name__ == "__main__":
     print(sh_cmd)
     # os.system(sh_cmd)
 
-    model_dir = os.path.join("/Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/", model)
+    model_dir = os.path.join(utils.get_project_path(), "mnn/models/", model)
     folder_path = os.path.join(model_dir, mobile)
-    op_name_list, name_op_dict, net_def = measure_interference.gather_model_profile(
+    op_name_list, name_op_dict, net_def = read_profile_data.gather_model_profile(
             os.path.join(model_dir, model + "-info.txt"),
             os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
             os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
@@ -48,10 +48,10 @@ if __name__ == "__main__":
         device = parallel_op_latency[1]
         alone_latency = 0.0
         if device == "CPU":
-            alone_latency = op.op_def.operatorLatency.CPU_latency*1000
+            alone_latency = op.op_def.operator_latency.CPU_latency*1000
             alone_cpu_latency_list.append(alone_latency)
         elif device == "OpenCL" or device == "N/A":
-            alone_latency = op.op_def.operatorLatency.GPU_latency*1000
+            alone_latency = op.op_def.operator_latency.GPU_latency*1000
             alone_gpu_latency_list.append(alone_latency)
         else:
             print(parallel_latency)

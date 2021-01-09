@@ -24,7 +24,7 @@ def draw_gantt(cpu_data, gpu_data, convert_data, fig_name):
     font_times_new_roman = {'fontname':'Times New Roman'}
     # Setting X-axis limits
     # gnt.set_xlim(0, x_limit * 1.2)
-    gnt.set_xlim(0, 160)
+    gnt.set_xlim(0, 60)
     # Setting labels for x-axis and y-axis
     gnt.set_xlabel('Millisecond since start', fontsize=font_size_num, **font_times_new_roman)
     gnt.set_ylabel('Computing Devices', fontsize=font_size_num, **font_times_new_roman) 

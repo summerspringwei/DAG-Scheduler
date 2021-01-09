@@ -1,5 +1,5 @@
 
-import greedy_device_placement
+from solver import scheduler_utils
 
 def depth_first_reorder(lines, op_name_list, name_op_dict):
     device_placement_dict = {}
@@ -24,7 +24,7 @@ def depth_first_reorder(lines, op_name_list, name_op_dict):
             child = name_op_dict[child_name]
             child_device = device_placement_dict[child_name]
             if child_device == device and \
-                greedy_device_placement.is_parents_executed(child, op_name_list, name_op_dict):
+                scheduler_utils.is_parents_executed(child, op_name_list, name_op_dict):
                 new_device_placement_lines.append("%s %s\n" % (child_name, device))
                 visited.add(child_name)
 

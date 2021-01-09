@@ -1,8 +1,9 @@
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
-from profile.read_net_structure import *
+from profile import subgraph
 
 def draw_single_bars(labels, data, fig_y_label, fig_title, color=(0.9, 0.0, 0.0, 0.5)):
 
@@ -64,10 +65,8 @@ def read_compare_file(file_path):
 
 def compare_nasnet_latency(model, mobile, thread):
     model_dir = os.path.join("../models/", model)
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), thread, SCALE=1.0)
+    op_name_list, name_op_dict = read_profile_data.load_model_profile(
+        model, mobile, thread)
     
     # Read parallel profile
     compare_file_path = os.path.join(model_dir, mobile, '{}-{}-cpu-{}-compare.csv'.format(mobile, model, thread))
@@ -75,11 +74,11 @@ def compare_nasnet_latency(model, mobile, thread):
     new_name_op_dict = {}
     for (name, ratio, parallel) in cpu_op_name_ratio_list:
         op = Operator(name)
-        op.op_def.operatorLatency.CPU_latency = parallel / 1000.0
+        op.op_def.operator_latency.CPU_latency = parallel / 1000.0
         new_name_op_dict[name] = op
     for (name, ratio, parallel) in gpu_op_name_ratio_list:
         op = Operator(name)
-        op.op_def.operatorLatency.GPU_latency = parallel / 1000.0
+        op.op_def.operator_latency.GPU_latency = parallel / 1000.0
         new_name_op_dict[name] = op
 
     pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
@@ -111,9 +110,9 @@ def compare_nasnet_latency(model, mobile, thread):
                 print((parallel_cpu_latency, parallel_gpu_latency))
             # assert(parallel_cpu_latency * parallel_gpu_latency == 0)
             if parallel_cpu_latency != 0:
-                cpu_subgraph_ratio_list.append((subgraph.name, parallel_cpu_latency / subgraph.op_def.operatorLatency.CPU_latency))
+                cpu_subgraph_ratio_list.append((subgraph.name, parallel_cpu_latency / subgraph.op_def.operator_latency.CPU_latency))
             elif parallel_gpu_latency != 0:
-                gpu_subgraph_ratio_list.append((subgraph.name, parallel_gpu_latency / subgraph.op_def.operatorLatency.GPU_latency))
+                gpu_subgraph_ratio_list.append((subgraph.name, parallel_gpu_latency / subgraph.op_def.operator_latency.GPU_latency))
     
     return cpu_subgraph_ratio_list, gpu_subgraph_ratio_list
 

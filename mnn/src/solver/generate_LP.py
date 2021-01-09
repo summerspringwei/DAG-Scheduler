@@ -1,13 +1,20 @@
 import queue
 import os
 import pysnooper
+import logging
+
+logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
+    level=logging.INFO)
+logger = logging.getLogger()
+
 
 from profile import read_profile_data
-from profile import *
 from profile import graph_partition
 from profile import find_critical_node
-from utils import *
+from utils import utils
 from visualization import *
+
 
 # DO NOT MODIFY THE VALUE OF `CPU` AND `GPU`
 CPU = 1
@@ -54,11 +61,11 @@ def get_parent_idxes_and_data_trans(op_name, one_module_names_idx_dict, op_dict,
     # For all 
     acc_data_trans_latency = 0.0
     parent_idx_data_trans = []
-    for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+    for (addr, data_trans) in op.op_def.operator_latency.input_data_trans_latency.items():
         data_trans_latency = data_trans[device-1]
         for op_parent_name in op.parents:
             op_parent = op_dict[op_parent_name]
-            if mode==LPMode.Mode_Subgraph and not isinstance(op_parent, Subgraph):
+            if mode==LPMode.Mode_Subgraph and not isinstance(op_parent, subgraph.Subgraph):
                 continue
             if op_parent_name not in one_module_names_idx_dict.keys():
                 continue
@@ -74,7 +81,7 @@ def get_input_tensor_data_trans_latency(op_name, op_dict, device):
     op = op_dict[op_name]
     acc_data_trans_latency = 0.0
     assert(device in [CPU, GPU])
-    for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+    for (addr, data_trans) in op.op_def.operator_latency.input_data_trans_latency.items():
         acc_data_trans_latency += data_trans[device]
     return acc_data_trans_latency
 
@@ -93,9 +100,9 @@ def generate_final_latency_for_one_node(op_name, one_module_names_idx_dict,
         c2 = ""
 
         if device == CPU:
-            device_latency = op.op_def.operatorLatency.CPU_latency
+            device_latency = op.op_def.operator_latency.CPU_latency
         elif device == GPU:
-            device_latency = op.op_def.operatorLatency.GPU_latency
+            device_latency = op.op_def.operator_latency.GPU_latency
         
         lp_data_trans = ""
         for (parent_idx, data_trans_latency) in parent_idx_data_trans:
@@ -162,7 +169,7 @@ def generate_parent_and_child_constraints(one_module_names_idx_dict,
     for device1 in device_list:
         for device2 in device_list:
             c = ""
-            op_parent_latency = op_dict[op_name_parent].op_def.operatorLatency
+            op_parent_latency = op_dict[op_name_parent].op_def.operator_latency
             
             device_latency = 0.0
             if device2 == CPU:
@@ -205,10 +212,10 @@ def generate_one_node_at_a_device(one_module_names_idx_dict, op_name_a,
     #                               op_dict)
     idx_b_parent = get_parent_idx(one_module_names_idx_dict, op_name_b,
                                   op_dict)
-    b_cpu_latency = op_dict[op_name_b].op_def.operatorLatency.CPU_latency
-    # a_cpu_latency = op_dict[op_name_a].op_def.operatorLatency.CPU_latency
-    b_gpu_latency = op_dict[op_name_b].op_def.operatorLatency.GPU_latency
-    # a_gpu_latency = op_dict[op_name_a].op_def.operatorLatency.GPU_latency
+    b_cpu_latency = op_dict[op_name_b].op_def.operator_latency.CPU_latency
+    # a_cpu_latency = op_dict[op_name_a].op_def.operator_latency.CPU_latency
+    b_gpu_latency = op_dict[op_name_b].op_def.operator_latency.GPU_latency
+    # a_gpu_latency = op_dict[op_name_a].op_def.operator_latency.GPU_latency
     constraints = []
     u_variable = []
 
@@ -297,13 +304,13 @@ def print_op_profile(one_module_names_idx_dict, op_dict):
     op_profile_list = []
     for op_name, idx in one_module_names_idx_dict.items():
         op = op_dict[op_name]
-        op_profile_list.append((op_name, idx, op.op_def.operatorLatency))
+        op_profile_list.append((op_name, idx, op.op_def.operator_latency))
     op_profile_list = sorted(op_profile_list,
                              key=lambda op_profile: op_profile[1])
 
     for op_profile in op_profile_list:
-        (op_name, idx, op.op_def.operatorLatency) = op_profile
-        print("%s %d %s" % (op_name, idx, op.op_def.operatorLatency))
+        (op_name, idx, op.op_def.operator_latency) = op_profile
+        print("%s %d %s" % (op_name, idx, op.op_def.operator_latency))
 
 
 def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
@@ -349,19 +356,18 @@ def generateLP(one_module_names_idx_dict, op_name_list, op_dict, net_def):
     return LP_contents
 
 
-def write_LP_contents(LP_contents, file_name):
-    f = open(file_name, "w")
-    f.writelines(LP_contents)
-    f.flush()
-    f.close()
-
 
 def run_glpsol(lp_file_path, result_file_path):
     glpsol_file_path = "glpsol"
     cmd_str = '%s --lp %s -o %s' % (glpsol_file_path, lp_file_path, result_file_path)
-    print("Execute %s" % (cmd_str))
+    logger.info("Execute %s" % (cmd_str))
     os.system(cmd_str)
-    print("Run solver done!")
+    logger.info("Run solver done!")
+
+# ./cplex -c "read /Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/inception-v4/redmi/subgraphs-Mixed_7b.lp" "mipopt" "write tmp.txt" "sol" "y" "quit"
+# TODO(xcw) Add support for IBM CPLEX solver
+def run_cplex(lp_file_path, result_file_path):
+    cplex_file_path = ""
 
 
 # The result file are in follows:
@@ -462,16 +468,16 @@ def parse_glpk_timeline(one_module_names_idx_dict, result_file_path, op_dict, mo
         op = op_dict[op_name]
         device_latency = 0.0
         if device == CPU:
-            device_latency = op.op_def.operatorLatency.CPU_latency
+            device_latency = op.op_def.operator_latency.CPU_latency
         elif device == GPU:
-            device_latency = op.op_def.operatorLatency.GPU_latency
+            device_latency = op.op_def.operator_latency.GPU_latency
         # Compute data trans latency
         acc_data_trans_latency = 0.0
-        for (addr, data_trans) in op.op_def.operatorLatency.input_data_trans_latency.items():
+        for (addr, data_trans) in op.op_def.operator_latency.input_data_trans_latency.items():
             data_trans_latency = data_trans[device-1]
             for op_parent_name in op.parents:
                 op_parent = op_dict[op_parent_name]
-                if mode==LPMode.Mode_Subgraph and not isinstance(op_parent, Subgraph):
+                if mode==LPMode.Mode_Subgraph and not isinstance(op_parent, subgraph.Subgraph):
                     continue
                 if op_parent_name not in one_module_names_idx_dict.keys():
                     continue
@@ -517,12 +523,12 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         one_module_names_idx_dict = {}
         if mode == LPMode.Mode_Subgraph:
             # For one module with multiple subgraphs, we need build subgraph and update the op_dict
-            parent_subgraph = Subgraph(module_name)
+            parent_subgraph = subgraph.Subgraph(module_name)
             if model_name != None and model_name.find("inception") >=0:
-                one_module_name, branches = get_inception_one_module_name(module_name, op_name_list)
+                one_module_name, branches = subgraph.get_inception_one_module_name(module_name, op_name_list)
                 parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, branches, pattern=module_name)
             elif model_name != None and (model_name.find("pnasnet") >=0 or model_name.find("nasnet") >=0):
-                parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
+                parent_subgraph.buildMultiSubgraph(op_name_list, name_op_dict, subgraph.pnasnet_mobile_subgraph_subprefix(), pattern=module_name)
             # one_module_names_idx_dict = associate_op_name_with_idx(
             #     "/mnt/d/home/Projects/DAG-scheduler/mnn/pnasnet-mobile/pnasnet-cell-0-subgraph-names.txt")
             print("aaa", parent_subgraph.op_name_list)
@@ -530,7 +536,7 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
                 print(name_op_dict[subgraph_name])
             one_module_names_idx_dict = associate_op_name_list_with_idx(parent_subgraph.op_name_list)
         elif mode == LPMode.Mode_Operator:
-            one_module_names_idx_dict = associate_op_name_list_with_idx(filter_op_name_list(op_name_list, module_name))
+            one_module_names_idx_dict = associate_op_name_list_with_idx(subgraph.filter_op_name_list(op_name_list, module_name))
         elif mode == LPMode.Mode_AUTO_Subgraph:
             module_op_name_list = []
             for op_name in op_name_list:
@@ -545,16 +551,17 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
             # exit(0)
         # Generate LP constraints and write them to a file
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
-        # write_LP_contents(LP_contents, "inception-one-module-mix5c.lp")
+
         module_name_striped = module_name.replace('/','-')
         if module_name_striped[-1] == '-':
             module_name_striped = module_name_striped[0:len(module_name_striped)-1]
             module_name_striped = module_name_striped.split('-')[-1]
         lp_file_path = os.path.join(folder_path, "subgraphs-" + module_name_striped + ".lp")
         result_file_path = os.path.join(folder_path, "lp-result-subgraphs-" + module_name_striped+ ".txt")
-        write_LP_contents(LP_contents, lp_file_path)
+        logger.info("Write Integer Linear Programming models to {}".format(lp_file_path))
+        utils.write_lines(lp_file_path, LP_contents)
         # Solve the LP
-        run_glpsol(lp_file_path, result_file_path)
+        # run_glpsol(lp_file_path, result_file_path)
         # Parse subgraph device placement result
         # name_device_tuple_list = parse_glpk_result(one_module_names_idx_dict, result_file_path)
         # print(name_device_tuple_list)
@@ -563,16 +570,19 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         intersection_list.append((endpoint, sum_of_intersection))
         print("endpoint: %f , intersection: %f" % (endpoint, sum_of_intersection))
         print("module_name")
-    
+        
         tmp_module_name_list = []
         for c in module_name.split("/"):
             if len(c.strip()) > 0:
                 tmp_module_name_list.append(c)
-        
-        draw_gantt(cpu_data, gpu_data, convert_data, os.path.join(folder_path, tmp_module_name_list[-1]))
-        
+        gantt_file_path = os.path.join(folder_path, tmp_module_name_list[-1])
+        draw_gantt(cpu_data, gpu_data, convert_data, gantt_file_path)
+        print("open {}".format(gantt_file_path))
+        os.system("open {}.pdf".format(gantt_file_path))
+        os.system("sleep 1")
+        # exit(0)
         # device_placement_file_path = os.path.join(folder_path, "mDeviceMap-"+ "subgraphs-" + model_name + "-" + module_name_striped +".txt")
-        results = write_subgraph_device_placement_result([name for (name, device, start_time) in op_execution_order_list if device == CPU],\
+        results = subgraph.write_subgraph_device_placement_result([name for (name, device, start_time) in op_execution_order_list if device == CPU],\
             [name for (name, device, start_time) in op_execution_order_list if device == GPU], \
             name_op_dict, op_execution_order_list=op_execution_order_list)
         lines.extend(results)
@@ -597,11 +607,9 @@ def sum_lp_objectives(folder_path):
 def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
     # Read profile data
     model_dir = os.path.join("../models/", model)
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"), \
-        thread, SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
+    op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread, \
+        SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
+    net_def = None
     
     # Using module prefix to form the subgraph
     pnasnet_module_list = ['cell_stem_0/', 'cell_stem_1/']
@@ -624,13 +632,13 @@ def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
     
     # Using GLPK solve device placement here
     folder_path = os.path.join(model_dir, mobile)
-    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
+    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, pnasnet_module_list, folder_path, model, mode=LPMode.Mode_Operator)
     unsupported_op_names = ["final_layer/Relu", "final_layer/Mean/reduction_indices", \
         "final_layer/Relu___tr4final_layer/Mean", "final_layer/Mean", \
         "final_layer/FC/weights", "final_layer/FC/MatMul", \
         "final_layer/FC/biases", "final_layer/FC/BiasAdd", "final_layer/predictions"]
     # Deal with ops that are not in the module prefix
-    lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=unsupported_op_names)
+    lines, untreated_op_latency = subgraph.insert_untreated_ops(lines, op_name_list, name_op_dict, unsupported_op_names=unsupported_op_names)
     lp_total = sum_lp_objectives(folder_path)
     
     # Write results
@@ -645,7 +653,7 @@ def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
             new_lines.append(line)
         lines = new_lines
     
-    write_lines(device_map_file_path, lines)
+    utils.write_lines(device_map_file_path, lines)
     sh_cmd = "adb push {} /data/local/tmp/".format(device_map_file_path)
     print(sh_cmd)
     os.system(sh_cmd)
@@ -656,11 +664,9 @@ def solve_pnasnet(model, mobile, thread, CPU_little_thread_index=None):
 
 def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
     model_dir = os.path.join("../models/", model)
-    op_name_list, name_op_dict, net_def = gather_model_profile(
-        os.path.join(model_dir, model + "-info.txt"),
-        os.path.join(model_dir, mobile, model+'-'+mobile+'-data-trans.csv'),
-        os.path.join(model_dir, mobile, mobile+"-"+model+"-layerwise-latency.csv"),
-        thread, SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
+    op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread, \
+        SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
+    net_def = None
     
     if model == "inception-v3":
         inception_prefix = "InceptionV3/InceptionV3/"
@@ -673,8 +679,8 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
             "Mixed_7a/","Mixed_7b/","Mixed_7c/","Mixed_7d/",]
     inception_module_list = [inception_prefix + module for module in inception_module_list]
     folder_path = os.path.join(model_dir, mobile)
-    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model, mode=LPMode.Mode_Subgraph)
-    lines, untreated_op_latency = insert_untreated_ops(lines, op_name_list, name_op_dict)
+    lines, intersection_list = solve_glpk(op_name_list, name_op_dict, net_def, inception_module_list, folder_path, model, mode=LPMode.Mode_Operator)
+    lines, untreated_op_latency = subgraph.insert_untreated_ops(lines, op_name_list, name_op_dict)
     lp_total = sum_lp_objectives(folder_path)
     print("LP+serial total: {}".format(lp_total+untreated_op_latency))
     print("LP+serial+intersection total: {}".format(sum([(endpoint+intersection) for endpoint, intersection in intersection_list]) + untreated_op_latency))
@@ -689,7 +695,7 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
             new_lines.append(line)
         lines = new_lines
 
-    write_lines(device_map_file_path, lines)
+    utils.write_lines(device_map_file_path, lines)
 
     sh_cmd = "adb push {} /data/local/tmp/".format(device_map_file_path)
     print(sh_cmd)
@@ -697,7 +703,7 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
 
 
 if __name__ == "__main__":
-    model, mobile, thread, CPU_little_thread_index = parse_model_mobile()
+    model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
     # model, mobile, thread = "inception-v3", "oneplus5t", 2
     if model in ['pnasnet-mobile', 'pnasnet-large', 'nasnet-large', 'nasnet-mobile']:
         solve_pnasnet(model, mobile, thread, CPU_little_thread_index=CPU_little_thread_index)

@@ -1,5 +1,5 @@
-from profile.net_struct import *
-from profile.read_net_structure import *
-from profile.read_profile_data import *
+from profile import net_struct
+from profile import subgraph
+from profile import read_profile_data
 import profile.find_critical_node
 import profile.graph_partition

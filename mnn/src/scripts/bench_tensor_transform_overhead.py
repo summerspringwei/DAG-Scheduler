@@ -1,6 +1,8 @@
 import os
 import numpy as np
 
+from utils import utils
+
 def get_tensors_shape(file_path):
     f = open(file_path)
     lines = f.readlines()
@@ -128,8 +130,8 @@ def get_tflite_tensor_data_trans(file_path):
     
 
 if __name__ == "__main__":
-    # tensor_shape_list = get_tensors_shape("/Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/inception-v3/redmi/inception-v3-redmi-data-trans.csv")
-    tensor_shape_list = get_tensors_shape("/Users/xiachunwei/Projects/DAG-Scheduler/mnn/models/pnasnet-large/redmi/pnasnet-large-redmi-data-trans.csv")
+    tensor_shape_list = get_tensors_shape(os.path.join(utils.get_project_path(), "mnn/models/pnasnet-large/redmi/pnasnet-large-redmi-data-trans.csv"))
+
     new_tensor_shape_list = preprocess_tensor_shape(tensor_shape_list)
     print(new_tensor_shape_list)
     # bench_tensor_transform_on_device(tensor_shape_list)

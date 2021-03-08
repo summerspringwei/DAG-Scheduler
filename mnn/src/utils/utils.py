@@ -7,14 +7,15 @@ def parse_model_mobile():
         'inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large',
         'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large',
         'inception-resnet-v2', 'model1', 'model2', 'model3', 'model4',
-        'example1'
+        'example1', 'dfmodel1', 'dfmodel2'
     ]
     mobile_list = [
         'lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20',
-        'snapdragon_855', 'huawei_p40', 'device1', 'device2', 'device3'
+        'snapdragon_855', 'huawei_p40', 'device1', 'device2', 'device3', 'mi9',
+        "npu"
     ]
     thread_number = [1, 2, 4, 8]
-
+    
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('model', type=str, help='Enter the model name')
     parser.add_argument('mobile', type=str, help='Enter the mobile name')

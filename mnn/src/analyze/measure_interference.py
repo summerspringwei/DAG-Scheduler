@@ -8,7 +8,7 @@ and analyze the CPU or GPU performance latency suppression ratio.
 import numpy as np
 import os
 import re
-from profile import *
+from profile import read_profile_data
 from utils import utils
 
 
@@ -102,9 +102,11 @@ def gather_net_profile(cpu_alone_path, gpu_alone_path, parallel_path, raw_info_f
 
 def gather_multi_file_profile(files_list, raw_info_file_path, result_file_path):
     profile_dict_list = []
+    
     for file_path in files_list:
+        os.system("ls {}".format(file_path))
         profile_dict_list.append(read_multi_runs_latency(file_path))
-    op_name_list, _= read_net_info(raw_info_file_path)    
+    op_name_list, _= read_profile_data.read_net_info(raw_info_file_path)    
     lines = []
     count = 0
     for op_name in op_name_list:
@@ -181,9 +183,9 @@ if __name__ == "__main__":
         os.path.join(model_dir, mobile, file_prefix+"-cpu-big-2.csv"),
         os.path.join(model_dir, mobile, file_prefix+"-cpu-big-4.csv"),
         os.path.join(model_dir, mobile, file_prefix+"-gpu-1.csv"),
-        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-1.csv"),
-        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-2.csv"),
-        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-4.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-1.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-2.csv"),
+        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-4.csv"),
         ],
         os.path.join(model_dir, model+"-info.txt"),
         result_file_path)

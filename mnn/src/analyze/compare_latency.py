@@ -8,8 +8,8 @@ from profile import read_profile_data
 
 if __name__ == "__main__":
     model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
-    sh_cmd='adb shell "cd /data/local/tmp && source set_env.sh && ./grun_mnn.sh {} {}"'.format(model, thread)
-    print(sh_cmd)
+    # sh_cmd='adb shell "cd /data/local/tmp && source set_env.sh && ./grun_mnn.sh {} {}"'.format(model, thread)
+    # print(sh_cmd)
     # os.system(sh_cmd)
 
     model_dir = os.path.join(utils.get_project_path(), "mnn/models/", model)

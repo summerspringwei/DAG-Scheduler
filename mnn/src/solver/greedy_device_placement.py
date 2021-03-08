@@ -354,7 +354,7 @@ if __name__ == "__main__":
           "final_layer/FC/weights", "final_layer/FC/MatMul", \
           "final_layer/FC/biases", "final_layer/FC/BiasAdd", "final_layer/predictions"]
   lines = []
-  graph_mode = 0
+  graph_mode = 1
   # 
   if graph_mode == 0:
     subgraph_name_list, name_op_dict = subgraph.build_multi_subgraphs(model, mobile, thread)
@@ -415,13 +415,7 @@ if __name__ == "__main__":
   else:
     print("There is no device")
     exit(0)
-  rc = os.system("adb push {} /data/local/tmp/".format(device_map_file_path+".opt"))
-  if rc == 0:
-    print("Push greedy device opt file to device")
-  sh_cmd='adb shell "cd /data/local/tmp && source set_env.sh && ./grun_mnn.sh {} {}"'.format(model, thread)
-  print(sh_cmd)
-  os.system(sh_cmd)
-  sh_cmd = 'python analyze/compare_latency.py {} {} {}'.format(model, mobile, thread)
-  print(sh_cmd)
-  os.system(sh_cmd)
+  # sh_cmd = 'python analyze/compare_latency.py {} {} {}'.format(model, mobile, thread)
+  # print(sh_cmd)
+  # os.system(sh_cmd)
   

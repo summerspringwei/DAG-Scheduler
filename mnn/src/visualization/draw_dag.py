@@ -57,11 +57,14 @@ def generate_graphviz_file(device_placement_result, op_name_list, name_op_dict, 
     labelloc  =  t // t: Place the graph's title on top.
     fontsize  = 40 // Make title stand out by giving a large font size
     fontcolor = black""".format(title))
+    
     for op_name in op_name_list:
         device, index = device_placement_result[op_name]
         op = name_op_dict[op_name]
         short_op_name = reset_op_name(op_name)
         for child in op.children:
+            if child not in device_placement_result.keys():
+                continue
             _, child_index = device_placement_result[child]
             lines.append('\"{}: {}\"->\"{}: {}";\n'.format(index, short_op_name, child_index, reset_op_name(child)))
         node_attr = ""
@@ -136,6 +139,7 @@ def generate_device_placement_figures(model, mobile, thread):
     
     greedy_device_placement_file_path = os.path.join(model_dir, mobile, "greedy-placement-{}-cpu-{}.txt".format(model, thread))
     ilp_device_placement_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
+    heft_device_placement_file_path = os.path.join(model_dir, mobile, "heft-placement-{}-cpu-{}.txt".format(model, thread))
 
     greedy_placement, ilp_placement = None, None
     if os.path.exists(greedy_device_placement_file_path):
@@ -149,6 +153,13 @@ def generate_device_placement_figures(model, mobile, thread):
         ilp_graphviz_file_path = os.path.join(model_dir, mobile, "{}-graphviz-{}-cpu-{}.gv".format("ilp", model, thread))
         ilp_graph_dot = generate_graphviz_file(ilp_placement, op_name_list, name_op_dict, "ILP {} {} {} thread(s)".format(model, mobile, thread))
         dot2png(ilp_graphviz_file_path, ilp_graph_dot)
+
+    if os.path.exists(heft_device_placement_file_path):
+        heft_placement = read_device_placement(heft_device_placement_file_path)
+        heft_graphviz_file_path = os.path.join(model_dir, mobile, "{}-graphviz-{}-cpu-{}.gv".format("heft", model, thread))
+        heft_graph_dot = generate_graphviz_file(heft_placement, op_name_list, name_op_dict, "heft {} {} {} thread(s)".format(model, mobile, thread))
+        dot2png(heft_graphviz_file_path, heft_graph_dot)
+
     if os.path.exists(greedy_device_placement_file_path) and os.path.exists(ilp_device_placement_file_path):
         diff_graphviz_file_path = os.path.join(model_dir, mobile, "{}-graphviz-{}-cpu-{}.gv".format("ilp-greedy-diff", model, thread))
         diff_graph_dot = generate_graphviz_diff_file(ilp_placement, greedy_placement, op_name_list, name_op_dict, \

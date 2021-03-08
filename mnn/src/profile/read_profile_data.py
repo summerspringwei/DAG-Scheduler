@@ -12,7 +12,7 @@ from profile import net_struct
 from utils import utils
 
 # Set the cpu<->gpu transformation overhead
-TRANSFORM_OVERHEAD = 1.3
+TRANSFORM_OVERHEAD = 0.0
 CPU_SLOWDOWN = 1.00
 GPU_SLOWDOWN = 1.00
 LATENCY_UNIT_SCALE = 1000
@@ -66,6 +66,7 @@ def read_latency(file_path,
         if len(com) < 4:
             continue
         op_latency = net_struct.OperatorLatency()
+        print(com[thread_index_to_thread_number(CPU_thread_index)].strip())
         op_latency.CPU_latency = float(
             com[thread_index_to_thread_number(CPU_thread_index)].strip(
             )) / LATENCY_UNIT_SCALE * OP_LATENCY_SCALE * CPU_SLOWDOWN
@@ -152,8 +153,13 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
     net_def = net_struct.NetDef()
     utils.get_logger().info(data_trans_dict.keys())
     # Gather three file into name_op_dict
+    tmp_op_name_list = []
+
     for op_name in op_name_list:
         op = name_op_dict[op_name]
+        if op_name not in latency_dict.keys():
+            continue
+        tmp_op_name_list.append(op_name)
         op_latency = latency_dict[op_name]
         op_type = op_name.split('/')[-1]
         op_def = net_struct.OperatorDef()
@@ -187,7 +193,7 @@ def gather_model_profile(raw_info_file_path, data_trans_file_path, inference_lat
         op.op_def = op_def
         name_op_dict[op_name] = op
         net_def.op.append(op)
-
+    op_name_list = tmp_op_name_list
     return op_name_list, name_op_dict, net_def
 
 

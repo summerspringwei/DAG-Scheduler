@@ -1,23 +1,15 @@
+#!python3
 import subprocess
 import os
 import time
-# redmi 652800 1036800 1401600 1689600 1804800 1958400 2016000
-# avaliable governors: interactive conservative ondemand userspace powersave performance
-# 855 超大核心： 825600 940800 1056000 1171200 1286400 1401600 1497600 1612800 1708800 1804800 
-# 1920000 2016000 2131200 2227200 2323200 2419200 2534400 2649600 2745600 2841600
-mobiles_cpu_freq_map = {
-    "redmi": [652800, 1036800, 1401600, 1689600, 1804800, 1958400, 2016000],
-    "snapdragon_855": [710400, 825600, 940800, 1056000, 1171200, 1286400, 1401600, \
-        1497600, 1612800, 1708800, 1804800, 1920000, 2016000, 2131200, 2227200, 2323200, 2419200], # Big cores
-}
+import argparse
 
-
-def get_avaliable_cpu_freq():
-    cmd = "adb shell cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies"
+def get_avaliable_cpu_freq(core_id):
+    cmd = "adb shell cat /sys/devices/system/cpu/cpu{}/cpufreq/scaling_available_frequencies".format(core_id)
     process = subprocess.Popen(cmd, shell=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result_f = process.stdout.read()
-    print(str(result_f).strip().split(" "))
+    return str(result_f, encoding = "utf-8").strip().split(" ")
 
 # Lighter: lightweight heterogenous inference 
 # cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
@@ -26,13 +18,47 @@ def set_cpu_freq(min_cpu_freq, max_cpu_freq, cores):
         cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_max_freq"'.format(max_cpu_freq, c)
         print(cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        result_f = process.stdout.read()
+        result_f = str(process.stdout.read(), encoding='utf-8')
         print(result_f)
         cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_min_freq"'.format(min_cpu_freq, c)
         print(cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        result_f = process.stdout.read()
+        result_f = str(process.stdout.read(), encoding='utf-8')
         print(result_f)
+
+
+
+class PerformanceMode:
+    PerformanceHigh = 0
+    PerformanceMedium = 1
+    PerformanceLow = 2
+    PerformanceDefault = 3
+
+
+def reset_freq():
+    for core_id in range(8):
+        cpu_freq_list = get_avaliable_cpu_freq(core_id)
+        set_cpu_freq(cpu_freq_list[0], cpu_freq_list[-1], [core_id])
+
+
+# Default 8 cores
+def set_performance(mode):
+    """Set all CPU cores frequency based on the mode.
+    """
+    if mode == PerformanceMode.PerformanceDefault:
+        reset_freq()
+        return
+    for core_id in range(8):
+        cpu_freq_list = get_avaliable_cpu_freq(core_id)
+        freq = cpu_freq_list[-1]
+        if mode == PerformanceMode.PerformanceHigh:
+            freq = cpu_freq_list[-1]
+        elif mode == PerformanceMode.PerformanceMedium:
+            freq = cpu_freq_list[len(cpu_freq_list)//2]
+        else:
+            freq = cpu_freq_list[0]
+        set_cpu_freq(freq, freq, [core_id])
+
 
 
 def set_cpu_governors(gov, cores):
@@ -44,6 +70,7 @@ def set_cpu_governors(gov, cores):
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result_f = process.stdout.read()
         print(result_f)
+
 
 def bench_tflite_resnet_v1_50_cmd():
     sh_cmd = 'adb shell /data/local/tmp/tflite_benchmark_model --graph=/sdcard/dnntune_models/resnet-v1-50.tflite \
@@ -58,17 +85,22 @@ def bench_tflite_deepspeech_cmd():
     os.system(sh_cmd)
 
 
+def parse_freq():
+    parser = argparse.ArgumentParser(description='Set CPU frequency.')
+    parser.add_argument('mode', type=str, help='Enter the performance mode')
+    args = parser.parse_args()
+    mode = args.mode
+    if mode == "l" or mode == "low":
+        return PerformanceMode.PerformanceLow
+    elif mode == "m" or mode == "medium":
+        return PerformanceMode.PerformanceMedium
+    elif mode == "h" or mode == "high":
+        return PerformanceMode.PerformanceHigh
+    elif mode== 'r' or mode == "reset":
+        return PerformanceMode.PerformanceDefault
 
 if __name__=="__main__":
-    # redmi_cpu_freqs = [652800, 1036800, 1401600, 1689600, 1804800, 1958400, 2016000]
-    # for freq in cpu_freqs:
-    #     set_cpu_freq(freq, freq, [0,1,2,3,4,5,6,7])
-    #     bench_tflite_deepspeech_cmd()
-    #     time.sleep(5)
-    # freq = 2016000
-    # set_cpu_freq(652800, 2016000, [0,1,2,3,4,5,6,7])
-    # set_cpu_governors("performance", [0,1,2,3,4,5,6,7])
-    # mobile_name = "snapdragon_855"
-    # set_cpu_freq(mobiles_cpu_freq_map[mobile_name][-1], mobiles_cpu_freq_map[mobile_name][-1], [4,5,6,7])
-    mobile_name = "redmi"
-    set_cpu_freq(mobiles_cpu_freq_map[mobile_name][-1], mobiles_cpu_freq_map[mobile_name][-1], [0,1,2,3,4,5,6,7])
+    mode = parse_freq()
+    for i in range(8):
+        print(get_avaliable_cpu_freq(i))
+    set_performance(mode)

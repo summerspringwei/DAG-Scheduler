@@ -84,6 +84,8 @@ def get_ops_total_latency(op, name_op_dict):
       for parent_tensor_addr, parent_tensor_shape in op_parent.output_tensors:
         if child_tensor_addr == parent_tensor_addr:
           utils.get_logger().info("{} {} {}".format(op.name, op_parent.name, parent_tensor_shape))
+          if child_tensor_addr not in op.op_def.operator_latency.input_data_trans_latency.keys():
+            continue
           if op_parent.op_def.device_type == net_struct.DeviceType.CPU:
             to_GPU_transpose_latency += op.op_def.operator_latency.input_data_trans_latency[child_tensor_addr][1]
           elif op_parent.op_def.device_type == net_struct.DeviceType.GPU:

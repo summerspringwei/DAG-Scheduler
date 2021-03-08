@@ -1,13 +1,13 @@
 
-from utils import *
-from profile.read_profile_data import *
+from utils import utils
+from profile import read_profile_data
 import os
 import queue
 
 def get_node_weight(model, input_name):
     model_dir = os.path.join("../models/", model)
     raw_info_file_path = os.path.join(model_dir, model + "-info.txt")
-    name_op_list, name_op_dict = read_net_info(raw_info_file_path)
+    name_op_list, name_op_dict = read_profile_data.read_net_info(raw_info_file_path)
     visited = set()
     name_weight_map = {}
     for name in name_op_list:
@@ -80,5 +80,5 @@ def get_node_weight_wrapper(model):
         return (None, None)
 
 if __name__ == "__main__":
-    model, mobile, thread = parse_model_mobile()
+    model, mobile, thread = utils.parse_model_mobile()
     get_node_weight_wrapper(model)

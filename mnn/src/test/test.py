@@ -8,6 +8,8 @@
 from profile import read_profile_data
 from utils import utils
 import logging
+import xml.etree.ElementTree as ET
+
 
 class Student:
     def __init__(self, name):
@@ -27,8 +29,17 @@ def func(a):
     c = 3
   return c
 
+def parse_cplex(cplex_result_file_path):
+  tree = ET.parse(cplex_result_file_path)
+  root = tree.getroot()
+  for child in root:
+    if child.tag == "variables":
+      for variable in child:
+        print(variable.attrib['name'], variable.attrib['value'])
+
 
 if __name__ == "__main__":
-    print(utils.get_project_path())
-    print(isinstance(BottomLevelFuncType.COMPUTE_COMM, BottomLevelFuncType))
-    print(func(3))
+    # print(utils.get_project_path())
+    # print(isinstance(BottomLevelFuncType.COMPUTE_COMM, BottomLevelFuncType))
+    # print(func(3))
+    parse_cplex('/Users/xiachunwei/Projects/DAG-Scheduler/mnn/src/tmp.xml')

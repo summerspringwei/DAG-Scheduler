@@ -30,12 +30,16 @@ def gather_tensors(model, mobile):
             for child in children:
                 if child not in used_op:
                     cpu_to_gpu_lines.append("%s %d\n" % (op_name, 0))
-                    cpu_to_gpu_lines.append("%s %d\n" % (child, 3))
+                    if child not in gpu_not_support_op_names:
+                        cpu_to_gpu_lines.append("%s %d\n" % (child, 3))
+                    else:
+                        cpu_to_gpu_lines.append("%s %d\n" % (child, 0))
+                    
                     gpu_to_cpu_lines.append("%s %d\n" % (op_name, 3))
                     gpu_to_cpu_lines.append("%s %d\n" % (child, 0))
                     used_op.add(child)
             used_op.add(op_name)
-                
+    
     f_cpu_to_gpu = open(cpu_to_gpu_file_path, 'w')
     f_cpu_to_gpu.writelines(cpu_to_gpu_lines)
     f_cpu_to_gpu.flush()

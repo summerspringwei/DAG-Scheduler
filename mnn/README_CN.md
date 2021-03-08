@@ -13,12 +13,16 @@ matplotlib
 pysnooper
 ```
 使用线性规划求解器，需要安装[GLPK](https://www.gnu.org/software/glpk/)（GNU Linear Programming Kit），并将`glpsol`加到系统路径中。
-
+同时还需要IBM CPLEX线性规划求解器[CPLEX](https://www.ibm.com/support/pages/downloading-ibm-ilog-cplex-optimization-studio-v1290)，
+并将安装目录中`cplex`可执行文件的路径添加到系统路径中。
 可视化需要安装[graphviz](https://graphviz.org/download/)
 
 需要安卓SDK platform-tools。主要是需要adb工具。
 
 以上均需要将相应二进制文件路径加到系统路径中。
+
+## 系统要求
+需要Linux或者MacOS系统。
 
 ## 文件组织结构
 `mace`文件夹已弃用。
@@ -66,7 +70,7 @@ adb -H 10.108.245.207 -P 7035 shell
 已经支持了`redmi`等7个mobile平台。
 由于框架通过模型和mobile的名称自动的到`mnn/models`文件夹下寻找对应的数据，如果需要添加新的模型和mobile平台（下同），则需要
 
-1. 在models下面创建文件夹，，模型名称为 $model_name，mobile名称为$mobile_name：
+1. 在models下面创建文件夹，，模型名称为 $model\_name，mobile名称为$mobile_name：
 ```shell
 mkdir $PROJECT_HOME/$model_name
 mkdir $PROJECT_HOME/$model_name/$mobile_name
@@ -83,6 +87,20 @@ mkdir $PROJECT_HOME/$model_name/$mobile_name
 5. 每个tensor在CPU和GPU之间进行传输和数据格式转换的开销保存在`$PROJECT_HOME/models/${model_name}/${mobile_name}/${model_name}-${mobile_name}-data-trans.csv`中，其中每一行的数据代表`tensor_shape CPU_to_GPU_communication_latency GPU_to_CPU_communication_latency`。
 
 6. 通过3、4、5中的文件，就可以得到要进行调度的所有数据了。用户可以先将自己的数据转换到上述的格式，再直接调用HOPE-Scheduler的API。
+
+## 华为NPU模型解析
+1. 框架是通过模型名称来寻找对应的模型结构文件和模型的profiling文件，以及保存求解的结果。
+因此，在models文件夹下创建模型文件夹，例如`dfmodel3`。
+2. 在`dfmodel3`的文件夹下存放模型的结构，`dfmodel3-info.txt`。
+3. 在`dfmodel3`下创建`npu`文件夹，里面保存`npu-dfmodel3-layerwise-latency.csv`为profiling的数据，具体格式参加已有模型的。
+4. 创建`dfmodel3-npu-data-trans.csv`为cpu和加速器之间通信的数据，如果没有，文件内容可以为空，但是文件必须存在。
+5. 修改`mnn/src/parser/parse_npu_model.py`的`json_file_path`和`info_file_path`到对应路径，之后运行
+```shell
+cd mnn/src
+python parse/parse_npu_model.py
+```
+即可将json格式的转成csv格式的模型结构数据。
+后续如何运行求解器，直接参见“求解器部分”。
 
 ## MNN模型
 MNN的模型可以从[onedrive](https://1drv.ms/u/s!AiO8PwT1yve8gotwXzCTumTw325OyQ?e=SxsmeE)下载。下载完成后，需要执行
@@ -129,17 +147,18 @@ cd $PROJECT_HOME/mnn/src
 
 执行ILP的线性规划求解器：
 ```shell
-./scripts/bench_lp.sh $model_name $mobile_name $thread $adb_config
+python3 solver/ilp_device_placement.py $model_name $mobile_name $thread 
 ```
 例如
 ```shell
-./scripts/bench_lp.sh pnasnet-large huawei_p40 2 "-H 10.108.245.207 -P 7035"
+python3 solver/ilp_device_placement.py dfmodel1 npu 1
 ```
 或者执行基于启发式的求解器：
 ```shell
-./scripts/bench_greedy.sh pnasnet-large huawei_p40 2
+python3 solver/greedy_device_placement.py dfmodel1 npu 1
 ```
-调度器最后会输出理论的
+以上面为例，调度器最后会输出理论的调度结果到`models/dfmodel1/npu/`目录下。
+
 之后，求解器直接把生成的执行计划push到手机的`/data/local/tmp/`目录中。
 
 将脚本文件传输到mobile上
@@ -174,5 +193,18 @@ grun_mnn.sh为测量启发式生成的执行计划的实际性能。
 ./scripts/compare.sh pnasnet-large 2 -H 10.108.245.207 -P 7035
 ```
 分别会打印出三种配置下的avg = xxx ms。通过对比时间即可。
+
+## 可视化
+框架提供了将设备分配结果可视化出来的功能。使用
+```shell
+python visualization/draw_dag.py $model_name $mobile_name $thread
+```
+例如
+```shell
+python3 visualization/draw_dag.py dfmodel2 npu 1
+```
+可视化出来的图片保存在对应的模型的mobile目录下。例如dfmodel2的可视化结果在`models/dfmodel2/npu`下的png图片。
+原始的分配结果为`dfmodel2-original-placement.txt`,对应ILP的结果为`ilp-graphviz-dfmodel2-cpu-1.png`,其他求解器的结果也在对应文件夹下。
+
 ## 联系
 有问题欢迎联系xiachunwei@ict.ac.cn

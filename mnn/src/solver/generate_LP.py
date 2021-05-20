@@ -426,6 +426,15 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         module_name_list.clear()
         for idx in range(len(subgraph_list)):
             module_name_list.append("subgraph-{}".format(idx))
+        print("Uprank partitioning result:")
+        for sb_name in subgraph_list:
+            print("{} {}".format(len(sb_name), sb_name))
+        sum = 0
+        for g in subgraph_list:
+            sum += len(g)
+        print(sum)
+        assert(sum == len(op_name_list))
+    exit(0)
     module_idx = 0
     for module_name in module_name_list:
         one_module_names_idx_dict = {}
@@ -451,6 +460,7 @@ def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_pat
         elif mode == LPMode.Mode_Model_Operator:
             one_module_names_idx_dict = associate_op_name_list_with_idx(op_name_list)
         # Generate LP constraints and write them to a file
+        
         LP_contents = generateLP(one_module_names_idx_dict, op_name_list, name_op_dict, net_def)
 
         module_name_striped = module_name.replace('/','-')

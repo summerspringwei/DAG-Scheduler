@@ -78,7 +78,11 @@ def heft_scheduler(op_name_list, name_op_dict, model, mobile, thread, CPU_little
     sh_cmd = "adb push {} /data/local/tmp/".format(file_path)
     print(sh_cmd)
     os.system(sh_cmd)
-    return
+    # Special for ACL
+    if model.find("acl") >= 0:
+      model_name = model.split('-')[-1]
+      run_cmd = 'adb shell "cd /data/local/tmp/ && ./acl-run.sh {} CL parallel {} {}"'.format(model_name, thread, "greedy-placement-{}-cpu-{}.txt".format(model, thread))
+      os.system(run_cmd)
 
 
 def test_heft_scheduler():

@@ -21,6 +21,7 @@ from solver import search_tree
 from solver import scheduler_utils
 from utils import utils
 
+search_window_size = 5
 
 def key_sort_operator(operator):
   return operator.earlist_start_point
@@ -66,8 +67,8 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
     # ops_queue= sorted(ops_queue, key=key_sort_operator)
     ops_queue = sorted(ops_queue, key=attrgetter("earlist_start_point", "name"))
     # Using search tree to find optimal device placement strategy
-    to_be_scheduled_op_names = [op.name for op in ops_queue][0:1]
-    logger.info("Search tree schedule {}".format((to_be_scheduled_op_names)))
+    to_be_scheduled_op_names = [op.name for op in ops_queue][0:search_window_size]
+    logger.info("Search tree schedule {} {}".format(len(to_be_scheduled_op_names), to_be_scheduled_op_names))
     root, leaf_node_list = search_tree.build_search_tree(to_be_scheduled_op_names, name_op_dict, [CPU_end_point, GPU_end_point])
     [CPU_end_point, GPU_end_point], device_placement = search_tree.get_optimal_device_placement(root, leaf_node_list, name_op_dict)
     utils.get_logger().info(device_placement)
@@ -414,7 +415,12 @@ if __name__ == "__main__":
     print("Push greedy device file to device")
   else:
     print("There is no device")
-    exit(0)
+  # Special for ACL
+  # if model.find("acl") >= 0:
+  #   model_name = model.split('-')[-1]
+  #   run_cmd = 'adb shell "cd /data/local/tmp/ && ./acl-run.sh {} CL parallel {} {}"'.format(model_name, thread, "greedy-placement-{}-cpu-{}.txt".format(model, thread))
+  #   os.system(run_cmd)
+  exit(0)
   # sh_cmd = 'python analyze/compare_latency.py {} {} {}'.format(model, mobile, thread)
   # print(sh_cmd)
   # os.system(sh_cmd)

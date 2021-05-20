@@ -144,9 +144,9 @@ def generate_device_placement_figures(model, mobile, thread):
     ilp_device_placement_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
     heft_device_placement_file_path = os.path.join(model_dir, mobile, "heft-placement-{}-cpu-{}.txt".format(model, thread))
     original_device_placement_file_path = os.path.join(model_dir, mobile, "{}-original-placement.txt".format(model))
-    if not os.path.exists(original_device_placement_file_path):
-        print(original_device_placement_file_path)
-        exit(0)
+    # if not os.path.exists(original_device_placement_file_path):
+    #     print(original_device_placement_file_path)
+    #     exit(0)
 
     greedy_placement, ilp_placement = None, None
     if os.path.exists(greedy_device_placement_file_path):

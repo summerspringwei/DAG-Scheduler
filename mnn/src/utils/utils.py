@@ -7,7 +7,11 @@ def parse_model_mobile():
         'inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large',
         'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large',
         'inception-resnet-v2', 'model1', 'model2', 'model3', 'model4',
-        'example1', 'dfmodel1', 'dfmodel2'
+        'example1', 'dfmodel1', 'dfmodel2', 'inceptionpart',
+        'acl-alexnet', 'acl-alexnet_ulayer', 'acl-inception_v3',
+        'acl-inception_v4', 'acl-nasnet_large', 'acl-nasnet_mobile',
+        'acl-pnasnet_large', 'acl-pnasnet_mobile', 'acl-squeezenet',
+        'acl-mobilenet', 'acl-mobilenet_v2'
     ]
     mobile_list = [
         'lenovo_k5', 'redmi', 'vivo_z3', 'oneplus5t', 'huawei_mate_20',
@@ -29,7 +33,7 @@ def parse_model_mobile():
     num_little_thread = args.num_little_thread
     print("Get model name %s mobile %s thread %d" % (model, mobile, thread))
     # Check args
-    if model not in model_list:
+    if str(model) not in model_list:
         print("Model name %s not support yet. Exit now." % model)
         exit(0)
     if mobile not in mobile_list:

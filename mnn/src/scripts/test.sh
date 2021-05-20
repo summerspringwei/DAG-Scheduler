@@ -2,8 +2,10 @@ set -xe
 MOBILE=huawei_p40
 for MODEL in inception-v3 inception-v4 pnasnet-mobile pnasnet-large nasnet-large
 do
-    python solver/greedy_device_placement.py $MODEL huawei_p40 2 4 > tmp.txt 2>&1
-    cat tmp.txt | grep "Greedy"
+    rm ../models/acl-$MODEL/acl-$MODEL-$MOBILE-data-trans.csv
+    cp ../models/$MODEL/$MODEL-$MODEL-data-trans.csv ../models/acl-$MODEL/acl-$MODEL-$MODEL-data-trans.csv
+    # python solver/greedy_device_placement.py $MODEL huawei_p40 2 4 > tmp.txt 2>&1
+    # cat tmp.txt | grep "Greedy"
     # python analyze/measure_interference.py $MODEL huawei_p40 2
     # ls -lth ../models/$MODEL/$MOBILE/$MOBILE-$MODEL-layerwise-latency.csv
     # ls -lth ../models/$MODEL/$MOBILE/$MOBILE-$MODEL-cpu-little-1.csv

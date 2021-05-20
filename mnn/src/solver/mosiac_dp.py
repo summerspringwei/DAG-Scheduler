@@ -197,6 +197,11 @@ def generate_mosaic_device_map(model, mobile, thread, op_name_list, device_dp):
     f.close()
     print("Write placement {}".format(file_path))
     os.system('adb push {} {}'.format(file_path, '/data/local/tmp/'))
+    # Special for ACL
+    if model.find("acl") >= 0:
+        model_name = model.split('-')[-1]
+        run_cmd = 'adb shell "cd /data/local/tmp/ && ./acl-run.sh {} CL parallel {} {}"'.format(model_name, thread, file_name)
+        os.system(run_cmd)
 
 
 def solve_mosaic_dp(model, mobile, thread):

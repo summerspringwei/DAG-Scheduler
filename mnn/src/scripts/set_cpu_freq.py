@@ -104,3 +104,4 @@ if __name__=="__main__":
     for i in range(8):
         print(get_avaliable_cpu_freq(i))
     set_performance(mode)
+    set_cpu_governors('performance', range(8))

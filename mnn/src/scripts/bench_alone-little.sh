@@ -32,3 +32,4 @@ adb shell "LD_LIBRARY_PATH=$ANDROID_DIR $ANDROID_DIR/benchmark.out $ANDROID_DIR/
 adb pull $ANDROID_DIR/profile.txt ../models/$MODEL/$MOBILE/
 cat ../models/$MODEL/$MOBILE/profile.txt | grep Iter | awk '{print $3, $5, $6, $7, $8}' > ../models/$MODEL/$MOBILE/$MOBILE-$MODEL-$DEVICE-$THREAD.csv
 echo "Bench $MODEL thread $THREAD done"
+

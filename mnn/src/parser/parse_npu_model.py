@@ -47,6 +47,7 @@ def get_model_info(json_file_path, info_file_path):
 
 if __name__=="__main__":
     # model, mobile, thread, _ = utils.parse_model_mobile()
-    json_file_path = "../models/dfmodel2/inceptionv3_resize_bs1.json"
-    info_file_path = "../models/{}/{}-info.txt".format("dfmodel2", "dfmodel2")
+    model_name = "inceptionpart"
+    json_file_path = "../models/inceptionpart/inceptionpart_bs1.json"
+    info_file_path = "../models/{}/{}-info.txt".format("inceptionpart", "inceptionpart")
     get_model_info(json_file_path, info_file_path)

@@ -414,7 +414,10 @@ def get_inception_one_module_name(op_name_prefix, op_name_list):
         if op_name.find(op_name_prefix) == 0:
             module_op_names.append(op_name)
             if op_name.find("Branch") > 0:
-                branches.add(op_name.split("/")[3])
+                for com in op_name.split("/"):
+                    if com.find("Branch") >= 0:
+                        branches.add(com)
+                # branches.add(op_name.split("/")[3])
     
     return module_op_names, list(branches)
 

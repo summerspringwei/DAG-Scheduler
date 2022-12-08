@@ -63,9 +63,7 @@ def binary_partitioning(ops_list, uprank_count_list, acc_uprank_list, start_idx,
     return v0_range + v1_range
 
 
-def uprank_partitioning(op_name_list, name_op_dict):
-    NUM_OP_THRESHOLD = 10
-    BALANCE_FACTOR = 0.3
+def uprank_partitioning(op_name_list, name_op_dict, NUM_OP_THRESHOLD = 12, BALANCE_FACTOR = 0.2):
     scheduler_utils.compute_bottom_level(op_name_list, name_op_dict, scheduler_utils.BottomLevelFuncType.RANK)
     ops_list = [name_op_dict[op_name] for op_name in op_name_list]
     ops_list = sorted(ops_list, key=attrgetter("bottom_level"))

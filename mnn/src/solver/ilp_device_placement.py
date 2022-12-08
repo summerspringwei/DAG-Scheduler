@@ -39,7 +39,7 @@ def push_device_placement_file(file_path, model, mobile, thread):
 
 
 def solve_model(model, mobile, thread, module_list, unsupported_op_list, \
-        mode=generate_LP.LPMode.Mode_Subgraph, CPU_little_thread_index=None):
+        mode=generate_LP.LPMode.Mode_Subgraph, CPU_little_thread_index=None, UPRANK_PARTITIONS=10):
     model_dir = os.path.join("../models/", model)
     op_name_list, name_op_dict = read_profile_data.load_model_profile(model, mobile, thread, \
         SCALE=1.0, CPU_little_thread_index=CPU_little_thread_index)
@@ -47,12 +47,12 @@ def solve_model(model, mobile, thread, module_list, unsupported_op_list, \
     model_dir = os.path.join("../models/", model)
     net_def = None
     folder_path = os.path.join(model_dir, mobile)
-    lines, intersection_list = generate_LP.solve_glpk(op_name_list, name_op_dict, net_def, module_list, folder_path, model, mode=mode)
+    lines, intersection_list = generate_LP.solve_glpk(op_name_list, name_op_dict, net_def, module_list, folder_path, model, mode=mode, UPRANK_PARTITIONS=UPRANK_PARTITIONS)
     lines, untreated_op_latency = subgraph.insert_untreated_ops(lines, op_name_list, name_op_dict)
     lp_total = parse_lp_solution.sum_lp_objectives(folder_path)
     logger.info("LP+serial total: {}".format(lp_total+untreated_op_latency))
     logger.info("LP+serial+intersection total: {}".format(sum([(endpoint+intersection) for endpoint, intersection in intersection_list]) + untreated_op_latency))
-
+    # exit(0)
     device_map_file_path = os.path.join(model_dir, mobile, "mDeviceMap-{}-cpu-{}.txt".format(model, thread))
     if CPU_little_thread_index != None:
         device_map_file_path, lines = replace_GPU_with_little(model_dir, \
@@ -114,19 +114,19 @@ def solve_inception(model, mobile, thread, CPU_little_thread_index=None):
         mode=generate_LP.LPMode.Mode_Subgraph, CPU_little_thread_index=CPU_little_thread_index)
 
 
-def solve_whole_model(model, mobile, thread, CPU_little_thread_index=None):
+def solve_whole_model(model, mobile, thread, CPU_little_thread_index=None, uprank_size=10):
     module_list = ["model"]
     unsupported_op_names = []
     solve_model(model, mobile, thread, module_list, unsupported_op_names, \
-        mode=generate_LP.LPMode.Mode_AUTO_Subgraph, CPU_little_thread_index=CPU_little_thread_index)
+        mode=generate_LP.LPMode.Mode_AUTO_Subgraph, CPU_little_thread_index=CPU_little_thread_index, UPRANK_PARTITIONS=uprank_size)
 
 
 if __name__ == "__main__":
-    # model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
-    model, mobile, thread = "acl-nasnet_large", "huawei_p40", 2
-    CPU_little_thread_index = None
-    solve_whole_model(model, mobile, thread, CPU_little_thread_index=CPU_little_thread_index)
-    exit(0)
+    model, mobile, thread, CPU_little_thread_index, uprank_size = utils.parse_model_mobile(utils.ArgConfig.SOLVER_ILP)
+    # model, mobile, thread = "acl-nasnet_large", "huawei_p40", 2
+    # CPU_little_thread_index = None
+    # solve_whole_model(model, mobile, thread, CPU_little_thread_index=CPU_little_thread_index, uprank_size=uprank_size)
+    # exit(0)
     if model in ['pnasnet-mobile', 'pnasnet-large', 'nasnet-large', 'nasnet-mobile', 
                  'acl-pnasnet_mobile', 'acl-pnasnet_large', 'acl-nasnet_large', 'acl-nasnet_mobile']:
         solve_pnasnet(model, mobile, thread, CPU_little_thread_index=CPU_little_thread_index)

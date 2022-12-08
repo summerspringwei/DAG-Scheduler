@@ -183,9 +183,9 @@ if __name__ == "__main__":
         os.path.join(model_dir, mobile, file_prefix+"-cpu-big-2.csv"),
         os.path.join(model_dir, mobile, file_prefix+"-cpu-big-4.csv"),
         os.path.join(model_dir, mobile, file_prefix+"-gpu-big-1.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-1.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-2.csv"),
-        os.path.join(model_dir, mobile, file_prefix+"-cpu-little-4.csv"),
+        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-1.csv"),
+        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-2.csv"),
+        # os.path.join(model_dir, mobile, file_prefix+"-cpu-little-4.csv"),
         ],
         os.path.join(model_dir, model+"-info.txt"),
         result_file_path)

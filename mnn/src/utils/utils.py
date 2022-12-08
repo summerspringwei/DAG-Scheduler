@@ -2,7 +2,13 @@ import argparse
 import logging
 import subprocess
 
-def parse_model_mobile():
+class ArgConfig:
+    DEFAULT = 0
+    SOLVER_GREEDY = 1
+    SOLVER_ILP = 2
+    
+
+def parse_model_mobile(arg_config=ArgConfig.DEFAULT):
     model_list = [
         'inception-v3', 'inception-v4', 'lanenet', 'pnasnet-large',
         'pnasnet-mobile', 'nasnet-mobile', 'nasnet-large',
@@ -26,6 +32,12 @@ def parse_model_mobile():
     parser.add_argument('thread', type=int, help='Enter the thread number')
     parser.add_argument("num_little_thread", type=int, \
         help='Optional: Enter the number of little thread', nargs='?', default=None)
+    if arg_config == ArgConfig.SOLVER_GREEDY:
+        parser.add_argument("--search_window", type=int, \
+            help='Optional: search', nargs='?', default=3)
+    elif arg_config == ArgConfig.SOLVER_ILP:
+        parser.add_argument("--uprank_size", type=int, \
+            help='Optional: uprank', nargs='?', default=10)
     args = parser.parse_args()
     model = args.model
     mobile = args.mobile
@@ -41,7 +53,12 @@ def parse_model_mobile():
         exit(0)
     if thread not in thread_number:
         print("Thread number %d not avaliable. Exit now." % thread)
-    return model, mobile, thread, num_little_thread
+    if arg_config == ArgConfig.SOLVER_GREEDY:
+        return model, mobile, thread, num_little_thread, args.search_window
+    elif arg_config == ArgConfig.SOLVER_ILP:
+        return model, mobile, thread, num_little_thread, args.uprank_size
+    else:
+        return model, mobile, thread, num_little_thread
 
 
 def write_lines(file_path, lines):

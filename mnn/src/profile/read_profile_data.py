@@ -20,6 +20,8 @@ LATENCY_UNIT_SCALE = 1000
 
 # Read Tensor transformation latency
 def read_data_trans(file_path):
+    if not os.path.exists(file_path):
+        return {}
     f = open(file_path, 'r')
     first_line = False
     data_trans_dict = {}
@@ -66,7 +68,7 @@ def read_latency(file_path,
         if len(com) < 4:
             continue
         op_latency = net_struct.OperatorLatency()
-        print(com[thread_index_to_thread_number(CPU_thread_index)].strip())
+        # print(com[thread_index_to_thread_number(CPU_thread_index)].strip())
         op_latency.CPU_latency = float(
             com[thread_index_to_thread_number(CPU_thread_index)].strip(
             )) / LATENCY_UNIT_SCALE * OP_LATENCY_SCALE * CPU_SLOWDOWN

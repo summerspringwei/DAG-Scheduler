@@ -413,28 +413,27 @@ def compute_data_trans_intersection(cpu_data, gpu_data, convert_data, convert_de
     return endpoint, sum_of_intersection
 
 
-def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name, mode=LPMode.Mode_Subgraph):
+def solve_glpk(op_name_list, name_op_dict, net_def, module_name_list, folder_path, model_name, mode=LPMode.Mode_Subgraph, UPRANK_PARTITIONS=10):
     folder_path = os.path.join(folder_path, "ilp")
     if not os.path.exists(folder_path):
         os.system("mkdir {}".format(folder_path))
     lines = []
     intersection_list = []
     if mode == LPMode.Mode_AUTO_Subgraph:
-        subgraph_list = uprank_partitioning.uprank_partitioning(op_name_list, name_op_dict)
+        subgraph_list = uprank_partitioning.uprank_partitioning(op_name_list, name_op_dict, UPRANK_PARTITIONS)
         # we partition the graph from bottom to up
         subgraph_list.reverse()
         module_name_list.clear()
         for idx in range(len(subgraph_list)):
             module_name_list.append("subgraph-{}".format(idx))
         print("Uprank partitioning result:")
-        for sb_name in subgraph_list:
-            print("{} {}".format(len(sb_name), sb_name))
         sum = 0
         for g in subgraph_list:
+            print("{} {}".format(len(g), g))
             sum += len(g)
         print(sum)
         assert(sum == len(op_name_list))
-    exit(0)
+    # exit(0)
     module_idx = 0
     for module_name in module_name_list:
         one_module_names_idx_dict = {}

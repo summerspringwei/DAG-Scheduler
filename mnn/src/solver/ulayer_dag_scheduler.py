@@ -12,7 +12,8 @@ def ulayer_scheduler(op_name_list, name_op_dict, model, mobile, thread):
     for op_name in op_name_list:
         op_name_low_case = op_name.lower()
         if "conv" in op_name_low_case or "depthwise" in op_name_low_case or \
-            "pointwise" in op_name_low_case:
+            "pointwise" in op_name_low_case or 'expand' in op_name_low_case or\
+                "squeeze" in op_name_low_case:
             op = name_op_dict[op_name]
             cpu_latency = op.op_def.operator_latency.CPU_latency
             gpu_latency = op.op_def.operator_latency.GPU_latency
@@ -21,6 +22,7 @@ def ulayer_scheduler(op_name_list, name_op_dict, model, mobile, thread):
             for r in [0.0, 0.25, 0.5, 0.75, 1]:
                 if max(r* cpu_latency, (1-r)*gpu_latency) < min_latency:
                     ratio = r
+            # ratio = 0.25
             line = "{} {}\n".format(op_name, ratio)
             device_map_lines.append(line)
     # TODO(xcw) Compute the ratio of workload on CPU and GPU

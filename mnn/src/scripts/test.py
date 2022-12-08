@@ -5,9 +5,12 @@ model_name2 = ["inception_v3", "inception_v4", "pnasnet_mobile", "pnasnet_large"
 
 mobile="vivo_z3"
 for i in range(len(model_name1)):
-    run_sh = "./scripts/bench_alone.sh {} {}".format(model_name2[i], mobile)
-    print(run_sh)
-    os.system(run_sh)
+    model = model_name2[i]
+    sh = "mkdir ../models/acl-{}/mi9".format(model)
+    os.system(sh)
+    # run_sh = "./scripts/bench_alone.sh {} {}".format(model_name2[i], mobile)
+    # print(run_sh)
+    # os.system(run_sh)
     # pull_sh = "adb pull /data/local/tmp/{} ../models/acl-{}/acl-{}-info.txt".format(model_name2[i], model_name2[i], model_name2[i])
     # print(pull_sh)
     # os.system(pull_sh)

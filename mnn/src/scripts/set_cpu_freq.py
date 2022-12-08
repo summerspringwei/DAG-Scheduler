@@ -14,13 +14,26 @@ def get_avaliable_cpu_freq(core_id):
 # Lighter: lightweight heterogenous inference 
 # cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 def set_cpu_freq(min_cpu_freq, max_cpu_freq, cores):
+    cmd = "adb devices"
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result_f = str(process.stdout.read(), encoding='utf-8')
+    is_mi9 = False
+    if result_f.find("e130cb65") >= 0:
+        is_mi9 = True
+    
     for c in cores:
-        cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_max_freq"'.format(max_cpu_freq, c)
+        if is_mi9:
+            cmd = 'adb shell "su -c \'echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_max_freq\'"'.format(max_cpu_freq, c)
+        else:
+            cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_max_freq"'.format(max_cpu_freq, c)
         print(cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result_f = str(process.stdout.read(), encoding='utf-8')
         print(result_f)
-        cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_min_freq"'.format(min_cpu_freq, c)
+        if is_mi9:
+            cmd = 'adb shell "su -c \'echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_min_freq\'"'.format(min_cpu_freq, c)
+        else:
+            cmd = 'adb shell "echo {} >  /sys/devices/system/cpu/cpu{}/cpufreq/scaling_min_freq"'.format(min_cpu_freq, c)
         print(cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         result_f = str(process.stdout.read(), encoding='utf-8')

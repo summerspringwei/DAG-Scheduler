@@ -6,6 +6,7 @@ from operator import itemgetter, attrgetter
 import timeit
 import logging
 
+
 logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
     datefmt='%Y-%m-%d:%H:%M:%S',
     level=logging.INFO)
@@ -21,13 +22,25 @@ from solver import search_tree
 from solver import scheduler_utils
 from utils import utils
 
-search_window_size = 5
+
 
 def key_sort_operator(operator):
   return operator.earlist_start_point
 
+def extend_to_be_scheduled(to_be_scheduled, name_op_dict, search_window_size):
+  for op_name in to_be_scheduled:
+    parent_op = name_op_dict[op_name]
+    for child_name in parent_op.children:
+      child_op = name_op_dict[child_name]
+      if len(child_op.parents) == 1:
+        to_be_scheduled.append(child_name)
+        if len(to_be_scheduled) >= search_window_size:
+          return
 
-def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_name, mobile, thread):
+
+
+
+def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_name, mobile, thread, search_window_size = 3):
   # ops_not_support_by_GPU = set(['concat', 'SpatialSqueeze', 'Shape', 'Reshape', 'Softmax', 'Reshape_1'])
   ops_not_support_by_GPU = []
   # Record the CPU queue and GPU queue finish timestamp
@@ -68,6 +81,8 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
     ops_queue = sorted(ops_queue, key=attrgetter("earlist_start_point", "name"))
     # Using search tree to find optimal device placement strategy
     to_be_scheduled_op_names = [op.name for op in ops_queue][0:search_window_size]
+    if len(to_be_scheduled_op_names) < search_window_size:
+      extend_to_be_scheduled(to_be_scheduled_op_names, name_op_dict, search_window_size)
     logger.info("Search tree schedule {} {}".format(len(to_be_scheduled_op_names), to_be_scheduled_op_names))
     root, leaf_node_list = search_tree.build_search_tree(to_be_scheduled_op_names, name_op_dict, [CPU_end_point, GPU_end_point])
     [CPU_end_point, GPU_end_point], device_placement = search_tree.get_optimal_device_placement(root, leaf_node_list, name_op_dict)
@@ -77,7 +92,8 @@ def greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model_na
     for scheduled_op_name in to_be_scheduled_op_names:
       scheduled_op = name_op_dict[scheduled_op_name]
       to_be_sche_ops.append(scheduled_op)
-      ops_queue.remove(scheduled_op)
+      if scheduled_op in ops_queue:
+        ops_queue.remove(scheduled_op)
 
   # End of while
   # for op in netdef.op:
@@ -341,7 +357,8 @@ def greedy_device_placement(op_name_list, ops_relation_dict, folder_path, model_
 
 if __name__ == "__main__":
   logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
-  model, mobile, thread, CPU_little_thread_index = utils.parse_model_mobile()
+  model, mobile, thread, CPU_little_thread_index, search_window_size = utils.parse_model_mobile(utils.ArgConfig.SOLVER_GREEDY)
+  
   # model, mobile, thread = "inception-v3", "redmi", 2
   model_dir = os.path.join(utils.get_project_path(), "mnn/models/", model)
   folder_path = os.path.join(model_dir, mobile)
@@ -355,11 +372,11 @@ if __name__ == "__main__":
           "final_layer/FC/weights", "final_layer/FC/MatMul", \
           "final_layer/FC/biases", "final_layer/FC/BiasAdd", "final_layer/predictions"]
   lines = []
-  graph_mode = 1
+  graph_mode = 0
   # 
   if graph_mode == 0:
     subgraph_name_list, name_op_dict = subgraph.build_multi_subgraphs(model, mobile, thread)
-    lines = greedy_device_placement_v3(subgraph_name_list, name_op_dict, folder_path, model, mobile, thread)
+    lines = greedy_device_placement_v3(subgraph_name_list, name_op_dict, folder_path, model, mobile, thread, search_window_size)
     # edges = []
     # for graph in subgraph_name_list:
     #   if graph.find("cell_7") == 0:
@@ -373,7 +390,7 @@ if __name__ == "__main__":
     #   print('\"{}\"->\"{}";'.format(op_name, child))
     # draw_dag(edges)
   elif graph_mode == 1:
-    lines = greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model, mobile, thread)
+    lines = greedy_device_placement_v3(op_name_list, name_op_dict, folder_path, model, mobile, thread, search_window_size)
   elif graph_mode == 2:
     input_node_name = None
     if model == "inception-v3":
@@ -415,12 +432,13 @@ if __name__ == "__main__":
     print("Push greedy device file to device")
   else:
     print("There is no device")
+  # exit(0)
   # Special for ACL
   # if model.find("acl") >= 0:
   #   model_name = model.split('-')[-1]
   #   run_cmd = 'adb shell "cd /data/local/tmp/ && ./acl-run.sh {} CL parallel {} {}"'.format(model_name, thread, "greedy-placement-{}-cpu-{}.txt".format(model, thread))
   #   os.system(run_cmd)
-  exit(0)
+  
   # sh_cmd = 'python analyze/compare_latency.py {} {} {}'.format(model, mobile, thread)
   # print(sh_cmd)
   # os.system(sh_cmd)

@@ -1,0 +1,52 @@
+digraph G {
+label     = "ILP & greedy compare dfmodel1 npu 1 thread(s)"
+    labelloc  =  t // t: Place the graph's title on top.
+    fontsize  = 40 // Make title stand out by giving a large font size
+    fontcolor = black"-: data"->"-: transdata";
+"-: data"->"-: trans_TransData_2";
+"-: data" [shape=box,style=filled,color=white];
+"-: transdata"->"-: resize_bilinearv2";
+"-: transdata" [shape=box,style=filled,color=white];
+"-: trans_TransData_2"->"-: quant";
+"-: trans_TransData_2"->"-: add0";
+"-: trans_TransData_2" [shape=box,style=filled,color=white];
+"-: add0"->"-: trans_TransData_6";
+"-: add0" [shape=box,style=filled,color=white];
+"-: trans_TransData_6"->"-: cast0";
+"-: trans_TransData_6" [shape=box,style=filled,color=white];
+"-: cast0"->"-: ArgMaxV2";
+"-: cast0" [shape=box,style=filled,color=white];
+"-: quant"->"-: Conv2d1";
+"-: quant" [shape=box,style=filled,color=white];
+"-: Conv2d1"->"-: dequant";
+"-: Conv2d1" [shape=box,style=filled,color=white];
+"-: dequant"->"-: trans_TransData_14";
+"-: dequant" [shape=box,style=filled,color=white];
+"-: trans_TransData_14"->"-: trans_Cast_15";
+"-: trans_TransData_14" [shape=box,style=filled,color=white];
+"-: trans_Cast_15"->"-: bias_add_1";
+"-: trans_Cast_15" [shape=box,style=filled,color=white];
+"-: resize_bilinearv2" [shape=box,style=filled,color=green];
+"-: ArgMaxV2"->"-: fusion_cast_op_3";
+"-: ArgMaxV2" [shape=box,style=filled,color=white];
+"-: fusion_cast_op_3"->"-: add";
+"-: fusion_cast_op_3" [shape=box,style=filled,color=white];
+"-: add"->"-: trans_Cast_30";
+"-: add" [shape=box,style=filled,color=white];
+"-: trans_Cast_30" [shape=box,style=filled,color=white];
+"-: bias_add_1"->"-: trans_Cast_16";
+"-: bias_add_1" [shape=box,style=filled,color=white];
+"-: trans_Cast_16"->"-: trans_TransData_17";
+"-: trans_Cast_16" [shape=box,style=filled,color=white];
+"-: trans_TransData_17"->"-: MatMul_1";
+"-: trans_TransData_17" [shape=box,style=filled,color=white];
+"-: MatMul_1"->"-: relu6";
+"-: MatMul_1" [shape=box,style=filled,color=white];
+"-: relu6"->"-: MatMul_2";
+"-: relu6" [shape=box,style=filled,color=white];
+"-: MatMul_2"->"-: trans_TransData_29";
+"-: MatMul_2" [shape=box,style=filled,color=white];
+"-: trans_TransData_29"->"-: Softmax";
+"-: trans_TransData_29" [shape=box,style=filled,color=white];
+"-: Softmax" [shape=box,style=filled,color=white];
+}

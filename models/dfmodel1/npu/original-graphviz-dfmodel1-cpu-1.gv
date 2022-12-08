@@ -1,0 +1,52 @@
+digraph G {
+label     = "original dfmodel1 npu 1 thread(s)"
+    labelloc  =  t // t: Place the graph's title on top.
+    fontsize  = 40 // Make title stand out by giving a large font size
+    fontcolor = black"24: data"->"14: transdata";
+"24: data"->"19: trans_TransData_2";
+"24: data" [shape=box,style=filled,color=red];
+"14: transdata"->"2: resize_bilinearv2";
+"14: transdata" [shape=box,style=filled,color=green];
+"19: trans_TransData_2"->"13: quant";
+"19: trans_TransData_2"->"20: add0";
+"19: trans_TransData_2" [shape=box,style=filled,color=green];
+"20: add0"->"22: trans_TransData_6";
+"20: add0" [shape=box,style=filled,color=green];
+"22: trans_TransData_6"->"5: cast0";
+"22: trans_TransData_6" [shape=box,style=filled,color=green];
+"5: cast0"->"3: ArgMaxV2";
+"5: cast0" [shape=box,style=filled,color=red];
+"13: quant"->"12: Conv2d1";
+"13: quant" [shape=box,style=filled,color=green];
+"12: Conv2d1"->"21: dequant";
+"12: Conv2d1" [shape=box,style=filled,color=green];
+"21: dequant"->"23: trans_TransData_14";
+"21: dequant" [shape=box,style=filled,color=green];
+"23: trans_TransData_14"->"6: trans_Cast_15";
+"23: trans_TransData_14" [shape=box,style=filled,color=green];
+"6: trans_Cast_15"->"4: bias_add_1";
+"6: trans_Cast_15" [shape=box,style=filled,color=red];
+"2: resize_bilinearv2" [shape=box,style=filled,color=red];
+"3: ArgMaxV2"->"10: fusion_cast_op_3";
+"3: ArgMaxV2" [shape=box,style=filled,color=red];
+"10: fusion_cast_op_3"->"17: add";
+"10: fusion_cast_op_3" [shape=box,style=filled,color=red];
+"17: add"->"7: trans_Cast_30";
+"17: add" [shape=box,style=filled,color=green];
+"7: trans_Cast_30" [shape=box,style=filled,color=red];
+"4: bias_add_1"->"9: trans_Cast_16";
+"4: bias_add_1" [shape=box,style=filled,color=red];
+"9: trans_Cast_16"->"18: trans_TransData_17";
+"9: trans_Cast_16" [shape=box,style=filled,color=red];
+"18: trans_TransData_17"->"15: MatMul_1";
+"18: trans_TransData_17" [shape=box,style=filled,color=green];
+"15: MatMul_1"->"1: relu6";
+"15: MatMul_1" [shape=box,style=filled,color=green];
+"1: relu6"->"11: MatMul_2";
+"1: relu6" [shape=box,style=filled,color=red];
+"11: MatMul_2"->"16: trans_TransData_29";
+"11: MatMul_2" [shape=box,style=filled,color=green];
+"16: trans_TransData_29"->"8: Softmax";
+"16: trans_TransData_29" [shape=box,style=filled,color=green];
+"8: Softmax" [shape=box,style=filled,color=red];
+}

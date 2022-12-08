@@ -1,0 +1,4503 @@
+{
+  "version": "MindSpore Lite 1.0.0",
+  "fmkType": 0,
+  "inputIndex": [
+    0
+  ],
+  "outputIndex": [
+    339
+  ],
+  "mempoolSize": 0,
+  "nodes": [
+    {
+      "name": "DepthwiseConv2D-0",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 1,
+          "channelOut": 64,
+          "kernelW": 5,
+          "kernelH": 5,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        0,
+        1,
+        2
+      ],
+      "outputIndex": [
+        3
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-3",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        3
+      ],
+      "outputIndex": [
+        4
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-4",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        4
+      ],
+      "outputIndex": [
+        5
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-2",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        3
+      ],
+      "outputIndex": [
+        6
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-5",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        6,
+        5
+      ],
+      "outputIndex": [
+        7
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-6",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        3,
+        7
+      ],
+      "outputIndex": [
+        8
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-7",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        9,
+        8
+      ],
+      "outputIndex": [
+        10
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-8",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        10,
+        11
+      ],
+      "outputIndex": [
+        12
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-1",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        3
+      ],
+      "outputIndex": [
+        13
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-9",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        13,
+        12
+      ],
+      "outputIndex": [
+        14
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-10",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        14,
+        15,
+        17
+      ],
+      "outputIndex": [
+        16
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-12",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 64,
+          "channelOut": 128,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        16,
+        18,
+        19
+      ],
+      "outputIndex": [
+        20
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-15",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        20
+      ],
+      "outputIndex": [
+        21
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-16",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        21
+      ],
+      "outputIndex": [
+        22
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-14",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        20
+      ],
+      "outputIndex": [
+        23
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-17",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        23,
+        22
+      ],
+      "outputIndex": [
+        24
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-18",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        20,
+        24
+      ],
+      "outputIndex": [
+        25
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-19",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        26,
+        25
+      ],
+      "outputIndex": [
+        27
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-20",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        27,
+        28
+      ],
+      "outputIndex": [
+        29
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-13",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        20
+      ],
+      "outputIndex": [
+        30
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-21",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        30,
+        29
+      ],
+      "outputIndex": [
+        31
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-22",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        31,
+        32,
+        34
+      ],
+      "outputIndex": [
+        33
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "MaxPooling-24",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pooling",
+        "value": {
+          "format": "NHWC",
+          "poolingMode": "MAX_POOLING",
+          "global": false,
+          "windowW": 3,
+          "windowH": 3,
+          "strideW": 2,
+          "strideH": 2,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "roundMode": "FLOOR",
+          "activationType": "NO_ACTIVATION",
+          "avgMode": 0
+        }
+      },
+      "inputIndex": [
+        33
+      ],
+      "outputIndex": [
+        35
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-25",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 128,
+          "channelOut": 96,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        35,
+        36,
+        37
+      ],
+      "outputIndex": [
+        38
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-28",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        38
+      ],
+      "outputIndex": [
+        39
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-29",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        39
+      ],
+      "outputIndex": [
+        40
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-27",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        38
+      ],
+      "outputIndex": [
+        41
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-30",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        41,
+        40
+      ],
+      "outputIndex": [
+        42
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-31",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        38,
+        42
+      ],
+      "outputIndex": [
+        43
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-32",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        44,
+        43
+      ],
+      "outputIndex": [
+        45
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-33",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        45,
+        46
+      ],
+      "outputIndex": [
+        47
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-26",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        38
+      ],
+      "outputIndex": [
+        48
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-34",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        48,
+        47
+      ],
+      "outputIndex": [
+        49
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-35",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        49,
+        50,
+        52
+      ],
+      "outputIndex": [
+        51
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-37",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 96,
+          "channelOut": 96,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        51,
+        53,
+        54
+      ],
+      "outputIndex": [
+        55
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-40",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        55
+      ],
+      "outputIndex": [
+        56
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-41",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        56
+      ],
+      "outputIndex": [
+        57
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-39",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        55
+      ],
+      "outputIndex": [
+        58
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-42",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        58,
+        57
+      ],
+      "outputIndex": [
+        59
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-43",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        55,
+        59
+      ],
+      "outputIndex": [
+        60
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-44",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        61,
+        60
+      ],
+      "outputIndex": [
+        62
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-45",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        62,
+        63
+      ],
+      "outputIndex": [
+        64
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-38",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        55
+      ],
+      "outputIndex": [
+        65
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-46",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        65,
+        64
+      ],
+      "outputIndex": [
+        66
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-47",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        66,
+        67,
+        69
+      ],
+      "outputIndex": [
+        68
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-49",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 96,
+          "channelOut": 192,
+          "kernelW": 1,
+          "kernelH": 1,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        68,
+        70,
+        71
+      ],
+      "outputIndex": [
+        72
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-52",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        72
+      ],
+      "outputIndex": [
+        73
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-53",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        73
+      ],
+      "outputIndex": [
+        74
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-51",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        72
+      ],
+      "outputIndex": [
+        75
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-54",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        75,
+        74
+      ],
+      "outputIndex": [
+        76
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-55",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        72,
+        76
+      ],
+      "outputIndex": [
+        77
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-56",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        78,
+        77
+      ],
+      "outputIndex": [
+        79
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-57",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        79,
+        80
+      ],
+      "outputIndex": [
+        81
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-50",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        72
+      ],
+      "outputIndex": [
+        82
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-58",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        82,
+        81
+      ],
+      "outputIndex": [
+        83
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-59",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        83,
+        84,
+        86
+      ],
+      "outputIndex": [
+        85
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "MaxPooling-61",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pooling",
+        "value": {
+          "format": "NHWC",
+          "poolingMode": "MAX_POOLING",
+          "global": false,
+          "windowW": 3,
+          "windowH": 3,
+          "strideW": 2,
+          "strideH": 2,
+          "padMode": "SAME_UPPER",
+          "padUp": 0,
+          "padDown": 1,
+          "padLeft": 0,
+          "padRight": 1,
+          "roundMode": "FLOOR",
+          "activationType": "NO_ACTIVATION",
+          "avgMode": 0
+        }
+      },
+      "inputIndex": [
+        85
+      ],
+      "outputIndex": [
+        87
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-62",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 192,
+          "channelOut": 128,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        87,
+        88,
+        89
+      ],
+      "outputIndex": [
+        90
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-65",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        90
+      ],
+      "outputIndex": [
+        91
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-66",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        91
+      ],
+      "outputIndex": [
+        92
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-64",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        90
+      ],
+      "outputIndex": [
+        93
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-67",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        93,
+        92
+      ],
+      "outputIndex": [
+        94
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-68",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        90,
+        94
+      ],
+      "outputIndex": [
+        95
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-69",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        96,
+        95
+      ],
+      "outputIndex": [
+        97
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-70",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        97,
+        98
+      ],
+      "outputIndex": [
+        99
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-63",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        90
+      ],
+      "outputIndex": [
+        100
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-71",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        100,
+        99
+      ],
+      "outputIndex": [
+        101
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-72",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        101,
+        102,
+        104
+      ],
+      "outputIndex": [
+        103
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-74",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 128,
+          "channelOut": 128,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        103,
+        105,
+        106
+      ],
+      "outputIndex": [
+        107
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-77",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        107
+      ],
+      "outputIndex": [
+        108
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-78",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        108
+      ],
+      "outputIndex": [
+        109
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-76",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        107
+      ],
+      "outputIndex": [
+        110
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-79",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        110,
+        109
+      ],
+      "outputIndex": [
+        111
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-80",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        107,
+        111
+      ],
+      "outputIndex": [
+        112
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-81",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        113,
+        112
+      ],
+      "outputIndex": [
+        114
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-82",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        114,
+        115
+      ],
+      "outputIndex": [
+        116
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-75",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        107
+      ],
+      "outputIndex": [
+        117
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-83",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        117,
+        116
+      ],
+      "outputIndex": [
+        118
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-84",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        118,
+        119,
+        121
+      ],
+      "outputIndex": [
+        120
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-86",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 128,
+          "channelOut": 256,
+          "kernelW": 1,
+          "kernelH": 1,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        120,
+        122,
+        123
+      ],
+      "outputIndex": [
+        124
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-89",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        124
+      ],
+      "outputIndex": [
+        125
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-90",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        125
+      ],
+      "outputIndex": [
+        126
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-88",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        124
+      ],
+      "outputIndex": [
+        127
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-91",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        127,
+        126
+      ],
+      "outputIndex": [
+        128
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-92",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        124,
+        128
+      ],
+      "outputIndex": [
+        129
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-93",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        130,
+        129
+      ],
+      "outputIndex": [
+        131
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-94",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        131,
+        132
+      ],
+      "outputIndex": [
+        133
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-87",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        124
+      ],
+      "outputIndex": [
+        134
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-95",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        134,
+        133
+      ],
+      "outputIndex": [
+        135
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-96",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        135,
+        136,
+        138
+      ],
+      "outputIndex": [
+        137
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "MaxPooling-98",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pooling",
+        "value": {
+          "format": "NHWC",
+          "poolingMode": "MAX_POOLING",
+          "global": false,
+          "windowW": 3,
+          "windowH": 3,
+          "strideW": 2,
+          "strideH": 2,
+          "padMode": "SAME_UPPER",
+          "padUp": 0,
+          "padDown": 1,
+          "padLeft": 0,
+          "padRight": 1,
+          "roundMode": "FLOOR",
+          "activationType": "NO_ACTIVATION",
+          "avgMode": 0
+        }
+      },
+      "inputIndex": [
+        137
+      ],
+      "outputIndex": [
+        139
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-99",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 256,
+          "channelOut": 192,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        139,
+        140,
+        141
+      ],
+      "outputIndex": [
+        142
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-102",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        142
+      ],
+      "outputIndex": [
+        143
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-103",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        143
+      ],
+      "outputIndex": [
+        144
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-101",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        142
+      ],
+      "outputIndex": [
+        145
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-104",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        145,
+        144
+      ],
+      "outputIndex": [
+        146
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-105",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        142,
+        146
+      ],
+      "outputIndex": [
+        147
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-106",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        148,
+        147
+      ],
+      "outputIndex": [
+        149
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-107",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        149,
+        150
+      ],
+      "outputIndex": [
+        151
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-100",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        142
+      ],
+      "outputIndex": [
+        152
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-108",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        152,
+        151
+      ],
+      "outputIndex": [
+        153
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-109",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        153,
+        154,
+        156
+      ],
+      "outputIndex": [
+        155
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-111",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 192,
+          "channelOut": 192,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        155,
+        157,
+        158
+      ],
+      "outputIndex": [
+        159
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-114",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        159
+      ],
+      "outputIndex": [
+        160
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-115",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        160
+      ],
+      "outputIndex": [
+        161
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-113",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        159
+      ],
+      "outputIndex": [
+        162
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-116",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        162,
+        161
+      ],
+      "outputIndex": [
+        163
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-117",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        159,
+        163
+      ],
+      "outputIndex": [
+        164
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-118",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        165,
+        164
+      ],
+      "outputIndex": [
+        166
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-119",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        166,
+        167
+      ],
+      "outputIndex": [
+        168
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-112",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        159
+      ],
+      "outputIndex": [
+        169
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-120",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        169,
+        168
+      ],
+      "outputIndex": [
+        170
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-121",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        170,
+        171,
+        173
+      ],
+      "outputIndex": [
+        172
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-123",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 192,
+          "channelOut": 192,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        172,
+        174,
+        175
+      ],
+      "outputIndex": [
+        176
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-126",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        176
+      ],
+      "outputIndex": [
+        177
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-127",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        177
+      ],
+      "outputIndex": [
+        178
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-125",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        176
+      ],
+      "outputIndex": [
+        179
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-128",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        179,
+        178
+      ],
+      "outputIndex": [
+        180
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-129",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        176,
+        180
+      ],
+      "outputIndex": [
+        181
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-130",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        182,
+        181
+      ],
+      "outputIndex": [
+        183
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-131",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        183,
+        184
+      ],
+      "outputIndex": [
+        185
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-124",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        176
+      ],
+      "outputIndex": [
+        186
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-132",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        186,
+        185
+      ],
+      "outputIndex": [
+        187
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-133",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        187,
+        188,
+        190
+      ],
+      "outputIndex": [
+        189
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-135",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 192,
+          "channelOut": 192,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        189,
+        191,
+        192
+      ],
+      "outputIndex": [
+        193
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-138",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        193
+      ],
+      "outputIndex": [
+        194
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-139",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        194
+      ],
+      "outputIndex": [
+        195
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-137",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        193
+      ],
+      "outputIndex": [
+        196
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-140",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        196,
+        195
+      ],
+      "outputIndex": [
+        197
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-141",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        193,
+        197
+      ],
+      "outputIndex": [
+        198
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-142",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        199,
+        198
+      ],
+      "outputIndex": [
+        200
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-143",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        200,
+        201
+      ],
+      "outputIndex": [
+        202
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-136",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        193
+      ],
+      "outputIndex": [
+        203
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-144",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        203,
+        202
+      ],
+      "outputIndex": [
+        204
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-145",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        204,
+        205,
+        207
+      ],
+      "outputIndex": [
+        206
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-147",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 192,
+          "channelOut": 384,
+          "kernelW": 1,
+          "kernelH": 1,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        206,
+        208,
+        209
+      ],
+      "outputIndex": [
+        210
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-150",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        210
+      ],
+      "outputIndex": [
+        211
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-151",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        211
+      ],
+      "outputIndex": [
+        212
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-149",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        210
+      ],
+      "outputIndex": [
+        213
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-152",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        213,
+        212
+      ],
+      "outputIndex": [
+        214
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-153",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        210,
+        214
+      ],
+      "outputIndex": [
+        215
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-154",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        216,
+        215
+      ],
+      "outputIndex": [
+        217
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-155",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        217,
+        218
+      ],
+      "outputIndex": [
+        219
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-148",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        210
+      ],
+      "outputIndex": [
+        220
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-156",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        220,
+        219
+      ],
+      "outputIndex": [
+        221
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-157",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        221,
+        222,
+        224
+      ],
+      "outputIndex": [
+        223
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "MeanPooling-159",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pooling",
+        "value": {
+          "format": "NHWC",
+          "poolingMode": "MEAN_POOLING",
+          "global": false,
+          "windowW": 3,
+          "windowH": 3,
+          "strideW": 2,
+          "strideH": 2,
+          "padMode": "SAME_UPPER",
+          "padUp": 0,
+          "padDown": 1,
+          "padLeft": 0,
+          "padRight": 1,
+          "roundMode": "FLOOR",
+          "activationType": "NO_ACTIVATION",
+          "avgMode": 0
+        }
+      },
+      "inputIndex": [
+        223
+      ],
+      "outputIndex": [
+        225
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Pad-160",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pad",
+        "value": {
+          "paddings": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "paddingMode": "CONSTANT",
+          "constantValue": 0.0
+        }
+      },
+      "inputIndex": [
+        225
+      ],
+      "outputIndex": [
+        226
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-161",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 384,
+          "channelOut": 256,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        226,
+        227,
+        228
+      ],
+      "outputIndex": [
+        229
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-164",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        229
+      ],
+      "outputIndex": [
+        230
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-165",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        230
+      ],
+      "outputIndex": [
+        231
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-163",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        229
+      ],
+      "outputIndex": [
+        232
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-166",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        232,
+        231
+      ],
+      "outputIndex": [
+        233
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-167",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        229,
+        233
+      ],
+      "outputIndex": [
+        234
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-168",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        235,
+        234
+      ],
+      "outputIndex": [
+        236
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-169",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        236,
+        237
+      ],
+      "outputIndex": [
+        238
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-162",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        229
+      ],
+      "outputIndex": [
+        239
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-170",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        239,
+        238
+      ],
+      "outputIndex": [
+        240
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-171",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        240,
+        241,
+        243
+      ],
+      "outputIndex": [
+        242
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-173",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 256,
+          "channelOut": 256,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        242,
+        244,
+        245
+      ],
+      "outputIndex": [
+        246
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-176",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        246
+      ],
+      "outputIndex": [
+        247
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-177",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        247
+      ],
+      "outputIndex": [
+        248
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-175",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        246
+      ],
+      "outputIndex": [
+        249
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-178",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        249,
+        248
+      ],
+      "outputIndex": [
+        250
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-179",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        246,
+        250
+      ],
+      "outputIndex": [
+        251
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-180",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        252,
+        251
+      ],
+      "outputIndex": [
+        253
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-181",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        253,
+        254
+      ],
+      "outputIndex": [
+        255
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-174",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        246
+      ],
+      "outputIndex": [
+        256
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-182",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        256,
+        255
+      ],
+      "outputIndex": [
+        257
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-183",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        257,
+        258,
+        260
+      ],
+      "outputIndex": [
+        259
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Pad-185",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pad",
+        "value": {
+          "paddings": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "paddingMode": "CONSTANT",
+          "constantValue": 0.0
+        }
+      },
+      "inputIndex": [
+        259
+      ],
+      "outputIndex": [
+        261
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-186",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 256,
+          "channelOut": 256,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        261,
+        262,
+        263
+      ],
+      "outputIndex": [
+        264
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-189",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        264
+      ],
+      "outputIndex": [
+        265
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-190",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        265
+      ],
+      "outputIndex": [
+        266
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-188",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        264
+      ],
+      "outputIndex": [
+        267
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-191",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        267,
+        266
+      ],
+      "outputIndex": [
+        268
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-192",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        264,
+        268
+      ],
+      "outputIndex": [
+        269
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-193",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        270,
+        269
+      ],
+      "outputIndex": [
+        271
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-194",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        271,
+        272
+      ],
+      "outputIndex": [
+        273
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-187",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        264
+      ],
+      "outputIndex": [
+        274
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-195",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        274,
+        273
+      ],
+      "outputIndex": [
+        275
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-196",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        275,
+        276,
+        278
+      ],
+      "outputIndex": [
+        277
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-198",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 256,
+          "channelOut": 256,
+          "kernelW": 2,
+          "kernelH": 2,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        277,
+        279,
+        280
+      ],
+      "outputIndex": [
+        281
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-201",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        281
+      ],
+      "outputIndex": [
+        282
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-202",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        282
+      ],
+      "outputIndex": [
+        283
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-200",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        281
+      ],
+      "outputIndex": [
+        284
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-203",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        284,
+        283
+      ],
+      "outputIndex": [
+        285
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-204",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        281,
+        285
+      ],
+      "outputIndex": [
+        286
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-205",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        287,
+        286
+      ],
+      "outputIndex": [
+        288
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-206",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        288,
+        289
+      ],
+      "outputIndex": [
+        290
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-199",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        281
+      ],
+      "outputIndex": [
+        291
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-207",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        291,
+        290
+      ],
+      "outputIndex": [
+        292
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-208",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        292,
+        293,
+        295
+      ],
+      "outputIndex": [
+        294
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Conv2D-210",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Conv2D",
+        "value": {
+          "format": "NHWC",
+          "group": 1,
+          "channelIn": 256,
+          "channelOut": 512,
+          "kernelW": 1,
+          "kernelH": 1,
+          "strideW": 1,
+          "strideH": 1,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "dilateW": 1,
+          "dilateH": 1,
+          "hasBias": true,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        294,
+        296,
+        297
+      ],
+      "outputIndex": [
+        298
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-213",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        298
+      ],
+      "outputIndex": [
+        299
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-214",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        299
+      ],
+      "outputIndex": [
+        300
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-212",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        298
+      ],
+      "outputIndex": [
+        301
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-215",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        301,
+        300
+      ],
+      "outputIndex": [
+        302
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-216",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        298,
+        302
+      ],
+      "outputIndex": [
+        303
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-217",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        304,
+        303
+      ],
+      "outputIndex": [
+        305
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-218",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        305,
+        306
+      ],
+      "outputIndex": [
+        307
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-211",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        298
+      ],
+      "outputIndex": [
+        308
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-219",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        308,
+        307
+      ],
+      "outputIndex": [
+        309
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-220",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        309,
+        310,
+        312
+      ],
+      "outputIndex": [
+        311
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "MeanPooling-222",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Pooling",
+        "value": {
+          "format": "NHWC",
+          "poolingMode": "MEAN_POOLING",
+          "global": false,
+          "windowW": 2,
+          "windowH": 2,
+          "strideW": 2,
+          "strideH": 2,
+          "padMode": "VALID",
+          "padUp": 0,
+          "padDown": 0,
+          "padLeft": 0,
+          "padRight": 0,
+          "roundMode": "FLOOR",
+          "activationType": "NO_ACTIVATION",
+          "avgMode": 0
+        }
+      },
+      "inputIndex": [
+        311
+      ],
+      "outputIndex": [
+        313
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "FullyConnected-223",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "FullConnection",
+        "value": {
+          "hasBias": true,
+          "axis": 1,
+          "useAxis": false,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        313,
+        314,
+        315
+      ],
+      "outputIndex": [
+        316
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Neg-226",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Neg",
+        "value": {
+        }
+      },
+      "inputIndex": [
+        316
+      ],
+      "outputIndex": [
+        317
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-227",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        317
+      ],
+      "outputIndex": [
+        318
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-225",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        316
+      ],
+      "outputIndex": [
+        319
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-228",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        319,
+        318
+      ],
+      "outputIndex": [
+        320
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Sub-229",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Sub",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        316,
+        320
+      ],
+      "outputIndex": [
+        321
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-230",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        322,
+        321
+      ],
+      "outputIndex": [
+        323
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-231",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Mul",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        323,
+        324
+      ],
+      "outputIndex": [
+        325
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Relu-224",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Activation",
+        "value": {
+          "type": "RELU",
+          "alpha": 0.2,
+          "min_val": -1.0,
+          "max_val": 1.0
+        }
+      },
+      "inputIndex": [
+        316
+      ],
+      "outputIndex": [
+        326
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Add-232",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Add",
+        "value": {
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        326,
+        325
+      ],
+      "outputIndex": [
+        327
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Mul-233",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Scale",
+        "value": {
+          "axis": -1,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        327,
+        328,
+        330
+      ],
+      "outputIndex": [
+        329
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Reshape-235",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Reshape",
+        "value": {
+          "format": "NHWC",
+          "shape": [
+            -1,
+            1,
+            1,
+            512
+          ]
+        }
+      },
+      "inputIndex": [
+        329,
+        331
+      ],
+      "outputIndex": [
+        332
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "FullyConnected-236",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "FullConnection",
+        "value": {
+          "hasBias": true,
+          "axis": 1,
+          "useAxis": false,
+          "activationType": "NO_ACTIVATION"
+        }
+      },
+      "inputIndex": [
+        332,
+        333,
+        334
+      ],
+      "outputIndex": [
+        335
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Reshape-237",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Reshape",
+        "value": {
+          "format": "NHWC",
+          "shape": [
+            -1,
+            1,
+            1,
+            256
+          ]
+        }
+      },
+      "inputIndex": [
+        335,
+        336
+      ],
+      "outputIndex": [
+        337
+      ],
+      "quantType": "QUANT_NONE"
+    },
+    {
+      "name": "Reshape-238",
+      "nodeType": "CNode",
+      "primitive": {
+        "value_type": "Reshape",
+        "value": {
+          "format": "NHWC",
+          "shape": [
+            1,
+            256
+          ]
+        }
+      },
+      "inputIndex": [
+        337,
+        338
+      ],
+      "outputIndex": [
+        339
+      ],
+      "quantType": "QUANT_NONE"
+    }
+  ]
+  }
+  

@@ -1,0 +1,2930 @@
+{
+    "version": "MindSpore Lite 1.0.0",
+    "fmkType": 0,
+    "inputIndex": [
+      0
+    ],
+    "outputIndex": [
+      241,
+      194,
+      146
+    ],
+    "mempoolSize": 0,
+    "nodes": [
+      {
+        "name": "Mul-0",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Scale",
+          "value": {
+            "axis": -1,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          0,
+          1,
+          3
+        ],
+        "outputIndex": [
+          2
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-2",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 3,
+            "channelOut": 24,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 1,
+            "padLeft": 0,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          2,
+          4,
+          5
+        ],
+        "outputIndex": [
+          6
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-3",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 24,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          6,
+          7,
+          8
+        ],
+        "outputIndex": [
+          9
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-4",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 16,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          9,
+          10,
+          11
+        ],
+        "outputIndex": [
+          12
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-5",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 16,
+            "channelOut": 96,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          12,
+          13,
+          14
+        ],
+        "outputIndex": [
+          15
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-6",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 96,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          15,
+          16,
+          17
+        ],
+        "outputIndex": [
+          18
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-7",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 96,
+            "channelOut": 24,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          18,
+          19,
+          20
+        ],
+        "outputIndex": [
+          21
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-8",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 144,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          21,
+          22,
+          23
+        ],
+        "outputIndex": [
+          24
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-9",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 144,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          24,
+          25,
+          26
+        ],
+        "outputIndex": [
+          27
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-10",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 144,
+            "channelOut": 24,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          27,
+          28,
+          29
+        ],
+        "outputIndex": [
+          30
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-11",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          30,
+          21
+        ],
+        "outputIndex": [
+          31
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-12",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 144,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          31,
+          32,
+          33
+        ],
+        "outputIndex": [
+          34
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-13",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 144,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          34,
+          35,
+          36
+        ],
+        "outputIndex": [
+          37
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-14",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 144,
+            "channelOut": 24,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          37,
+          38,
+          39
+        ],
+        "outputIndex": [
+          40
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-15",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 144,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          40,
+          41,
+          42
+        ],
+        "outputIndex": [
+          43
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-16",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 144,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          43,
+          44,
+          45
+        ],
+        "outputIndex": [
+          46
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-17",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 144,
+            "channelOut": 24,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          46,
+          47,
+          48
+        ],
+        "outputIndex": [
+          49
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-18",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          49,
+          40
+        ],
+        "outputIndex": [
+          50
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-19",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 144,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          50,
+          51,
+          52
+        ],
+        "outputIndex": [
+          53
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-20",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 144,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          53,
+          54,
+          55
+        ],
+        "outputIndex": [
+          56
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-21",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 144,
+            "channelOut": 24,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          56,
+          57,
+          58
+        ],
+        "outputIndex": [
+          59
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-22",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          59,
+          50
+        ],
+        "outputIndex": [
+          60
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-23",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 24,
+            "channelOut": 144,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          60,
+          61,
+          62
+        ],
+        "outputIndex": [
+          63
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-24",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 144,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          63,
+          64,
+          65
+        ],
+        "outputIndex": [
+          66
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-25",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 144,
+            "channelOut": 48,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          66,
+          67,
+          68
+        ],
+        "outputIndex": [
+          69
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-26",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 48,
+            "channelOut": 288,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          69,
+          70,
+          71
+        ],
+        "outputIndex": [
+          72
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-27",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 288,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          72,
+          73,
+          74
+        ],
+        "outputIndex": [
+          75
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-28",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 288,
+            "channelOut": 48,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          75,
+          76,
+          77
+        ],
+        "outputIndex": [
+          78
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-29",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          78,
+          69
+        ],
+        "outputIndex": [
+          79
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-30",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 48,
+            "channelOut": 288,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          79,
+          80,
+          81
+        ],
+        "outputIndex": [
+          82
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-31",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 288,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          82,
+          83,
+          84
+        ],
+        "outputIndex": [
+          85
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-32",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 288,
+            "channelOut": 48,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          85,
+          86,
+          87
+        ],
+        "outputIndex": [
+          88
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-33",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          88,
+          79
+        ],
+        "outputIndex": [
+          89
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-34",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 48,
+            "channelOut": 288,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          89,
+          90,
+          91
+        ],
+        "outputIndex": [
+          92
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-35",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 288,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          92,
+          93,
+          94
+        ],
+        "outputIndex": [
+          95
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-36",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 288,
+            "channelOut": 48,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          95,
+          96,
+          97
+        ],
+        "outputIndex": [
+          98
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-37",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          98,
+          89
+        ],
+        "outputIndex": [
+          99
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-38",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 48,
+            "channelOut": 288,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          99,
+          100,
+          101
+        ],
+        "outputIndex": [
+          102
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-39",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 288,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          102,
+          103,
+          104
+        ],
+        "outputIndex": [
+          105
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-40",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 288,
+            "channelOut": 72,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          105,
+          106,
+          107
+        ],
+        "outputIndex": [
+          108
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-41",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 72,
+            "channelOut": 432,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          108,
+          109,
+          110
+        ],
+        "outputIndex": [
+          111
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-42",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 432,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          111,
+          112,
+          113
+        ],
+        "outputIndex": [
+          114
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-43",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 432,
+            "channelOut": 72,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          114,
+          115,
+          116
+        ],
+        "outputIndex": [
+          117
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-44",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          117,
+          108
+        ],
+        "outputIndex": [
+          118
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-45",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 72,
+            "channelOut": 432,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          118,
+          119,
+          120
+        ],
+        "outputIndex": [
+          121
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-46",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 432,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          121,
+          122,
+          123
+        ],
+        "outputIndex": [
+          124
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-47",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 432,
+            "channelOut": 72,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          124,
+          125,
+          126
+        ],
+        "outputIndex": [
+          127
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-48",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          127,
+          118
+        ],
+        "outputIndex": [
+          128
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-51",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 72,
+            "channelOut": 432,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          128,
+          129,
+          130
+        ],
+        "outputIndex": [
+          131
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-54",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 432,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          131,
+          132,
+          133
+        ],
+        "outputIndex": [
+          134
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-57",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 432,
+            "channelOut": 160,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          134,
+          135,
+          136
+        ],
+        "outputIndex": [
+          137
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-58",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 160,
+            "channelOut": 320,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          137,
+          138,
+          139
+        ],
+        "outputIndex": [
+          140
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "MeanPooling-61",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Pooling",
+          "value": {
+            "format": "NHWC",
+            "poolingMode": "MEAN_POOLING",
+            "global": false,
+            "windowW": 7,
+            "windowH": 7,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "VALID",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "roundMode": "FLOOR",
+            "activationType": "NO_ACTIVATION",
+            "avgMode": 0
+          }
+        },
+        "inputIndex": [
+          140
+        ],
+        "outputIndex": [
+          141
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-64",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 320,
+            "channelOut": 5,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          141,
+          142,
+          143
+        ],
+        "outputIndex": [
+          144
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Reshape-65",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Reshape",
+          "value": {
+            "format": "NHWC",
+            "shape": [
+              1,
+              5
+            ]
+          }
+        },
+        "inputIndex": [
+          144,
+          145
+        ],
+        "outputIndex": [
+          146
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-50",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 72,
+            "channelOut": 432,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          128,
+          147,
+          148
+        ],
+        "outputIndex": [
+          149
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-53",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 432,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          149,
+          150,
+          151
+        ],
+        "outputIndex": [
+          152
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-56",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 432,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          152,
+          153,
+          154
+        ],
+        "outputIndex": [
+          155
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-60",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          155,
+          156,
+          157
+        ],
+        "outputIndex": [
+          158
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-63",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          158,
+          159,
+          160
+        ],
+        "outputIndex": [
+          161
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-67",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          161,
+          162,
+          163
+        ],
+        "outputIndex": [
+          164
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-69",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          164,
+          155
+        ],
+        "outputIndex": [
+          165
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-71",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          165,
+          166,
+          167
+        ],
+        "outputIndex": [
+          168
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-73",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          168,
+          169,
+          170
+        ],
+        "outputIndex": [
+          171
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-75",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          171,
+          172,
+          173
+        ],
+        "outputIndex": [
+          174
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-77",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          174,
+          165
+        ],
+        "outputIndex": [
+          175
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-79",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          175,
+          176,
+          177
+        ],
+        "outputIndex": [
+          178
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-81",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          178,
+          179,
+          180
+        ],
+        "outputIndex": [
+          181
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-83",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 240,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          181,
+          182,
+          183
+        ],
+        "outputIndex": [
+          184
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-85",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 240,
+            "channelOut": 1280,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          184,
+          185,
+          186
+        ],
+        "outputIndex": [
+          187
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "MeanPooling-87",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Pooling",
+          "value": {
+            "format": "NHWC",
+            "poolingMode": "MEAN_POOLING",
+            "global": false,
+            "windowW": 7,
+            "windowH": 7,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "VALID",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "roundMode": "FLOOR",
+            "activationType": "NO_ACTIVATION",
+            "avgMode": 0
+          }
+        },
+        "inputIndex": [
+          187
+        ],
+        "outputIndex": [
+          188
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-89",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 1280,
+            "channelOut": 107,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          188,
+          189,
+          190
+        ],
+        "outputIndex": [
+          191
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Reshape-91",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Reshape",
+          "value": {
+            "format": "NHWC",
+            "shape": [
+              1,
+              107
+            ]
+          }
+        },
+        "inputIndex": [
+          191,
+          192
+        ],
+        "outputIndex": [
+          193
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Logistic-92",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Activation",
+          "value": {
+            "type": "SIGMOID",
+            "alpha": 0.2,
+            "min_val": -1.0,
+            "max_val": 1.0
+          }
+        },
+        "inputIndex": [
+          193
+        ],
+        "outputIndex": [
+          194
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-49",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 72,
+            "channelOut": 432,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          128,
+          195,
+          196
+        ],
+        "outputIndex": [
+          197
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-52",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 432,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 2,
+            "strideH": 2,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          197,
+          198,
+          199
+        ],
+        "outputIndex": [
+          200
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-55",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 432,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          200,
+          201,
+          202
+        ],
+        "outputIndex": [
+          203
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-59",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          203,
+          204,
+          205
+        ],
+        "outputIndex": [
+          206
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-62",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          206,
+          207,
+          208
+        ],
+        "outputIndex": [
+          209
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-66",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          209,
+          210,
+          211
+        ],
+        "outputIndex": [
+          212
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-68",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          212,
+          203
+        ],
+        "outputIndex": [
+          213
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-70",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          213,
+          214,
+          215
+        ],
+        "outputIndex": [
+          216
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-72",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          216,
+          217,
+          218
+        ],
+        "outputIndex": [
+          219
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-74",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 120,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          219,
+          220,
+          221
+        ],
+        "outputIndex": [
+          222
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Add-76",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Add",
+          "value": {
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          222,
+          213
+        ],
+        "outputIndex": [
+          223
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-78",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 120,
+            "channelOut": 720,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          223,
+          224,
+          225
+        ],
+        "outputIndex": [
+          226
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "DepthwiseConv2D-80",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "DepthwiseConv2D",
+          "value": {
+            "format": "NHWC",
+            "channelIn": 720,
+            "channelMultiplier": 1,
+            "kernelW": 3,
+            "kernelH": 3,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 1,
+            "padDown": 1,
+            "padLeft": 1,
+            "padRight": 1,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          226,
+          227,
+          228
+        ],
+        "outputIndex": [
+          229
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-82",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 720,
+            "channelOut": 240,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          229,
+          230,
+          231
+        ],
+        "outputIndex": [
+          232
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-84",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 240,
+            "channelOut": 1280,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "RELU6"
+          }
+        },
+        "inputIndex": [
+          232,
+          233,
+          234
+        ],
+        "outputIndex": [
+          235
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "MeanPooling-86",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Pooling",
+          "value": {
+            "format": "NHWC",
+            "poolingMode": "MEAN_POOLING",
+            "global": false,
+            "windowW": 7,
+            "windowH": 7,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "VALID",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "roundMode": "FLOOR",
+            "activationType": "NO_ACTIVATION",
+            "avgMode": 0
+          }
+        },
+        "inputIndex": [
+          235
+        ],
+        "outputIndex": [
+          236
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Conv2D-88",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Conv2D",
+          "value": {
+            "format": "NHWC",
+            "group": 1,
+            "channelIn": 1280,
+            "channelOut": 635,
+            "kernelW": 1,
+            "kernelH": 1,
+            "strideW": 1,
+            "strideH": 1,
+            "padMode": "SAME_UPPER",
+            "padUp": 0,
+            "padDown": 0,
+            "padLeft": 0,
+            "padRight": 0,
+            "dilateW": 1,
+            "dilateH": 1,
+            "hasBias": true,
+            "activationType": "NO_ACTIVATION"
+          }
+        },
+        "inputIndex": [
+          236,
+          237,
+          238
+        ],
+        "outputIndex": [
+          239
+        ],
+        "quantType": "QUANT_NONE"
+      },
+      {
+        "name": "Reshape-90",
+        "nodeType": "CNode",
+        "primitive": {
+          "value_type": "Reshape",
+          "value": {
+            "format": "NHWC",
+            "shape": [
+              1,
+              635
+            ]
+          }
+        },
+        "inputIndex": [
+          239,
+          240
+        ],
+        "outputIndex": [
+          241
+        ],
+        "quantType": "QUANT_NONE"
+      }
+    ]
+   
+  }
+  
